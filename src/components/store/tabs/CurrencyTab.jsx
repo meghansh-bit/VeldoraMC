@@ -4,7 +4,7 @@ import PixelBox from "../../ui/PixelBox";
 import PixelButton from "../../ui/PixelButton";
 import { fetchCurrencyPacks } from "../../../data/store";
 import { useCart } from "../../../context/useCart";
-import coinIcon from "../../../assets/votes/coin.png";
+const coinIcon = "/velora-icon.svg";
 
 export default function CurrencyTab() {
   const [packs, setPacks] = useState(null);
