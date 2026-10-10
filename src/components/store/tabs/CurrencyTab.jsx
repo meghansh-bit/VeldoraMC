@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Check } from "lucide-react";
 import PixelBox from "../../ui/PixelBox";
 import PixelButton from "../../ui/PixelButton";
-import { fetchCurrencyPacks } from "../../../data/store";
+import { fetchCurrencyPacks, formatInrEquivalent } from "../../../data/store";
 import { useCart } from "../../../context/useCart";
 import coinIcon from "../../../assets/votes/coin.png";
 
@@ -41,10 +41,10 @@ export default function CurrencyTab() {
       )}
 
       {packs && (
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="store-product-grid grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {packs.map((pack) => (
+            <div className={`store-product-card store-product-${pack.key}`} key={pack.key}>
             <PixelBox
-              key={pack.key}
               tone={pack.tone}
               filled={pack.featured}
               contentClassName="flex h-full flex-col items-center gap-3 text-center"
@@ -63,11 +63,8 @@ export default function CurrencyTab() {
                   {pack.bonus}
                 </span>
               )}
-              <div
-                className="mt-1 text-[18px] gold-gradient-text "
-              >
-                {pack.price}
-              </div>
+              <div className="mt-1 text-[18px] gold-gradient-text store-usd-price">{pack.price}</div>
+              <span className="store-inr-price">{formatInrEquivalent(pack.price)}</span>
               <PixelButton
                 tone={pack.tone}
                 className="mt-auto w-full"
@@ -80,6 +77,7 @@ export default function CurrencyTab() {
                 </span>
               </PixelButton>
             </PixelBox>
+            </div>
           ))}
         </div>
       )}
