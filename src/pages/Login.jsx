@@ -15,7 +15,7 @@ export default function Login() {
   useSeo({ title: "Email OTP Login", description: "Sign in to your VeldoraMC website account with a one-time email code.", path: "/login", noindex: true });
 
   async function sendCode(event) {
-    event.preventDefault();
+    event?.preventDefault?.();
     setError("");
     setNotice("");
     const cleanEmail = email.trim().toLowerCase();
@@ -45,7 +45,7 @@ export default function Login() {
     setError("");
     setNotice("");
     const token = code.trim();
-    if (!/^\\d{6}$/.test(token)) {
+    if (!/^\d{6}$/.test(token)) {
       setError("Enter the 6-digit code from your email.");
       return;
     }
