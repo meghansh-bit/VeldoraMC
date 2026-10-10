@@ -64,7 +64,7 @@ export default function Bundles() {
       </article>;
     })}</div>
     <form id="bundle-checkout" className="bundle-checkout" onSubmit={checkout}>
-      <div><span className="bundles-eyebrow">SECURE CHECKOUT</span><h2>Ready to claim your rank?</h2><p>Enter your Minecraft username and receipt email. Your rank should only be delivered after a verified payment webhook confirms the purchase.</p></div>
+      <div><span className="bundles-eyebrow">SECURE CHECKOUT</span><h2>Ready to choose your bundle?</h2><p>Enter your Minecraft username and receipt email to continue. Any rank delivery must wait until a verified payment webhook confirms your purchase.</p></div>
       <div className="checkout-fields"><label>Minecraft username<input required minLength={3} maxLength={16} value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Your in-game name" pattern="[A-Za-z0-9_]+" /></label><label>Receipt email<input required type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="you@example.com" /></label><label>Selected bundle<select required value={selected} onChange={(e) => setSelected(e.target.value)}><option value="" disabled>Choose a bundle</option>{bundles.map((b) => <option key={b.id} value={b.id}>{b.name} — ₹{format(b.price, "INR")}</option>)}</select></label><button className="bundle-buy" type="submit">Continue to payment <span>→</span></button></div>
       {selectedBundle && <div className="checkout-summary"><span>{selectedBundle.name}</span><strong>₹{format(selectedBundle.price, "INR")} INR equivalent</strong></div>}
       {status && <p className="checkout-status" role="status">{status}</p>}
