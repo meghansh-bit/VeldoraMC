@@ -51,7 +51,7 @@ export default function CurrencyTab() {
             >
               <img
                 src={coinIcon}
-                alt=""
+                alt="Velora currency icon"
                 className="h-12 w-12 object-contain [image-rendering:pixelated]"
               />
               <h3 className="text-[13px] gradient-text ">{pack.name}</h3>
@@ -82,7 +82,7 @@ export default function CurrencyTab() {
       )}
 
       <p className="mt-6 text-center text-[11.5px] text-(--color-text-dim)">
-        In-game currency is delivered instantly and can be spent at player shops or the auction house.
+        Velora is VeldoraMC's in-game currency.
       </p>
     </div>
   );
