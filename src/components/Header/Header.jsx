@@ -8,7 +8,11 @@ import PixelButton from "../ui/PixelButton";
 import { useCart } from "../../context/useCart";
 import cartIcon from "../../assets/icons/cart.png";
 
-function MicrosoftMark({ size = 18 }) {\n  return <svg width={size} height={size} viewBox="0 0 24 24" aria-hidden="true"><path fill="#f25022" d="M1 1h10v10H1z"/><path fill="#7fba00" d="M13 1h10v10H13z"/><path fill="#00a4ef" d="M1 13h10v10H1z"/><path fill="#ffb900" d="M13 13h10v10H13z"/></svg>;\n}\n\nfunction CartBadge({ count, className = "top-1.5 right-1.5" }) {
+function MicrosoftMark({ size = 18 }) {
+  return <svg width={size} height={size} viewBox="0 0 24 24" aria-hidden="true"><path fill="#f25022" d="M1 1h10v10H1z"/><path fill="#7fba00" d="M13 1h10v10H13z"/><path fill="#00a4ef" d="M1 13h10v10H1z"/><path fill="#ffb900" d="M13 13h10v10H13z"/></svg>;
+}
+
+function CartBadge({ count, className = "top-1.5 right-1.5" }) {
   if (count <= 0) return null;
   return (
     <span
