@@ -210,21 +210,21 @@ export function fetchCrateKeys() {
 
 // ── Currency packs ─────────────────────────────────────────────
 export const CURRENCY_PACKS = [
-  { key: "starter", name: "Starter Pack", amount: "10,000 Coins", price: "₹339", tone: "neutral" },
+  { key: "starter", name: "Starter Pack", amount: "10,000 Velora", price: "₹339", tone: "neutral" },
   {
     key: "value",
     name: "Value Pack",
-    amount: "30,000 Coins",
+    amount: "30,000 Velora",
     price: "₹764",
     tone: "info",
     bonus: "+15% bonus",
     featured: true,
   },
-  { key: "mega", name: "Mega Pack", amount: "75,000 Coins", price: "₹1,614", tone: "primary", bonus: "+25% bonus" },
+  { key: "mega", name: "Mega Pack", amount: "75,000 Velora", price: "₹1,614", tone: "primary", bonus: "+25% bonus" },
   {
     key: "ultimate",
     name: "Ultimate Pack",
-    amount: "200,000 Coins",
+    amount: "200,000 Velora",
     price: "₹3,399",
     tone: "pink",
     bonus: "+40% bonus",
