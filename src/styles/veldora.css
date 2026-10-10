@@ -296,3 +296,13 @@ header .pixel-btn{border:1px solid #c5f36b!important;border-radius:999px!importa
 @media(max-width:850px){.vh-hero{padding-top:115px}.vh-hero-inner{grid-template-columns:1fr;gap:10px}.vh-hero-copy{text-align:center;margin:auto}.vh-eyebrow,.vh-hero-actions,.vh-hero-note{justify-content:center}.vh-hero-copy>p{margin-left:auto;margin-right:auto}.vh-hero-emblem{min-height:300px}.vh-emblem-ring{width:250px}.vh-emblem-v{font-size:120px}.vh-section-head{align-items:start;flex-direction:column;gap:12px}.vh-mode-featured{grid-template-columns:1fr}.vh-mode-featured .vh-mode-art{min-height:0;height:260px}.vh-community{margin-left:20px;margin-right:20px}.vh-news-teaser{margin-left:20px;margin-right:20px}}
 @media(max-width:560px){.vh-hero{min-height:0;padding:112px 20px 66px}.vh-hero h1{font-size:clamp(42px,12vw,64px)}.vh-hero-copy>p{font-size:13px}.vh-hero-actions{flex-direction:column}.vh-hero-actions .vbtn{width:100%}.vh-hero-emblem{min-height:250px}.vh-emblem-ring{width:215px}.vh-emblem-v{font-size:105px}.vh-modes-section{padding-top:58px;padding-bottom:60px}.vh-modes-grid{grid-template-columns:1fr}.vh-mode-featured{grid-column:auto}.vh-mode-art,.vh-mode-featured .vh-mode-art{height:210px;min-height:0}.vh-mode-copy{padding:19px}.vh-community{align-items:flex-start;flex-wrap:wrap;padding:22px;margin-bottom:35px}.vh-community>div:nth-child(2){min-width:calc(100% - 82px)}.vh-community>.vbtn{width:100%}.vh-news-teaser{align-items:flex-start;flex-direction:column;padding-bottom:55px}.vh-news-teaser .vbtn{width:100%}}
 @media(prefers-reduced-motion:reduce){.vh-mode-card,.vh-mode-art img,.vh-mode-link svg{transition:none}}
+
+/* Lifesteal-only home and crisp Minecraft heart mark */
+.vh-emblem-heart-wrap{display:grid;place-items:center;min-height:155px;filter:drop-shadow(0 12px 20px #f5284540)}
+.vh-minecraft-heart{width:clamp(78px,11vw,126px);height:auto;image-rendering:pixelated;shape-rendering:crispEdges}
+.vh-mode-icon .vh-minecraft-heart{width:25px;height:24px;filter:drop-shadow(0 0 8px #f5284540)}
+.vh-lifesteal-card .vh-mode-art{min-height:280px}
+.vh-lifesteal-card .vh-mode-copy{display:flex;flex-direction:column;justify-content:center}
+.vh-single-mode-section .vh-section-head{margin-bottom:26px}
+@media(max-width:850px){.vh-emblem-heart-wrap{min-height:125px}.vh-minecraft-heart{width:92px}.vh-lifesteal-card .vh-mode-art{height:260px;min-height:0}}
+@media(max-width:560px){.vh-emblem-heart-wrap{min-height:110px}.vh-minecraft-heart{width:78px}}
