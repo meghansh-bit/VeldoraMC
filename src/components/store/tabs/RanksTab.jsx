@@ -117,7 +117,7 @@ export default function RanksTab() {
                 filled={rank.featured}
                 padding="none"
                 className="overflow-hidden rank-premium-box"
-                contentClassName="flex h-full flex-col gap-4 p-5"
+                contentClassName="flex h-full flex-col gap-2.5 p-3 sm:p-3.5"
                 header={
                   <div className="flex w-full items-center gap-2.5 py-1">
                     <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-sm bg-black/25">
@@ -133,42 +133,8 @@ export default function RanksTab() {
                     </span>
                   </div>
                 }
-                headerClassName="px-5! py-3! bg-black/10"
+                headerClassName="px-3! py-2! bg-black/10"
               >
-                {/* Username color + special nameplate preview */}
-                <div className="flex flex-col items-center gap-3 rounded-sm bg-black/15 py-3">
-                  <div className="flex flex-col items-center gap-1">
-                    <span className="text-[9.5px] tracking-[0.08em] text-(--color-text-dim) uppercase">
-                      Username Color
-                    </span>
-                    <span className={`text-[12.5px] font-semibold ${gradientClass}`}>
-                      {rank.usernameColor}
-                    </span>
-                  </div>
-
-                  <div className="flex flex-col items-center gap-1.5">
-                    <span className="text-[9.5px] tracking-[0.08em] text-(--color-text-dim) uppercase">
-                      Special Nameplate
-                    </span>
-                    <span
-                      className="flex items-center gap-1.5 rounded-sm border px-3 py-1"
-                      style={{ borderColor: `var(--color-${rank.tone})` }}
-                    >
-                      <MessageSquare size={11} className={gradientClass} />
-                      <span className={`text-[11px] font-bold uppercase ${gradientClass}`}>
-                        {rank.name}
-                      </span>
-                    </span>
-                  </div>
-                </div>
-
-                {/* Full perk comparison */}
-                <div className="flex flex-col">
-                  {RANK_PERK_ROWS.map((row) => (
-                    <PerkRow key={row.key} row={row} value={rank.values[row.key]} />
-                  ))}
-                </div>
-
                 <PixelButton
                   tone={rank.tone}
                   className="mt-auto w-full py-5!"
