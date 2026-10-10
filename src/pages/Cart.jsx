@@ -161,11 +161,10 @@ export default function Cart() {
   useSeo({ title: "Your Cart", path: "/cart", noindex: true });
   const { items, count, subtotal, clearCart } = useCart();
   const [placed, setPlaced] = useState(false);
+  const [paymentOpen, setPaymentOpen] = useState(false);
 
-  const handleCheckout = () => {
-    setPlaced(true);
-    clearCart();
-  };
+  // Temporary checkout placeholder until a real Paymenter endpoint and webhook are configured.
+  const handleCheckout = () => setPaymentOpen(true);
 
   return (
     <section className="mx-auto max-w-5xl px-4 py-6 sm:px-6">
@@ -177,6 +176,30 @@ export default function Cart() {
       </p>
 
       {placed && <OrderPlaced onContinue={() => setPlaced(false)} />}
+
+
+      {paymentOpen && !placed && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/75 p-4 backdrop-blur-md" role="dialog" aria-modal="true" aria-labelledby="paymenter-title">
+          <div className="w-full max-w-md rounded-2xl border border-red-400/30 bg-[#111014]/95 p-6 shadow-[0_20px_90px_#ff334d20]">
+            <div className="mb-4 flex items-center gap-3">
+              <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-red-500/10 text-red-300"><ShoppingCart size={22} /></span>
+              <div>
+                <h2 id="paymenter-title" className="text-lg font-extrabold text-white">Paymenter Checkout</h2>
+                <p className="text-xs text-white/50">Temporary payment preview</p>
+              </div>
+            </div>
+            <div className="mb-4 rounded-xl border border-white/10 bg-white/[0.03] p-4">
+              <div className="flex items-center justify-between text-sm text-white/65"><span>Items</span><span>{count}</span></div>
+              <div className="mt-2 flex items-center justify-between text-base font-bold text-white"><span>Total</span><span>{formatUSD(subtotal)}</span></div>
+            </div>
+            <p className="text-sm leading-6 text-white/70">Paymenter isn’t connected yet. This temporary screen lets you review your order, but it will not charge you or deliver items.</p>
+            <div className="mt-5 flex gap-3">
+              <button type="button" onClick={() => setPaymentOpen(false)} className="flex-1 rounded-xl border border-white/15 px-4 py-3 text-sm font-bold text-white transition hover:bg-white/5">Back to cart</button>
+              <button type="button" onClick={() => setPaymentOpen(false)} className="flex-1 rounded-xl bg-[#ff334d] px-4 py-3 text-sm font-extrabold text-white transition hover:bg-[#e92540]">Got it</button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {!placed && items.length === 0 && <EmptyCart />}
 
@@ -224,8 +247,7 @@ export default function Cart() {
             </PixelButton>
 
             <p className="text-center text-[10.5px] leading-relaxed text-(--color-text-dim)">
-              Instant in-game delivery after checkout — no real payment is
-              processed on this preview store.
+              Temporary Paymenter preview. Payments and automatic delivery are not connected yet.
             </p>
           </PixelBox>
         </div>
