@@ -13,7 +13,7 @@ import {
 } from "lucide-react";
 import PixelBox from "../../ui/PixelBox";
 import PixelButton from "../../ui/PixelButton";
-import { fetchRanks, RANK_PERK_ROWS, formatInrEquivalent } from "../../../data/store";
+import { fetchRanks, RANK_PERK_ROWS } from "../../../data/store";
 import { useCart } from "../../../context/useCart";
 
 // One icon per tier so the columns read at a glance instead of repeating
@@ -131,7 +131,6 @@ export default function RanksTab() {
                       className="ml-auto text-[17px] text-(--color-text) gold-gradient-text "
                     >
                       {rank.price}
-                      <span className="mt-1 block text-[10px] text-white/60">{formatInrEquivalent(rank.price)}</span>
                     </span>
                   </div>
                 }
