@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Gamepad2, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import Logo from "./Logo";
 import NavButton from "./NavButton";
 import { navItems } from "./navItems";
@@ -8,7 +8,7 @@ import PixelButton from "../ui/PixelButton";
 import { useCart } from "../../context/useCart";
 import cartIcon from "../../assets/icons/cart.png";
 
-function CartBadge({ count, className = "top-1.5 right-1.5" }) {
+function MicrosoftMark({ size = 18 }) {\n  return <svg width={size} height={size} viewBox="0 0 24 24" aria-hidden="true"><path fill="#f25022" d="M1 1h10v10H1z"/><path fill="#7fba00" d="M13 1h10v10H13z"/><path fill="#00a4ef" d="M1 13h10v10H1z"/><path fill="#ffb900" d="M13 13h10v10H13z"/></svg>;\n}\n\nfunction CartBadge({ count, className = "top-1.5 right-1.5" }) {
   if (count <= 0) return null;
   return (
     <span
@@ -65,7 +65,7 @@ export default function Header() {
             <PixelButton
               tone="success"
               size="lg"
-              icon={Gamepad2}
+              icon={MicrosoftMark}
               className="shrink-0 px-4!"
               textClassName="gradient-text"
               textStyle={{
@@ -126,7 +126,7 @@ export default function Header() {
 
           <div className="px-4 py-4">
             <Link to="/login" onClick={() => setOpen(false)} className="vbtn vbtn-primary w-full">
-              <Gamepad2 size={17} /> Login
+              <MicrosoftMark size={18} /> Login
             </Link>
           </div>
         </div>
