@@ -8,17 +8,17 @@ import CratesTab from "../components/store/tabs/CratesTab";
 import CurrencyTab from "../components/store/tabs/CurrencyTab";
 import TopDonatorsTab from "../components/store/tabs/TopDonatorsTab";
 import { useSeo } from "../hooks/useSeo";
-import { formatInrEquivalent } from "../data/store";
+
 import { useCart } from "../context/useCart";
 import PixelButton from "../components/ui/PixelButton";
 import { CheckCircle2, ShoppingCart } from "lucide-react";
 
 const TAB_COMPONENTS = { ranks: RanksTab, crates: CratesTab, currency: CurrencyTab, donators: TopDonatorsTab };
 const bundleHighlights = [
-  { name: "Starter", fullName: "Starter Bundle", description: "Kick off your Lifesteal journey.", price: "$2.49", tone: "starter", icon: ShieldCheck, perks: ["Starter rank & kit", "A few crate keys"] },
-  { name: "Warrior", fullName: "Warrior Bundle", description: "For players ready to make a name.", price: "$5.99", tone: "warrior", icon: Heart, perks: ["Warrior rank & kit", "Extra progression perks"], featured: true },
-  { name: "Champion", fullName: "Champion Bundle", description: "A powerful upgrade for regulars.", price: "$11.99", tone: "champion", icon: KeyRound, perks: ["Champion rank & kit", "More crate keys"] },
-  { name: "Mythic", fullName: "Mythic Bundle", description: "The premium Veldora experience.", price: "$21.99", tone: "mythic", icon: Crown, perks: ["Mythic rank & kit", "Premium extras"] },
+  { name: "Starter", fullName: "Starter Bundle", description: "Kick off your Lifesteal journey.", price: "₹212", tone: "starter", icon: ShieldCheck, perks: ["Starter rank & kit", "A few crate keys"] },
+  { name: "Warrior", fullName: "Warrior Bundle", description: "For players ready to make a name.", price: "₹509", tone: "warrior", icon: Heart, perks: ["Warrior rank & kit", "Extra progression perks"], featured: true },
+  { name: "Champion", fullName: "Champion Bundle", description: "A powerful upgrade for regulars.", price: "₹1,019", tone: "champion", icon: KeyRound, perks: ["Champion rank & kit", "More crate keys"] },
+  { name: "Mythic", fullName: "Mythic Bundle", description: "The premium Veldora experience.", price: "₹1,869", tone: "mythic", icon: Crown, perks: ["Mythic rank & kit", "Premium extras"] },
 ];
 
 export default function Store() {
@@ -58,7 +58,7 @@ export default function Store() {
               <span className="vstore-bundle-label">{name.toUpperCase()} TIER</span>
               <h3>{fullName}</h3><p>{description}</p>
               <ul>{perks.map((perk) => <li key={perk}><span>✓</span>{perk}</li>)}</ul>
-              <div className="vstore-bundle-bottom"><div className="vstore-bundle-price"><strong>{price}</strong><small>{formatInrEquivalent(price)}</small></div><PixelButton tone="primary" size="sm" className="vstore-bundle-cart" icon={addedBundle === tone ? CheckCircle2 : ShoppingCart} onClick={() => handleAddBundle({fullName, price, tone, icon: Icon})}>{addedBundle === tone ? "Added ✓" : "Add to Cart"}</PixelButton></div>
+              <div className="vstore-bundle-bottom"><div className="vstore-bundle-price"><strong>{price}</strong></div><PixelButton tone="primary" size="sm" className="vstore-bundle-cart" icon={addedBundle === tone ? CheckCircle2 : ShoppingCart} onClick={() => handleAddBundle({fullName, price, tone, icon: Icon})}>{addedBundle === tone ? "Added ✓" : "Add to Cart"}</PixelButton></div>
             </article>
           ))}
         </div>
