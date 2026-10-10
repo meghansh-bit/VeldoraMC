@@ -13,7 +13,7 @@ import {
 } from "lucide-react";
 import PixelBox from "../../ui/PixelBox";
 import PixelButton from "../../ui/PixelButton";
-import { fetchRanks, RANK_PERK_ROWS } from "../../../data/store";
+import { fetchRanks, RANK_PERK_ROWS, formatInrEquivalent } from "../../../data/store";
 import { useCart } from "../../../context/useCart";
 
 // One icon per tier so the columns read at a glance instead of repeating
@@ -101,18 +101,18 @@ export default function RanksTab() {
       )}
 
       {ranks && (
-        <div className="grid gap-5 sm:grid-cols-3">
+        <div className="rank-premium-grid grid gap-5 sm:grid-cols-3">
           {ranks.map((rank) => {
             const Icon = RANK_ICONS[rank.key] ?? Star;
             const gradientClass = TONE_GRADIENT[rank.tone] ?? "gradient-text";
 
             return (
+              <div key={rank.key} className={`rank-premium-card rank-premium-${rank.key}`}>
               <PixelBox
-                key={rank.key}
                 tone={rank.tone}
                 filled={rank.featured}
                 padding="none"
-                className={`overflow-hidden `}
+                className="overflow-hidden rank-premium-box"
                 contentClassName="flex h-full flex-col gap-4 p-5"
                 header={
                   <div className="flex w-full items-center gap-2.5 py-1">
@@ -173,11 +173,13 @@ export default function RanksTab() {
                   iconClassName="text-[#ffc02e]"
                   onClick={() => handleAddToCart(rank)}
                 >
-                  <span className="gold-gradient-text ">
-                    {addedKey === rank.key ? "Added to Cart" : "Add to Cart"}
+                  <span className="rank-add-label">
+                    {addedKey === rank.key ? "Added to Cart ✓" : "Add to Cart"}
                   </span>
                 </PixelButton>
               </PixelBox>
+              <div className="rank-inr-price">{formatInrEquivalent(rank.price)}</div>
+              </div>
             );
           })}
         </div>
