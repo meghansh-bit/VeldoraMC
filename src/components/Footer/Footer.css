@@ -97,3 +97,11 @@
   font-size: 11px;
   color: var(--color-text-dim);
 }
+
+.site-footer__logo { font-size: 16px; letter-spacing: .12em; }
+.site-footer__logo span { color: var(--color-primary); }
+.site-footer__tagline { font-size: 13px; max-width: 300px; }
+.site-footer__discord-cta { display: inline-flex; align-items: center; gap: 9px; margin-top: 18px; padding: 11px 14px; border: 1px solid var(--color-primary); background: color-mix(in srgb, var(--color-primary) 14%, transparent); color: var(--color-text); font-size: 12px; font-weight: 800; transition: transform 150ms ease, background 150ms ease; }
+.site-footer__discord-cta:hover { transform: translateY(-2px); background: color-mix(in srgb, var(--color-primary) 24%, transparent); }
+.site-footer__col a { font-size: 13px; }
+.site-footer__bottom { padding: 20px 1rem; }
