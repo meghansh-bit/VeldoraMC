@@ -18,13 +18,7 @@
 
 const SIMULATED_DELAY = 250;
 
-// Approximate display conversion only; checkout should use the payment provider rate.
-export const USD_TO_INR_ESTIMATE = 85;
-export function formatInrEquivalent(price) {
-  const amount = Number(String(price).replace(/[^0-9.]/g, ""));
-  if (!Number.isFinite(amount)) return "";
-  return `≈ ₹${Math.round(amount * USD_TO_INR_ESTIMATE).toLocaleString("en-IN")} INR`;
-} // ms — mimics a network round-trip
+export function formatInrEquivalent(price) { return String(price).startsWith("₹") ? price : ""; } // ms — mimics a network round-trip
 
 function resolve(data) {
   return new Promise((res) => setTimeout(() => res(data), SIMULATED_DELAY));
@@ -88,7 +82,7 @@ export const RANKS = [
   {
     key: "vip",
     name: "VIP",
-    price: "$4.99",
+    price: "₹424",
     tone: "",
     usernameColor: "Green",
     perks: ["Colored name tag", "/hat and /kit vip", "2 extra homes"],
@@ -113,7 +107,7 @@ export const RANKS = [
   {
     key: "mvp",
     name: "MVP",
-    price: "$9.99",
+    price: "₹849",
     tone: "primary",
     usernameColor: "Aqua",
     perks: [
@@ -144,7 +138,7 @@ export const RANKS = [
   {
     key: "legend",
     name: "LEGEND",
-    price: "$19.99",
+    price: "₹1,699",
     tone: "success",
     usernameColor: "Gold",
     perks: [
@@ -182,21 +176,21 @@ export const CRATE_KEYS = [
   {
     key: "common",
     name: "Common Key",
-    price: "$2.99",
+    price: "₹254",
     tone: "neutral",
     contents: ["Basic cosmetics", "Small currency boost", "Common tools"],
   },
   {
     key: "rare",
     name: "Rare Key",
-    price: "$6.99",
+    price: "₹594",
     tone: "info",
     contents: ["Rare cosmetics", "Mid-tier currency", "Enchanted gear"],
   },
   {
     key: "epic",
     name: "Epic Key",
-    price: "$12.99",
+    price: "₹1,104",
     tone: "primary",
     contents: ["Epic cosmetics", "Large currency boost", "Exclusive pets"],
     featured: true,
@@ -204,7 +198,7 @@ export const CRATE_KEYS = [
   {
     key: "legendary",
     name: "Legendary Key",
-    price: "$24.99",
+    price: "₹2,124",
     tone: "pink",
     contents: ["Legendary cosmetics", "Max currency boost", "One-of-a-kind items"],
   },
@@ -216,22 +210,22 @@ export function fetchCrateKeys() {
 
 // ── Currency packs ─────────────────────────────────────────────
 export const CURRENCY_PACKS = [
-  { key: "starter", name: "Starter Pack", amount: "10,000 Coins", price: "$3.99", tone: "neutral" },
+  { key: "starter", name: "Starter Pack", amount: "10,000 Coins", price: "₹339", tone: "neutral" },
   {
     key: "value",
     name: "Value Pack",
     amount: "30,000 Coins",
-    price: "$8.99",
+    price: "₹764",
     tone: "info",
     bonus: "+15% bonus",
     featured: true,
   },
-  { key: "mega", name: "Mega Pack", amount: "75,000 Coins", price: "$18.99", tone: "primary", bonus: "+25% bonus" },
+  { key: "mega", name: "Mega Pack", amount: "75,000 Coins", price: "₹1,614", tone: "primary", bonus: "+25% bonus" },
   {
     key: "ultimate",
     name: "Ultimate Pack",
     amount: "200,000 Coins",
-    price: "$39.99",
+    price: "₹3,399",
     tone: "pink",
     bonus: "+40% bonus",
   },
