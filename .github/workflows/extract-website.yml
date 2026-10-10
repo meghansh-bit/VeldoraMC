@@ -1,0 +1,56 @@
+name: Extract VeldoraMC website ZIP
+
+on:
+  push:
+    paths:
+      - "VeldoraMC-Bundles-Payments.zip"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Extract website files
+        run: |
+          python - <<'PY'
+          from pathlib import Path, PurePosixPath
+          from zipfile import ZipFile
+
+          archive = Path("VeldoraMC-Bundles-Payments.zip")
+          if not archive.exists():
+              raise SystemExit("Upload VeldoraMC-Bundles-Payments.zip to the repository root first.")
+
+          root = Path(".").resolve()
+          with ZipFile(archive) as z:
+              bad = z.testzip()
+              if bad:
+                  raise SystemExit(f"Corrupt ZIP entry: {bad}")
+              for item in z.infolist():
+                  name = item.filename
+                  if not name or name.endswith("/") or name.startswith("veldora-edit/"):
+                      continue
+                  rel = PurePosixPath(name)
+                  if rel.is_absolute() or ".." in rel.parts:
+                      raise SystemExit(f"Unsafe ZIP path: {name}")
+                  target = (root / Path(*rel.parts)).resolve()
+                  if root not in target.parents and target != root:
+                      raise SystemExit(f"Unsafe output path: {name}")
+                  target.parent.mkdir(parents=True, exist_ok=True)
+                  target.write_bytes(z.read(item))
+          PY
+
+      - name: Commit extracted website
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if ! git diff --cached --quiet; then
+            git commit -m "Extract VeldoraMC website source"
+            git push
+          fi
