@@ -39,6 +39,19 @@ export default function PlayerProfiles() {
       </div>
       <p className="portal-intro">Look up a player and explore their VeldoraMC stats, rank, Velora, and edition.</p>
 
+      <section className="relative mt-6 overflow-hidden rounded-xl border border-cyan-300/20 bg-[#11131c] p-5 sm:p-6">
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-cyan-400/10 via-transparent to-violet-400/10"/>
+        <div className="relative flex flex-col gap-4 sm:flex-row sm:items-center">
+          <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl border border-cyan-300/20 bg-cyan-300/10 text-cyan-200"><UserRound size={27}/></div>
+          <div className="min-w-0 flex-1">
+            <div className="text-[10px] font-bold tracking-[.2em] text-cyan-200/70">YOUR PLAYER PROFILE</div>
+            <h2 className="mt-1 text-lg font-extrabold text-white">Your stats. Your legacy.</h2>
+            <p className="mt-1 text-sm leading-6 text-white/50">Sign in to view your own profile here. Account login is not active yet, so your personal Minecraft account cannot be detected just yet.</p>
+          </div>
+          <Link to="/login" className="vbtn vbtn-primary min-h-12 justify-center whitespace-nowrap">LOGIN TO CONTINUE <ArrowRight size={16}/></Link>
+        </div>
+      </section>
+
       <div className="coming-banner"><span className="live-dot"/><div><b>PLAYER STATS INTEGRATION PENDING</b><small>Search and profile layout are ready. Verified stats will appear after the Minecraft server API is connected.</small></div></div>
 
       <form onSubmit={handleSearch} className="mt-6 flex w-full flex-col gap-3 sm:flex-row">
