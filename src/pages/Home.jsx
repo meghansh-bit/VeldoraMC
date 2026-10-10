@@ -30,7 +30,7 @@ export default function Home() {
         <p className="vhi-lead">Fight for every heart. Build your legacy. Make allies, challenge rivals, and carve your own story in VeldoraMC Lifesteal.</p>
         <div className="vhi-stats"><div><strong>LIFESTEAL</strong><span>ONE MAIN GAMEMODE</span></div><div><strong>JAVA + BEDROCK*</strong><span>PLAYER COMMUNITY</span></div></div>
         <div className="vhi-platforms" aria-label="Minecraft platform compatibility"><span>▰</span><span>▦</span><span>◉</span><span>▯</span></div>
-        <div className="vhi-hero-actions"><a href="https://discord.gg/NruxFSnrUe" target="_blank" rel="noreferrer" className="vhi-btn vhi-btn-ghost"><DiscordMark size={20}/> Join Community</a></div>
+        <div className="vhi-hero-actions"><a href="#projects" className="vhi-btn vhi-btn-green"><Gamepad2 size={18}/> Explore Lifesteal <ArrowDown size={16}/></a><a href="https://discord.gg/NruxFSnrUe" target="_blank" rel="noreferrer" className="vhi-btn vhi-btn-ghost"><DiscordMark size={20}/> Join Community</a></div>
       </div>
       <div className="vhi-hero-bottom"><span><Signal size={15}/> YOUR NEXT WORLD IS WAITING</span><span>SCROLL TO EXPLORE ↓</span></div>
     </section>
