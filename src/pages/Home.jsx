@@ -24,7 +24,7 @@ export default function Home() {
     <section className="vhi-hero">
       <div className="vhi-hero-bg" style={{ backgroundImage: `linear-gradient(90deg,rgba(7,7,20,.94),rgba(7,7,20,.52) 52%,rgba(7,7,20,.7)),url(${lifestealImage})` }} />
       <div className="vhi-hero-inner">
-        <div className="vhi-wordmark"><span className="vhi-mark"><MinecraftHeart /></span><span>VELDORA<span className="vhi-wordmark-accent">MC</span></span></div>
+        <div className="vhi-wordmark"><img src="/veldoramc-logo.svg" alt="VeldoraMC" className="vhi-wordmark-image" /></div>
         <span className="vhi-eyebrow"><span className="vhi-pulse" /> MINECRAFT LIFESTEAL SERVER</span>
         <h1>YOUR NEXT<br/><span>BIG ADVENTURE.</span></h1>
         <p className="vhi-lead">Fight for every heart. Build your legacy. Make allies, challenge rivals, and carve your own story in VeldoraMC Lifesteal.</p>
