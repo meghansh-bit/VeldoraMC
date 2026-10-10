@@ -16,7 +16,15 @@
 //   GET /api/store/top-donators?period=monthly|allTime
 // ─────────────────────────────────────────────────────────────
 
-const SIMULATED_DELAY = 250; // ms — mimics a network round-trip
+const SIMULATED_DELAY = 250;
+
+// Approximate display conversion only; checkout should use the payment provider rate.
+export const USD_TO_INR_ESTIMATE = 85;
+export function formatInrEquivalent(price) {
+  const amount = Number(String(price).replace(/[^0-9.]/g, ""));
+  if (!Number.isFinite(amount)) return "";
+  return `≈ ₹${Math.round(amount * USD_TO_INR_ESTIMATE).toLocaleString("en-IN")} INR`;
+} // ms — mimics a network round-trip
 
 function resolve(data) {
   return new Promise((res) => setTimeout(() => res(data), SIMULATED_DELAY));
@@ -43,7 +51,7 @@ export function fetchMonthlyGoal() {
   return resolve({
     current: 3420,
     target: 6000,
-    currency: "৳",
+    currency: "$",
     supporters: 47,
     endsAt: getMonthResetAt(),
   });
@@ -238,24 +246,24 @@ export function fetchCurrencyPacks() {
 // so this list doubles as social proof for the store categories below it.
 const topDonators = {
   monthly: [
-    { rank: 1, username: "OpEfath", amount: 1450, tier: "LEGEND" },
-    { rank: 2, username: "MahirPro7", amount: 990, tier: "MVP" },
-    { rank: 3, username: "tasneem", amount: 720, tier: "MVP" },
-    { rank: 4, username: "RoyPlays28", amount: 480, tier: "VIP" },
-    { rank: 5, username: "niloy3334444", amount: 350, tier: "VIP" },
-    { rank: 6, username: "BigFred30", amount: 300, tier: "VIP" },
-    { rank: 7, username: "JJ_ZERO", amount: 250, tier: "VIP" },
-    { rank: 8, username: "Sayham", amount: 200, tier: "VIP" },
+    { rank: 1, username: "OpEfath", amount: 14.5, tier: "LEGEND" },
+    { rank: 2, username: "MahirPro7", amount: 9.9, tier: "MVP" },
+    { rank: 3, username: "tasneem", amount: 7.2, tier: "MVP" },
+    { rank: 4, username: "RoyPlays28", amount: 4.8, tier: "VIP" },
+    { rank: 5, username: "niloy3334444", amount: 3.5, tier: "VIP" },
+    { rank: 6, username: "BigFred30", amount: 3, tier: "VIP" },
+    { rank: 7, username: "JJ_ZERO", amount: 2.5, tier: "VIP" },
+    { rank: 8, username: "Sayham", amount: 2, tier: "VIP" },
   ],
   allTime: [
-    { rank: 1, username: "OpEfath", amount: 18650, tier: "LEGEND" },
-    { rank: 2, username: "MahinIsBest", amount: 15200, tier: "LEGEND" },
-    { rank: 3, username: "MahirPro7", amount: 12980, tier: "LEGEND" },
-    { rank: 4, username: "tasneem", amount: 9640, tier: "MVP" },
-    { rank: 5, username: "RoyPlays28", amount: 8100, tier: "MVP" },
-    { rank: 6, username: "Arman_Mahim", amount: 6450, tier: "MVP" },
-    { rank: 7, username: "parbon50", amount: 5300, tier: "MVP" },
-    { rank: 8, username: "iori", amount: 4120, tier: "VIP" },
+    { rank: 1, username: "OpEfath", amount: 186.5, tier: "LEGEND" },
+    { rank: 2, username: "MahinIsBest", amount: 152, tier: "LEGEND" },
+    { rank: 3, username: "MahirPro7", amount: 129.8, tier: "LEGEND" },
+    { rank: 4, username: "tasneem", amount: 96.4, tier: "MVP" },
+    { rank: 5, username: "RoyPlays28", amount: 81, tier: "MVP" },
+    { rank: 6, username: "Arman_Mahim", amount: 64.5, tier: "MVP" },
+    { rank: 7, username: "parbon50", amount: 53, tier: "MVP" },
+    { rank: 8, username: "iori", amount: 41.2, tier: "VIP" },
   ],
 };
 
