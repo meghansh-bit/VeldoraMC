@@ -12,6 +12,7 @@ import LinkMinecraft from "../pages/LinkMinecraft";
 import PortalPage from "../pages/PortalPage";
 import PlayerProfiles from "../pages/PlayerProfiles";
 import Bundles from "../pages/Bundles";
+import AdminDashboard from "../pages/AdminDashboard";
 
 export const router = createBrowserRouter([
  { path: "/", element: <RootLayout />, children: [
@@ -23,5 +24,6 @@ export const router = createBrowserRouter([
   { path: "link-minecraft", element: <LinkMinecraft /> },
   { path: "profiles", element: <PlayerProfiles /> }, { path: "leaderboard", element: <PortalPage /> },
   { path: "community", element: <PortalPage /> }, { path: "support", element: <PortalPage /> },
- ]}
+ ]},
+ { path: "/admin", element: <AdminDashboard /> },
 ]);
