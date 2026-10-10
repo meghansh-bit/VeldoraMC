@@ -89,6 +89,10 @@ export default function RanksTab() {
 
   return (
     <div className="mt-8">
+      <div className="mb-5 rounded-xl border border-red-400/20 bg-red-500/[0.06] px-4 py-3 text-center text-[12px] leading-relaxed text-white/70">
+        Want to check what each rank unlocks? Join the server and type <code className="rounded bg-black/40 px-1.5 py-0.5 font-bold text-red-300">/store</code> in-game to view rank perks.
+      </div>
+
       {/* Upgrade-discount banner */}
       <div className="mb-5 flex items-start gap-2.5 rounded-sm border border-(--color-info)/40 bg-(--color-info)/10 px-4 py-3 text-[11px] leading-snug text-(--color-text-muted)">
         <Info size={15} className="mt-0.5 shrink-0 text-(--color-info)" />
