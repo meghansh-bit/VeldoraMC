@@ -1,4 +1,4 @@
-import { ArrowRight, Copy, Check, Gamepad2, Users, ShieldCheck, Sparkles, Swords, MessageCircle, Globe2 } from "lucide-react";
+import { ArrowRight, Gamepad2, Users, ShieldCheck, Sparkles, Swords, MessageCircle, Globe2 } from "lucide-react";
 import { useState } from "react";
 import { useSeo } from "../hooks/useSeo";
 
@@ -14,17 +14,14 @@ const values = [
 ];
 export default function Home() {
   useSeo({ title: "VeldoraMC — Minecraft Community", description: "Discover VeldoraMC, a Minecraft community built for survival, competition, and playing together.", path: "/" });
-  const [copied, setCopied] = useState(false);
-  const serverAddress = "play.veldoramc.com";
-  const copyIp = async () => { try { await navigator.clipboard.writeText(serverAddress); setCopied(true); setTimeout(() => setCopied(false), 1600); } catch { window.location.href = "https://discord.gg/NruxFSnrUe"; } };
   return <div className="vel-home inpvp-inspired">
     <section className="network-hero">
       <div className="network-hero__art" aria-hidden="true"><div className="network-hero__sun" /><div className="network-hero__mountain mountain-a" /><div className="network-hero__mountain mountain-b" /><div className="network-hero__blocks"><span /><span /><span /><span /><span /></div></div>
       <div className="network-hero__content">
         <div className="network-pill"><span className="live-dot" /> THE VELDORAMC NETWORK</div><div className="network-emblem"><span>V</span><i>MC</i></div>
         <h1>YOUR NEXT<br /><span>MINECRAFT ADVENTURE.</span></h1><p>Discover new worlds, meet your people, and make your mark. Your story starts at VeldoraMC.</p>
-        <div className="network-actions"><button className="vbtn vbtn-primary" onClick={copyIp}>{copied ? <Check size={17} /> : <Copy size={17} />}{copied ? "SERVER IP COPIED" : serverAddress}</button><a className="vbtn vbtn-glass" href="https://discord.gg/NruxFSnrUe" target="_blank" rel="noreferrer"><MessageCircle size={17} /> JOIN OUR DISCORD <ArrowRight size={15} /></a></div>
-        <div className="network-note">JAVA / BEDROCK DETAILS · CHECK DISCORD FOR LAUNCH UPDATES</div>
+        <div className="network-actions"><a className="vbtn vbtn-primary" href="https://discord.gg/NruxFSnrUe" target="_blank" rel="noreferrer"><MessageCircle size={17} /> SERVER INFO & UPDATES <ArrowRight size={15} /></a><a className="vbtn vbtn-glass" href="#projects"><Gamepad2 size={17} /> EXPLORE THE NETWORK</a></div>
+        <div className="network-note">SERVER ADDRESS & SUPPORTED EDITIONS ANNOUNCED IN DISCORD</div>
       </div><a className="network-scroll" href="#projects">EXPLORE VELDORAMC <span>↓</span></a>
     </section>
     <section className="network-projects" id="projects"><div className="network-section-head"><div><span className="section-kicker">DISCOVER VELDORAMC</span><h2>Pick your next <span>adventure.</span></h2></div><p>One community. New experiences. Find the way you want to play.</p></div>
