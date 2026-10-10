@@ -9,6 +9,9 @@ import CurrencyTab from "../components/store/tabs/CurrencyTab";
 import TopDonatorsTab from "../components/store/tabs/TopDonatorsTab";
 import { useSeo } from "../hooks/useSeo";
 import { formatInrEquivalent } from "../data/store";
+import { useCart } from "../context/useCart";
+import PixelButton from "../components/ui/PixelButton";
+import { CheckCircle2, ShoppingCart } from "lucide-react";
 
 const TAB_COMPONENTS = { ranks: RanksTab, crates: CratesTab, currency: CurrencyTab, donators: TopDonatorsTab };
 const bundleHighlights = [
@@ -21,6 +24,13 @@ const bundleHighlights = [
 export default function Store() {
   useSeo({ title: "VeldoraMC Store", description: "Explore VeldoraMC Lifesteal ranks, bundles, crate keys, and in-game currency.", path: "/store" });
   const [activeTab, setActiveTab] = useState(STORE_TABS[0].key);
+  const [addedBundle, setAddedBundle] = useState(null);
+  const { addToCart } = useCart();
+  const handleAddBundle = (bundle) => {
+    addToCart({ id: `bundle-${bundle.tone}`, category: "rank", name: bundle.fullName, price: bundle.price, tone: "primary", icon: bundle.icon });
+    setAddedBundle(bundle.tone);
+    window.setTimeout(() => setAddedBundle((current) => current === bundle.tone ? null : current), 1500);
+  };
   const ActiveTabComponent = TAB_COMPONENTS[activeTab] || RanksTab;
 
   return (
@@ -47,7 +57,7 @@ export default function Store() {
               <span className="vstore-bundle-label">{name.toUpperCase()} TIER</span>
               <h3>{fullName}</h3><p>{description}</p>
               <ul>{perks.map((perk) => <li key={perk}><span>✓</span>{perk}</li>)}</ul>
-              <div className="vstore-bundle-bottom"><div className="vstore-bundle-price"><strong>{price}</strong><small>{formatInrEquivalent(price)}</small></div><a href="/bundles" aria-label={`View ${fullName}`}>View bundle <ArrowRight size={15}/></a></div>
+              <div className="vstore-bundle-bottom"><div className="vstore-bundle-price"><strong>{price}</strong><small>{formatInrEquivalent(price)}</small></div><PixelButton tone="primary" size="sm" className="vstore-bundle-cart" icon={addedBundle === tone ? CheckCircle2 : ShoppingCart} onClick={() => handleAddBundle({fullName, price, tone, icon: Icon})}>{addedBundle === tone ? "Added ✓" : "Add to Cart"}</PixelButton></div>
             </article>
           ))}
         </div>
