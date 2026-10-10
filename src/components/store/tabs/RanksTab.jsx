@@ -130,6 +130,7 @@ export default function RanksTab() {
                       className="ml-auto text-[17px] text-(--color-text) gold-gradient-text "
                     >
                       {rank.price}
+                      <span className="mt-1 block text-[10px] text-white/60">{formatInrEquivalent(rank.price)}</span>
                     </span>
                   </div>
                 }
@@ -148,7 +149,6 @@ export default function RanksTab() {
                   </span>
                 </PixelButton>
               </PixelBox>
-              <div className="rank-inr-price">{formatInrEquivalent(rank.price)}</div>
               </div>
             );
           })}
