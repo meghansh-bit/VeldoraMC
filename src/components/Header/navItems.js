@@ -6,5 +6,4 @@ export const navItems = [
   { to: "/staff", label: "Staff" },
   { to: "/support", label: "Support" },
   { to: "/store", label: "Store" },
-  { to: "/bundles", label: "Bundles & Ranks" },
 ];
