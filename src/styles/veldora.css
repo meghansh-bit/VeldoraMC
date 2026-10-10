@@ -486,3 +486,28 @@ header .vbtn-primary:hover,.vbtn-primary:hover{background:linear-gradient(135deg
 .vstore-bundle-price small{font-size:10px;color:#a8a4ad;font-weight:600}
 @keyframes store-card-enter{from{opacity:0;transform:translateY(16px) scale(.985)}to{opacity:1;transform:translateY(0) scale(1)}}
 @media(prefers-reduced-motion:reduce){.rank-premium-card,.store-product-card{animation:none;transition:none}.rank-premium-card:hover,.store-product-card:hover{transform:none}}
+
+
+/* Mobile hero polish: compact platform strip and clear the fixed header */
+.vhi-platforms{display:flex;align-items:center;gap:10px;margin:16px 0 22px;color:#c8cbd6}
+.vhi-platform{display:inline-flex;align-items:center;gap:7px;padding:8px 11px;border:1px solid rgba(255,255,255,.13);border-radius:9px;background:rgba(255,255,255,.045);color:#c9ccd8;font-size:12px;line-height:1;letter-spacing:.08em;font-weight:800}
+.vhi-platform svg{width:16px;height:16px;color:#c6f56b;flex:none}
+.vhi-platform small{font-size:9px;letter-spacing:.12em}
+.vhi-wordmark-image{display:block;width:min(100%,520px);height:auto;max-height:90px;object-fit:contain;object-position:left center}
+@media(max-width:700px){
+  .vhi-hero{padding-top:145px;padding-bottom:88px;min-height:0}
+  .vhi-wordmark{margin-bottom:34px;max-width:100%}
+  .vhi-wordmark-image{width:min(100%,440px);max-height:64px}
+  .vhi-hero h1{font-size:clamp(42px,11vw,62px)!important;line-height:1.02!important;margin:18px 0 22px!important}
+  .vhi-lead{font-size:16px;line-height:1.72}
+  .vhi-stats{gap:15px;margin:25px 0 14px}
+  .vhi-stats>div{padding-left:11px}
+  .vhi-stats strong{font-size:15px}
+  .vhi-stats span{font-size:8px;letter-spacing:.1em}
+  .vhi-platforms{gap:7px;margin:14px 0 22px;flex-wrap:wrap}
+  .vhi-platform{gap:6px;padding:8px 9px}
+  .vhi-platform small{font-size:8px}
+  .vhi-hero-actions{gap:10px;margin-top:0}
+  .vhi-btn{min-height:50px}
+  .vhi-hero-bottom{bottom:18px}
+}
