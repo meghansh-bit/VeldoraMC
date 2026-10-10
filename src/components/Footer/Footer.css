@@ -105,3 +105,11 @@
 .site-footer__discord-cta:hover { transform: translateY(-2px); background: color-mix(in srgb, var(--color-primary) 24%, transparent); }
 .site-footer__col a { font-size: 13px; }
 .site-footer__bottom { padding: 20px 1rem; }
+
+/* Footer identity and real Discord branding */
+.site-footer__logo-link{display:inline-flex;align-items:center;text-decoration:none;max-width:240px}
+.site-footer__logo-image{display:block;width:clamp(175px,22vw,225px);height:auto;object-fit:contain;filter:none!important}
+.site-footer__discord-cta{background:linear-gradient(135deg,#5865f2,#4752c4)!important;border:1px solid #8490ff!important;color:#fff!important;border-radius:12px!important;box-shadow:0 7px 24px #5865f238,inset 0 1px 0 #ffffff35!important;padding:13px 17px!important;font-size:13px!important;letter-spacing:.01em}
+.site-footer__discord-cta:hover{background:linear-gradient(135deg,#6875ff,#5865f2)!important;box-shadow:0 10px 30px #5865f255,inset 0 1px 0 #ffffff45!important;transform:translateY(-2px)}
+.site-footer__social[aria-label="Discord"]{color:#aab1ff;border-color:#5865f270;background:#5865f215}
+.site-footer__social[aria-label="Discord"]:hover{color:#fff;background:#5865f2;border-color:#8490ff}
