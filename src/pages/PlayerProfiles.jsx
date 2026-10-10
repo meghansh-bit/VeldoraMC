@@ -1,33 +1,32 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Search, UserRound, Swords, HeartPulse, Clock3, Crown, Coins, Gamepad2, Monitor, Smartphone, ArrowRight, ShieldCheck } from "lucide-react";
+import { Search, UserRound, Swords, HeartPulse, Clock3, Crown, Coins, Gamepad2, Monitor, Smartphone, ArrowRight, Medal } from "lucide-react";
 import { useSeo } from "../hooks/useSeo";
 import { avatarUrl } from "../data/votes";
 
-const STATS = [
-  { label: "KILLS", value: "—", icon: Swords, tone: "text-rose-300" },
-  { label: "DEATHS", value: "—", icon: HeartPulse, tone: "text-orange-200" },
-  { label: "PLAYTIME", value: "—", icon: Clock3, tone: "text-cyan-200" },
-  { label: "RANK", value: "—", icon: Crown, tone: "text-violet-200" },
-  { label: "VELORA", value: "—", icon: Coins, tone: "text-amber-200" },
+const PROFILE_STATS = [
+  { label: "KILLS", detail: "Confirmed player eliminations", icon: Swords, accent: "text-rose-300", glow: "from-rose-400/15" },
+  { label: "DEATHS", detail: "Times fallen in battle", icon: HeartPulse, accent: "text-orange-200", glow: "from-orange-300/15" },
+  { label: "PLAYTIME", detail: "Time spent in the realm", icon: Clock3, accent: "text-cyan-200", glow: "from-cyan-400/15" },
+  { label: "RANK & VELORA", detail: "Rank and in-game currency", icon: Crown, accent: "text-amber-200", glow: "from-amber-300/15" },
 ];
 
 export default function PlayerProfiles() {
   const [query, setQuery] = useState("");
   const [searchedPlayer, setSearchedPlayer] = useState("");
-  const [searched, setSearched] = useState(false);
-  useSeo({ title: "Player Profiles", description: "Search VeldoraMC player profiles and view kills, deaths, playtime, rank, Velora, and Java or Bedrock platform.", path: "/profiles" });
+  const [error, setError] = useState("");
+  useSeo({ title: "Player Profiles", description: "Search VeldoraMC player profiles, kills, deaths, playtime, rank, Velora, and Java or Bedrock edition.", path: "/profiles" });
 
   function handleSearch(event) {
     event.preventDefault();
     const username = query.trim().replace(/^@/, "");
-    if (!username || !/^[A-Za-z0-9_]{3,16}$/.test(username)) {
+    if (!/^[A-Za-z0-9_]{3,16}$/.test(username)) {
       setSearchedPlayer("");
-      setSearched(true);
+      setError("Enter a Minecraft username between 3 and 16 characters.");
       return;
     }
     setSearchedPlayer(username);
-    setSearched(true);
+    setError("");
   }
 
   return <main className="portal-page">
@@ -36,50 +35,37 @@ export default function PlayerProfiles() {
       <div className="section-kicker">01 / PLAYER DIRECTORY</div>
       <div className="portal-heading">
         <div className="portal-icon"><UserRound size={29}/></div>
-        <h1>PLAYER PROFILES<span>.</span><br/><span>YOUR LEGACY.</span></h1>
+        <h1>PLAYER PROFILES<span>.</span><br/><span>KNOW THE LEGENDS.</span></h1>
       </div>
-      <p className="portal-intro">Search a Minecraft username to explore a player's VeldoraMC identity, stats, rank, and platform.</p>
+      <p className="portal-intro">Look up a player and explore their VeldoraMC stats, rank, Velora, and edition.</p>
 
-      <form onSubmit={handleSearch} className="mt-8 flex w-full max-w-3xl flex-col gap-3 sm:flex-row">
+      <div className="coming-banner"><span className="live-dot"/><div><b>PLAYER STATS INTEGRATION PENDING</b><small>Search and profile layout are ready. Verified stats will appear after the Minecraft server API is connected.</small></div></div>
+
+      <form onSubmit={handleSearch} className="mt-6 flex w-full flex-col gap-3 sm:flex-row">
         <label className="flex min-w-0 flex-1 items-center gap-3 rounded-xl border border-white/10 bg-[#11131c] px-4 focus-within:border-cyan-300/50">
           <Search size={19} className="shrink-0 text-white/40"/>
-          <input value={query} onChange={event => setQuery(event.target.value)} placeholder="Enter Minecraft username..." aria-label="Minecraft username" className="h-14 min-w-0 flex-1 bg-transparent text-sm text-white outline-none placeholder:text-white/35"/>
+          <input value={query} onChange={event => setQuery(event.target.value)} placeholder="Search Minecraft username..." aria-label="Minecraft username" className="h-14 min-w-0 flex-1 bg-transparent text-sm text-white outline-none placeholder:text-white/35"/>
         </label>
         <button type="submit" className="vbtn vbtn-primary min-h-14 justify-center"><Search size={17}/> SEARCH PLAYER</button>
       </form>
-      <p className="mt-3 text-[11px] text-white/40">Use a Java or Bedrock player name (3–16 letters, numbers, or underscores).</p>
+      {error && <p role="alert" className="mt-3 rounded-lg border border-rose-300/20 bg-rose-400/5 p-3 text-sm text-rose-200">{error}</p>}
 
-      {searched && !searchedPlayer && <p role="alert" className="mt-5 rounded-lg border border-rose-300/20 bg-rose-400/5 p-4 text-sm text-rose-200">Enter a valid Minecraft username to search.</p>}
-
-      {searchedPlayer && <section className="mt-8 overflow-hidden rounded-2xl border border-white/10 bg-[#10121a]">
-        <div className="flex flex-col gap-5 border-b border-white/10 bg-gradient-to-r from-cyan-300/[.09] via-transparent to-violet-400/[.08] p-5 sm:flex-row sm:items-center sm:p-7">
-          <img src={avatarUrl(searchedPlayer, 96)} alt="" className="h-20 w-20 rounded-xl border border-white/10 bg-black/30 [image-rendering:pixelated]" onError={event => { event.currentTarget.style.visibility = "hidden"; }}/>
-          <div className="min-w-0 flex-1">
-            <div className="text-[10px] font-bold tracking-[.2em] text-cyan-200/70">PLAYER PROFILE</div>
-            <h2 className="mt-1 break-all text-2xl font-extrabold text-white">{searchedPlayer}</h2>
-            <p className="mt-2 text-xs text-white/45">Stats will appear when live server data is connected.</p>
+      {searchedPlayer ? <section className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
+        <article className="relative overflow-hidden rounded-xl border border-white/10 bg-[#11131c] p-5 sm:col-span-2 sm:p-6">
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-cyan-400/15 via-transparent to-violet-400/10"/>
+          <div className="relative flex flex-col gap-4 sm:flex-row sm:items-center">
+            <img src={avatarUrl(searchedPlayer, 96)} alt="" className="h-20 w-20 rounded-xl border border-white/10 bg-black/30 [image-rendering:pixelated]" onError={event => { event.currentTarget.style.visibility = "hidden"; }}/>
+            <div className="min-w-0 flex-1"><div className="text-[10px] font-bold tracking-[.2em] text-cyan-200/70">PLAYER PROFILE</div><h2 className="mt-1 break-all text-2xl font-extrabold text-white">{searchedPlayer}</h2><p className="mt-2 text-xs text-white/45">Profile preview · not yet verified by the server</p></div>
+            <span className="w-fit rounded-full border border-white/10 bg-black/20 px-3 py-2 text-[10px] font-bold tracking-wider text-white/55">STATS COMING SOON</span>
           </div>
-          <span className="inline-flex w-fit items-center gap-2 rounded-full border border-white/10 bg-black/20 px-3 py-2 text-[10px] font-bold tracking-wider text-white/60"><ShieldCheck size={14}/> UNVERIFIED PROFILE</span>
-        </div>
-        <div className="grid grid-cols-2 gap-3 p-4 sm:grid-cols-3 sm:p-6 lg:grid-cols-5">
-          {STATS.map(({label,value,icon:Icon,tone}) => <div key={label} className="rounded-xl border border-white/[.07] bg-white/[.025] p-4">
-            <Icon size={19} className={tone}/>
-            <div className="mt-4 text-xl font-extrabold text-white">{value}</div>
-            <div className="mt-1 text-[10px] font-bold tracking-[.14em] text-white/40">{label}</div>
-          </div>)}
-        </div>
-        <div className="grid gap-3 border-t border-white/10 p-4 sm:grid-cols-2 sm:p-6">
-          <div className="flex items-center gap-3 rounded-xl border border-white/[.07] p-4"><Monitor size={21} className="text-cyan-200"/><div><div className="text-sm font-bold text-white">Java Edition</div><div className="mt-1 text-xs text-white/40">Platform status unavailable</div></div></div>
-          <div className="flex items-center gap-3 rounded-xl border border-white/[.07] p-4"><Smartphone size={21} className="text-violet-200"/><div><div className="text-sm font-bold text-white">Bedrock Edition</div><div className="mt-1 text-xs text-white/40">Platform status unavailable</div></div></div>
-        </div>
-        <div className="border-t border-white/10 bg-black/10 px-5 py-4 text-xs leading-5 text-white/40">This is a profile preview only. The name is not yet verified against VeldoraMC, and the stats and edition require a live server/plugin API before they can be displayed accurately.</div>
-      </section>}
-
-      {!searchedPlayer && <div className="mt-8 grid gap-4 sm:grid-cols-3">
-        {[["PLAYER STATS","Kills, deaths, and total playtime.",Swords],["RANK & VELORA","Showcase rank and Velora balance.",Coins],["JAVA OR BEDROCK","Identify the edition used to join.",Gamepad2]].map(([title,description,Icon]) => <article key={title} className="rounded-xl border border-white/10 bg-[#11131c] p-5"><Icon size={22} className="text-cyan-200"/><h2 className="mt-4 text-sm font-extrabold tracking-wider text-white">{title}</h2><p className="mt-2 text-xs leading-5 text-white/45">{description}</p></article>)}
+        </article>
+        {PROFILE_STATS.map(({label,detail,icon:Icon,accent,glow},index) => <article key={label} className="relative overflow-hidden rounded-xl border border-white/10 bg-[#11131c] p-5 sm:p-6"><div className={`pointer-events-none absolute inset-0 bg-gradient-to-br ${glow} to-transparent opacity-80`}/><div className="relative"><div className="flex items-start justify-between gap-3"><div className={`flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-black/20 ${accent}`}><Icon size={23}/></div><span className="text-[10px] font-bold tracking-[.2em] text-white/35">STAT 0{index+1}</span></div><h3 className={`mt-5 text-lg font-extrabold tracking-wide ${accent}`}>{label}</h3><p className="mt-1 text-xs leading-5 text-white/45">{detail}</p><div className="mt-5 flex min-h-20 flex-col items-center justify-center rounded-lg border border-dashed border-white/10 bg-black/20 px-4 py-4 text-center"><Medal size={20} className="mb-2 text-white/25"/><p className="text-xs font-bold tracking-wider text-white/50">—</p><p className="mt-1 text-[11px] text-white/35">Waiting for live stats</p></div></div></article>)}
+        <article className="relative overflow-hidden rounded-xl border border-white/10 bg-[#11131c] p-5 sm:col-span-2 sm:p-6"><div className="flex items-start justify-between gap-3"><div><h3 className="text-sm font-extrabold tracking-wider text-white">PLAYING EDITION</h3><p className="mt-1 text-xs text-white/45">Java or Bedrock</p></div><Gamepad2 size={22} className="text-cyan-200"/></div><div className="mt-5 grid gap-3 sm:grid-cols-2"><div className="flex items-center gap-3 rounded-lg border border-white/10 bg-black/20 p-4"><Monitor size={22} className="text-cyan-200"/><div><p className="text-sm font-bold text-white">Java Edition</p><p className="mt-1 text-xs text-white/40">Not connected</p></div></div><div className="flex items-center gap-3 rounded-lg border border-white/10 bg-black/20 p-4"><Smartphone size={22} className="text-violet-200"/><div><p className="text-sm font-bold text-white">Bedrock Edition</p><p className="mt-1 text-xs text-white/40">Not connected</p></div></div></div></article>
+      </section> : <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
+        {PROFILE_STATS.map(({label,detail,icon:Icon,accent,glow},index) => <article key={label} className="relative overflow-hidden rounded-xl border border-white/10 bg-[#11131c] p-5 sm:p-6"><div className={`pointer-events-none absolute inset-0 bg-gradient-to-br ${glow} to-transparent opacity-80`}/><div className="relative"><div className="flex items-start justify-between gap-3"><div className={`flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-black/20 ${accent}`}><Icon size={23}/></div><span className="text-[10px] font-bold tracking-[.2em] text-white/35">CATEGORY 0{index+1}</span></div><h2 className={`mt-5 text-lg font-extrabold tracking-wide ${accent}`}>{label}</h2><p className="mt-1 text-sm font-semibold text-white/80">{detail}</p><div className="mt-5 flex min-h-20 flex-col items-center justify-center rounded-lg border border-dashed border-white/10 bg-black/20 px-4 py-4 text-center"><Medal size={20} className="mb-2 text-white/25"/><p className="text-xs font-bold tracking-wider text-white/50">PLAYER DATA PREVIEW</p><p className="mt-1 text-[11px] text-white/35">Search a username to view this section</p></div></div></article>)}
       </div>}
 
-      <div className="portal-bottom"><div><h2>READY TO MAKE YOUR MARK?</h2><p>Join VeldoraMC and start building your legacy.</p></div><Link className="vbtn vbtn-primary" to="/">BACK TO HOME <ArrowRight size={16}/></Link></div>
+      <div className="portal-bottom"><div><h2>MAKE YOUR NAME LEGENDARY.</h2><p>Join the realm and earn your place in VeldoraMC history.</p></div><Link className="vbtn vbtn-primary" to="/">BACK TO HOME <ArrowRight size={16}/></Link></div>
     </div>
   </main>;
 }
