@@ -23,8 +23,8 @@ const CATEGORY_STYLE = {
   currency: { label: "CURRENCY", color: "var(--color-success)" },
 };
 
-function formatUSD(amount) {
-  return `$${amount.toFixed(2)}`;
+function formatINR(amount) {
+  return "₹" + Math.round(amount).toLocaleString("en-IN");
 }
 
 function ItemIcon({ item }) {
@@ -95,7 +95,7 @@ function CartRow({ item }) {
         </div>
 
         <span className="w-16 shrink-0 text-right text-[13px] gold-gradient-text">
-          {formatUSD(lineTotal)}
+          {formatINR(lineTotal)}
         </span>
 
         <PixelButton
@@ -190,7 +190,7 @@ export default function Cart() {
             </div>
             <div className="mb-4 rounded-xl border border-white/10 bg-white/[0.03] p-4">
               <div className="flex items-center justify-between text-sm text-white/65"><span>Items</span><span>{count}</span></div>
-              <div className="mt-2 flex items-center justify-between text-base font-bold text-white"><span>Total</span><span>{formatUSD(subtotal)}</span></div>
+              <div className="mt-2 flex items-center justify-between text-base font-bold text-white"><span>Total</span><span>{formatINR(subtotal)}</span></div>
             </div>
             <p className="text-sm leading-6 text-white/70">Paymenter isn’t connected yet. This temporary screen lets you review your order, but it will not charge you or deliver items.</p>
             <div className="mt-5 flex gap-3">
@@ -228,12 +228,12 @@ export default function Cart() {
           >
             <div className="flex items-center justify-between text-[12.5px]">
               <span className="text-(--color-text-muted)">Subtotal</span>
-              <span className="gradient-text">{formatUSD(subtotal)}</span>
+              <span className="gradient-text">{formatINR(subtotal)}</span>
             </div>
 
             <div className="flex items-center justify-between border-t border-white/10 pt-3 text-[14px]">
               <span className="gradient-text">Total</span>
-              <span className="gold-gradient-text">{formatUSD(subtotal)}</span>
+              <span className="gold-gradient-text">{formatINR(subtotal)}</span>
             </div>
 
             <PixelButton
