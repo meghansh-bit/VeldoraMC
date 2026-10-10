@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Check } from "lucide-react";
 import PixelBox from "../../ui/PixelBox";
 import PixelButton from "../../ui/PixelButton";
-import { fetchCrateKeys } from "../../../data/store";
+import { fetchCrateKeys, formatInrEquivalent } from "../../../data/store";
 import { useCart } from "../../../context/useCart";
 import keyIcon from "../../../assets/votes/key.png";
 
@@ -41,10 +41,10 @@ export default function CratesTab() {
       )}
 
       {keys && (
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="store-product-grid grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {keys.map((crate) => (
+            <div className={`store-product-card store-product-${crate.key}`} key={crate.key}>
             <PixelBox
-              key={crate.key}
               tone={crate.tone}
               filled={crate.featured}
               contentClassName="flex h-full flex-col items-center gap-3 text-center"
@@ -55,11 +55,8 @@ export default function CratesTab() {
                 className="h-12 w-12 object-contain [image-rendering:pixelated]"
               />
               <h3 className="text-[13px] gradient-text ">{crate.name}</h3>
-              <div
-                className="text-[18px] gold-gradient-text "
-              >
-                {crate.price}
-              </div>
+              <div className="text-[18px] gold-gradient-text store-usd-price">{crate.price}</div>
+              <span className="store-inr-price">{formatInrEquivalent(crate.price)}</span>
               <ul className="flex flex-col gap-1.5">
                 {crate.contents.map((line) => (
                   <li key={line} className="text-[11px] gradient-text ">
@@ -79,6 +76,7 @@ export default function CratesTab() {
                 </span>
               </PixelButton>
             </PixelBox>
+            </div>
           ))}
         </div>
       )}
