@@ -330,3 +330,42 @@ header .pixel-btn{border:1px solid #c5f36b!important;border-radius:999px!importa
 @media(max-width:760px){.vhi-hero{min-height:770px;padding:92px 22px 88px;align-items:center}.vhi-wordmark{margin-bottom:48px;font-size:20px}.vhi-hero h1{font-size:clamp(42px,11vw,65px)!important}.vhi-lead{font-size:15px;line-height:1.75}.vhi-stats{gap:20px}.vhi-stats>div{padding-left:10px}.vhi-stats strong{font-size:16px}.vhi-stats span{font-size:8px;letter-spacing:.1em}.vhi-platforms{gap:20px}.vhi-hero-actions{display:grid;grid-template-columns:1fr}.vhi-btn{width:100%;min-height:54px}.vhi-hero-bottom{font-size:8px;letter-spacing:.08em}.vhi-projects,.vhi-values{padding:68px 20px}.vhi-section-title{margin-bottom:34px}.vhi-project-art{min-height:300px;padding:22px}.vhi-project-badge{top:15px;right:15px;font-size:8px}.vhi-project-heart{width:60px;height:60px}.vhi-project-heart .vh-minecraft-heart{width:38px}.vhi-project-brand strong{font-size:28px}.vhi-online{left:15px;bottom:15px;font-size:11px}.vhi-project-info{padding:25px 22px 28px}.vhi-values-grid{grid-template-columns:1fr;gap:15px}.vhi-value-card{padding:25px;min-height:0}.vhi-about{grid-template-columns:1fr;gap:30px;padding:70px 22px}.vhi-trust-grid{gap:12px}.vhi-trust-card{padding:18px;min-height:155px}.vhi-trust-card h3{font-size:15px}.vhi-trust-card p{font-size:11px}.vhi-final-cta{margin:0 20px 55px;padding:24px;align-items:flex-start;flex-wrap:wrap}.vhi-final-cta>div:nth-child(2){min-width:calc(100% - 85px)}.vhi-final-cta>.vhi-btn{width:100%}.vh-inpvp-home .vh-news-teaser{margin:0 20px;flex-direction:column;align-items:flex-start}.vh-inpvp-home .vh-news-teaser .vbtn{width:100%}}
 @media(max-width:420px){.vhi-stats{gap:13px}.vhi-stats strong{font-size:14px}.vhi-hero-bottom span:last-child{display:none}.vhi-trust-grid{grid-template-columns:1fr}.vhi-project-art{min-height:275px}}
 @media(prefers-reduced-motion:reduce){.vhi-btn{transition:none}}
+
+/* Animated Discord calls-to-action and subtle motion polish */
+.vhi-hero .vhi-btn-ghost,.vhi-btn-discord{position:relative;overflow:hidden;background:linear-gradient(115deg,#5865f2,#4752c4)!important;color:#fff!important;border:1px solid #9da6ff65!important;box-shadow:0 0 0 0 #5865f255;animation:vhi-discord-glow 2.8s ease-in-out infinite}
+.vhi-hero .vhi-btn-ghost:before,.vhi-btn-discord:before{content:"";position:absolute;top:-80%;left:-45%;width:35%;height:260%;background:linear-gradient(90deg,transparent,#ffffff50,transparent);transform:rotate(25deg);animation:vhi-button-shine 4.2s ease-in-out infinite;pointer-events:none}
+.vhi-hero .vhi-btn-ghost svg,.vhi-btn-discord svg{flex:none;filter:drop-shadow(0 0 5px #fff5)}
+.vhi-hero .vhi-btn-ghost:hover,.vhi-btn-discord:hover{background:linear-gradient(115deg,#6e7aff,#5865f2)!important;box-shadow:0 0 28px #5865f277,0 10px 25px #0004;transform:translateY(-4px) scale(1.015)}
+.vhi-btn-discord{flex:none}
+.vhi-mark{animation:vhi-mark-float 4s ease-in-out infinite;transition:box-shadow .25s,transform .25s}
+.vhi-mark:hover{transform:rotate(-7deg) scale(1.08);box-shadow:0 0 28px #c5f66d65}
+.vh-minecraft-heart{filter:drop-shadow(0 0 7px #ff355a55);animation:vhi-heart-beat 2.2s ease-in-out infinite;transform-origin:center}
+.vhi-eyebrow .vhi-pulse{animation:vhi-pulse-glow 1.8s ease-in-out infinite}
+.vhi-project-card{transition:transform .35s ease,border-color .35s,box-shadow .35s;transform:translateZ(0)}
+.vhi-project-card:hover{transform:translateY(-7px);border-color:#ff596e75;box-shadow:0 28px 80px #0008,0 0 32px #ff596e12}
+.vhi-project-art{transition:background-position .7s ease}
+.vhi-project-card:hover .vhi-project-art{background-position:center 44%}
+.vhi-value-card,.vhi-trust-card{position:relative;overflow:hidden;transition:transform .3s ease,box-shadow .3s ease,border-color .3s ease}
+.vhi-value-card:after,.vhi-trust-card:after{content:"";position:absolute;inset:0;opacity:0;pointer-events:none;background:linear-gradient(120deg,transparent 15%,#ffffff12 48%,transparent 78%);transform:translateX(-100%);transition:opacity .3s}
+.vhi-value-card:hover,.vhi-trust-card:hover{transform:translateY(-5px);box-shadow:0 15px 34px #0002;border-color:#c5f66d75}
+.vhi-value-card:hover:after,.vhi-trust-card:hover:after{opacity:1;animation:vhi-card-shine .9s ease}
+.vhi-online svg{animation:vhi-signal-blink 2s ease-in-out infinite}
+.vhi-arrow-btn{transition:transform .25s,background .25s,box-shadow .25s}
+.vhi-arrow-btn:hover{transform:translateX(4px);box-shadow:0 0 20px #ff596e24}
+.vhi-final-cta{transition:border-color .3s,box-shadow .3s,transform .3s}
+.vhi-final-cta:hover{border-color:#5865f275;box-shadow:0 15px 55px #5865f214;transform:translateY(-3px)}
+.vhi-final-cta .vhi-btn-green{background:linear-gradient(115deg,#5865f2,#4752c4)!important;box-shadow:0 8px 25px #5865f238}
+.vhi-final-cta .vhi-btn-green:hover{box-shadow:0 0 30px #5865f277;transform:translateY(-3px)}
+.vhi-hero .vhi-btn-green{position:relative;overflow:hidden;box-shadow:0 0 0 0 #18bd5b66;animation:vhi-green-glow 3s ease-in-out infinite}
+.vhi-hero .vhi-btn-green:hover{box-shadow:0 0 28px #18bd5b66;transform:translateY(-3px)}
+.vhi-section-title h2,.vhi-about h2,.vhi-final-cta h2{animation:vhi-text-enter .7s ease both}
+@keyframes vhi-heart-beat{0%,45%,100%{transform:scale(1)}10%{transform:scale(1.1)}20%{transform:scale(.98)}30%{transform:scale(1.06)}}
+@keyframes vhi-discord-glow{0%,100%{box-shadow:0 0 0 0 #5865f233,0 8px 22px #0002}50%{box-shadow:0 0 0 5px #5865f21c,0 8px 30px #5865f244}}
+@keyframes vhi-green-glow{0%,100%{box-shadow:0 0 0 0 #18bd5b00}50%{box-shadow:0 0 0 4px #18bd5b20,0 0 26px #18bd5b24}}
+@keyframes vhi-button-shine{0%,58%{left:-45%;opacity:0}65%{opacity:1}83%,100%{left:130%;opacity:0}}
+@keyframes vhi-mark-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+@keyframes vhi-pulse-glow{0%,100%{box-shadow:0 0 0 0 #8de75d55}50%{box-shadow:0 0 0 5px #8de75d12}}
+@keyframes vhi-card-shine{to{transform:translateX(100%)}}
+@keyframes vhi-signal-blink{0%,100%{opacity:1}50%{opacity:.45}}
+@keyframes vhi-text-enter{from{opacity:.65;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@media(prefers-reduced-motion:reduce){.vh-inpvp-home *, .vh-inpvp-home *:before,.vh-inpvp-home *:after{animation:none!important;scroll-behavior:auto!important;transition:none!important}}
