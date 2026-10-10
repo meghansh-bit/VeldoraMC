@@ -46,7 +46,7 @@ export default function PlayerProfiles() {
           <div className="min-w-0 flex-1">
             <div className="flex items-center gap-2 text-[10px] font-bold tracking-[.2em] text-cyan-200/70"><UserRound size={14} aria-hidden="true"/> YOUR PLAYER PROFILE</div>
             <h2 className="mt-1 text-lg font-extrabold text-white">Your stats. Your legacy.</h2>
-            <p className="mt-1 text-sm leading-6 text-white/50">Sign in to view your own profile here. Account login is not active yet, so your personal Minecraft account cannot be detected just yet.</p>
+            <p className="mt-1 text-sm leading-6 text-white/50">Sign in with email OTP to access your website account. Link Minecraft separately to verify your in-game identity; live stats will appear once the server integration is connected.</p>
           </div>
           <Link to="/login" className="vbtn vbtn-primary min-h-12 justify-center whitespace-nowrap">LOGIN TO CONTINUE <ArrowRight size={16}/></Link>
         </div>
