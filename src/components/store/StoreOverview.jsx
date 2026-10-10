@@ -98,7 +98,7 @@ export default function StoreOverview() {
         <div className="mt-8 grid grid-cols-2 gap-4">
           <StatCard
             icon={totalVotes}
-            value={`৳${stats.totalRaised.toLocaleString()}`}
+            value={`${stats.totalRaised.toLocaleString()}`}
             label="TOTAL RAISED"
           />
           <StatCard
