@@ -1,4 +1,5 @@
 import { useState, useMemo, useCallback, useRef } from "react";
+import { X } from "lucide-react";
 import { CartContext } from "./cart-context";
 import { parsePrice } from "./cart-utils";
 
@@ -55,5 +56,15 @@ export function CartProvider({ children }) {
   const subtotal = useMemo(() => items.reduce((sum, i) => sum + parsePrice(i.price) * i.qty, 0), [items]);
   const value = useMemo(() => ({ items, addToCart, removeFromCart, updateQty, clearCart, count, subtotal, cartNotice, dismissCartNotice }), [items, addToCart, removeFromCart, updateQty, clearCart, count, subtotal, cartNotice, dismissCartNotice]);
 
-  return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
+  return (
+    <CartContext.Provider value={value}>
+      {children}
+      {cartNotice && (
+        <div role="alert" className="fixed bottom-5 left-4 right-4 z-[200] mx-auto flex max-w-lg items-start gap-3 rounded-xl border border-red-400/40 bg-[#1a1013] p-4 text-sm text-white shadow-2xl">
+          <span className="flex-1 leading-6">{cartNotice}</span>
+          <button type="button" aria-label="Dismiss message" onClick={dismissCartNotice} className="rounded-md p-1 text-white/70 hover:bg-white/10"><X size={18} /></button>
+        </div>
+      )}
+    </CartContext.Provider>
+  );
 }
