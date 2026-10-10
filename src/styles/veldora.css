@@ -402,3 +402,24 @@ header nav a:hover,header nav button:hover{color:#ff5365!important}
 @keyframes vhi-red-glow{0%,100%{box-shadow:0 0 0 0 #ff263b00}50%{box-shadow:0 0 0 4px #ff263b20,0 0 26px #ff263b24}}
 /* Keep Discord buttons recognizable as Discord blue */
 .vhi-hero .vhi-btn-ghost,.vhi-btn-discord{background:linear-gradient(115deg,#5865f2,#4752c4)!important;border-color:#9da6ff65!important}
+
+/* Site-wide liquid-glass finish — VeldoraMC red, white and charcoal */
+:root{--glass-surface:rgba(255,255,255,.055);--glass-surface-strong:rgba(255,255,255,.085);--glass-border:rgba(255,255,255,.14);--glass-highlight:rgba(255,255,255,.23);--glass-shadow:0 18px 55px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.10)}
+html{background:#09090b}
+body{background:radial-gradient(ellipse at 12% 0%,rgba(255,38,59,.075),transparent 32%),radial-gradient(ellipse at 90% 42%,rgba(255,255,255,.025),transparent 30%),#09090b!important}
+header.fixed{background:rgba(12,12,15,.68)!important;backdrop-filter:blur(28px) saturate(175%)!important;-webkit-backdrop-filter:blur(28px) saturate(175%)!important;border-bottom:1px solid rgba(255,255,255,.13)!important;box-shadow:0 12px 40px #0005,inset 0 1px 0 #ffffff0b!important}
+.vel-logo,.vel-logo-mark,.vhi-mark,.pixel-box,.pixel-panel,.vhi-project-card,.vhi-value-card,.vhi-trust-card,.vhi-final-cta,.portal-card,.store-card,.bundle-card,.news-card,.staff-card,.vote-card,.cart-panel,.login-card,.vhi-featured-story,.home-featured-story,.home-news-card{background-color:rgba(255,255,255,.045)!important;background-image:linear-gradient(135deg,rgba(255,255,255,.09),rgba(255,255,255,.018) 48%,rgba(255,38,59,.025))!important;border-color:rgba(255,255,255,.13)!important;box-shadow:var(--glass-shadow);backdrop-filter:blur(18px) saturate(145%);-webkit-backdrop-filter:blur(18px) saturate(145%);border-radius:18px}
+.vhi-project-card,.vhi-value-card,.vhi-trust-card,.home-news-card,.news-card,.staff-card,.vote-card,.bundle-card,.store-card{transition:transform .28s ease,border-color .28s ease,box-shadow .28s ease,background .28s ease}
+.vhi-project-card:hover,.vhi-value-card:hover,.vhi-trust-card:hover,.home-news-card:hover,.news-card:hover,.staff-card:hover,.vote-card:hover,.bundle-card:hover,.store-card:hover{transform:translateY(-4px);border-color:rgba(255,38,59,.42)!important;box-shadow:0 25px 65px #0007,inset 0 1px 0 #ffffff19,0 0 28px #ff263b0b}
+input,textarea,select,.pixel-input,.portal-input{background:rgba(255,255,255,.055)!important;border:1px solid rgba(255,255,255,.16)!important;border-radius:12px!important;backdrop-filter:blur(12px);color:#fff!important}
+input:focus,textarea:focus,select:focus,.pixel-input:focus,.portal-input:focus{border-color:#ff263b99!important;box-shadow:0 0 0 3px #ff263b20!important;outline:none}
+button,.pixel-btn,.vhi-btn,.vbtn{transition:transform .22s ease,box-shadow .22s ease,filter .22s ease}
+button:hover,.pixel-btn:hover,.vhi-btn:hover,.vbtn:hover{filter:brightness(1.07)}
+.veldora-support-float{position:fixed;z-index:1000;right:clamp(14px,3vw,34px);bottom:clamp(20px,4vh,38px);display:flex;align-items:center;gap:11px;padding:15px 22px 15px 15px;border:1px solid #ffe09a;border-radius:4px;background:linear-gradient(135deg,#ffd44d,#ffad0a);color:#251700!important;font-size:15px;font-weight:850;letter-spacing:.01em;text-decoration:none!important;box-shadow:0 8px 30px #ffb40045,0 0 0 1px #fff2,inset 0 1px 0 #fff9;transition:transform .22s ease,box-shadow .22s ease;animation:veldora-support-glow 3.2s ease-in-out infinite}
+.veldora-support-float:before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(120deg,transparent 20%,#ffffff9c 48%,transparent 70%);transform:translateX(-120%);animation:veldora-support-shine 5s ease-in-out infinite}
+.veldora-support-float:hover{transform:translateY(-4px) scale(1.025);box-shadow:0 13px 38px #ffb40065,0 0 0 1px #fff5,inset 0 1px 0 #fff9}
+.veldora-support-icon{display:grid;place-items:center;width:34px;height:34px;border-radius:3px;background:#fff5d3;color:#2b1b00;box-shadow:inset 0 1px 0 #fff}
+@keyframes veldora-support-glow{0%,100%{box-shadow:0 8px 30px #ffb40035,0 0 0 1px #fff2,inset 0 1px 0 #fff9}50%{box-shadow:0 10px 38px #ffb40062,0 0 0 4px #ffca3a1a,inset 0 1px 0 #fff9}}
+@keyframes veldora-support-shine{0%,65%{transform:translateX(-120%);opacity:0}70%{opacity:1}88%,100%{transform:translateX(120%);opacity:0}}
+@media(max-width:480px){.veldora-support-float{right:12px;bottom:16px;padding:10px 15px 10px 10px;gap:8px;font-size:14px}.veldora-support-icon{width:30px;height:30px}}
+@media(prefers-reduced-motion:reduce){.veldora-support-float,.veldora-support-float:before{animation:none!important}*,*:before,*:after{scroll-behavior:auto!important;transition:none!important}}
