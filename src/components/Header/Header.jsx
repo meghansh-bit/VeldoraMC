@@ -73,7 +73,7 @@ export default function Header() {
                 "--nav-grad-bottom": "#2a9328",
               }}
             >
-              Xbox Login · Soon
+              Login
             </PixelButton>
           </Link>
         </div>
@@ -126,7 +126,7 @@ export default function Header() {
 
           <div className="px-4 py-4">
             <Link to="/login" onClick={() => setOpen(false)} className="vbtn vbtn-primary w-full">
-              <Gamepad2 size={17} /> Xbox login <span className="text-[9px] opacity-70">SOON</span>
+              <Gamepad2 size={17} /> Login
             </Link>
           </div>
         </div>
