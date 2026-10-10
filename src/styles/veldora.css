@@ -423,3 +423,14 @@ button:hover,.pixel-btn:hover,.vhi-btn:hover,.vbtn:hover{filter:brightness(1.07)
 @keyframes veldora-support-shine{0%,65%{transform:translateX(-120%);opacity:0}70%{opacity:1}88%,100%{transform:translateX(120%);opacity:0}}
 @media(max-width:480px){.veldora-support-float{right:12px;bottom:16px;padding:10px 15px 10px 10px;gap:8px;font-size:14px}.veldora-support-icon{width:30px;height:30px}}
 @media(prefers-reduced-motion:reduce){.veldora-support-float,.veldora-support-float:before{animation:none!important}*,*:before,*:after{scroll-behavior:auto!important;transition:none!important}}
+
+/* Final UI refinements: keep the original flat wordmark and use green for Microsoft login */
+.vel-logo{background:transparent!important;background-image:none!important;border:0!important;box-shadow:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;border-radius:0!important}
+.vel-logo-image{filter:none!important;box-shadow:none!important;drop-shadow:none!important}
+.vhi-wordmark-image{filter:none!important}
+header .pixel-btn,header .pixel-btn.tone-success{background:#15803d!important;border-color:#22c55e!important;color:#fff!important;box-shadow:0 5px 18px #16a34a30!important}
+header .pixel-btn:hover,header .pixel-btn.tone-success:hover{background:#166534!important;box-shadow:0 0 24px #22c55e40!important}
+header .vbtn-primary,.vbtn-primary{background:linear-gradient(135deg,#15803d,#16a34a)!important;border:1px solid #4ade80!important;color:#fff!important;box-shadow:0 8px 24px #16a34a2b!important}
+header .vbtn-primary:hover,.vbtn-primary:hover{background:linear-gradient(135deg,#166534,#15803d)!important;box-shadow:0 0 25px #22c55e45!important}
+.vhi-hero .vhi-btn-green,.vhi-final-cta .vhi-btn-green{background:linear-gradient(135deg,#15803d,#16a34a)!important;border:1px solid #4ade80!important;color:#fff!important;box-shadow:0 8px 24px #16a34a30!important;animation:none!important}
+.vhi-hero .vhi-btn-green:hover,.vhi-final-cta .vhi-btn-green:hover{background:linear-gradient(135deg,#166534,#15803d)!important;box-shadow:0 0 25px #22c55e45!important}
