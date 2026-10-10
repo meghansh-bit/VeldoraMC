@@ -1,12 +1,11 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ShoppingCart } from "lucide-react";
 import Logo from "./Logo";
 import NavButton from "./NavButton";
 import { navItems } from "./navItems";
 import PixelButton from "../ui/PixelButton";
 import { useCart } from "../../context/useCart";
-import cartIcon from "../../assets/icons/cart.png";
 
 function MicrosoftMark({ size = 18 }) {
   return <svg width={size} height={size} viewBox="0 0 24 24" aria-hidden="true"><path fill="#f25022" d="M1 1h10v10H1z"/><path fill="#7fba00" d="M13 1h10v10H13z"/><path fill="#00a4ef" d="M1 13h10v10H1z"/><path fill="#ffb900" d="M13 13h10v10H13z"/></svg>;
@@ -57,11 +56,7 @@ export default function Header() {
             aria-label="View cart"
             className="relative flex h-10 w-10 shrink-0 items-center justify-center text-(--color-text) transition-colors hover:text-(--color-primary)"
           >
-            <img
-              src={cartIcon}
-              alt=""
-              className="h-5 w-5 object-contain [image-rendering:pixelated]"
-            />
+            <ShoppingCart className="h-[19px] w-[19px]" strokeWidth={1.8} aria-hidden="true" />
             <CartBadge count={count} />
           </Link>
 
@@ -119,11 +114,7 @@ export default function Header() {
           >
             <span className="gradient-text">Cart</span>
             <span className="relative flex items-center">
-              <img
-                src={cartIcon}
-                alt=""
-                className="h-4.5 w-4.5 object-contain [image-rendering:pixelated]"
-              />
+              <ShoppingCart className="h-[18px] w-[18px]" strokeWidth={1.8} aria-hidden="true" />
               <CartBadge count={count} className="-top-2 -right-2" />
             </span>
           </Link>
