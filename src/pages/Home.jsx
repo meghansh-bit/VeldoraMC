@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowDown, ArrowRight, Heart, Users, ShieldCheck, Clock3, FlaskConical, BarChart3, ExternalLink, Signal, Gamepad2 } from "lucide-react";
+import { ArrowDown, ArrowRight, Heart, Users, ShieldCheck, Clock3, FlaskConical, BarChart3, ExternalLink, Signal, Gamepad2, Smartphone, Monitor } from "lucide-react";
 import { useSeo } from "../hooks/useSeo";
 import lifestealImage from "../assets/hero/rear.png";
 function DiscordMark({ size = 19 }) { return <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.73 5.14A18.4 18.4 0 0 0 15.2 3.75l-.56 1.14a16.9 16.9 0 0 0-5.27 0L8.8 3.75a18.4 18.4 0 0 0-4.53 1.39C1.4 9.38.62 13.52 1.01 17.6a18.5 18.5 0 0 0 5.55 2.8l1.2-1.95a12 12 0 0 1-1.89-.91l.46-.36c3.64 1.69 7.59 1.69 11.19 0l.47.36c-.61.36-1.24.66-1.9.91l1.2 1.95a18.4 18.4 0 0 0 5.55-2.8c.46-4.73-.79-8.83-3.11-12.46ZM8.74 14.9c-1.09 0-1.98-.99-1.98-2.2s.87-2.2 1.98-2.2c1.12 0 2 .99 1.98 2.2 0 1.21-.87 2.2-1.98 2.2Zm6.52 0c-1.09 0-1.98-.99-1.98-2.2s.87-2.2 1.98-2.2c1.12 0 2 .99 1.98 2.2 0 1.21-.86 2.2-1.98 2.2Z"/></svg>; }
@@ -29,7 +29,11 @@ export default function Home() {
         <h1>YOUR NEXT<br/><span>BIG ADVENTURE.</span></h1>
         <p className="vhi-lead">Fight for every heart. Build your legacy. Make allies, challenge rivals, and carve your own story in VeldoraMC Lifesteal.</p>
         <div className="vhi-stats"><div><strong>LIFESTEAL</strong><span>ONE MAIN GAMEMODE</span></div><div><strong>JAVA + BEDROCK*</strong><span>PLAYER COMMUNITY</span></div></div>
-        <div className="vhi-platforms" aria-label="Minecraft platform compatibility"><span>▰</span><span>▦</span><span>◉</span><span>▯</span></div>
+        <div className="vhi-platforms" aria-label="Available platforms: mobile, PC, and console">
+          <span className="vhi-platform"><Smartphone size={19} strokeWidth={2}/><small>MOBILE</small></span>
+          <span className="vhi-platform"><Monitor size={19} strokeWidth={2}/><small>PC</small></span>
+          <span className="vhi-platform"><Gamepad2 size={19} strokeWidth={2}/><small>CONSOLE</small></span>
+        </div>
         <div className="vhi-hero-actions"><a href="#projects" className="vhi-btn vhi-btn-green"><Gamepad2 size={18}/> Explore Lifesteal <ArrowDown size={16}/></a><a href="https://discord.gg/NruxFSnrUe" target="_blank" rel="noreferrer" className="vhi-btn vhi-btn-ghost"><DiscordMark size={20}/> Join Community</a></div>
       </div>
       <div className="vhi-hero-bottom"><span><Signal size={15}/> YOUR NEXT WORLD IS WAITING</span><span>SCROLL TO EXPLORE ↓</span></div>
