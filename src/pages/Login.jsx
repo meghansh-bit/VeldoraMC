@@ -2,7 +2,8 @@
 import { Link } from "react-router-dom";
 import { ShieldCheck, ArrowLeft } from "lucide-react";
 import { useSeo } from "../hooks/useSeo";
-function MicrosoftMark({ size = 24 }) { return <svg width={size} height={size} viewBox="0 0 24 24" aria-hidden="true"><path fill="#f25022" d="M1 1h10v10H1z"/><path fill="#7fba00" d="M13 1h10v10H13z"/><path fill="#00a4ef" d="M1 13h10v10H1z"/><path fill="#ffb900" d="M13 13h10v10H13z"/></svg>; }\nexport default function Login() {
+function MicrosoftMark({ size = 24 }) { return <svg width={size} height={size} viewBox="0 0 24 24" aria-hidden="true"><path fill="#f25022" d="M1 1h10v10H1z"/><path fill="#7fba00" d="M13 1h10v10H13z"/><path fill="#00a4ef" d="M1 13h10v10H1z"/><path fill="#ffb900" d="M13 13h10v10H13z"/></svg>; }
+export default function Login() {
   useSeo({ title: "Login", path: "/login", noindex: true });
   return <section className="portal-page login-page"><div className="portal-inner login-inner">
     <Link to="/" className="login-back"><ArrowLeft size={16}/> Back to VeldoraMC</Link>
