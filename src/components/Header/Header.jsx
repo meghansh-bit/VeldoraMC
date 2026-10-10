@@ -22,6 +22,41 @@ function CartBadge({ count, className = "top-1.5 right-1.5" }) {
   );
 }
 
+function CartNavLink({ count, mobile = false, onNavigate }) {
+  const location = useLocation();
+  const isActive = location.pathname === "/cart";
+  if (mobile) {
+    return (
+      <Link
+        to="/cart"
+        onClick={onNavigate}
+        aria-label="View cart"
+        className={"group flex w-full items-center gap-3 border-b border-white/[0.045] px-4 py-3 text-[14px] transition-all " + (isActive ? "bg-cyan-400/[0.07] text-white" : "text-white/80 hover:bg-white/[0.035]")}
+      >
+        <span className={"relative flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border transition-all duration-200 " + (isActive ? "border-cyan-300/30 bg-cyan-400/15 text-cyan-200 shadow-[0_0_18px_rgba(34,211,238,0.12)]" : "border-white/10 bg-white/[0.035] text-white/60 group-hover:border-cyan-300/20 group-hover:bg-cyan-300/10 group-hover:text-cyan-100")}>
+          <ShoppingCart className="h-[17px] w-[17px]" strokeWidth={1.9} aria-hidden="true" />
+          <CartBadge count={count} className="-top-1 -right-1" />
+        </span>
+        <span className={isActive ? "text-cyan-100" : "text-white/75 group-hover:text-white"}>Cart</span>
+      </Link>
+    );
+  }
+
+  return (
+    <Link
+      to="/cart"
+      aria-label="View cart"
+      className={"group relative flex h-14 shrink-0 items-center gap-2.5 border-b-2 px-3 text-[13px] font-medium transition-all duration-200 " + (isActive ? "border-b-cyan-300 bg-cyan-300/[0.055] text-white" : "border-b-transparent text-white/80 hover:bg-white/[0.035]")}
+    >
+      <span className={"relative flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border transition-all duration-200 " + (isActive ? "border-cyan-300/30 bg-cyan-400/15 text-cyan-200 shadow-[0_0_18px_rgba(34,211,238,0.12)]" : "border-white/10 bg-white/[0.035] text-white/60 group-hover:border-cyan-300/20 group-hover:bg-cyan-300/10 group-hover:text-cyan-100")}>
+        <ShoppingCart className="h-[17px] w-[17px]" strokeWidth={1.9} aria-hidden="true" />
+        <CartBadge count={count} />
+      </span>
+      <span className={isActive ? "text-cyan-100" : "text-white/75 group-hover:text-white"}>Cart</span>
+    </Link>
+  );
+}
+
 export default function Header() {
   const [open, setOpen] = useState(false);
   const location = useLocation();
@@ -47,19 +82,11 @@ export default function Header() {
             {navItems.map((item) => (
               <NavButton key={item.to} {...item} />
             ))}
+            <CartNavLink count={count} />
           </nav>
         </div>
 
         <div className="hidden shrink-0 items-center gap-2 pr-3 min-[1080px]:flex">
-          <Link
-            to="/cart"
-            aria-label="View cart"
-            className="relative flex h-10 w-10 shrink-0 items-center justify-center text-(--color-text) transition-colors hover:text-(--color-primary)"
-          >
-            <ShoppingCart className="h-[19px] w-[19px]" strokeWidth={1.8} aria-hidden="true" />
-            <CartBadge count={count} />
-          </Link>
-
           <Link to={'/login'}>
             <PixelButton
               tone="success"
@@ -106,18 +133,8 @@ export default function Header() {
                 onNavigate={() => setOpen(false)}
               />
             ))}
+            <CartNavLink count={count} mobile onNavigate={() => setOpen(false)} />
           </nav>
-          <Link
-            to="/cart"
-            onClick={() => setOpen(false)}
-            className="flex w-full items-center justify-between gap-2 border-b border-white/5 px-4 py-4 text-[15px]"
-          >
-            <span className="gradient-text">Cart</span>
-            <span className="relative flex items-center">
-              <ShoppingCart className="h-[18px] w-[18px]" strokeWidth={1.8} aria-hidden="true" />
-              <CartBadge count={count} className="-top-2 -right-2" />
-            </span>
-          </Link>
 
           <div className="px-4 py-4">
             <Link to="/login" onClick={() => setOpen(false)} className="vbtn vbtn-primary w-full">
