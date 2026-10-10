@@ -55,8 +55,10 @@ export default function CratesTab() {
                 className="h-12 w-12 object-contain [image-rendering:pixelated]"
               />
               <h3 className="text-[13px] gradient-text ">{crate.name}</h3>
-              <div className="text-[18px] gold-gradient-text store-usd-price">{crate.price}</div>
-              <span className="store-inr-price">{formatInrEquivalent(crate.price)}</span>
+              <div className="flex flex-col items-center leading-tight">
+                <div className="text-[18px] gold-gradient-text store-usd-price">{crate.price}</div>
+                <span className="store-inr-price mt-1">{formatInrEquivalent(crate.price)}</span>
+              </div>
               <ul className="flex flex-col gap-1.5">
                 {crate.contents.map((line) => (
                   <li key={line} className="text-[11px] gradient-text ">
