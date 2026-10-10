@@ -204,3 +204,24 @@ header .pixel-btn{border:1px solid #c5f36b!important;border-radius:999px!importa
  .portal-page{padding-top:45px}
 }
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}
+
+
+/* Smooth out the older content pages so the entire site shares the same system. */
+.pixel-btn{border:1px solid #ffffff18!important;border-radius:16px!important;border-image:none!important;box-shadow:none!important;background:#141a12!important;color:#f5f7f1!important}
+.pixel-btn:before,.pixel-btn:after{display:none!important}
+.pixel-btn:hover{border-color:#c5f36b60!important;background:#192217!important;transform:translateY(-2px)}
+.title{font-size:clamp(34px,5vw,56px)!important;font-weight:850!important;letter-spacing:-.055em!important;line-height:1.06!important;color:#f5f7f1!important}
+.gold-gradient-text,.gradient-text,.info-gradient-text,.green-gradient-text{background:linear-gradient(100deg,#f5f7f1,#c5f36b)!important;background-clip:text!important;-webkit-background-clip:text!important;color:transparent!important}
+.mx-auto.max-w-7xl{max-width:1320px!important;padding-top:42px!important;padding-bottom:56px!important}
+.mx-auto.max-w-7xl>h1{margin-bottom:12px}
+.mx-auto.max-w-7xl .p{color:#aab4a4;line-height:1.8}
+.mx-auto.max-w-7xl .grid{gap:18px}
+.mx-auto.max-w-7xl .rounded-sm,.mx-auto.max-w-7xl .rounded-xl,.mx-auto.max-w-7xl .rounded-2xl,.mx-auto.max-w-7xl .rounded-3xl{border-radius:18px}
+.mx-auto.max-w-7xl [class*="border-white/"]{border-color:#ffffff17}
+.mx-auto.max-w-7xl .bg-(--color-bg-soft){background:#141a12}
+.mx-auto.max-w-7xl button{transition:transform .2s,border-color .2s,background .2s}
+.mx-auto.max-w-7xl button:hover{transform:translateY(-1px)}
+.login-panel{border:1px solid #ffffff18!important;border-radius:26px!important;background:radial-gradient(ellipse at 85% 0%,#c5f36b15,transparent 45%),#121711!important;box-shadow:0 30px 100px #0004}
+.login-panel h1{font-size:clamp(42px,7vw,70px)!important;letter-spacing:-.065em!important}
+.security-note,.login-status{border-radius:14px!important;border-color:#ffffff18!important;background:#0b0d0b!important}
+@media(max-width:1079px){header.fixed>div:first-child{padding-right:14px;padding-left:14px}}
