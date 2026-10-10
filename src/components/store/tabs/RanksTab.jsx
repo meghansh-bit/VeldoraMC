@@ -75,7 +75,7 @@ export default function RanksTab() {
   }, []);
 
   const handleAddToCart = (rank) => {
-    addToCart({
+    const added = addToCart({
       id: `rank-${rank.key}`,
       category: "rank",
       name: `${rank.name} Rank`,
@@ -83,6 +83,7 @@ export default function RanksTab() {
       tone: rank.tone,
       icon: RANK_ICONS[rank.key] ?? Star,
     });
+    if (!added) return;
     setAddedKey(rank.key);
     setTimeout(() => setAddedKey((k) => (k === rank.key ? null : k)), 1500);
   };
