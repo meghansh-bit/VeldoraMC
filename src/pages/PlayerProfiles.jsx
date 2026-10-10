@@ -44,7 +44,7 @@ export default function PlayerProfiles() {
         <div className="relative flex flex-col gap-4 sm:flex-row sm:items-center">
           <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl border border-cyan-300/20 bg-cyan-300/10 text-cyan-200"><UserRound size={27}/></div>
           <div className="min-w-0 flex-1">
-            <div className="text-[10px] font-bold tracking-[.2em] text-cyan-200/70">YOUR PLAYER PROFILE</div>
+            <div className="flex items-center gap-2 text-[10px] font-bold tracking-[.2em] text-cyan-200/70"><UserRound size={14} aria-hidden="true"/> YOUR PLAYER PROFILE</div>
             <h2 className="mt-1 text-lg font-extrabold text-white">Your stats. Your legacy.</h2>
             <p className="mt-1 text-sm leading-6 text-white/50">Sign in to view your own profile here. Account login is not active yet, so your personal Minecraft account cannot be detected just yet.</p>
           </div>
