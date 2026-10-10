@@ -1,4 +1,16 @@
 import { NavLink } from "react-router-dom";
+import newsIcon from "../../assets/reasons/events.png";
+import leaderboardIcon from "../../assets/votes/crown.png";
+import staffIcon from "../../assets/reasons/moderation.png";
+import storeIcon from "../../assets/votes/key.png";
+import supportIcon from "../../assets/reasons/community.png";
+import homeIcon from "../../assets/modes/survival.png";
+
+const NAV_ICONS = { Home: homeIcon, News: newsIcon, Leaderboard: leaderboardIcon, Staff: staffIcon, Store: storeIcon, Support: supportIcon };
+function NavItemContent({ label, badge, isActive }) {
+  const icon = NAV_ICONS[label];
+  return <><span className="vnav-icon-wrap">{icon && <img className="vnav-icon" src={icon} alt="" />}</span><span className={"vnav-label " + (isActive ? "is-active" : "")}>{label}</span>{badge && <span className="vnav-badge">{badge}</span>}<span className="vnav-chevron" aria-hidden="true">›</span></>;
+}
 
 const DESKTOP_BASE =
   "relative shrink-0 flex items-center justify-center whitespace-nowrap " +
@@ -12,9 +24,8 @@ const DESKTOP_BASE =
 // Flat list row for the mobile dropdown — divider line instead of a
 // pixel-button border, matching the reference mobile menu.
 const MOBILE_BASE =
-  "flex w-full items-center justify-between gap-2 whitespace-nowrap " +
-  "border-b border-white/5 px-4 py-4 text-[15px]  " +
-  "transition-colors outline-none";
+  "vnav-mobile-row group flex w-full items-center gap-3 whitespace-nowrap " +
+  "px-4 py-3.5 text-[15px] transition-all outline-none";
 
 export default function NavButton({
   to,
@@ -32,28 +43,8 @@ export default function NavButton({
         end={end}
         className={MOBILE_BASE}
       >
-        {({ isActive }) => (
-          <>
-            <span
-              className={
-                "gradient-text " +
-                (isActive
-                  ? ""
-                  : "group-hover:[--nav-grad-top:#ffe066] group-hover:[--nav-grad-bottom:#c97a12]")
-              }
-              style={{
-                "--nav-grad-top": isActive ? "#ffe066" : "",
-                "--nav-grad-bottom": isActive ? "#c97a12" : "",
-              }}
-            >
-              {label}
-            </span>
+        {({ isActive }) => <NavItemContent label={label} badge={badge} isActive={isActive} />}
 
-            {badge && (
-              <span className="absolute -top-2 -right-1.5 border border-black bg-(--color-success) px-1 py-0.5 text-[8px] tracking-wider text-[#0d1f0d]">
-                {badge}
-              </span>
-            )}
           </>
         )}
       </NavLink>
@@ -72,28 +63,8 @@ export default function NavButton({
           : "")
       }
     >
-      {({ isActive }) => (
-        <>
-          <span
-            className={
-              "gradient-text " +
-              (isActive
-                ? ""
-                : "group-hover:[--nav-grad-top:#ffe066] group-hover:[--nav-grad-bottom:#c97a12]")
-            }
-            style={{
-              "--nav-grad-top": isActive ? "#ffe066" : "",
-              "--nav-grad-bottom": isActive ? "#c97a12" : "",
-            }}
-          >
-            {label}
-          </span>
+      {({ isActive }) => <NavItemContent label={label} badge={badge} isActive={isActive} />}
 
-          {badge && (
-            <span className="absolute -top-2 -right-1.5 border border-black bg-(--color-success) px-1 py-0.5 text-[8px] tracking-wider text-[#0d1f0d]">
-              {badge}
-            </span>
-          )}
         </>
       )}
     </NavLink>
