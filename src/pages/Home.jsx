@@ -1,74 +1,74 @@
 import { Link } from "react-router-dom";
-import { Calendar, ArrowRight, MessageCircle, Newspaper } from "lucide-react";
+import { ArrowRight, Compass, Heart, Swords, Trophy, Users, Sparkles, Shield, Blocks } from "lucide-react";
 import PixelBox from "../components/ui/PixelBox";
-import { newsPosts } from "../data/news";
 import { useSeo } from "../hooks/useSeo";
+import lifestealImage from "../assets/modes/survival.png";
+import bedwarsImage from "../assets/modes/bedwars.png";
+import skyblockImage from "../assets/modes/skyblock.png";
+import minigamesImage from "../assets/modes/minigames.png";
+
+const gameModes = [
+  { name: "Lifesteal", tag: "HIGH STAKES SURVIVAL", description: "Fight, form alliances, and build your own story. Every encounter can change the balance of power.", image: lifestealImage, icon: Heart, featured: true },
+  { name: "Survival", tag: "BUILD YOUR LEGACY", description: "Gather resources, explore the world, and turn a small starter base into something legendary.", image: lifestealImage, icon: Compass },
+  { name: "BedWars", tag: "TEAM UP & OUTPLAY", description: "Protect your bed, gear up, and outsmart rival teams in fast-paced matches.", image: bedwarsImage, icon: Shield },
+  { name: "SkyBlock", tag: "START SMALL. DREAM BIG.", description: "Begin on a tiny island and grow your own floating world one upgrade at a time.", image: skyblockImage, icon: Blocks },
+  { name: "Minigames", tag: "QUICK MATCHES. BIG MOMENTS.", description: "Jump into bite-sized challenges, compete with friends, and keep the fun going.", image: minigamesImage, icon: Trophy },
+];
 
 export default function Home() {
   useSeo({
-    title: "VeldoraMC — Latest News & Updates",
-    description: "The latest VeldoraMC announcements, community updates, events, and server news.",
+    title: "VeldoraMC — Find Your Next Adventure",
+    description: "Explore VeldoraMC game modes, meet the community, and choose your next Minecraft adventure.",
     path: "/",
   });
 
-  const featured = newsPosts[0];
-  const stories = newsPosts.slice(1, 4);
-
   return (
-    <main className="home-news-page mx-auto max-w-7xl px-4 py-6 sm:px-6">
-      <section className="home-news-heading">
-        <div className="home-news-kicker"><Newspaper size={14} /> THE VELDORAMC JOURNAL</div>
-        <h1 className="title gold-gradient-text">Latest News</h1>
-        <p className="p">Updates, events, announcements, and stories from around the VeldoraMC community.</p>
+    <main className="veldora-home">
+      <section className="vh-hero">
+        <div className="vh-hero-glow" />
+        <div className="vh-hero-inner">
+          <div className="vh-hero-copy">
+            <span className="vh-eyebrow"><span className="vh-live-dot" /> YOUR NEXT MINECRAFT ADVENTURE</span>
+            <h1>ENTER THE WORLD<br /><span>OF VELDORA.</span></h1>
+            <p>Big adventures. Unforgettable rivalries. A community that makes every block count. Find the mode that feels like yours.</p>
+            <div className="vh-hero-actions">
+              <a className="vbtn vbtn-primary" href="#gamemodes"><Compass size={17} /> EXPLORE GAMEMODES <ArrowRight size={15} /></a>
+              <a className="vbtn vbtn-glass" href="https://discord.gg/NruxFSnrUe" target="_blank" rel="noreferrer"><Users size={17} /> JOIN COMMUNITY</a>
+            </div>
+            <div className="vh-hero-note"><span>JAVA / BEDROCK INFO</span><i /> <span>BUILT FOR THE COMMUNITY</span></div>
+          </div>
+          <div className="vh-hero-emblem" aria-label="VeldoraMC emblem">
+            <div className="vh-emblem-ring"><div className="vh-emblem-v">V</div><span>VELDORA</span><small>MINECRAFT NETWORK</small></div>
+            <Sparkles className="vh-spark vh-spark-one" size={22} /><Sparkles className="vh-spark vh-spark-two" size={15} />
+          </div>
+        </div>
+        <a className="vh-scroll" href="#gamemodes">SCROLL TO EXPLORE <span>↓</span></a>
       </section>
 
-      {featured && (
-        <Link to={`/news/${featured.slug}`} className="home-featured-link">
-          <article className="home-featured-story">
-            <div className="home-featured-image">
-              <img src={featured.image} alt={featured.title} />
-              <span className="home-featured-label">{featured.category}</span>
-            </div>
-            <div className="home-featured-copy">
-              <div className="home-story-meta"><span>{featured.category.toUpperCase()}</span><span><Calendar size={13} /> {featured.date}</span></div>
-              <h2>{featured.title}</h2>
-              <p>{featured.excerpt}</p>
-              <span className="home-story-read">READ STORY <ArrowRight size={15} /></span>
-            </div>
-          </article>
-        </Link>
-      )}
-
-      <section className="home-news-listing">
-        <div className="home-news-listing-head">
-          <div><span className="section-kicker">FROM THE COMMUNITY</span><h2>More stories<span>.</span></h2></div>
-          <Link to="/news" className="home-view-all">ALL NEWS <ArrowRight size={15} /></Link>
+      <section id="gamemodes" className="vh-modes-section">
+        <div className="vh-section-head">
+          <div><span className="vh-section-kicker">CHOOSE YOUR ADVENTURE</span><h2>One server. <span>Many worlds.</span></h2></div>
+          <p>Whether you want a fierce challenge or a place to build at your own pace, start with the mode that calls to you.</p>
         </div>
-        <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {stories.map(({ slug, image, category, tone, date, title, excerpt }) => (
-            <PixelBox key={slug} tone="info" padding="none" className="home-news-card overflow-hidden">
-              <Link to={`/news/${slug}`} className="home-news-card-image">
-                <img src={image} alt={title} loading="lazy" />
-                <span className="home-news-category" style={{ "--story-tone": tone }}>{category.toUpperCase()}</span>
-              </Link>
-              <div className="flex flex-col gap-3 p-4">
-                <span className="home-news-date"><Calendar size={12} /> {date}</span>
-                <h3>{title}</h3>
-                <p className="p text-start! text-[10px]!">{excerpt}</p>
-                <Link to={`/news/${slug}`} className="home-news-read">READ MORE <ArrowRight size={14} /></Link>
-              </div>
-            </PixelBox>
+        <div className="vh-modes-grid">
+          {gameModes.map(({ name, tag, description, image, icon: Icon, featured }) => (
+            <article key={name} className={`vh-mode-card ${featured ? "vh-mode-featured" : ""}`}>
+              <div className="vh-mode-art"><img src={image} alt={`${name} Minecraft game mode`} loading={featured ? "eager" : "lazy"} /><div className="vh-mode-art-shade" /><span className="vh-mode-tag">{tag}</span><span className="vh-mode-icon"><Icon size={19} /></span></div>
+              <div className="vh-mode-copy"><div className="vh-mode-title-row"><h3>{name}</h3>{featured && <span className="vh-popular">FEATURED MODE</span>}</div><p>{description}</p><a href="https://discord.gg/NruxFSnrUe" target="_blank" rel="noreferrer" className="vh-mode-link">DISCOVER MODE <ArrowRight size={15} /></a></div>
+            </article>
           ))}
         </div>
       </section>
 
-      <section className="home-news-community">
-        <div>
-          <span className="section-kicker">STAY IN THE LOOP</span>
-          <h2>News is just the beginning<span>.</span></h2>
-          <p>Join the community for announcements, event updates, and conversations with other players.</p>
-        </div>
-        <a href="https://discord.gg/NruxFSnrUe" target="_blank" rel="noreferrer" className="vbtn vbtn-primary"><MessageCircle size={17} /> JOIN DISCORD <ArrowRight size={15} /></a>
+      <section className="vh-community">
+        <div className="vh-community-icon"><Users size={26} /></div>
+        <div><span className="vh-section-kicker">YOUR PEOPLE ARE HERE</span><h2>Make your next story <span>with us.</span></h2><p>Meet other players, share your builds, find teammates, and keep up with community announcements.</p></div>
+        <a className="vbtn vbtn-primary" href="https://discord.gg/NruxFSnrUe" target="_blank" rel="noreferrer">JOIN DISCORD <ArrowRight size={15} /></a>
+      </section>
+
+      <section className="vh-news-teaser">
+        <div><span className="vh-section-kicker">FRESH FROM VELDORA</span><h2>Stay in the loop<span>.</span></h2><p>Check announcements, community events, and server updates.</p></div>
+        <Link to="/news" className="vbtn vbtn-glass">LATEST NEWS <ArrowRight size={15} /></Link>
       </section>
     </main>
   );
