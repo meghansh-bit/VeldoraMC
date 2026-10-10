@@ -1,5 +1,4 @@
 import { ArrowRight, Gamepad2, Users, ShieldCheck, Sparkles, Swords, MessageCircle, Globe2 } from "lucide-react";
-import { useState } from "react";
 import { useSeo } from "../hooks/useSeo";
 
 const projects = [
