@@ -4,8 +4,8 @@ import { useSeo } from "../hooks/useSeo";
 
 export default function Store() {
   useSeo({
-    title: "VeldoraMC Coin Store",
-    description: "Browse VeldoraMC in-game coin packs.",
+    title: "VeldoraMC Velora Store",
+    description: "Get Velora currency packs for VeldoraMC.",
     path: "/store",
   });
 
@@ -16,12 +16,12 @@ export default function Store() {
         <div className="vstore-orb vstore-orb-two" />
         <div className="vstore-hero-copy">
           <span className="vstore-kicker"><Sparkles size={14} /> OFFICIAL VELDORAMC STORE</span>
-          <h1>Get more <span>coins.</span></h1>
-          <p>Choose a coin pack to boost your in-game progress.</p>
-          <a href="#coin-packs" className="vstore-primary">Browse coin packs <ArrowRight size={17} /></a>
+          <h1>Get more <span>Velora.</span></h1>
+          <p>Choose a Velora pack to boost your in-game progress.</p>
+          <a href="#coin-packs" className="vstore-primary">Browse Velora packs <ArrowRight size={17} /></a>
           <div className="vstore-trust">
             <span><ShieldCheck size={15} /> Support the server</span>
-            <span><Heart size={15} /> In-game currency</span>
+            <span><Heart size={15} /> Velora currency</span>
           </div>
         </div>
         <div className="vstore-hero-emblem" aria-hidden="true">
@@ -35,7 +35,7 @@ export default function Store() {
         <div className="vstore-section-head">
           <div>
             <span className="vstore-kicker">IN-GAME CURRENCY</span>
-            <h2>Choose your <em>coin pack</em></h2>
+            <h2>Choose your <em>Velora pack</em></h2>
             <p>Prices are displayed in Indian rupees (INR).</p>
           </div>
         </div>
