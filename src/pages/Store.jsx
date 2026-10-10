@@ -27,7 +27,8 @@ export default function Store() {
   const [addedBundle, setAddedBundle] = useState(null);
   const { addToCart } = useCart();
   const handleAddBundle = (bundle) => {
-    addToCart({ id: `bundle-${bundle.tone}`, category: "rank", name: bundle.fullName, price: bundle.price, tone: "primary", icon: bundle.icon });
+    const added = addToCart({ id: `bundle-${bundle.tone}`, category: "rank", name: bundle.fullName, price: bundle.price, tone: "primary", icon: bundle.icon });
+    if (!added) return;
     setAddedBundle(bundle.tone);
     window.setTimeout(() => setAddedBundle((current) => current === bundle.tone ? null : current), 1500);
   };
