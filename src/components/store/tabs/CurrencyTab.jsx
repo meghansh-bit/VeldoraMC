@@ -63,8 +63,10 @@ export default function CurrencyTab() {
                   {pack.bonus}
                 </span>
               )}
-              <div className="mt-1 text-[18px] gold-gradient-text store-usd-price">{pack.price}</div>
-              <span className="store-inr-price">{formatInrEquivalent(pack.price)}</span>
+              <div className="mt-1 flex flex-col items-center leading-tight">
+                <div className="text-[18px] gold-gradient-text store-usd-price">{pack.price}</div>
+                <span className="store-inr-price mt-1">{formatInrEquivalent(pack.price)}</span>
+              </div>
               <PixelButton
                 tone={pack.tone}
                 className="mt-auto w-full"
