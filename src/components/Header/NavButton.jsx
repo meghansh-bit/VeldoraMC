@@ -1,10 +1,11 @@
 import { NavLink } from "react-router-dom";
-import { Home, Newspaper, Trophy, ShieldCheck, ShoppingBag, Headset, ChevronRight } from "lucide-react";
+import { Home, Newspaper, Trophy, ShieldCheck, ShoppingBag, Headset, UserRound, ChevronRight } from "lucide-react";
 
 const NAV_ICONS = {
   Home: Home,
   News: Newspaper,
   Leaderboard: Trophy,
+  Profiles: UserRound,
   Staff: ShieldCheck,
   Store: ShoppingBag,
   Support: Headset,
