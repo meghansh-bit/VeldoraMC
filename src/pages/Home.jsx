@@ -38,7 +38,7 @@ export default function Home() {
       <div className="vhi-section-title"><span>THE VELDORAMC EXPERIENCE</span><h2>Pick Your <em>Adventure</em></h2><p>One world, one community, endless ways to make your mark.</p></div>
       <article className="vhi-project-card">
         <div className="vhi-project-art" style={{ backgroundImage: `linear-gradient(90deg,rgba(21,8,20,.8),rgba(8,10,23,.38)),url(${lifestealImage})` }}>
-          <div className="vhi-project-brand"><div className="vhi-project-heart"><MinecraftHeart/></div><strong>VELDORA<br/><b>LIFESTEAL</b></strong><small>EST. 2026</small></div>
+          <div className="vhi-project-brand"><div className="vhi-project-heart"><MinecraftHeart/></div><strong>VELDORAMC<br/><b>LIFESTEAL</b></strong><small>EST. 2026</small></div>
           <span className="vhi-project-badge">MAIN GAMEMODE</span><div className="vhi-online"><Signal size={16}/> Lifesteal SMP <span>Explore now</span></div>
         </div>
         <div className="vhi-project-info"><h3>Lifesteal Survival Multiplayer</h3><p>Venture into a world where hearts are everything. Battle other players, steal hearts, build hidden bases, and form alliances. Trust carefully — every fight can change your future.</p><div className="vhi-project-footer"><a className="vhi-btn vhi-btn-green" href="https://discord.gg/NruxFSnrUe" target="_blank" rel="noreferrer"><DiscordMark size={20}/> Join Discord</a><a className="vhi-arrow-btn" href="https://discord.gg/NruxFSnrUe" target="_blank" rel="noreferrer" aria-label="Discover Lifesteal"><ArrowRight size={22}/></a></div></div>
