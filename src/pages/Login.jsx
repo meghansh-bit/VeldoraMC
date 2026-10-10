@@ -31,6 +31,7 @@ export default function Login() {
       });
       if (authError) throw authError;
       setEmail(cleanEmail);
+      setCode("");
       setStep("code");
       setNotice("We've sent a sign-in code to your email. Check your inbox and spam folder.");
     } catch (authError) {
@@ -89,14 +90,14 @@ export default function Login() {
           <span>6-digit email code</span>
           <span className="flex items-center gap-2 rounded-lg border border-white/15 bg-white/5 px-3">
             <KeyRound size={17} aria-hidden="true"/>
-            <input className="w-full bg-transparent py-3 tracking-[.35em] outline-none" inputMode="numeric" autoComplete="one-time-code" pattern="[0-9]{6}" maxLength={6} value={code} onChange={event => setCode(event.target.value.replace(/\\D/g, "").slice(0, 6))} placeholder="123456" required />
+            <input className="w-full bg-transparent py-3 tracking-[.35em] outline-none" inputMode="numeric" autoComplete="one-time-code" pattern="[0-9]{6}" maxLength={6} value={code} onChange={event => setCode(event.target.value.replace(/\D/g, "").slice(0, 6))} placeholder="123456" required />
           </span>
         </label>
         {error && <div role="alert" className="security-note mt-2"><LockKeyhole size={20}/><div><b>Couldn't verify</b><small>{error}</small></div></div>}
         {notice && <div role="status" className="security-note mt-2"><Mail size={20}/><div><b>Code sent</b><small>{notice}</small></div></div>}
         <button type="submit" disabled={loading} className="vbtn vbtn-primary w-full justify-center mt-2">{loading ? "VERIFYING..." : "VERIFY & SIGN IN"} <ArrowRight size={16}/></button>
         <button type="button" disabled={loading} className="w-full py-2 text-sm text-white/65 underline underline-offset-4" onClick={() => { setStep("email"); setCode(""); setError(""); setNotice(""); }}>Use a different email</button>
-        <button type="button" disabled={loading} className="w-full py-2 text-sm text-cyan-200 underline underline-offset-4" onClick={sendCode}>Send a new code</button>
+        <button type="button" disabled={loading} className="w-full py-2 text-sm text-cyan-200 underline underline-offset-4" onClick={() => sendCode()}>Send a new code</button>
       </form>}
 
       <div className="security-note mt-5"><ShieldCheck size={22}/><div><b>Secure and separate</b><small>This signs you into the VeldoraMC website only. It does not log you into or out of Minecraft.</small></div></div>
