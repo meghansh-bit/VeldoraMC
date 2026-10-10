@@ -369,3 +369,10 @@ header .pixel-btn{border:1px solid #c5f36b!important;border-radius:999px!importa
 @keyframes vhi-signal-blink{0%,100%{opacity:1}50%{opacity:.45}}
 @keyframes vhi-text-enter{from{opacity:.65;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 @media(prefers-reduced-motion:reduce){.vh-inpvp-home *, .vh-inpvp-home *:before,.vh-inpvp-home *:after{animation:none!important;scroll-behavior:auto!important;transition:none!important}}
+
+/* VeldoraMC white + red MC wordmark */
+.vel-logo{display:flex;align-items:center;min-width:0;padding:0 16px!important}
+.vel-logo-image{display:block;width:clamp(145px,18vw,205px);height:auto;max-height:46px;object-fit:contain}
+.vhi-wordmark{display:flex;align-items:center;justify-content:flex-start;margin:0 0 22px;max-width:min(100%,560px)}
+.vhi-wordmark-image{display:block;width:min(100%,490px);height:auto;max-height:105px;object-fit:contain;filter:drop-shadow(0 5px 22px #0008)}
+@media(max-width:640px){.vel-logo{padding:0 12px!important}.vel-logo-image{width:158px;max-height:40px}.vhi-wordmark{margin-bottom:18px}.vhi-wordmark-image{width:min(100%,390px);max-height:80px}}
