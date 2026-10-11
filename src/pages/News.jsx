@@ -4,8 +4,13 @@ import PixelBox from "../components/ui/PixelBox";
 import PixelButton from "../components/ui/PixelButton";
 import { newsPosts } from "../data/news";
 import { useSeo } from "../hooks/useSeo";
+import { useEffect, useState } from "react";
+import { supabase } from "../lib/supabase";
 
 export default function News() {
+  const [managedPosts, setManagedPosts] = useState([]);
+  useEffect(() => { let alive = true; supabase.from("news_posts").select("slug,image,category,excerpt,title,created_at").eq("published", true).order("created_at", { ascending: false }).then(({ data }) => { if (alive && data) setManagedPosts(data.map(p => ({ ...p, date: new Date(p.created_at).toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" }), tone: "var(--color-info)", managed: true }))); }); return () => { alive = false; }; }, []);
+  const posts = [...managedPosts, ...newsPosts];
   useSeo({
     title: "News",
     description:
@@ -20,7 +25,7 @@ export default function News() {
       </p>
 
       <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {newsPosts.map(
+        {posts.map(
           ({ slug, image, category, tone, date, title, excerpt }) => (
             <PixelBox
               key={slug}
@@ -28,11 +33,11 @@ export default function News() {
               padding="none"
               className="overflow-hidden transition-transform hover:-translate-y-1"
             >
-              <div className=" w-full overflow-hidden bg-(--color-bg-soft)">
+              <div className="h-44 w-full overflow-hidden bg-(--color-bg-soft)">
                 <img
                   src={image}
                   alt={title}
-                  className="h-full w-full object-cover [image-rendering:pixelated]"
+                  className="h-full w-full object-cover"
                 />
               </div>
 
@@ -57,11 +62,11 @@ export default function News() {
                   </span>
                 </div>
 
-                <h3 className="text-[13.5px] gold-gradient-text truncate">
+                <h3 className="text-base font-semibold leading-snug gold-gradient-text">
                   {title}
                 </h3>
 
-                <p className="p text-start! text-[10px]!">{excerpt}</p>
+                <p className="text-start text-sm leading-relaxed text-(--color-text-muted)">{excerpt}</p>
 
                 <Link to={`/news/${slug}`} className="mt-auto">
                   <PixelButton tone="info" className="w-full py-5! gap-0!">
