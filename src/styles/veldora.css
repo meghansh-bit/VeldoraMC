@@ -734,3 +734,15 @@ header.fixed .pixel-btn {
 @media(max-width:1079px) {
   .vnav-login-button {min-height:48px;height:48px;font-size:13px}
 }
+
+
+/* Keep desktop navigation hidden on mobile; only show the collapsible mobile menu */
+@media (max-width:1079px) {
+  header.fixed > div:first-child nav[aria-label="Primary"] {
+    display:none!important;
+  }
+  header.fixed > .grid nav[aria-label="Primary mobile"] {
+    display:flex!important;
+    flex-direction:column;
+  }
+}
