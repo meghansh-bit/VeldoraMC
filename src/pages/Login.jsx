@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { ShieldCheck, ArrowLeft, LockKeyhole, Mail, KeyRound, ArrowRight } from "lucide-react";
 import { useSeo } from "../hooks/useSeo";
 import { supabase } from "../lib/supabase";
@@ -12,6 +12,7 @@ export default function Login() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
   useSeo({ title: "Email OTP Login", description: "Sign in to your VeldoraMC website account with a one-time email code.", path: "/login", noindex: true });
 
   async function sendCode(event) {
@@ -58,7 +59,8 @@ export default function Login() {
         type: "email"
       });
       if (authError) throw authError;
-      navigate("/profiles");
+      const destination = location.state?.from === "/admin" ? "/admin" : "/profiles";
+      navigate(destination, { replace: true });
     } catch (authError) {
       setError(authError?.message || "That code didn't work. Request a new one and try again.");
     } finally {
