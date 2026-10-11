@@ -13,6 +13,7 @@ import PortalPage from "../pages/PortalPage";
 import PlayerProfiles from "../pages/PlayerProfiles";
 import Bundles from "../pages/Bundles";
 import AdminDashboard from "../pages/AdminDashboard";
+import AdminTickets from "../pages/AdminTickets";
 import Lifesteal from "../pages/Lifesteal";
 
 export const router = createBrowserRouter([
@@ -28,4 +29,5 @@ export const router = createBrowserRouter([
   { path: "community", element: <PortalPage /> }, { path: "support", element: <PortalPage /> },
  ]},
  { path: "/admin", element: <AdminDashboard /> },
+ { path: "/admin/tickets", element: <AdminTickets /> },
 ]);
