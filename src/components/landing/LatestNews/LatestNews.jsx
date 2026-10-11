@@ -1,13 +1,18 @@
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { supabase } from "../../../lib/supabase";
 import { ArrowRight, Calendar } from "lucide-react";
 import PixelBox from "../../ui/PixelBox";
 import PixelButton from "../../ui/PixelButton";
 import { newsPosts } from "../../../data/news";
 
 // Homepage teaser only shows the 3 most recent posts.
-const POSTS = newsPosts.slice(0, 3);
+
 
 export default function LatestNews() {
+  const [managedPosts, setManagedPosts] = useState([]);
+  useEffect(() => { let alive = true; supabase.from("news_posts").select("slug,image,category,excerpt,title,created_at").eq("published", true).order("created_at", { ascending: false }).limit(3).then(({data}) => { if (alive && data) setManagedPosts(data.map(p => ({...p, date: new Date(p.created_at).toLocaleDateString(undefined, {year:"numeric",month:"short",day:"numeric"}), tone:"var(--color-info)"}))); }); return () => { alive = false; }; }, []);
+  const POSTS = [...managedPosts, ...newsPosts].slice(0,3);
   return (
     <section className="mx-auto max-w-7xl px-4 pt-25 sm:px-6">
       <div>
@@ -40,11 +45,11 @@ export default function LatestNews() {
             padding="none"
             className="overflow-hidden transition-transform hover:-translate-y-1"
           >
-            <div className=" w-full overflow-hidden bg-(--color-bg-soft)">
+            <div className="h-44 w-full overflow-hidden bg-(--color-bg-soft)">
               <img
                 src={image}
                 alt={title}
-                className="h-full w-full object-cover [image-rendering:pixelated]"
+                className="h-full w-full object-cover"
               />
             </div>
 
@@ -69,11 +74,11 @@ export default function LatestNews() {
                 </span>
               </div>
 
-              <h3 className="text-[13.5px] gold-gradient-text truncate">
+              <h3 className="text-base font-semibold leading-snug gold-gradient-text">
                 {title}
               </h3>
 
-              <p className="p text-start! text-[10px]!">{excerpt}</p>
+              <p className="text-start text-sm leading-relaxed text-(--color-text-muted)">{excerpt}</p>
 
               <Link to={`/news/${slug}`} className="mt-auto">
                 <PixelButton tone="info" className="w-full py-5! gap-0!">
