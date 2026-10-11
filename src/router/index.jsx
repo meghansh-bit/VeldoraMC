@@ -14,6 +14,7 @@ import PlayerProfiles from "../pages/PlayerProfiles";
 import Bundles from "../pages/Bundles";
 import AdminDashboard from "../pages/AdminDashboard";
 import AdminTickets from "../pages/AdminTickets";
+import AdminNews from "../pages/AdminNews";
 import Lifesteal from "../pages/Lifesteal";
 
 export const router = createBrowserRouter([
@@ -30,4 +31,5 @@ export const router = createBrowserRouter([
  ]},
  { path: "/admin", element: <AdminDashboard /> },
  { path: "/admin/tickets", element: <AdminTickets /> },
+ { path: "/admin/news", element: <AdminNews /> },
 ]);
