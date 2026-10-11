@@ -13,6 +13,7 @@ import PortalPage from "../pages/PortalPage";
 import PlayerProfiles from "../pages/PlayerProfiles";
 import Bundles from "../pages/Bundles";
 import AdminDashboard from "../pages/AdminDashboard";
+import Lifesteal from "../pages/Lifesteal";
 
 export const router = createBrowserRouter([
  { path: "/", element: <RootLayout />, children: [
@@ -21,6 +22,7 @@ export const router = createBrowserRouter([
   { path: "votes", element: <Votes /> }, { path: "store", element: <Store /> }, { path: "bundles", element: <Bundles /> },
   { path: "staff", element: <Staff /> }, { path: "cart", element: <Cart /> },
   { path: "login", element: <Login /> },
+  { path: "lifesteal", element: <Lifesteal /> },
   { path: "link-minecraft", element: <LinkMinecraft /> },
   { path: "profiles", element: <PlayerProfiles /> }, { path: "leaderboard", element: <PortalPage /> },
   { path: "community", element: <PortalPage /> }, { path: "support", element: <PortalPage /> },
