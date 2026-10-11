@@ -62,6 +62,12 @@ function SupportCentre() {
   async function createTicket(event) {
     event.preventDefault(); setError(""); setNotice("");
     if (!user) return;
+    const activeTicket = tickets.find((item) => item.status === "open");
+    if (activeTicket) {
+      setShowNew(false); setSelected(activeTicket);
+      setError("You already have an open ticket. Please continue that conversation; you can create another after it is resolved.");
+      return;
+    }
     if (subject.trim().length < 4 || firstMessage.trim().length < 10) {
       setError("Add a subject (at least 4 characters) and explain your issue in at least 10 characters."); return;
     }
@@ -98,15 +104,16 @@ function SupportCentre() {
     <div className="section-kicker">04 / PLAYER CARE</div>
     <div className="portal-heading"><div className="portal-icon"><CircleHelp size={29}/></div><h1>SUPPORT CENTRE<br/><span>WE'VE GOT YOUR BACK.</span></h1></div>
     <p className="portal-intro">Open a private ticket, explain what happened, and keep the conversation in one place — like a Discord support ticket.</p>
+    <div className="coming-banner support-response-banner"><span className="live-dot"/><div><b>OUR RESPONSE GOAL: WITHIN 24 HOURS</b><small>We aim to resolve all support tickets within 24 hours. Complex issues may take longer, but we will keep you updated.</small></div></div>
     {!user ? <section className="support-auth-card"><div className="support-status-icon"><Ticket size={24}/></div><h2>Sign in to open a ticket</h2><p>Tickets are private to your account. Sign in with your email to create a ticket and view your support history.</p><Link className="vbtn vbtn-primary" to="/login">SIGN IN TO CONTINUE <ArrowRight size={16}/></Link></section> :
     <div className="support-layout">
       <aside className="support-sidebar">
         <div className="support-sidebar-top"><div><span className="support-overline">YOUR SUPPORT</span><h2>My tickets</h2></div><button className="support-icon-btn" onClick={loadTickets} aria-label="Refresh tickets"><RefreshCw size={16}/></button></div>
-        <button className="vbtn vbtn-primary support-new-btn" onClick={() => { setShowNew(true); setSelected(null); setError(""); setNotice(""); }}><Plus size={17}/> CREATE TICKET</button>
+        <button className="vbtn vbtn-primary support-new-btn" disabled={tickets.some((item) => item.status === "open")} title={tickets.some((item) => item.status === "open") ? "Resolve your open ticket before creating another" : "Create a support ticket"} onClick={() => { setShowNew(true); setSelected(null); setError(""); setNotice(""); }}><Plus size={17}/> {tickets.some((item) => item.status === "open") ? "OPEN TICKET IN PROGRESS" : "CREATE TICKET"}</button>
         {loading ? <p className="support-muted">Loading tickets…</p> : tickets.length === 0 ? <div className="support-empty-small"><Ticket size={22}/><b>No tickets yet</b><span>Need help? Create your first ticket.</span></div> : <div className="support-ticket-list">{tickets.map(ticket=><button key={ticket.id} className={`support-ticket-row ${selected?.id===ticket.id ? "is-selected" : ""}`} onClick={() => { setShowNew(false); openTicket(ticket); }}><span className="support-ticket-row-top"><span className={`support-dot status-${ticket.status}`}/><b>{ticket.subject}</b></span><span className="support-ticket-row-meta">#{ticket.id.slice(0,8)} · {ticket.category}</span><span className="support-ticket-row-bottom"><span className={`support-status status-${ticket.status}`}>{ticket.status}</span><small>{new Date(ticket.updated_at || ticket.created_at).toLocaleDateString()}</small></span></button>)}</div>}
       </aside>
       <section className="support-main">
-        {showNew ? <><div className="support-panel-heading"><span className="support-overline">NEW REQUEST</span><h2>Create a ticket</h2><p>Give us enough detail to understand how we can help.</p></div><form className="support-form" onSubmit={createTicket}>
+        {showNew && tickets.some((item) => item.status === "open") ? <div className="support-welcome"><div className="support-welcome-icon"><Ticket size={28}/></div><span className="support-overline">ONE OPEN TICKET AT A TIME</span><h2>Continue your current ticket</h2><p>To keep support organized, please resolve your current ticket before opening another.</p><button className="vbtn vbtn-primary" onClick={() => { const activeTicket = tickets.find((item) => item.status === "open"); if (activeTicket) { setShowNew(false); openTicket(activeTicket); } }}>VIEW OPEN TICKET <ArrowRight size={16}/></button></div> : showNew ? <><div className="support-panel-heading"><span className="support-overline">NEW REQUEST</span><h2>Create a ticket</h2><p>Give us enough detail to understand how we can help.</p></div><form className="support-form" onSubmit={createTicket}>
           <label>Subject<input value={subject} onChange={e=>setSubject(e.target.value)} maxLength={120} placeholder="Briefly describe your issue" required/></label>
           <div className="support-form-grid"><label>Category<select value={category} onChange={e=>setCategory(e.target.value)}>{TICKET_CATEGORIES.map(item=><option key={item}>{item}</option>)}</select></label><label>Priority<select value={priority} onChange={e=>setPriority(e.target.value)}><option value="normal">Normal</option><option value="high">High</option></select></label></div>
           <label>How can we help?<textarea value={firstMessage} onChange={e=>setFirstMessage(e.target.value)} rows={6} maxLength={5000} placeholder="Include what happened and any useful details. Don't share passwords or payment card details." required/></label>
