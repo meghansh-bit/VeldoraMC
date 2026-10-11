@@ -92,7 +92,14 @@ export default function Header() {
     if (!sessionUser) return mobile ? (
       <Link to="/login" onClick={() => setOpen(false)} className="vbtn vbtn-primary w-full justify-center"><MicrosoftMark size={18}/> Login</Link>
     ) : (
-      <Link to="/login"><PixelButton tone="success" size="lg" icon={MicrosoftMark} className="shrink-0 px-4!" textClassName="gradient-text" textStyle={{ "--nav-grad-top": "#6fcb6b", "--nav-grad-bottom": "#2a9328" }}>Login</PixelButton></Link>
+      <Link
+        to="/login"
+        className="vnav-login-button group inline-flex h-10 shrink-0 items-center justify-center gap-2.5 rounded-xl px-4 text-[12px] font-extrabold tracking-wide text-white transition-all duration-200"
+      >
+        <span className="vnav-login-icon flex h-6 w-6 items-center justify-center rounded-lg"><MicrosoftMark size={15} /></span>
+        <span>Login</span>
+        <ChevronRight size={14} className="vnav-login-arrow transition-transform duration-200 group-hover:translate-x-0.5" />
+      </Link>
     );
     return (
       <div className={mobile ? "flex items-center gap-3 rounded-lg border border-cyan-300/20 bg-cyan-300/5 p-3" : "flex items-center gap-2 rounded-lg border border-cyan-300/20 bg-cyan-300/5 px-3 py-2"}>
