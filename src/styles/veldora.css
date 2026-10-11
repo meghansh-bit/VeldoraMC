@@ -585,3 +585,128 @@ header .vbtn-primary:hover,.vbtn-primary:hover{background:linear-gradient(135deg
   header.fixed nav[aria-label="Primary"]>a:not([href="/cart"]) {padding-inline:8px!important;font-size:11px!important}
   header.fixed .vel-logo-image {width:138px}
 }
+
+
+/* Navbar layout fix — final overrides to neutralize older conflicting header rules */
+header.fixed {
+  width:100%;
+  z-index:1000;
+  overflow:visible;
+}
+header.fixed > div:first-child {
+  width:100%;
+  max-width:1500px;
+  margin-inline:auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:clamp(10px,1.5vw,24px);
+  height:72px!important;
+  padding:0 clamp(16px,3vw,40px)!important;
+}
+header.fixed > div:first-child > div:first-child {
+  display:flex;
+  align-items:center;
+  flex:1 1 auto;
+  min-width:0;
+  gap:clamp(12px,1.5vw,24px);
+}
+header.fixed .vel-logo {
+  display:flex;
+  flex:0 0 auto;
+  align-items:center;
+  justify-content:flex-start;
+  height:64px!important;
+  padding:0!important;
+}
+header.fixed .vel-logo-image {
+  display:block;
+  width:clamp(132px,12vw,174px)!important;
+  max-width:100%;
+  max-height:44px!important;
+  height:auto;
+  object-fit:contain;
+}
+header.fixed nav[aria-label="Primary"] {
+  display:flex;
+  align-items:center;
+  flex:0 1 auto;
+  min-width:0;
+  gap:clamp(2px,.35vw,6px);
+}
+header.fixed nav[aria-label="Primary"] > a:not([href="/cart"]) {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  flex:0 1 auto;
+  height:40px!important;
+  min-width:0;
+  padding:0 clamp(7px,.75vw,12px)!important;
+  gap:0!important;
+  border:1px solid transparent!important;
+  border-radius:9px;
+  white-space:nowrap;
+  font-size:clamp(11px,.82vw,12px)!important;
+  letter-spacing:0!important;
+}
+header.fixed nav[aria-label="Primary"] > a:not([href="/cart"]) .vnav-icon-wrap,
+header.fixed nav[aria-label="Primary"] > a:not([href="/cart"]) > svg {
+  display:none!important;
+}
+header.fixed nav[aria-label="Primary"] > a:not([href="/cart"]):hover {
+  background:rgba(169,150,255,.09)!important;
+  border-color:rgba(169,150,255,.15)!important;
+}
+header.fixed nav[aria-label="Primary"] > a:not([href="/cart"])[aria-current="page"] {
+  background:rgba(169,150,255,.13)!important;
+  border-color:rgba(169,150,255,.24)!important;
+  color:#e1d9ff!important;
+}
+header.fixed nav[aria-label="Primary"] > a[href="/cart"] {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  flex:0 0 40px;
+  width:40px;
+  height:40px!important;
+  padding:0!important;
+  border:1px solid rgba(255,255,255,.12)!important;
+  border-radius:9px;
+  margin-left:2px;
+}
+header.fixed > div:first-child > div:last-child {
+  display:flex;
+  flex:0 0 auto;
+  align-items:center;
+  margin-left:auto;
+  padding-right:0!important;
+}
+header.fixed .pixel-btn {
+  white-space:nowrap;
+}
+@media (min-width:1080px) and (max-width:1240px) {
+  header.fixed > div:first-child { padding-inline:14px!important;gap:8px; }
+  header.fixed > div:first-child > div:first-child { gap:9px; }
+  header.fixed .vel-logo-image { width:122px!important; }
+  header.fixed nav[aria-label="Primary"] { gap:0; }
+  header.fixed nav[aria-label="Primary"] > a:not([href="/cart"]) { padding-inline:6px!important;font-size:10.5px!important; }
+  header.fixed > div:first-child > div:last-child .pixel-btn { padding-inline:10px!important; }
+}
+@media (max-width:1079px) {
+  header.fixed > div:first-child {
+    height:66px!important;
+    padding-inline:16px!important;
+  }
+  header.fixed .vel-logo-image { width:clamp(136px,42vw,174px)!important; }
+  header.fixed > div:first-child > button {
+    display:flex;
+    flex:0 0 42px;
+    width:42px;
+    height:42px;
+    border:1px solid rgba(255,255,255,.12);
+    border-radius:10px;
+    background:rgba(255,255,255,.045);
+  }
+  header.fixed > div:first-child > div:first-child { flex:1 1 auto; }
+  header.fixed .grid nav[aria-label="Primary"] { display:flex;flex-direction:column; }
+}
