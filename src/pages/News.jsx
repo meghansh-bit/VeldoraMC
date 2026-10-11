@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import { Calendar, ArrowRight } from "lucide-react";
 import PixelBox from "../components/ui/PixelBox";
 import PixelButton from "../components/ui/PixelButton";
-import { newsPosts } from "../data/news";
 import { useSeo } from "../hooks/useSeo";
 import { useEffect, useState } from "react";
 import { supabase } from "../lib/supabase";
@@ -10,7 +9,7 @@ import { supabase } from "../lib/supabase";
 export default function News() {
   const [managedPosts, setManagedPosts] = useState([]);
   useEffect(() => { let alive = true; supabase.from("news_posts").select("slug,image,category,excerpt,title,created_at").eq("published", true).order("created_at", { ascending: false }).then(({ data }) => { if (alive && data) setManagedPosts(data.map(p => ({ ...p, date: new Date(p.created_at).toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" }), tone: "var(--color-info)", managed: true }))); }); return () => { alive = false; }; }, []);
-  const posts = [...managedPosts, ...newsPosts];
+  const posts = managedPosts;
   useSeo({
     title: "News",
     description:
@@ -24,7 +23,7 @@ export default function News() {
         Events, season recaps, and everything happening around the server.
       </p>
 
-      <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      {posts.length === 0 ? <div className="mt-8 rounded-xl border border-white/10 p-8 text-center"><h2 className="text-xl font-semibold">No announcements yet</h2><p className="mt-2 text-sm text-(--color-text-muted)">Check back soon for official VeldoraMC updates.</p></div> : <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {posts.map(
           ({ slug, image, category, tone, date, title, excerpt }) => (
             <PixelBox
@@ -80,7 +79,7 @@ export default function News() {
             </PixelBox>
           ),
         )}
-      </div>
+      </div>}
     </section>
   );
 }
