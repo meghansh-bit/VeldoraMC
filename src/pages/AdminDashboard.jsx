@@ -73,7 +73,7 @@ export default function AdminDashboard() {
         <p style={{ color: "#aebaff", fontSize: 10, letterSpacing: ".16em", fontWeight: 800 }}>VELDORAMC CONTROL CENTER</p>
         <h1 style={{ fontSize: 28, margin: "10px 0" }}>Admin access only.</h1>
         <p style={muted}>{userEmail ? "Your current session does not contain the required Supabase administrator role. Sign out and back in after the role has been updated." : "Sign in with your authorized administrator account to continue."}</p>
-        <button style={buttonStyle} onClick={() => navigate("/login")}>Go to sign in</button>
+        <button style={buttonStyle} onClick={() => navigate("/login", { state: { from: "/admin" } })}>Go to sign in</button>
         <p><a style={{ color: "#aebaff" }} href="/">Return to VeldoraMC</a></p>
       </section>
     </main>
