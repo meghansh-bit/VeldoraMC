@@ -1,0 +1,15 @@
+name: VeldoraLink
+version: 1.0.0
+main: site.veldoramc.link.VeldoraLink
+api-version: '1.21'
+author: VeldoraMC
+description: Links the Minecraft player currently online to a VeldoraMC website account.
+commands:
+  link:
+    description: Redeem a one-time VeldoraMC account link code.
+    usage: /link <code>
+    permission: veldoralink.use
+permissions:
+  veldoralink.use:
+    description: Allows a player to link a website account.
+    default: true

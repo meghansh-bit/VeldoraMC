@@ -1,0 +1,5 @@
+# Configure this after deploying the Supabase Edge Function.
+endpoint: "https://YOUR_PROJECT_REF.supabase.co/functions/v1/minecraft-link"
+# Must match the MINECRAFT_LINK_SERVER_SECRET Edge Function secret.
+# Do not put a real secret in GitHub.
+server-secret: "CHANGE-ME"
