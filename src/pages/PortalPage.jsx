@@ -1,12 +1,126 @@
+import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { ArrowRight, CircleHelp, Crown, MessageCircle, ShieldCheck, Trophy, Users, Swords, Coins, Wallet, UsersRound, Medal } from "lucide-react";
+import { ArrowRight, CircleHelp, MessageCircle, Trophy, Users, Swords, Coins, Wallet, UsersRound, Medal, Plus, Ticket, Send, RefreshCw, Clock3, CheckCircle2, AlertCircle, X, ChevronLeft } from "lucide-react";
 import { useSeo } from "../hooks/useSeo";
+import { supabase } from "../lib/supabase";
 
 const pages = {
   "/profiles": { num:"01", eyebrow:"PLAYER DIRECTORY", title:"PLAYER PROFILES", accent:"YOUR LEGACY.", intro:"A home for every adventurer. Search players, view stats, and follow the stories unfolding across VeldoraMC.", icon:Users, cards:[["Public profiles","Minecraft name, avatar, rank, and recent achievements."],["Personal stats","Kills, hearts, streaks, and playtime when game data is connected."],["Player history","A timeline for milestones and notable moments."]] },
   "/community": { num:"03", eyebrow:"FIND YOUR ALLIANCE", title:"COMMUNITY", accent:"PLAY TOGETHER.", intro:"Meet your next duo, plan your next raid, and be first to hear when VeldoraMC opens.", icon:MessageCircle, cards:[["Discord server","Invite link will be added before launch."],["Events & announcements","Community events, updates, and launch news."],["Rules & safety","A welcoming community with clear expectations."]] },
-  "/support": { num:"04", eyebrow:"WE'VE GOT YOUR BACK", title:"SUPPORT CENTRE", accent:"NEED A HAND?", intro:"Find help with account access, purchases, player reports, or technical issues. Support ticket integration can be added later.", icon:CircleHelp, cards:[["Player support","Account and gameplay questions."],["Store assistance","Purchase and payment support after store launch."],["Report a player","A safe route for reporting rule-breaking."]] },
 };
+
+const TICKET_CATEGORIES = ["General question", "Account help", "Store / purchase", "Player report", "Bug report", "Ban appeal", "Other"];
+
+function SupportCentre() {
+  const [user, setUser] = useState(null);
+  const [tickets, setTickets] = useState([]);
+  const [selected, setSelected] = useState(null);
+  const [messages, setMessages] = useState([]);
+  const [subject, setSubject] = useState("");
+  const [category, setCategory] = useState(TICKET_CATEGORIES[0]);
+  const [priority, setPriority] = useState("normal");
+  const [firstMessage, setFirstMessage] = useState("");
+  const [reply, setReply] = useState("");
+  const [creating, setCreating] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState("");
+  const [notice, setNotice] = useState("");
+  const [showNew, setShowNew] = useState(false);
+
+  useEffect(() => {
+    let active = true;
+    supabase.auth.getSession().then(({ data }) => {
+      if (!active) return;
+      setUser(data.session?.user || null);
+      setLoading(false);
+    }).catch(() => { if (active) setLoading(false); });
+    const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user || null);
+    });
+    return () => { active = false; listener.subscription.unsubscribe(); };
+  }, []);
+
+  async function loadTickets() {
+    if (!user) { setTickets([]); return; }
+    setLoading(true); setError("");
+    const { data, error: queryError } = await supabase.from("support_tickets").select("id,subject,category,priority,status,created_at,updated_at").order("updated_at", { ascending: false });
+    if (queryError) setError(queryError.message.includes("does not exist") ? "Support tables aren't set up yet. Run the SQL setup script in your Supabase SQL Editor." : queryError.message);
+    else setTickets(data || []);
+    setLoading(false);
+  }
+
+  useEffect(() => { loadTickets(); }, [user]);
+
+  async function openTicket(ticket) {
+    setSelected(ticket); setMessages([]); setError(""); setNotice("");
+    const { data, error: queryError } = await supabase.from("support_messages").select("id,ticket_id,user_id,message,created_at").eq("ticket_id", ticket.id).order("created_at", { ascending: true });
+    if (queryError) setError(queryError.message);
+    else setMessages(data || []);
+  }
+
+  async function createTicket(event) {
+    event.preventDefault(); setError(""); setNotice("");
+    if (!user) return;
+    if (subject.trim().length < 4 || firstMessage.trim().length < 10) {
+      setError("Add a subject (at least 4 characters) and explain your issue in at least 10 characters."); return;
+    }
+    setCreating(true);
+    const { data: ticket, error: insertError } = await supabase.from("support_tickets").insert({ user_id: user.id, subject: subject.trim(), category, priority, status: "open" }).select("id,subject,category,priority,status,created_at,updated_at").single();
+    if (insertError) { setError(insertError.message); setCreating(false); return; }
+    const { error: messageError } = await supabase.from("support_messages").insert({ ticket_id: ticket.id, user_id: user.id, message: firstMessage.trim() });
+    if (messageError) {
+      setError("Ticket was created, but the first message could not be saved: " + messageError.message);
+      setCreating(false); await loadTickets(); return;
+    }
+    setSubject(""); setFirstMessage(""); setPriority("normal"); setCategory(TICKET_CATEGORIES[0]); setShowNew(false);
+    await loadTickets(); await openTicket(ticket); setCreating(false); setNotice("Your ticket has been created.");
+  }
+
+  async function sendReply(event) {
+    event.preventDefault(); if (!selected || !reply.trim() || !user) return;
+    setSending(true); setError("");
+    const { error: insertError } = await supabase.from("support_messages").insert({ ticket_id: selected.id, user_id: user.id, message: reply.trim() });
+    if (insertError) setError(insertError.message);
+    else { setReply(""); await openTicket(selected); await loadTickets(); }
+    setSending(false);
+  }
+
+  async function closeTicket() {
+    if (!selected) return;
+    setError("");
+    const { error: updateError } = await supabase.from("support_tickets").update({ status: "closed" }).eq("id", selected.id);
+    if (updateError) setError(updateError.message);
+    else { const updated = { ...selected, status: "closed" }; setSelected(updated); await loadTickets(); }
+  }
+
+  return <main className="portal-page support-page"><div className="portal-glow"/><div className="portal-inner">
+    <div className="section-kicker">04 / PLAYER CARE</div>
+    <div className="portal-heading"><div className="portal-icon"><CircleHelp size={29}/></div><h1>SUPPORT CENTRE<br/><span>WE'VE GOT YOUR BACK.</span></h1></div>
+    <p className="portal-intro">Open a private ticket, explain what happened, and keep the conversation in one place — like a Discord support ticket.</p>
+    {!user ? <section className="support-auth-card"><div className="support-status-icon"><Ticket size={24}/></div><h2>Sign in to open a ticket</h2><p>Tickets are private to your account. Sign in with your email to create a ticket and view your support history.</p><Link className="vbtn vbtn-primary" to="/login">SIGN IN TO CONTINUE <ArrowRight size={16}/></Link></section> :
+    <div className="support-layout">
+      <aside className="support-sidebar">
+        <div className="support-sidebar-top"><div><span className="support-overline">YOUR SUPPORT</span><h2>My tickets</h2></div><button className="support-icon-btn" onClick={loadTickets} aria-label="Refresh tickets"><RefreshCw size={16}/></button></div>
+        <button className="vbtn vbtn-primary support-new-btn" onClick={() => { setShowNew(true); setSelected(null); setError(""); setNotice(""); }}><Plus size={17}/> CREATE TICKET</button>
+        {loading ? <p className="support-muted">Loading tickets…</p> : tickets.length === 0 ? <div className="support-empty-small"><Ticket size={22}/><b>No tickets yet</b><span>Need help? Create your first ticket.</span></div> : <div className="support-ticket-list">{tickets.map(ticket=><button key={ticket.id} className={`support-ticket-row ${selected?.id===ticket.id ? "is-selected" : ""}`} onClick={() => { setShowNew(false); openTicket(ticket); }}><span className="support-ticket-row-top"><span className={`support-dot status-${ticket.status}`}/><b>{ticket.subject}</b></span><span className="support-ticket-row-meta">#{ticket.id.slice(0,8)} · {ticket.category}</span><span className="support-ticket-row-bottom"><span className={`support-status status-${ticket.status}`}>{ticket.status}</span><small>{new Date(ticket.updated_at || ticket.created_at).toLocaleDateString()}</small></span></button>)}</div>}
+      </aside>
+      <section className="support-main">
+        {showNew ? <><div className="support-panel-heading"><span className="support-overline">NEW REQUEST</span><h2>Create a ticket</h2><p>Give us enough detail to understand how we can help.</p></div><form className="support-form" onSubmit={createTicket}>
+          <label>Subject<input value={subject} onChange={e=>setSubject(e.target.value)} maxLength={120} placeholder="Briefly describe your issue" required/></label>
+          <div className="support-form-grid"><label>Category<select value={category} onChange={e=>setCategory(e.target.value)}>{TICKET_CATEGORIES.map(item=><option key={item}>{item}</option>)}</select></label><label>Priority<select value={priority} onChange={e=>setPriority(e.target.value)}><option value="normal">Normal</option><option value="high">High</option></select></label></div>
+          <label>How can we help?<textarea value={firstMessage} onChange={e=>setFirstMessage(e.target.value)} rows={6} maxLength={5000} placeholder="Include what happened and any useful details. Don't share passwords or payment card details." required/></label>
+          <div className="support-form-foot"><small>{firstMessage.length}/5000 characters</small><button className="vbtn vbtn-primary" type="submit" disabled={creating}>{creating ? "CREATING…" : "SUBMIT TICKET"} <ArrowRight size={16}/></button></div>
+        </form></> : selected ? <><div className="support-panel-heading support-thread-heading"><button className="support-back-btn" onClick={()=>setSelected(null)}><ChevronLeft size={16}/> ALL TICKETS</button><div className="support-thread-title"><div><span className="support-overline">TICKET #{selected.id.slice(0,8)}</span><h2>{selected.subject}</h2><p>{selected.category} · Created {new Date(selected.created_at).toLocaleString()}</p></div><span className={`support-status status-${selected.status}`}>{selected.status}</span></div>{selected.status==="open" && <button className="support-close-btn" onClick={closeTicket}><CheckCircle2 size={15}/> Mark as resolved</button>}</div>
+          <div className="support-messages">{messages.map(message=><article key={message.id} className={`support-message ${message.user_id===user.id ? "own-message" : ""}`}><div className="support-message-avatar">{message.user_id===user.id ? "Y" : "S"}</div><div className="support-message-content"><div className="support-message-meta"><b>{message.user_id===user.id ? "You" : "Support team"}</b><time>{new Date(message.created_at).toLocaleString()}</time></div><p>{message.message}</p></div></article>)}</div>
+          {selected.status==="open" ? <form className="support-reply-form" onSubmit={sendReply}><textarea value={reply} onChange={e=>setReply(e.target.value)} rows={3} maxLength={5000} placeholder="Write a reply…" required/><div><small>Never share passwords or sensitive payment details.</small><button type="submit" className="vbtn vbtn-primary" disabled={sending || !reply.trim()}>{sending ? "SENDING…" : "SEND REPLY"} <Send size={15}/></button></div></form> : <div className="support-closed-note"><CheckCircle2 size={18}/> This ticket is marked as resolved.</div>}
+        </> : <div className="support-welcome"><div className="support-welcome-icon"><MessageCircle size={28}/></div><span className="support-overline">PRIVATE SUPPORT THREADS</span><h2>How can we help?</h2><p>Choose an existing ticket to continue the conversation, or create a new one for account help, store issues, player reports, ban appeals, and more.</p><button className="vbtn vbtn-primary" onClick={()=>setShowNew(true)}><Plus size={17}/> CREATE A TICKET</button><div className="support-help-tags"><span>Account help</span><span>Purchases</span><span>Player reports</span><span>Bug reports</span></div></div>}
+        {error && <div role="alert" className="support-alert"><AlertCircle size={17}/><span>{error}</span></div>}{notice && <div role="status" className="support-notice"><CheckCircle2 size={17}/><span>{notice}</span></div>}
+      </section>
+    </div>}
+    <div className="portal-bottom"><div><h2>NEED COMMUNITY HELP?</h2><p>Join the community for announcements and launch updates.</p></div><a className="vbtn vbtn-primary" href="https://discord.gg/NruxFSnrUe" target="_blank" rel="noreferrer">OPEN DISCORD <ArrowRight size={16}/></a></div>
+  </div></main>;
+}
 
 const HALL_CATEGORIES = [
   { id:"kills", title:"TOP KILLS", subtitle:"The fiercest fighters", detail:"Players ranked by confirmed kills", icon:Swords, accent:"text-rose-300", glow:"from-rose-400/15" },
@@ -54,6 +168,7 @@ function HallOfFame() {
 export default function PortalPage() {
   const loc=useLocation();
   if (loc.pathname === "/leaderboard" || loc.pathname === "/leaderboards") return <HallOfFame />;
+  if (loc.pathname === "/support") return <SupportCentre />;
   const p=pages[loc.pathname] || pages["/community"]; const Icon=p.icon;
   useSeo({title:p.title, description:p.intro, path:loc.pathname});
   return <main className="portal-page"><div className="portal-glow"/><div className="portal-inner"><div className="section-kicker">{p.num} / {p.eyebrow}</div><div className="portal-heading"><div className="portal-icon"><Icon size={29}/></div><h1>{p.title}<br/><span>{p.accent}</span></h1></div><p className="portal-intro">{p.intro}</p><div className="coming-banner"><span className="live-dot"/><div><b>INTEGRATION READY · COMING SOON</b><small>This is a front-end foundation. Live data and account services are not connected yet.</small></div></div><div className="portal-card-grid">{p.cards.map(([title,desc],i)=><article className="portal-card" key={title}><span className="portal-card-num">0{i+1}</span><h2>{title}</h2><p>{desc}</p><ArrowRight size={18} className="portal-card-arrow"/></article>)}</div><div className="portal-bottom"><div><h2>BE THERE FROM DAY ONE.</h2><p>Stay tuned while we prepare the realm for launch.</p></div><Link className="vbtn vbtn-primary" to="/">BACK TO HOME <ArrowRight size={16}/></Link></div></div></main>;
