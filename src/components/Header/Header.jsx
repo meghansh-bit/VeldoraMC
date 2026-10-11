@@ -96,7 +96,18 @@ export default function Header() {
     );
     return (
       <div className={mobile ? "flex items-center gap-3 rounded-lg border border-cyan-300/20 bg-cyan-300/5 p-3" : "flex items-center gap-2 rounded-lg border border-cyan-300/20 bg-cyan-300/5 px-3 py-2"}>
-        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-cyan-300/10 text-cyan-200"><UserRound size={18}/></span>
+        <span className="flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-lg border border-cyan-300/25 bg-cyan-300/10 text-cyan-200">
+          <img
+            src={`https://mc-heads.net/avatar/${encodeURIComponent(sessionUser.user_metadata?.minecraft_username || sessionUser.user_metadata?.gamertag || sessionUser.user_metadata?.username || playerName)}/36`}
+            alt={`${playerName} Minecraft skin head`}
+            width="36"
+            height="36"
+            className="h-full w-full object-cover"
+            loading="lazy"
+            onError={(event) => { event.currentTarget.style.display = "none"; }}
+          />
+          <UserRound size={18} className="hidden" />
+        </span>
         <span className="min-w-0 flex-1"><span className="block text-[9px] font-bold tracking-[.16em] text-cyan-200/70">IN-GAME PLAYER</span><span className="block max-w-40 truncate text-sm font-bold text-white">{playerName}</span></span>
         <button type="button" onClick={signOut} title="Sign out" aria-label="Sign out" className="rounded-md p-2 text-white/50 hover:bg-white/10 hover:text-white"><LogOut size={16}/></button>
       </div>
