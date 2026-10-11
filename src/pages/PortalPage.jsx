@@ -72,7 +72,22 @@ function SupportCentre() {
       setError("Add a subject (at least 4 characters) and explain your issue in at least 10 characters."); return;
     }
     setCreating(true);
-    const { data: ticket, error: insertError } = await supabase.from("support_tickets").insert({ user_id: user.id, subject: subject.trim(), category, priority, status: "open" }).select("id,subject,category,priority,status,created_at,updated_at").single();
+    // Re-check the live Supabase session at submit time rather than relying on
+    // component state that may be stale after OTP login/session refresh.
+    const { data: authData, error: authError } = await supabase.auth.getUser();
+    const authenticatedUser = authData?.user;
+    if (authError || !authenticatedUser) {
+      setError("Your login session has expired. Please sign in again, then create your ticket.");
+      setCreating(false);
+      return;
+    }
+    const { data: ticket, error: insertError } = await supabase.from("support_tickets").insert({
+      user_id: authenticatedUser.id,
+      subject: subject.trim(),
+      category,
+      priority,
+      status: "open"
+    }).select("id,subject,category,priority,status,created_at,updated_at").single();
     if (insertError) { setError(insertError.message); setCreating(false); return; }
     const { error: messageError } = await supabase.from("support_messages").insert({ ticket_id: ticket.id, user_id: user.id, message: firstMessage.trim() });
     if (messageError) {
