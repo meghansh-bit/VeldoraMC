@@ -4,7 +4,6 @@ import { supabase } from "../lib/supabase";
 import { Calendar, ArrowLeft, User } from "lucide-react";
 import PixelBox from "../components/ui/PixelBox";
 import PixelButton from "../components/ui/PixelButton";
-import { newsPosts, getPostBySlug } from "../data/news";
 import { useSeo } from "../hooks/useSeo";
 
 function ContentBlock({ block }) {
@@ -46,7 +45,7 @@ export default function NewsDetails() {
   const { slug } = useParams();
   const [managedPost, setManagedPost] = useState(null);
   useEffect(() => { let alive = true; supabase.from("news_posts").select("*").eq("slug", slug).eq("published", true).maybeSingle().then(({data}) => { if (alive && data) setManagedPost({ ...data, date: new Date(data.created_at).toLocaleDateString(undefined,{year:"numeric",month:"short",day:"numeric"}), author: "VeldoraMC Team", tone: "var(--color-info)", content: (data.content || "").split(/\\n\\s*\\n/).filter(Boolean).map(text => ({type:"p",text})) }); }); return () => { alive = false; }; }, [slug]);
-  const post = managedPost || getPostBySlug(slug);
+  const post = managedPost;
 
   useSeo(
     post
@@ -79,7 +78,7 @@ export default function NewsDetails() {
     );
   }
 
-  const related = newsPosts.filter((p) => p.slug !== post.slug).slice(0, 3);
+  const related = [];
 
   return (
     <section className="mx-auto max-w-7xl px-4 py-6 sm:px-6 ">
