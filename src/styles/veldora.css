@@ -746,3 +746,28 @@ header.fixed .pixel-btn {
     flex-direction:column;
   }
 }
+
+
+/* Premium hero and more readable editorial typography */
+.vhi-hero{min-height:min(820px,calc(100svh - 66px));isolation:isolate}
+.vhi-hero-bg{transform:scale(1.025);filter:saturate(1.08);background-position:center 42%!important}
+.vhi-hero:after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(ellipse at 72% 35%,rgba(135,100,255,.18),transparent 36%),linear-gradient(180deg,transparent 65%,rgba(7,7,20,.8))}
+.vhi-hero-inner{max-width:1180px;width:100%;padding:clamp(42px,7vw,88px) clamp(18px,4vw,44px);position:relative}
+.vhi-wordmark-image{filter:drop-shadow(0 12px 32px rgba(119,91,255,.3))}
+.vhi-eyebrow{display:inline-flex;align-items:center;gap:10px;padding:9px 13px;border:1px solid rgba(182,163,255,.25);border-radius:999px;background:rgba(20,16,40,.55);backdrop-filter:blur(12px);font-size:10px;letter-spacing:.18em}
+.vhi-hero h1{font-size:clamp(48px,8.2vw,104px);line-height:.96;letter-spacing:-.075em;font-weight:950;text-wrap:balance;text-shadow:0 8px 42px rgba(0,0,0,.32);margin:22px 0}
+.vhi-hero h1 span{background:linear-gradient(100deg,#f5efff 0%,#c2b2ff 40%,#8b78ff 72%,#f2b7ff 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.vhi-lead{max-width:610px;font-size:clamp(14px,1.5vw,17px);line-height:1.9;color:rgba(245,241,255,.78);text-wrap:pretty}
+.vhi-stats{margin-top:28px;gap:12px}
+.vhi-stats>div{padding:13px 17px;border:1px solid rgba(193,175,255,.18);border-radius:13px;background:rgba(17,13,34,.55);backdrop-filter:blur(10px)}
+.vhi-platforms{margin-top:20px;gap:10px}
+.vhi-platform{border:1px solid rgba(255,255,255,.11);background:rgba(255,255,255,.035);border-radius:12px;padding:10px 13px}
+.vhi-btn{border-radius:12px!important;min-height:49px;padding:0 18px!important;font-weight:800;letter-spacing:.015em;transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease}
+.vhi-btn:hover{transform:translateY(-3px);box-shadow:0 12px 34px rgba(0,0,0,.24)}
+.vhi-btn-green{box-shadow:0 8px 30px rgba(109,231,173,.17)}
+.vhi-project-info h3,.vhi-value-card h3,.vhi-trust-card h3{letter-spacing:-.025em;line-height:1.35}
+.vhi-project-info p,.vhi-value-card p,.vhi-trust-card p,.vhi-about-copy p{font-size:14px;line-height:1.85}
+.vhi-section-title h2,.vhi-about-copy h2,.vhi-final-cta h2{letter-spacing:-.055em;line-height:1.08;text-wrap:balance}
+.vhi-section-title>p{font-size:14px;line-height:1.8}
+.vh-news-teaser h2{letter-spacing:-.05em;line-height:1.1}
+@media(max-width:700px){.vhi-hero{min-height:auto}.vhi-hero-bg{background-position:58% center!important}.vhi-hero-inner{padding-top:64px;padding-bottom:86px}.vhi-wordmark-image{max-width:min(230px,70vw)}.vhi-hero h1{font-size:clamp(43px,12vw,66px);letter-spacing:-.065em}.vhi-lead{font-size:14px;line-height:1.8}.vhi-hero-bottom{font-size:8px}.vhi-stats{display:grid;grid-template-columns:1fr 1fr}.vhi-stats>div{padding:11px}.vhi-stats strong{font-size:10px}.vhi-stats span{font-size:8px}.vhi-hero-actions{align-items:stretch}.vhi-hero-actions .vhi-btn{flex:1;min-width:0;font-size:11px;padding:0 12px!important}.vhi-project-info p,.vhi-value-card p,.vhi-trust-card p,.vhi-about-copy p{font-size:13px;line-height:1.8}}
