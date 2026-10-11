@@ -85,6 +85,7 @@ export default function AdminDashboard() {
         <Link to="/admin" style={{ color: "#f2f4fa", textDecoration: "none", fontWeight: 900, letterSpacing: ".08em" }}>VELDORA<span style={{ color: "#aebaff" }}>MC</span> <span style={{ color: "#929bad", fontSize: 10 }}>CONTROL CENTER</span></Link>
         <div style={{ display: "flex", gap: 9, flexWrap: "wrap" }}>
           <Link to="/admin/tickets" style={buttonStyle}><Ticket size={15}/> Support tickets {openCount !== null ? `(${openCount} open)` : ""}</Link>
+          <Link to="/admin/news" style={buttonStyle}><FileText size={15}/> News & announcements</Link>
           <button style={buttonStyle} onClick={loadTicketStats} disabled={refreshing}><RefreshCw size={15}/> {refreshing ? "Refreshing…" : "Refresh"}</button>
           <button style={buttonStyle} onClick={signOut}><LogOut size={15}/> Sign out</button>
         </div>
