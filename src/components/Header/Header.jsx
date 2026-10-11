@@ -81,7 +81,7 @@ export default function Header() {
   }, []);
 
   const playerName = sessionUser
-    ? (sessionUser.user_metadata?.minecraft_username || sessionUser.user_metadata?.gamertag || sessionUser.user_metadata?.username || sessionUser.email?.split("@")[0] || "Player")
+    ? (sessionUser.user_metadata?.minecraft_username || sessionUser.user_metadata?.gamertag || sessionUser.user_metadata?.username || "Player")
     : null;
   async function signOut() {
     await supabase.auth.signOut();
@@ -98,7 +98,7 @@ export default function Header() {
       <div className={mobile ? "flex items-center gap-3 rounded-lg border border-cyan-300/20 bg-cyan-300/5 p-3" : "flex items-center gap-2 rounded-lg border border-cyan-300/20 bg-cyan-300/5 px-3 py-2"}>
         <span className="flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-lg border border-cyan-300/25 bg-cyan-300/10 text-cyan-200">
           <img
-            src={`https://mc-heads.net/avatar/${encodeURIComponent(sessionUser.user_metadata?.minecraft_username || sessionUser.user_metadata?.gamertag || sessionUser.user_metadata?.username || playerName)}/36`}
+            src={`https://mc-heads.net/avatar/${encodeURIComponent(sessionUser.user_metadata?.minecraft_username || sessionUser.user_metadata?.gamertag || sessionUser.user_metadata?.username || "Steve")}/36`}
             alt={`${playerName} Minecraft skin head`}
             width="36"
             height="36"
