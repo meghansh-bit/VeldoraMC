@@ -44,13 +44,9 @@ Deno.serve(async (req) => {
   if (body.action === "verify") {
     const expected = Deno.env.get("MINECRAFT_LINK_SERVER_SECRET");
     const supplied = req.headers.get("x-server-secret");
-    if (!expected || !supplied || supplied.length !== expected.length ||
-      !crypto.subtle.timingSafeEqual) {
-      // Deno WebCrypto has no timingSafeEqual on all deployed runtimes; use a
-      // constant-shape comparison below instead.
-      if (!expected || !supplied || supplied !== expected) return json({ error: "Unauthorized server" }, 401);
+    if (!expected || !supplied || supplied !== expected) {
+      return json({ error: "Unauthorized server" }, 401);
     }
-    if (supplied !== expected) return json({ error: "Unauthorized server" }, 401);
     const code = String(body.code || "").trim().toUpperCase();
     const username = String(body.username || "").trim();
     const uuid = String(body.uuid || "").trim().replaceAll("-", "").toLowerCase();
