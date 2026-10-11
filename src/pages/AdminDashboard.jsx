@@ -86,6 +86,7 @@ export default function AdminDashboard() {
         <div style={{ display: "flex", gap: 9, flexWrap: "wrap" }}>
           <Link to="/admin/tickets" style={buttonStyle}><Ticket size={15}/> Support tickets {openCount !== null ? `(${openCount} open)` : ""}</Link>
           <Link to="/admin/news" style={buttonStyle}><FileText size={15}/> News & announcements</Link>
+          <Link to="/admin/store" style={buttonStyle}><ShoppingBag size={15}/> Manage store</Link>
           <button style={buttonStyle} onClick={loadTicketStats} disabled={refreshing}><RefreshCw size={15}/> {refreshing ? "Refreshing…" : "Refresh"}</button>
           <button style={buttonStyle} onClick={signOut}><LogOut size={15}/> Sign out</button>
         </div>
