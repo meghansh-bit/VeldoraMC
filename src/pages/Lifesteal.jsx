@@ -1,17 +1,23 @@
 import { useState } from "react";
-import { ArrowLeft, ArrowRight, Copy, Check, Heart, Swords, Shield, Gem, Flame, Users, Map, Pickaxe, Crosshair, Clock3 } from "lucide-react";
+import { ArrowLeft, ArrowRight, Heart, Swords, Shield, Gem, Users, Pickaxe, Crosshair, Clock3 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useSeo } from "../hooks/useSeo";
 import lifestealImage from "../assets/hero/rear.png";
 import "./Lifesteal.css";
 
+const inpvpImages = {
+  base: "https://cdn.gatherings.franchise.minecraft-services.net/public/discovery/inpvp/msmp_base.png",
+  hearts: "https://cdn.gatherings.franchise.minecraft-services.net/public/discovery/inpvp/msmp_lifesteal.png",
+  crystal: "https://cdn.gatherings.franchise.minecraft-services.net/public/discovery/inpvp/msmp_crystal_pvp.png",
+};
+
 const features = [
-  { icon: Gem, number: "01", title: "Crystal PvP", tag: "HIGH-SKILL COMBAT", body: "Master crystal placement, timing, and movement. Every fight rewards practice, awareness, and smart decisions.", className: "crystal" },
-  { icon: Shield, number: "02", title: "Base Building & Raiding", tag: "PROTECT YOUR LOOT", body: "Build a hidden base, secure your resources, scout your rivals, and plan your next raid with your team.", className: "base" },
-  { icon: Crosshair, number: "03", title: "Warzone PvP", tag: "NO PLACE TO HIDE", body: "Enter dangerous battles, challenge rival squads, and fight for valuable loot in contested areas.", className: "warzone" },
-  { icon: Heart, number: "04", title: "Heart Stealing", tag: "EVERY HEART COUNTS", body: "Win fights to steal hearts and grow stronger. Lose a fight and your opponents may grow stronger instead.", className: "hearts" },
-  { icon: Users, number: "05", title: "Teams & Alliances", tag: "TRUST YOUR SQUAD", body: "Build a team, form temporary alliances, and decide who deserves your trust in a world of rivalries.", className: "teams" },
-  { icon: Pickaxe, number: "06", title: "Survival & Progression", tag: "BUILD YOUR LEGACY", body: "Gather resources, gear up, explore, and turn a small start into a base everyone knows about.", className: "survival" },
+  { icon: Gem, number: "01", title: "Crystal PvP", tag: "HIGH-SKILL COMBAT", body: "Master crystal placement, timing, and movement. Every fight rewards practice, awareness, and smart decisions.", className: "crystal", image: inpvpImages.crystal },
+  { icon: Shield, number: "02", title: "Base Building & Raiding", tag: "PROTECT YOUR LOOT", body: "Build a hidden base, secure your resources, scout your rivals, and plan your next raid with your team.", className: "base", image: inpvpImages.base },
+  { icon: Crosshair, number: "03", title: "Warzone PvP", tag: "NO PLACE TO HIDE", body: "Enter dangerous battles, challenge rival squads, and fight for valuable loot in contested areas.", className: "warzone", image: inpvpImages.crystal },
+  { icon: Heart, number: "04", title: "Heart Stealing", tag: "EVERY HEART COUNTS", body: "Win fights to steal hearts and grow stronger. Lose a fight and your opponents may grow stronger instead.", className: "hearts", image: inpvpImages.hearts },
+  { icon: Users, number: "05", title: "Teams & Alliances", tag: "TRUST YOUR SQUAD", body: "Build a team, form temporary alliances, and decide who deserves your trust in a world of rivalries.", className: "teams", image: inpvpImages.base },
+  { icon: Pickaxe, number: "06", title: "Survival & Progression", tag: "BUILD YOUR LEGACY", body: "Gather resources, gear up, explore, and turn a small start into a base everyone knows about.", className: "survival", image: inpvpImages.base },
 ];
 
 export default function Lifesteal() {
@@ -38,8 +44,8 @@ export default function Lifesteal() {
     </section>
     <section id="features" className="vl-features">
       <div className="vl-section-heading"><span className="vl-kicker">MORE THAN SURVIVAL</span><h2>WHAT IS <em>LIFESTEAL?</em></h2><p>A survival world where hearts are power, alliances are fragile, and the next fight is never far away.</p></div>
-      <div className="vl-feature-grid">{features.map(({icon:Icon,number,title,tag,body,className})=><article className={`vl-feature-card vl-${className}`} key={number} style={{ "--vl-card-bg": `url(${lifestealImage})` }}>
-        <div className="vl-feature-art"><span className="vl-feature-number">{number}</span><span className="vl-feature-icon"><Icon size={25}/></span><span className="vl-feature-art-label">VELDORAMC / LIFESTEAL</span></div>
+      <div className="vl-feature-grid">{features.map(({icon:Icon,number,title,tag,body,className,image})=><article className={`vl-feature-card vl-${className}`} key={number}>
+        <div className="vl-feature-art" style={{ "--vl-card-bg": `url(${image || lifestealImage})` }}><span className="vl-feature-number">{number}</span><span className="vl-feature-icon"><Icon size={25}/></span><span className="vl-feature-art-label">VELDORAMC / LIFESTEAL</span></div>
         <div className="vl-feature-copy"><span className="vl-feature-tag">{tag}</span><h3>{title}</h3><p>{body}</p></div>
       </article>)}</div>
     </section>
