@@ -1,4 +1,6 @@
 import { Link, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { supabase } from "../lib/supabase";
 import { Calendar, ArrowLeft, User } from "lucide-react";
 import PixelBox from "../components/ui/PixelBox";
 import PixelButton from "../components/ui/PixelButton";
@@ -9,7 +11,7 @@ function ContentBlock({ block }) {
   if (block.type === "h2") {
     return (
       <h2
-        className="mt-6 text-[16px] gold-gradient-text first:mt-0"
+        className="mt-8 text-xl font-bold tracking-tight gold-gradient-text first:mt-0"
       >
         {block.text}
       </h2>
@@ -34,7 +36,7 @@ function ContentBlock({ block }) {
 
   // default: paragraph
   return (
-    <p className="mt-3 text-[13px] leading-relaxed text-(--color-text-muted)">
+    <p className="mt-4 text-[15px] leading-8 text-(--color-text-muted) max-w-4xl">
       {block.text}
     </p>
   );
@@ -42,7 +44,9 @@ function ContentBlock({ block }) {
 
 export default function NewsDetails() {
   const { slug } = useParams();
-  const post = getPostBySlug(slug);
+  const [managedPost, setManagedPost] = useState(null);
+  useEffect(() => { let alive = true; supabase.from("news_posts").select("*").eq("slug", slug).eq("published", true).maybeSingle().then(({data}) => { if (alive && data) setManagedPost({ ...data, date: new Date(data.created_at).toLocaleDateString(undefined,{year:"numeric",month:"short",day:"numeric"}), author: "VeldoraMC Team", tone: "var(--color-info)", content: (data.content || "").split(/\\n\\s*\\n/).filter(Boolean).map(text => ({type:"p",text})) }); }); return () => { alive = false; }; }, [slug]);
+  const post = managedPost || getPostBySlug(slug);
 
   useSeo(
     post
@@ -88,11 +92,11 @@ export default function NewsDetails() {
         </PixelButton>
       </Link>
 
-      <div className="w-full mt-6 rounded-lg overflow-hidden bg-(--color-bg-soft)">
+      <div className="w-full mt-6 rounded-xl overflow-hidden bg-(--color-bg-soft)">
         <img
           src={post.image}
           alt={post.title}
-          className="h-full w-full object-cover [image-rendering:pixelated]"
+          className="max-h-[560px] w-full object-cover"
         />
       </div>
 
