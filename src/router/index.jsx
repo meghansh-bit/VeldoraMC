@@ -15,6 +15,7 @@ import Bundles from "../pages/Bundles";
 import AdminDashboard from "../pages/AdminDashboard";
 import AdminTickets from "../pages/AdminTickets";
 import AdminNews from "../pages/AdminNews";
+import AdminStore from "../pages/AdminStore";
 import Lifesteal from "../pages/Lifesteal";
 
 export const router = createBrowserRouter([
@@ -32,4 +33,5 @@ export const router = createBrowserRouter([
  { path: "/admin", element: <AdminDashboard /> },
  { path: "/admin/tickets", element: <AdminTickets /> },
  { path: "/admin/news", element: <AdminNews /> },
+ { path: "/admin/store", element: <AdminStore /> },
 ]);
