@@ -82,3 +82,82 @@ a { color: inherit; text-decoration: none; }
 .support-alert svg,.support-notice svg { flex:none; margin-top:1px; }
 @media(max-width:760px) { .support-layout { grid-template-columns:1fr; } .support-main { min-height:420px; } .support-sidebar { padding:14px; } .support-ticket-list { grid-template-columns:1fr; max-height:300px; overflow:auto; } .support-welcome,.support-auth-card { min-height:400px; padding:36px 20px; } .support-panel-heading,.support-form { padding:18px; } .support-messages { padding:18px; } .support-reply-form { padding:16px 18px; } .support-alert,.support-notice { margin:0 18px 18px; } }
 @media(max-width:430px) { .support-form-grid { grid-template-columns:1fr; } .support-thread-title { flex-direction:column; } .support-form-foot { align-items:flex-start; } }
+
+
+/* VeldoraMC theme system: gradient accents and user-selectable light/dark mode */
+:root {
+  color-scheme: dark;
+  --surface-glass: rgba(19, 24, 39, .82);
+  --surface-card: #111827;
+  --surface-input: #0b1220;
+  --gradient-brand: linear-gradient(120deg, #35c2fc 0%, #8b5cf6 48%, #ff5cc8 100%);
+  --gradient-cta: linear-gradient(115deg, #168de2 0%, #7655f7 52%, #d946ef 100%);
+  --shadow-brand: 0 10px 35px rgba(77, 100, 255, .2);
+  transition: background-color .25s ease, color .25s ease;
+}
+:root[data-theme="light"] {
+  color-scheme: light;
+  --color-bg: #f5f7ff;
+  --color-bg-soft: #e9edfb;
+  --color-header: rgba(255,255,255,.92);
+  --color-border: #d8def0;
+  --color-text: #18213b;
+  --color-text-muted: #52607d;
+  --color-text-dim: #7b86a0;
+  --color-primary: #6547e8;
+  --surface-glass: rgba(255,255,255,.88);
+  --surface-card: #ffffff;
+  --surface-input: #f2f5ff;
+  --shadow-brand: 0 12px 35px rgba(74, 86, 180, .12);
+}
+html, body, #root { min-height: 100%; }
+body {
+  background:
+    radial-gradient(ellipse at 8% 0%, rgba(53,194,252,.11), transparent 32rem),
+    radial-gradient(ellipse at 92% 12%, rgba(139,92,246,.12), transparent 34rem),
+    var(--color-bg);
+  color: var(--color-text);
+  transition: background-color .25s ease, color .25s ease;
+}
+:root[data-theme="light"] body {
+  background:
+    radial-gradient(ellipse at 8% 0%, rgba(53,194,252,.17), transparent 32rem),
+    radial-gradient(ellipse at 92% 12%, rgba(139,92,246,.13), transparent 34rem),
+    var(--color-bg);
+}
+.gradient-text, .gold-gradient-text, .silver-gradient-text, .bronze-gradient-text, .green-gradient-text, .info-gradient-text {
+  background-image: var(--gradient-brand);
+  background-size: 100% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+:root[data-theme="light"] .gradient-text { --nav-grad-top: #2679dc; --nav-grad-bottom: #8a45e8; }
+:root[data-theme="light"] .gold-gradient-text { --nav-grad-top: #b96a00; --nav-grad-bottom: #ed9b12; }
+:root[data-theme="light"] .silver-gradient-text { --nav-grad-top: #64748b; --nav-grad-bottom: #94a3b8; }
+
+/* Floating toggle remains accessible on every route and saves the choice on this device. */
+.veldora-theme-toggle {
+  position: fixed;
+  z-index: 9999;
+  right: 18px;
+  bottom: 18px;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 11px 15px;
+  border: 1px solid rgba(139, 92, 246, .48);
+  border-radius: 999px;
+  color: #fff;
+  background: var(--gradient-cta);
+  box-shadow: var(--shadow-brand);
+  font: 600 12px/1.2 system-ui, sans-serif;
+  letter-spacing: .02em;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.veldora-theme-toggle:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(105, 75, 245, .32); }
+.veldora-theme-toggle:focus-visible { outline: 3px solid #35c2fc; outline-offset: 3px; }
+:root[data-theme="light"] .veldora-theme-toggle { color: #fff; }
+@media (max-width: 480px) {
+  .veldora-theme-toggle { right: 12px; bottom: 12px; padding: 10px 12px; }
+}
