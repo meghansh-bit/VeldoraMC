@@ -1,0 +1,5 @@
+# Supabase project URL and publishable/anon key (public values).
+# plugin-secret is a private server-to-server secret; never expose it in website code.
+supabase-url: "https://YOUR_PROJECT.supabase.co"
+supabase-anon-key: "YOUR_SUPABASE_PUBLISHABLE_KEY"
+plugin-secret: "CHANGE_ME_TO_A_LONG_RANDOM_SECRET"

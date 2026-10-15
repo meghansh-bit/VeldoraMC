@@ -1,0 +1,11 @@
+name: VeldoraLink
+version: 1.0.0
+main: site.veldoramc.link.VeldoraLinkPlugin
+api-version: '1.21'
+commands:
+  link:
+    description: Generate a one-time VeldoraMC website linking code
+    usage: /link
+permissions:
+  veldora.link:
+    default: true
