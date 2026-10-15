@@ -1,0 +1,4 @@
+# Configure the deployed Supabase project URL and a long random secret.
+# Keep plugin-secret private. Never put it in the website frontend.
+supabase-url: "https://YOUR_PROJECT.supabase.co"
+plugin-secret: "CHANGE_ME_TO_A_LONG_RANDOM_SECRET"
