@@ -28,7 +28,7 @@ export default function Home() {
         <span className="vhi-eyebrow"><span className="vhi-pulse" /> MINECRAFT GAMEMODES</span>
         <h1>YOUR NEXT<br/><span>BIG ADVENTURE.</span></h1>
         <p className="vhi-lead">Discover your next adventure. Explore our gamemodes, meet your rivals, build with friends, and make your mark in VeldoraMC.</p>
-        <div className="vhi-stats"><div><strong>OUR GAMEMODES</strong><span>FIND YOUR NEXT ADVENTURE</span></div><div><strong>JAVA + BEDROCK*</strong><span>PLAYER COMMUNITY</span></div></div>
+        <div className="vhi-stats"><div><strong>JAVA + BEDROCK*</strong><span>PLAYER COMMUNITY</span></div></div>
         <div className="vhi-platforms" aria-label="Available platforms: mobile, PC, and console">
           <span className="vhi-platform"><Smartphone size={19} strokeWidth={2}/><small>MOBILE</small></span>
           <span className="vhi-platform"><Monitor size={19} strokeWidth={2}/><small>PC</small></span>
