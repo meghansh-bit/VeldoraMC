@@ -148,7 +148,7 @@ export default function Staff() {
    useSeo({
     title: "Staff",
     description:
-      "Meet the VeldoraMC team — owners, admins, moderators, and helpers who build and run the server.",
+      "Meet the founder behind VeldoraMC.",
     path: "/staff",
   });
 
@@ -157,14 +157,7 @@ export default function Staff() {
   return (
     <section className="mx-auto max-w-7xl px-4 py-6 sm:px-6">
       <h1 className="title gold-gradient-text">Staff</h1>
-      <p className="p">
-        The people building, running, and moderating VeldoraMC — say hi if you
-        spot us in-game or on Discord.
-      </p>
-      <p className="mt-1 text-center text-[11px] text-(--color-text-dim)">
-        <span className="text-(--color-success)">●</span> {onlineCount} of{" "}
-        {STAFF.length} team members online right now
-      </p>
+      <p className="p">Meet the founder behind VeldoraMC.</p>
 
       {STAFF_TIERS.map((tier, i) => (
         <TierSection key={tier.key} tier={tier} isFirst={i === 0} />
