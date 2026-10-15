@@ -19,31 +19,31 @@ const trust = [
   { icon: Heart, title: "Lifesteal Action", body: "Every heart counts. Every encounter tells a story." },
 ];
 export default function Home() {
-  useSeo({ title: "VeldoraMC — Lifesteal Minecraft Server", description: "Join VeldoraMC Lifesteal SMP. Battle rivals, build alliances, and make your mark.", path: "/" });
+  useSeo({ title: "VeldoraMC — Minecraft Gamemodes", description: "Explore VeldoraMC Minecraft gamemodes, meet the community, and make your mark.", path: "/" });
   return <main className="veldora-home vh-inpvp-home">
     <section className="vhi-hero">
       <div className="vhi-hero-bg" style={{ backgroundImage: `linear-gradient(90deg,rgba(7,7,20,.94),rgba(7,7,20,.52) 52%,rgba(7,7,20,.7)),url(${lifestealImage})` }} />
       <div className="vhi-hero-inner">
         <div className="vhi-wordmark"><img src="/veldoramc-logo.svg" alt="VeldoraMC" className="vhi-wordmark-image" /></div>
-        <span className="vhi-eyebrow"><span className="vhi-pulse" /> MINECRAFT LIFESTEAL SERVER</span>
+        <span className="vhi-eyebrow"><span className="vhi-pulse" /> MINECRAFT GAMEMODES</span>
         <h1>YOUR NEXT<br/><span>BIG ADVENTURE.</span></h1>
-        <p className="vhi-lead">Fight for every heart. Build your legacy. Make allies, challenge rivals, and carve your own story in VeldoraMC Lifesteal.</p>
-        <div className="vhi-stats"><div><strong>LIFESTEAL</strong><span>ONE MAIN GAMEMODE</span></div><div><strong>JAVA + BEDROCK*</strong><span>PLAYER COMMUNITY</span></div></div>
+        <p className="vhi-lead">Discover your next adventure. Explore our gamemodes, meet your rivals, build with friends, and make your mark in VeldoraMC.</p>
+        <div className="vhi-stats"><div><strong>OUR GAMEMODES</strong><span>FIND YOUR NEXT ADVENTURE</span></div><div><strong>JAVA + BEDROCK*</strong><span>PLAYER COMMUNITY</span></div></div>
         <div className="vhi-platforms" aria-label="Available platforms: mobile, PC, and console">
           <span className="vhi-platform"><Smartphone size={19} strokeWidth={2}/><small>MOBILE</small></span>
           <span className="vhi-platform"><Monitor size={19} strokeWidth={2}/><small>PC</small></span>
           <span className="vhi-platform"><Gamepad2 size={19} strokeWidth={2}/><small>CONSOLE</small></span>
         </div>
-        <div className="vhi-hero-actions"><a href="#projects" className="vhi-btn vhi-btn-green"><Gamepad2 size={18}/> Explore Lifesteal <ArrowDown size={16}/></a><a href="https://discord.gg/NruxFSnrUe" target="_blank" rel="noreferrer" className="vhi-btn vhi-btn-ghost"><DiscordMark size={20}/> Join Community</a></div>
+        <div className="vhi-hero-actions"><a href="#projects" className="vhi-btn vhi-btn-green"><Gamepad2 size={18}/> Explore Gamemodes <ArrowDown size={16}/></a><a href="https://discord.gg/NruxFSnrUe" target="_blank" rel="noreferrer" className="vhi-btn vhi-btn-ghost"><DiscordMark size={20}/> Join Community</a></div>
       </div>
       <div className="vhi-hero-bottom"><span><Signal size={15}/> YOUR NEXT WORLD IS WAITING</span><span>SCROLL TO EXPLORE ↓</span></div>
     </section>
     <section id="projects" className="vhi-projects">
-      <div className="vhi-section-title"><span>THE VELDORAMC EXPERIENCE</span><h2>Pick Your <em>Adventure</em></h2><p>One world, one community, endless ways to make your mark.</p></div>
+      <div className="vhi-section-title"><span>THE VELDORAMC EXPERIENCE</span><h2>Our <em>Gamemodes</em></h2><p>Choose a way to play, find your community, and make your mark.</p></div>
       <article className="vhi-project-card">
         <div className="vhi-project-art" style={{ backgroundImage: `linear-gradient(90deg,rgba(21,8,20,.8),rgba(8,10,23,.38)),url(${lifestealImage})` }}>
           <div className="vhi-project-brand"><div className="vhi-project-heart"><MinecraftHeart/></div><strong>VELDORAMC<br/><b>LIFESTEAL</b></strong><small>EST. 2026</small></div>
-          <span className="vhi-project-badge">MAIN GAMEMODE</span><div className="vhi-online"><Signal size={16}/> Lifesteal SMP <span>Explore now</span></div>
+          <span className="vhi-project-badge">GAMEMODE</span><div className="vhi-online"><Signal size={16}/> Lifesteal SMP <span>Explore now</span></div>
         </div>
         <div className="vhi-project-info"><h3>Lifesteal Survival Multiplayer</h3><p>Venture into a world where hearts are everything. Battle other players, steal hearts, build hidden bases, and form alliances. Trust carefully — every fight can change your future.</p><div className="vhi-project-footer"><Link className="vhi-btn vhi-btn-green" to="/lifesteal">Explore Lifesteal <ArrowRight size={18}/></Link><Link className="vhi-arrow-btn" to="/lifesteal" aria-label="Discover Lifesteal"><ArrowRight size={22}/></Link></div></div>
       </article>
