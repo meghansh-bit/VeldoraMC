@@ -1,4 +1,5 @@
 import { Coins, ArrowRight, Sparkles, ShieldCheck, Heart, ShoppingBag } from "lucide-react";
+import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { supabase } from "../lib/supabase";
 import { useCart } from "../context/useCart";
@@ -7,7 +8,7 @@ import { useSeo } from "../hooks/useSeo";
 
 export default function Store() {
   const [managedItems, setManagedItems] = useState([]);
-  const { addToCart } = useCart();
+  const { addToCart, count } = useCart();
   useEffect(() => { let alive = true; supabase.from("store_items").select("id,name,category,description,image_url,price").eq("active", true).order("created_at", { ascending: false }).then(({ data }) => { if (alive && data) setManagedItems(data); }); return () => { alive = false; }; }, []);
   useSeo({
     title: "VeldoraMC Velora Store",
