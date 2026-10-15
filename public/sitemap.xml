@@ -1,43 +1,22 @@
+
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://veldoramc.example/</loc>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
+    <loc>https://veldoramc.vercel.app/</loc>
   </url>
   <url>
-    <loc>https://veldoramc.example/profiles</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
+    <loc>https://veldoramc.vercel.app/profiles</loc>
   </url>
   <url>
-    <loc>https://veldoramc.example/leaderboard</loc>
-    <changefreq>daily</changefreq>
-    <priority>0.7</priority>
+    <loc>https://veldoramc.vercel.app/leaderboard</loc>
   </url>
   <url>
-    <loc>https://veldoramc.example/community</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
+    <loc>https://veldoramc.vercel.app/support</loc>
   </url>
   <url>
-    <loc>https://veldoramc.example/support</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
+    <loc>https://veldoramc.vercel.app/store</loc>
   </url>
   <url>
-    <loc>https://veldoramc.example/store</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://veldoramc.example/bundles</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://veldoramc.example/staff</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
+    <loc>https://veldoramc.vercel.app/staff</loc>
   </url>
 </urlset>
