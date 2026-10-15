@@ -78,7 +78,7 @@ function SpotlightCard({ member, style }) {
           alt={member.username}
           className="h-20 w-20 rounded-sm ring-2 ring-black/40 [image-rendering:pixelated]"
         />
-        <StatusDot online={member.online} size="h-4 w-4" />
+        {member.online !== null && <StatusDot online={member.online} size="h-4 w-4" />}
       </div>
       <div className="flex flex-col items-center gap-2 sm:items-start">
         <span className={`text-[18px] ${style.textClass}`}>{member.username}</span>
@@ -86,7 +86,7 @@ function SpotlightCard({ member, style }) {
         <p className="mt-1 max-w-md text-[12px] leading-relaxed text-(--color-text-muted)">
           {member.bio}
         </p>
-        <DiscordTag handle={member.discord} />
+        {member.discord && <DiscordTag handle={member.discord} />}
       </div>
     </PixelBox>
   );
@@ -105,12 +105,12 @@ function MemberCard({ member, style }) {
           alt={member.username}
           className="h-14 w-14 rounded-sm ring-1 ring-black/40 [image-rendering:pixelated]"
         />
-        <StatusDot online={member.online} />
+        {member.online !== null && <StatusDot online={member.online} />}
       </div>
       <span className={`text-[13px] ${style.textClass}`}>{member.username}</span>
       <RoleBadge role={member.role} badgeClass={style.badgeClass} />
       <p className="text-[11px] leading-snug text-(--color-text-dim)">{member.bio}</p>
-      <DiscordTag handle={member.discord} />
+      {member.discord && <DiscordTag handle={member.discord} />}
     </PixelBox>
   );
 }
@@ -152,7 +152,7 @@ export default function Staff() {
     path: "/staff",
   });
 
-  const onlineCount = STAFF.filter((m) => m.online).length;
+
 
   return (
     <section className="mx-auto max-w-7xl px-4 py-6 sm:px-6">
@@ -176,13 +176,13 @@ export default function Staff() {
         contentClassName="flex flex-col items-center gap-3 py-8 text-center"
       >
         <Sparkles size={18} className="text-(--color-primary)" />
-        <h3 className="text-[14px] gold-gradient-text ">Want to join the team?</h3>
+        <h3 className="text-[14px] gold-gradient-text ">More team members coming later</h3>
         <p className="max-w-sm text-[11.5px] leading-relaxed text-(--color-text-muted)">
           We open staff applications every season. Active, helpful players
           get noticed first.
         </p>
         <PixelButton tone="primary" size="sm" className="mt-1 px-4! py-4!">
-          <span className="gold-gradient-text ">Apply on Discord</span>
+          <span className="gold-gradient-text ">Join our Discord</span>
         </PixelButton>
       </PixelBox>
     </section>
