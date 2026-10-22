@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useState } from "react";
 import { ArrowDown, ArrowRight, Heart, Users, ShieldCheck, Clock3, FlaskConical, BarChart3, ExternalLink, Signal, Gamepad2, Smartphone, Monitor } from "lucide-react";
 import { useSeo } from "../hooks/useSeo";
 import lifestealImage from "../assets/hero/rear.png";
@@ -19,6 +20,26 @@ const trust = [
   { icon: Heart, title: "Lifesteal Action", body: "Every heart counts. Every encounter tells a story." },
 ];
 export default function Home() {
+  const [ipCopied, setIpCopied] = useState(false);
+  const copyServerIp = async () => {
+    try {
+      await navigator.clipboard.writeText("veldoramc.mc-dns.net");
+      setIpCopied(true);
+      window.setTimeout(() => setIpCopied(false), 1800);
+    } catch {
+      const field = document.createElement("textarea");
+      field.value = "veldoramc.mc-dns.net";
+      field.setAttribute("readonly", "");
+      field.style.position = "absolute";
+      field.style.left = "-9999px";
+      document.body.appendChild(field);
+      field.select();
+      const copied = document.execCommand("copy");
+      field.remove();
+      setIpCopied(copied);
+      window.setTimeout(() => setIpCopied(false), 1800);
+    }
+  };
   useSeo({ title: "VeldoraMC — Minecraft Gamemodes", description: "Explore VeldoraMC Minecraft gamemodes, meet the community, and make your mark.", path: "/" });
   return <main className="veldora-home vh-inpvp-home">
     <section className="vhi-hero">
@@ -28,13 +49,24 @@ export default function Home() {
         <span className="vhi-eyebrow"><span className="vhi-pulse" /> MINECRAFT GAMEMODES</span>
         <h1>YOUR NEXT<br/><span>BIG ADVENTURE.</span></h1>
         <p className="vhi-lead">Discover your next adventure. Explore our gamemodes, meet your rivals, build with friends, and make your mark in VeldoraMC.</p>
-        <div className="vhi-stats"><div><strong>JAVA + BEDROCK*</strong><span>PLAYER COMMUNITY</span></div></div>
+        <div className="vhi-stats"><div><strong>JAVA EDITION LIVE</strong><span>JOIN VELDORAMC LIFESTEAL</span></div></div>
         <div className="vhi-platforms" aria-label="Available platforms: mobile, PC, and console">
           <span className="vhi-platform"><Smartphone size={19} strokeWidth={2}/><small>MOBILE</small></span>
           <span className="vhi-platform"><Monitor size={19} strokeWidth={2}/><small>PC</small></span>
           <span className="vhi-platform"><Gamepad2 size={19} strokeWidth={2}/><small>CONSOLE</small></span>
         </div>
         <div className="vhi-hero-actions"><a href="#projects" className="vhi-btn vhi-btn-green"><Gamepad2 size={18}/> Explore Gamemodes <ArrowDown size={16}/></a><a href="https://discord.gg/NruxFSnrUe" target="_blank" rel="noreferrer" className="vhi-btn vhi-btn-ghost"><DiscordMark size={20}/> Join Community</a></div>
+        <div className="vhi-server-connect" style={{ marginTop: 24, maxWidth: 490, padding: "17px 19px", border: "1px solid rgba(255,255,255,.18)", borderRadius: 16, background: "rgba(13,13,25,.68)", backdropFilter: "blur(14px)", boxShadow: "0 12px 36px rgba(0,0,0,.22)" }}>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12, flexWrap: "wrap", marginBottom: 10 }}>
+            <span style={{ color: "#d4d4df", fontSize: 11, fontWeight: 800, letterSpacing: ".16em" }}>SERVER ADDRESS</span>
+            <span style={{ display: "inline-flex", alignItems: "center", gap: 7, color: "#72f2a4", fontSize: 11, fontWeight: 800, letterSpacing: ".08em" }}><span style={{ width: 7, height: 7, borderRadius: "50%", background: "#72f2a4", boxShadow: "0 0 12px rgba(114,242,164,.8)" }} /> JAVA EDITION</span>
+          </div>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 14, flexWrap: "wrap" }}>
+            <code style={{ color: "#fff", fontSize: "clamp(16px, 2.3vw, 21px)", fontWeight: 800, letterSpacing: ".01em", overflowWrap: "anywhere" }}>veldoramc.mc-dns.net</code>
+            <button type="button" onClick={copyServerIp} aria-label="Copy VeldoraMC server IP" style={{ border: 0, borderRadius: 10, padding: "11px 15px", color: "#101018", background: "#ff4545", font: "inherit", fontSize: 12, fontWeight: 900, cursor: "pointer", whiteSpace: "nowrap" }}>{ipCopied ? "✓ COPIED!" : "COPY IP"}</button>
+          </div>
+          <p style={{ margin: "10px 0 0", color: "#b9b9c8", fontSize: 12 }}>Copy the IP and join in Minecraft Java Edition. Bedrock support is coming soon.</p>
+        </div>
       </div>
       <div className="vhi-hero-bottom"><span><Signal size={15}/> YOUR NEXT WORLD IS WAITING</span><span>SCROLL TO EXPLORE ↓</span></div>
     </section>
