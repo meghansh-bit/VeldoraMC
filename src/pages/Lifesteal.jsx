@@ -22,7 +22,7 @@ const features = [
 
 export default function Lifesteal() {
   const [copied, setCopied] = useState(false);
-  const serverIp = "";
+  const serverIp = "veldoramc.mc-dns.net";
   useSeo({ title: "Lifesteal — VeldoraMC", description: "Discover VeldoraMC Lifesteal: PvP, base raiding, warzones, heart stealing, and team rivalries.", path: "/lifesteal" });
   async function copyIp() {
     if (!serverIp) return;
@@ -50,6 +50,6 @@ export default function Lifesteal() {
       </article>)}</div>
     </section>
     <section className="vl-how"><div className="vl-how-copy"><span className="vl-kicker">PLAY SMART. STAY ALIVE.</span><h2>YOUR HEARTS.<br/><em>YOUR LEGACY.</em></h2><p>Gear up, pick your battles, and make every decision count. Whether you prefer building a secure base or taking the fight straight to your rivals, there's always another way to rise.</p><div className="vl-how-points"><span><Heart size={17}/> Hearts can be won and lost</span><span><Shield size={17}/> Protect your resources</span><span><Users size={17}/> Allies can change everything</span></div></div><div className="vl-how-art" style={{ "--vl-bg": `url(${lifestealImage})` }}><div className="vl-art-stamp"><Heart size={24}/><b>FIGHT<br/>FOR MORE</b><small>VELDORAMC</small></div></div></section>
-    <section className="vl-join"><span className="vl-kicker">THE SERVER IS IN PREPARATION</span><h2>READY TO MAKE<br/><em>YOUR MARK?</em></h2><p>We're getting VeldoraMC ready. Server connection details will be announced here when the server is live.</p><div className="vl-ip-box"><div><span>SERVER IP</span><strong>COMING SOON</strong></div><button disabled title="The server address has not been set yet"><Clock3 size={16}/> NOT LIVE YET</button></div><div className="vl-join-actions"><a href="https://discord.gg/NruxFSnrUe" target="_blank" rel="noreferrer" className="vl-primary">JOIN THE COMMUNITY <ArrowRight size={17}/></a><Link to="/" className="vl-secondary">BACK TO HOME</Link></div><small className="vl-disclaimer">Server IP and supported editions will be added once hosting is configured.</small></section>
+    <section className="vl-join"><span className="vl-kicker">JOIN THE BATTLE</span><h2>READY TO MAKE<br/><em>YOUR MARK?</em></h2><p>Jump into VeldoraMC Lifesteal. Copy the server address and join the fight.</p><div className="vl-ip-box"><div><span>JAVA EDITION • SERVER IP</span><strong>{serverIp}</strong></div><button onClick={copyIp} type="button" title="Copy server IP">{copied ? "COPIED!" : "COPY IP"}</button></div><div className="vl-join-actions"><a href="https://discord.gg/NruxFSnrUe" target="_blank" rel="noreferrer" className="vl-primary">JOIN THE COMMUNITY <ArrowRight size={17}/></a><Link to="/" className="vl-secondary">BACK TO HOME</Link></div><small className="vl-disclaimer">Add the server in Minecraft Java Edition using the address above. If connection fails, check our Discord for server status.</small></section>
   </main>;
 }
