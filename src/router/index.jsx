@@ -10,7 +10,6 @@ import Cart from "../pages/Cart";
 import Login from "../pages/Login";
 import LinkMinecraft from "../pages/LinkMinecraft";
 import PortalPage from "../pages/PortalPage";
-import PlayerProfiles from "../pages/PlayerProfiles";
 import Bundles from "../pages/Bundles";
 import AdminDashboard from "../pages/AdminDashboard";
 import AdminTickets from "../pages/AdminTickets";
@@ -27,7 +26,7 @@ export const router = createBrowserRouter([
   { path: "login", element: <Login /> },
   { path: "lifesteal", element: <Lifesteal /> },
   { path: "link-minecraft", element: <LinkMinecraft /> },
-  { path: "profiles", element: <PlayerProfiles /> }, { path: "leaderboard", element: <PortalPage /> },
+  { path: "leaderboard", element: <PortalPage /> },
   { path: "community", element: <PortalPage /> }, { path: "support", element: <PortalPage /> },
  ]},
  { path: "/admin", element: <AdminDashboard /> },
