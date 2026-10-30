@@ -70,8 +70,9 @@ export default function Header() {
           id: data.id,
           name: data.name,
           edition: "java",
-          avatar: `https://crafatar.com/avatars/${data.id}?size=96&overlay`,
-          body: `https://crafatar.com/renders/body/${data.id}?overlay`,
+          avatar: data.avatar,
+          body: data.body,
+          hasCustomSkin: data.hasCustomSkin,
           verifiedLookup: true
         });
       } else {
@@ -161,14 +162,13 @@ export default function Header() {
         <div className="fixed inset-0 z-[2000] flex items-center justify-center bg-black/75 p-4 backdrop-blur-sm"
           onMouseDown={(event) => { if (event.target === event.currentTarget) closeLogin(); }}>
           <section role="dialog" aria-modal="true" aria-labelledby="player-login-title"
-            className="relative w-full max-w-md overflow-hidden rounded-2xl border border-cyan-300/20 bg-[#10131c] p-6 shadow-2xl shadow-black/50">
+            className="relative w-full max-w-sm overflow-hidden rounded-2xl border border-white/10 bg-[#10131c] p-5 shadow-2xl shadow-black/60">
             <button type="button" onClick={closeLogin} aria-label="Close login" className="absolute right-4 top-4 rounded-lg p-2 text-white/50 hover:bg-white/10 hover:text-white"><X size={19} /></button>
-            <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl border border-cyan-300/20 bg-cyan-300/10 text-cyan-200"><UserRound size={25} /></div>
-            <p className="text-[10px] font-bold tracking-[.22em] text-cyan-200/70">PLAYER PROFILE</p>
-            <h2 id="player-login-title" className="mt-1 text-2xl font-black text-white">LOGIN TO VELDORA<span className="text-rose-400">.</span></h2>
-            <p className="mt-2 text-sm leading-6 text-white/55">Choose your Minecraft edition, then enter your in-game name.</p>
+            
+            <div className="mb-5 flex items-center justify-between"><div><p className="text-[10px] font-bold tracking-[.2em] text-cyan-200/70">PLAYER PROFILE</p><h2 id="player-login-title" className="mt-1 text-xl font-black text-white">WELCOME BACK<span className="text-rose-400">.</span></h2></div><span className="rounded-full border border-white/10 px-3 py-1 text-[10px] font-bold tracking-wider text-white/40">MINECRAFT</span></div>
+            <p className="mt-1 text-sm leading-5 text-white/50">Select your edition and enter your in-game name.</p>
 
-            <div className="mt-5 grid grid-cols-2 gap-2 rounded-xl bg-black/25 p-1">
+            <div className="mt-4 grid grid-cols-2 gap-1 rounded-xl border border-white/10 bg-black/30 p-1">
               <button type="button" onClick={() => { setEdition("java"); setPreview(null); setError(""); setUsername(""); }}
                 className={"flex h-11 items-center justify-center gap-2 rounded-lg text-sm font-bold transition " + (edition === "java" ? "bg-cyan-300 text-slate-950" : "text-white/55 hover:text-white")}>
                 <Monitor size={16} /> Java
@@ -195,22 +195,22 @@ export default function Header() {
             </form>
 
             {preview && (
-              <div className="mt-5 overflow-hidden rounded-xl border border-cyan-300/20 bg-cyan-300/5 p-4">
+              <div className="mt-4 overflow-hidden rounded-xl border border-white/10 bg-white/[.035] p-3">
                 <div className="flex items-center gap-4">
-                  <img src={preview.body} alt={preview.verifiedLookup ? `${preview.name} Minecraft skin preview` : "Generic Minecraft preview; Bedrock skin is not publicly searchable"} className="h-28 w-20 object-contain [image-rendering:pixelated]" />
+                  <img src={preview.body} alt={preview.verifiedLookup ? `${preview.name} Minecraft skin preview` : "Generic Minecraft preview; Bedrock skin is not publicly searchable"} className="h-24 w-16 object-contain [image-rendering:pixelated]" />
                   <div className="min-w-0 flex-1">
-                    <p className="text-[10px] font-bold tracking-[.18em] text-emerald-200">{preview.verifiedLookup ? "JAVA PROFILE FOUND" : "GAMERTAG SELECTED"}</p>
+                    <p className="text-[9px] font-bold tracking-[.16em] text-emerald-200">{preview.verifiedLookup ? (preview.hasCustomSkin ? "JAVA PROFILE · CUSTOM SKIN" : "JAVA PROFILE · DEFAULT SKIN") : "GAMERTAG SELECTED"}</p>
                     <p className="mt-1 break-all text-xl font-black text-white">{preview.name}</p>
-                    <p className="mt-1 text-xs text-white/45">{edition === "java" ? "Minecraft Java Edition" : "Minecraft Bedrock Edition"}</p>
+                    <p className="mt-1 text-xs text-white/45">{edition === "java" ? (preview.hasCustomSkin ? "Skin texture detected" : "No custom skin is set on this profile") : "Minecraft Bedrock Edition"}</p>
                   </div>
-                  <img src={preview.avatar} alt="" className="h-12 w-12 rounded-lg border border-white/10 [image-rendering:pixelated]" />
+                  <img src={preview.avatar} alt="" className="h-10 w-10 rounded-lg border border-white/10 [image-rendering:pixelated]" />
                 </div>
                 {edition === "bedrock" && <p className="mt-3 text-[11px] leading-5 text-amber-100/70">Bedrock gamertags can be entered, but their actual skin cannot be fetched from a public username lookup. The real skin can only be shown after a supported in-game/server link.</p>}
                 <button type="button" onClick={confirmPlayer} className="vbtn vbtn-primary mt-4 min-h-12 w-full justify-center">CONTINUE AS {preview.name.toUpperCase()} <ChevronRight size={17} /></button>
               </div>
             )}
 
-            <div className="mt-5 flex gap-2 rounded-lg border border-amber-300/15 bg-amber-300/5 p-3">
+            <div className="mt-4 flex gap-2 rounded-lg border border-amber-300/15 bg-amber-300/5 p-3">
               <ShieldAlert size={17} className="mt-0.5 shrink-0 text-amber-200" />
               <p className="text-[11px] leading-5 text-white/55">This is a public profile selector, not account ownership verification. It does not authorize purchases, private data or staff access. Use Microsoft sign-in or an in-game verification code for secure account linking.</p>
             </div>
