@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { Menu, X, ChevronRight, UserRound, LogOut, Search, LoaderCircle, Gamepad2, Monitor } from "lucide-react";
 import Logo from "./Logo";
 import NavButton from "./NavButton";
@@ -118,14 +118,13 @@ export default function Header() {
     }
     return (
       <div className={mobile ? "flex items-center gap-3 rounded-lg border border-cyan-300/20 bg-cyan-300/5 p-3" : "flex items-center gap-2 rounded-lg border border-cyan-300/20 bg-cyan-300/5 px-2 py-1.5"}>
-        <Link to={`/profiles?player=${encodeURIComponent(player.name)}`} onClick={() => setOpen(false)}
-          title={`View ${player.name}'s profile`} className="flex min-w-0 items-center gap-2">
+        <div title={`${player.name} · ${player.edition === "bedrock" ? "Bedrock" : "Java"}`} className="flex min-w-0 items-center gap-2">
           <img src={player.avatar} alt="" width="36" height="36" className="h-9 w-9 shrink-0 rounded-lg border border-cyan-300/25 bg-black/30 [image-rendering:pixelated]" />
           <span className="min-w-0 text-left">
             <span className="block text-[9px] font-bold tracking-[.16em] text-cyan-200/70">{player.edition === "bedrock" ? "BEDROCK PLAYER" : "JAVA PLAYER"}</span>
             <span className="block max-w-32 truncate text-sm font-bold text-white">{player.name}</span>
           </span>
-        </Link>
+        </div>
         <button type="button" onClick={() => { setLoginOpen(true); setOpen(false); }} title="Change player" aria-label="Change player" className="rounded-md p-2 text-white/50 hover:bg-white/10 hover:text-white"><Search size={15} /></button>
         <button type="button" onClick={clearPlayer} title="Log out" aria-label="Clear selected player" className="rounded-md p-2 text-white/50 hover:bg-white/10 hover:text-white"><LogOut size={15} /></button>
       </div>
