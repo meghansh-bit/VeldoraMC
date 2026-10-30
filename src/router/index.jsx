@@ -7,7 +7,6 @@ import Store from "../pages/Store";
 import Staff from "../pages/Staff";
 import NewsDetails from "../pages/NewsDetails";
 import Cart from "../pages/Cart";
-import Login from "../pages/Login";
 import LinkMinecraft from "../pages/LinkMinecraft";
 import PortalPage from "../pages/PortalPage";
 import Bundles from "../pages/Bundles";
@@ -23,7 +22,7 @@ export const router = createBrowserRouter([
   { path: "news", element: <News /> }, { path: "news/:slug", element: <NewsDetails /> },
   { path: "votes", element: <Votes /> }, { path: "store", element: <Store /> }, { path: "bundles", element: <Bundles /> },
   { path: "staff", element: <Staff /> }, { path: "cart", element: <Cart /> },
-  { path: "login", element: <Login /> },
+  { path: "login", element: <Navigate to="/" replace /> },
   { path: "lifesteal", element: <Lifesteal /> },
   { path: "link-minecraft", element: <LinkMinecraft /> },
   { path: "profiles", element: <Navigate to="/" replace /> },
