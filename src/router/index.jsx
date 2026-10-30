@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Navigate } from "react-router-dom";
 import RootLayout from "../layouts/RootLayout";
 import Home from "../pages/Home";
 import News from "../pages/News";
@@ -26,6 +26,7 @@ export const router = createBrowserRouter([
   { path: "login", element: <Login /> },
   { path: "lifesteal", element: <Lifesteal /> },
   { path: "link-minecraft", element: <LinkMinecraft /> },
+  { path: "profiles", element: <Navigate to="/" replace /> },
   { path: "leaderboard", element: <PortalPage /> },
   { path: "community", element: <PortalPage /> }, { path: "support", element: <PortalPage /> },
  ]},
