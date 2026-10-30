@@ -1,116 +1,263 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, ChevronRight, UserRound, LogOut } from "lucide-react";
+import { Menu, X, ChevronRight, UserRound, LogOut, Search, LoaderCircle, ShieldAlert } from "lucide-react";
 import Logo from "./Logo";
 import NavButton from "./NavButton";
 import { navItems } from "./navItems";
-import PixelButton from "../ui/PixelButton";
-import { supabase } from "../../lib/supabase";
 
-function MicrosoftMark({ size = 18 }) {
-  return <svg width={size} height={size} viewBox="0 0 24 24" aria-hidden="true"><path fill="#f25022" d="M1 1h10v10H1z"/><path fill="#7fba00" d="M13 1h10v10H13z"/><path fill="#00a4ef" d="M1 13h10v10H1z"/><path fill="#ffb900" d="M13 13h10v10H13z"/></svg>;
-}
+const PLAYER_STORAGE_KEY = "veldora_selected_player";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
   const location = useLocation();
   const [lastPath, setLastPath] = useState(location.pathname);
-  const [sessionUser, setSessionUser] = useState(null);
+  const [player, setPlayer] = useState(null);
+  const [loginOpen, setLoginOpen] = useState(false);
+  const [username, setUsername] = useState("");
+  const [preview, setPreview] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   useEffect(() => {
-    let active = true;
-    supabase.auth.getSession().then(({ data }) => {
-      if (active) setSessionUser(data.session?.user || null);
-    });
-    const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
-      setSessionUser(session?.user || null);
-    });
-    return () => { active = false; listener.subscription.unsubscribe(); };
+    try {
+      const saved = window.localStorage.getItem(PLAYER_STORAGE_KEY);
+      if (saved) setPlayer(JSON.parse(saved));
+    } catch {
+      window.localStorage.removeItem(PLAYER_STORAGE_KEY);
+    }
   }, []);
 
-  const playerName = sessionUser
-    ? (sessionUser.user_metadata?.minecraft_username || sessionUser.user_metadata?.gamertag || sessionUser.user_metadata?.username || "Player")
-    : null;
-  async function signOut() {
-    await supabase.auth.signOut();
+  useEffect(() => {
+    if (location.pathname !== lastPath) {
+      setLastPath(location.pathname);
+      setOpen(false);
+    }
+  }, [location.pathname, lastPath]);
+
+  async function searchPlayer(event) {
+    event.preventDefault();
+    const clean = username.trim();
+    if (!/^[A-Za-z0-9_]{3,16}$/.test(clean)) {
+      setError("Enter a valid Minecraft Java username (3–16 characters).");
+      setPreview(null);
+      return;
+    }
+
+    setLoading(true);
+    setError("");
+    setPreview(null);
+    try {
+      const response = await fetch(
+        `https://api.mojang.com/users/profiles/minecraft/${encodeURIComponent(clean)}`
+      );
+      if (response.status === 404 || response.status === 204) {
+        throw new Error("We couldn't find that Java Edition username. Check the spelling and try again.");
+      }
+      if (!response.ok) throw new Error("Minecraft account lookup is temporarily unavailable. Try again in a moment.");
+
+      const data = await response.json();
+      if (!data?.id || !data?.name) throw new Error("That username doesn't have a valid Java profile.");
+      setPreview({
+        id: data.id,
+        name: data.name,
+        avatar: `https://crafatar.com/avatars/${data.id}?size=96&overlay`,
+        body: `https://crafatar.com/renders/body/${data.id}?overlay`
+      });
+    } catch (lookupError) {
+      setError(lookupError.message || "Couldn't find that Minecraft account.");
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  function confirmPlayer() {
+    if (!preview) return;
+    setPlayer(preview);
+    window.localStorage.setItem(PLAYER_STORAGE_KEY, JSON.stringify(preview));
+    setLoginOpen(false);
+    setUsername("");
+    setPreview(null);
+    setError("");
+  }
+
+  function clearPlayer() {
+    window.localStorage.removeItem(PLAYER_STORAGE_KEY);
+    setPlayer(null);
     setOpen(false);
   }
 
   function PlayerAccount({ mobile = false }) {
-    if (!sessionUser) return mobile ? (
-      <Link to="/login" onClick={() => setOpen(false)} className="vbtn vbtn-primary w-full justify-center"><MicrosoftMark size={18}/> Login</Link>
-    ) : (
-      <Link
-        to="/login"
-        className="vnav-login-button group inline-flex h-10 shrink-0 items-center justify-center gap-2.5 rounded-xl px-4 text-[12px] font-extrabold tracking-wide text-white transition-all duration-200"
-      >
-        <span className="vnav-login-icon flex h-6 w-6 items-center justify-center rounded-lg"><MicrosoftMark size={15} /></span>
-        <span>Login</span>
-        <ChevronRight size={14} className="vnav-login-arrow transition-transform duration-200 group-hover:translate-x-0.5" />
-      </Link>
-    );
+    if (!player) {
+      return (
+        <button
+          type="button"
+          onClick={() => { setLoginOpen(true); setOpen(false); }}
+          className={mobile
+            ? "vbtn vbtn-primary w-full justify-center"
+            : "vnav-login-button group inline-flex h-10 shrink-0 items-center justify-center gap-2.5 rounded-xl px-4 text-[12px] font-extrabold tracking-wide text-white transition-all duration-200"}
+        >
+          <span className="flex h-6 w-6 items-center justify-center rounded-lg"><UserRound size={17} /></span>
+          <span>Login</span>
+          {!mobile && <ChevronRight size={14} className="vnav-login-arrow transition-transform duration-200 group-hover:translate-x-0.5" />}
+        </button>
+      );
+    }
+
     return (
-      <div className={mobile ? "flex items-center gap-3 rounded-lg border border-cyan-300/20 bg-cyan-300/5 p-3" : "flex items-center gap-2 rounded-lg border border-cyan-300/20 bg-cyan-300/5 px-3 py-2"}>
-        <span className="flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-lg border border-cyan-300/25 bg-cyan-300/10 text-cyan-200">
+      <div className={mobile
+        ? "flex items-center gap-3 rounded-lg border border-cyan-300/20 bg-cyan-300/5 p-3"
+        : "flex items-center gap-2 rounded-lg border border-cyan-300/20 bg-cyan-300/5 px-2 py-1.5"}
+      >
+        <Link
+          to={`/profiles?player=${encodeURIComponent(player.name)}`}
+          onClick={() => setOpen(false)}
+          title={`View ${player.name}'s profile`}
+          className="flex min-w-0 items-center gap-2"
+        >
           <img
-            src={`https://mc-heads.net/avatar/${encodeURIComponent(sessionUser.user_metadata?.minecraft_username || sessionUser.user_metadata?.gamertag || sessionUser.user_metadata?.username || "Steve")}/36`}
-            alt={`${playerName} Minecraft skin head`}
+            src={player.avatar}
+            alt=""
             width="36"
             height="36"
-            className="h-full w-full object-cover"
-            loading="lazy"
-            onError={(event) => { event.currentTarget.style.display = "none"; }}
+            className="h-9 w-9 shrink-0 rounded-lg border border-cyan-300/25 bg-black/30 [image-rendering:pixelated]"
           />
-          <UserRound size={18} className="hidden" />
-        </span>
-        <span className="min-w-0 flex-1"><span className="block text-[9px] font-bold tracking-[.16em] text-cyan-200/70">IN-GAME PLAYER</span><span className="block max-w-40 truncate text-sm font-bold text-white">{playerName}</span></span>
-        <button type="button" onClick={signOut} title="Sign out" aria-label="Sign out" className="rounded-md p-2 text-white/50 hover:bg-white/10 hover:text-white"><LogOut size={16}/></button>
+          <span className="min-w-0 text-left">
+            <span className="block text-[9px] font-bold tracking-[.16em] text-cyan-200/70">PLAYER PROFILE</span>
+            <span className="block max-w-32 truncate text-sm font-bold text-white">{player.name}</span>
+          </span>
+        </Link>
+        <button
+          type="button"
+          onClick={() => { setLoginOpen(true); setOpen(false); }}
+          title="Change player"
+          aria-label="Change player"
+          className="rounded-md p-2 text-white/50 hover:bg-white/10 hover:text-white"
+        >
+          <Search size={15} />
+        </button>
+        <button
+          type="button"
+          onClick={clearPlayer}
+          title="Log out"
+          aria-label="Clear selected player"
+          className="rounded-md p-2 text-white/50 hover:bg-white/10 hover:text-white"
+        >
+          <LogOut size={15} />
+        </button>
       </div>
     );
-  }
-
-  if (location.pathname !== lastPath) {
-    setLastPath(location.pathname);
-    setOpen(false);
   }
 
   return (
-    <header className="fixed top-0 left-0 w-full border-b-3 border-t-3 border-(--color-border) bg-(--color-header) z-1000">
-      <div className="flex h-14 w-full items-center justify-between">
-        <div className="flex items-stretch">
-          <Logo />
-          <nav className="hidden items-stretch min-[1080px]:flex" aria-label="Primary">
-            {navItems.map((item) => <NavButton key={item.to} {...item} />)}
-          </nav>
+    <>
+      <header className="fixed top-0 left-0 w-full border-b-3 border-t-3 border-(--color-border) bg-(--color-header) z-1000">
+        <div className="flex h-14 w-full items-center justify-between">
+          <div className="flex items-stretch">
+            <Logo />
+            <nav className="hidden items-stretch min-[1080px]:flex" aria-label="Primary">
+              {navItems.map((item) => <NavButton key={item.to} {...item} />)}
+            </nav>
+          </div>
+
+          <div className="hidden shrink-0 items-center gap-2 pr-3 min-[1080px]:flex">
+            <PlayerAccount />
+          </div>
+
+          <button
+            type="button"
+            className="flex h-10 w-10 shrink-0 items-center justify-center text-(--color-text) min-[1080px]:hidden"
+            onClick={() => setOpen((value) => !value)}
+            aria-label={open ? "Close menu" : "Open menu"}
+            aria-expanded={open}
+          >
+            {open ? <X size={22} /> : <Menu size={22} />}
+          </button>
         </div>
 
-        <div className="hidden shrink-0 items-center gap-2 pr-3 min-[1080px]:flex">
-          <PlayerAccount />
-        </div>
-
-        <button
-          type="button"
-          className="flex h-10 w-10 shrink-0 items-center justify-center text-(--color-text) min-[1080px]:hidden"
-          onClick={() => setOpen((v) => !v)}
-          aria-label={open ? "Close menu" : "Open menu"}
-          aria-expanded={open}
-        >
-          {open ? <X size={22} /> : <Menu size={22} />}
-        </button>
-      </div>
-
-      <div className={"grid overflow-hidden transition-all duration-300 min-[1080px]:hidden " + (open ? "grid-rows-[1fr] border-t-2 border-(--color-border) opacity-100" : "grid-rows-[0fr] opacity-0")}>
-        <div className="min-h-0">
-          <nav className="flex flex-col" aria-label="Primary mobile">
-            {navItems.map((item) => (
-              <NavButton key={item.to} {...item} mobile onNavigate={() => setOpen(false)} />
-            ))}
-          </nav>
-          <div className="px-4 py-4">
-            <PlayerAccount mobile />
+        <div className={"grid overflow-hidden transition-all duration-300 min-[1080px]:hidden " + (open ? "grid-rows-[1fr] border-t-2 border-(--color-border) opacity-100" : "grid-rows-[0fr] opacity-0")}>
+          <div className="min-h-0">
+            <nav className="flex flex-col" aria-label="Primary mobile">
+              {navItems.map((item) => <NavButton key={item.to} {...item} mobile onNavigate={() => setOpen(false)} />)}
+            </nav>
+            <div className="px-4 py-4">
+              <PlayerAccount mobile />
+            </div>
           </div>
         </div>
-      </div>
-    </header>
+      </header>
+
+      {loginOpen && (
+        <div
+          className="fixed inset-0 z-[2000] flex items-center justify-center bg-black/75 p-4 backdrop-blur-sm"
+          onMouseDown={(event) => { if (event.target === event.currentTarget) setLoginOpen(false); }}
+        >
+          <section
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="player-login-title"
+            className="relative w-full max-w-md overflow-hidden rounded-2xl border border-cyan-300/20 bg-[#10131c] p-6 shadow-2xl shadow-black/50"
+          >
+            <button
+              type="button"
+              onClick={() => { setLoginOpen(false); setError(""); }}
+              aria-label="Close login"
+              className="absolute right-4 top-4 rounded-lg p-2 text-white/50 hover:bg-white/10 hover:text-white"
+            >
+              <X size={19} />
+            </button>
+
+            <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl border border-cyan-300/20 bg-cyan-300/10 text-cyan-200">
+              <UserRound size={25} />
+            </div>
+            <p className="text-[10px] font-bold tracking-[.22em] text-cyan-200/70">PLAYER PROFILE</p>
+            <h2 id="player-login-title" className="mt-1 text-2xl font-black text-white">LOGIN TO VELDORA<span className="text-rose-400">.</span></h2>
+            <p className="mt-2 text-sm leading-6 text-white/55">Enter your Minecraft Java username. We'll find the account and show its skin before you continue.</p>
+
+            <form onSubmit={searchPlayer} className="mt-5">
+              <label htmlFor="minecraft-username" className="mb-2 block text-xs font-bold tracking-wider text-white/70">MINECRAFT USERNAME</label>
+              <div className="flex items-center gap-2 rounded-xl border border-white/10 bg-black/25 px-3 focus-within:border-cyan-300/50">
+                <UserRound size={17} className="text-white/40" />
+                <input
+                  id="minecraft-username"
+                  autoFocus
+                  autoComplete="off"
+                  maxLength={16}
+                  value={username}
+                  onChange={(event) => { setUsername(event.target.value.replace(/[^A-Za-z0-9_]/g, "")); setError(""); setPreview(null); }}
+                  placeholder="Enter username"
+                  className="h-12 min-w-0 flex-1 bg-transparent text-sm text-white outline-none placeholder:text-white/30"
+                />
+              </div>
+              {error && <p role="alert" className="mt-3 rounded-lg border border-rose-300/20 bg-rose-400/5 p-3 text-xs leading-5 text-rose-200">{error}</p>}
+              <button type="submit" disabled={loading || !username.trim()} className="vbtn vbtn-primary mt-3 min-h-12 w-full justify-center disabled:cursor-not-allowed disabled:opacity-50">
+                {loading ? <><LoaderCircle size={17} className="animate-spin" /> SEARCHING...</> : <><Search size={17} /> FIND MY ACCOUNT</>}
+              </button>
+            </form>
+
+            {preview && (
+              <div className="mt-5 overflow-hidden rounded-xl border border-cyan-300/20 bg-cyan-300/5 p-4">
+                <div className="flex items-center gap-4">
+                  <img src={preview.body} alt={`${preview.name} Minecraft skin preview`} className="h-28 w-20 object-contain [image-rendering:pixelated]" />
+                  <div className="min-w-0 flex-1">
+                    <p className="text-[10px] font-bold tracking-[.18em] text-emerald-200">ACCOUNT FOUND</p>
+                    <p className="mt-1 break-all text-xl font-black text-white">{preview.name}</p>
+                    <p className="mt-1 text-xs text-white/45">Minecraft Java profile</p>
+                  </div>
+                  <img src={preview.avatar} alt="" className="h-12 w-12 rounded-lg border border-white/10 [image-rendering:pixelated]" />
+                </div>
+                <button type="button" onClick={confirmPlayer} className="vbtn vbtn-primary mt-4 min-h-12 w-full justify-center">
+                  CONTINUE AS {preview.name.toUpperCase()} <ChevronRight size={17} />
+                </button>
+              </div>
+            )}
+
+            <div className="mt-5 flex gap-2 rounded-lg border border-amber-300/15 bg-amber-300/5 p-3">
+              <ShieldAlert size={17} className="mt-0.5 shrink-0 text-amber-200" />
+              <p className="text-[11px] leading-5 text-white/55">This selects a public player profile and displays its skin. It does not verify account ownership or unlock purchases, private data, or staff access. Bedrock-only gamertags and offline-mode usernames may not resolve.</p>
+            </div>
+          </section>
+        </div>
+      )}
+    </>
   );
 }
