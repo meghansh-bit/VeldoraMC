@@ -169,14 +169,20 @@ export default function Header() {
 
             <div className="mt-5 grid grid-cols-2 gap-3">
               <button type="button" aria-pressed={edition === "java"} onClick={() => { setEdition("java"); setPreview(null); setError(""); setUsername(""); }}
-                className={"group relative flex min-h-[88px] flex-col items-start justify-between overflow-hidden rounded-xl border p-3 text-left transition-all duration-200 " + (edition === "java" ? "border-emerald-300/80 bg-gradient-to-br from-emerald-400/20 via-emerald-500/10 to-transparent text-white shadow-[0_0_24px_rgba(16,185,129,.13)] ring-1 ring-emerald-300/20" : "border-white/10 bg-white/[.025] text-white/55 hover:border-white/25 hover:bg-white/[.05] hover:text-white")}>
-                <span className={"flex h-8 w-8 items-center justify-center rounded-lg " + (edition === "java" ? "bg-emerald-300 text-[#07150f]" : "bg-white/10 text-white/65 group-hover:bg-white/15")}><Monitor size={17} /></span>
-                <span className="flex w-full items-center justify-between"><span className="text-sm font-extrabold tracking-wide">JAVA</span>{edition === "java" && <span className="h-2 w-2 rounded-full bg-emerald-300 shadow-[0_0_10px_rgba(110,231,183,.9)]" />}</span>
+                className={"group relative flex min-h-[112px] flex-col justify-between overflow-hidden rounded-xl border p-4 text-left transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-300 " + (edition === "java" ? "border-emerald-300/70 bg-gradient-to-br from-emerald-400/20 to-emerald-900/10 text-white shadow-[0_8px_28px_rgba(16,185,129,.12)]" : "border-white/10 bg-white/[.035] text-white/65 hover:border-emerald-300/35 hover:bg-white/[.06] hover:text-white")}>
+                <span className="flex w-full items-center justify-between">
+                  <span className={"flex h-10 w-10 items-center justify-center rounded-xl border transition-colors " + (edition === "java" ? "border-emerald-200/30 bg-emerald-300 text-[#07150f]" : "border-white/10 bg-white/[.06] text-white/70 group-hover:border-emerald-300/20")}><Monitor size={20} /></span>
+                  <span className={"rounded-full px-2 py-1 text-[9px] font-extrabold tracking-widest " + (edition === "java" ? "bg-emerald-300/15 text-emerald-200" : "bg-white/5 text-white/35")}>{edition === "java" ? "SELECTED" : "JAVA"}</span>
+                </span>
+                <span><span className="block text-sm font-extrabold tracking-wide">Java Edition</span><span className={"mt-1 block text-[11px] " + (edition === "java" ? "text-emerald-100/65" : "text-white/35")}>PC · Mac · Linux</span></span>
               </button>
               <button type="button" aria-pressed={edition === "bedrock"} onClick={() => { setEdition("bedrock"); setPreview(null); setError(""); setUsername(""); }}
-                className={"group relative flex min-h-[88px] flex-col items-start justify-between overflow-hidden rounded-xl border p-3 text-left transition-all duration-200 " + (edition === "bedrock" ? "border-emerald-300/80 bg-gradient-to-br from-emerald-400/20 via-emerald-500/10 to-transparent text-white shadow-[0_0_24px_rgba(16,185,129,.13)] ring-1 ring-emerald-300/20" : "border-white/10 bg-white/[.025] text-white/55 hover:border-white/25 hover:bg-white/[.05] hover:text-white")}>
-                <span className={"flex h-8 w-8 items-center justify-center rounded-lg " + (edition === "bedrock" ? "bg-emerald-300 text-[#07150f]" : "bg-white/10 text-white/65 group-hover:bg-white/15")}><Gamepad2 size={18} /></span>
-                <span className="flex w-full items-center justify-between"><span className="text-sm font-extrabold tracking-wide">BEDROCK</span>{edition === "bedrock" && <span className="h-2 w-2 rounded-full bg-emerald-300 shadow-[0_0_10px_rgba(110,231,183,.9)]" />}</span>
+                className={"group relative flex min-h-[112px] flex-col justify-between overflow-hidden rounded-xl border p-4 text-left transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-300 " + (edition === "bedrock" ? "border-emerald-300/70 bg-gradient-to-br from-emerald-400/20 to-emerald-900/10 text-white shadow-[0_8px_28px_rgba(16,185,129,.12)]" : "border-white/10 bg-white/[.035] text-white/65 hover:border-emerald-300/35 hover:bg-white/[.06] hover:text-white")}>
+                <span className="flex w-full items-center justify-between">
+                  <span className={"flex h-10 w-10 items-center justify-center rounded-xl border transition-colors " + (edition === "bedrock" ? "border-emerald-200/30 bg-emerald-300 text-[#07150f]" : "border-white/10 bg-white/[.06] text-white/70 group-hover:border-emerald-300/20")}><Gamepad2 size={20} /></span>
+                  <span className={"rounded-full px-2 py-1 text-[9px] font-extrabold tracking-widest " + (edition === "bedrock" ? "bg-emerald-300/15 text-emerald-200" : "bg-white/5 text-white/35")}>{edition === "bedrock" ? "SELECTED" : "BEDROCK"}</span>
+                </span>
+                <span><span className="block text-sm font-extrabold tracking-wide">Bedrock Edition</span><span className={"mt-1 block text-[11px] " + (edition === "bedrock" ? "text-emerald-100/65" : "text-white/35")}>Console · Mobile · Windows</span></span>
               </button>
             </div>
 
