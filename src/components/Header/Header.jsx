@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, ChevronRight, UserRound, LogOut, Search, LoaderCircle, ShieldAlert, Gamepad2, Monitor } from "lucide-react";
+import { Menu, X, ChevronRight, UserRound, LogOut, Search, LoaderCircle, Gamepad2, Monitor } from "lucide-react";
 import Logo from "./Logo";
 import NavButton from "./NavButton";
 import { navItems } from "./navItems";
@@ -168,14 +168,16 @@ export default function Header() {
             <div className="mb-5 flex items-center justify-between"><div><p className="text-[10px] font-bold tracking-[.2em] text-cyan-200/70">PLAYER PROFILE</p><h2 id="player-login-title" className="mt-1 text-xl font-black text-white">WELCOME BACK<span className="text-rose-400">.</span></h2></div><span className="rounded-full border border-white/10 px-3 py-1 text-[10px] font-bold tracking-wider text-white/40">MINECRAFT</span></div>
             <p className="mt-1 text-sm leading-5 text-white/50">Select your edition and enter your in-game name.</p>
 
-            <div className="mt-4 grid grid-cols-2 gap-1 rounded-xl border border-white/10 bg-black/30 p-1">
-              <button type="button" onClick={() => { setEdition("java"); setPreview(null); setError(""); setUsername(""); }}
-                className={"flex h-11 items-center justify-center gap-2 rounded-lg text-sm font-bold transition " + (edition === "java" ? "bg-cyan-300 text-slate-950" : "text-white/55 hover:text-white")}>
-                <Monitor size={16} /> Java
+            <div className="mt-5 grid grid-cols-2 gap-3">
+              <button type="button" aria-pressed={edition === "java"} onClick={() => { setEdition("java"); setPreview(null); setError(""); setUsername(""); }}
+                className={"group relative flex min-h-[88px] flex-col items-start justify-between overflow-hidden rounded-xl border p-3 text-left transition-all duration-200 " + (edition === "java" ? "border-emerald-300/80 bg-gradient-to-br from-emerald-400/20 via-emerald-500/10 to-transparent text-white shadow-[0_0_24px_rgba(16,185,129,.13)] ring-1 ring-emerald-300/20" : "border-white/10 bg-white/[.025] text-white/55 hover:border-white/25 hover:bg-white/[.05] hover:text-white")}>
+                <span className={"flex h-8 w-8 items-center justify-center rounded-lg " + (edition === "java" ? "bg-emerald-300 text-[#07150f]" : "bg-white/10 text-white/65 group-hover:bg-white/15")}><Monitor size={17} /></span>
+                <span className="flex w-full items-center justify-between"><span className="text-sm font-extrabold tracking-wide">JAVA</span>{edition === "java" && <span className="h-2 w-2 rounded-full bg-emerald-300 shadow-[0_0_10px_rgba(110,231,183,.9)]" />}</span>
               </button>
-              <button type="button" onClick={() => { setEdition("bedrock"); setPreview(null); setError(""); setUsername(""); }}
-                className={"flex h-11 items-center justify-center gap-2 rounded-lg text-sm font-bold transition " + (edition === "bedrock" ? "bg-cyan-300 text-slate-950" : "text-white/55 hover:text-white")}>
-                <Gamepad2 size={16} /> Bedrock
+              <button type="button" aria-pressed={edition === "bedrock"} onClick={() => { setEdition("bedrock"); setPreview(null); setError(""); setUsername(""); }}
+                className={"group relative flex min-h-[88px] flex-col items-start justify-between overflow-hidden rounded-xl border p-3 text-left transition-all duration-200 " + (edition === "bedrock" ? "border-emerald-300/80 bg-gradient-to-br from-emerald-400/20 via-emerald-500/10 to-transparent text-white shadow-[0_0_24px_rgba(16,185,129,.13)] ring-1 ring-emerald-300/20" : "border-white/10 bg-white/[.025] text-white/55 hover:border-white/25 hover:bg-white/[.05] hover:text-white")}>
+                <span className={"flex h-8 w-8 items-center justify-center rounded-lg " + (edition === "bedrock" ? "bg-emerald-300 text-[#07150f]" : "bg-white/10 text-white/65 group-hover:bg-white/15")}><Gamepad2 size={18} /></span>
+                <span className="flex w-full items-center justify-between"><span className="text-sm font-extrabold tracking-wide">BEDROCK</span>{edition === "bedrock" && <span className="h-2 w-2 rounded-full bg-emerald-300 shadow-[0_0_10px_rgba(110,231,183,.9)]" />}</span>
               </button>
             </div>
 
@@ -205,15 +207,10 @@ export default function Header() {
                   </div>
                   <img src={preview.avatar} alt="" className="h-10 w-10 rounded-lg border border-white/10 [image-rendering:pixelated]" />
                 </div>
-                {edition === "bedrock" && <p className="mt-3 text-[11px] leading-5 text-amber-100/70">Bedrock gamertags can be entered, but their actual skin cannot be fetched from a public username lookup. The real skin can only be shown after a supported in-game/server link.</p>}
                 <button type="button" onClick={confirmPlayer} className="vbtn vbtn-primary mt-4 min-h-12 w-full justify-center">CONTINUE AS {preview.name.toUpperCase()} <ChevronRight size={17} /></button>
               </div>
             )}
 
-            <div className="mt-4 flex gap-2 rounded-lg border border-amber-300/15 bg-amber-300/5 p-3">
-              <ShieldAlert size={17} className="mt-0.5 shrink-0 text-amber-200" />
-              <p className="text-[11px] leading-5 text-white/55">This is a public profile selector, not account ownership verification. It does not authorize purchases, private data or staff access. Use Microsoft sign-in or an in-game verification code for secure account linking.</p>
-            </div>
           </section>
         </div>
       )}
