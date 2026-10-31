@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ArrowDown, ArrowRight, Check, Copy, Crown, Heart, Shield, Swords, Users, Zap, Gamepad2, MessageCircle, Sparkles } from "lucide-react";
+import { ArrowDown, ArrowRight, Check, Copy, Crown, Heart, Shield, Users, Zap, Gamepad2, MessageCircle, Sparkles } from "lucide-react";
 import { useSeo } from "../hooks/useSeo";
 import lifestealImage from "../assets/hero/rear.png";
 
@@ -20,7 +20,7 @@ function DiscordIcon() {
 
 export default function Home() {
   const [copied, setCopied] = useState(false);
-  useSeo({ title: "VeldoraMC — Enter the Lifesteal Realm", description: "Enter VeldoraMC, a Minecraft Lifesteal realm. Build your base, forge alliances, and fight for every heart. Join the community.", path: "/", image: "https://veldoramc.vercel.app/og-image.png" });
+  useSeo({ title: "VeldoraMC — Enter the Lifesteal Realm", description: "Enter VeldoraMC, a Minecraft Lifesteal realm. Build your base, forge alliances, and compete for every heart. Join the community.", path: "/", image: "https://veldoramc.vercel.app/og-image.svg" });
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return undefined;
@@ -69,7 +69,7 @@ export default function Home() {
 
     <section className="vld-intro vld-section" id="realm">
       <div className="vld-intro-art" aria-hidden="true"><div className="vld-art-ring vld-ring-a"/><div className="vld-art-ring vld-ring-b"/><div className="vld-art-heart"><HeartMark/></div><span className="vld-art-caption">ONE HEART. ONE LIFE. ONE LEGACY.</span></div>
-      <div className="vld-intro-copy"><div className="vld-overline">WELCOME TO VELDORAMC <span>— 001</span></div><h2>A realm where<br/><em>every heart counts.</em></h2><p>VeldoraMC is a Lifesteal survival world built around high-stakes encounters, clever bases, shifting alliances, and the stories players create together.</p><p>Grow stronger, protect your hearts, and make your name mean something.</p><a className="vld-text-link" href="#how-it-works">Discover how it works <ArrowRight size={16}/></a></div>
+      <div className="vld-intro-copy"><div className="vld-overline">WELCOME TO VELDORAMC <span>— 001</span></div><h2>A realm where<br/><em>every heart counts.</em></h2><p>VeldoraMC is a Lifesteal survival world built around strategic encounters, clever bases, shifting alliances, and the stories players create together.</p><p>Grow stronger, protect your hearts, and make your name mean something.</p><a className="vld-text-link" href="#how-it-works">Discover how it works <ArrowRight size={16}/></a></div>
     </section>
 
     <section className="vld-world vld-section" id="how-it-works">
@@ -77,7 +77,7 @@ export default function Home() {
       <div className="vld-feature-grid">
         <article className="vld-feature vld-feature-large"><div className="vld-feature-top"><span>01 / SURVIVE</span><Heart size={21}/></div><div className="vld-feature-bottom"><h3>Protect your hearts.</h3><p>Every encounter matters. Stay prepared, stay alert, and never take your last heart for granted.</p></div><div className="vld-feature-watermark">♥</div></article>
         <article className="vld-feature"><div className="vld-feature-top"><span>02 / BUILD</span><Shield size={21}/></div><div className="vld-feature-bottom"><h3>Build your stronghold.</h3><p>Create a base worth defending and a home worth returning to.</p></div><div className="vld-feature-watermark">⌂</div></article>
-        <article className="vld-feature"><div className="vld-feature-top"><span>03 / CONQUER</span><Swords size={21}/></div><div className="vld-feature-bottom"><h3>Choose your battles.</h3><p>Make alliances, face rivals, and fight for your place in the realm.</p></div><div className="vld-feature-watermark">⚔</div></article>
+        <article className="vld-feature"><div className="vld-feature-top"><span>03 / CONQUER</span><Zap size={21}/></div><div className="vld-feature-bottom"><h3>Build your legacy.</h3><p>Make alliances, meet rivals, and earn your place in the realm.</p></div><div className="vld-feature-watermark">⚔</div></article>
       </div>
     </section>
 
