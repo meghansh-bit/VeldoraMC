@@ -1,12 +1,5 @@
-// Single source of truth for site-wide SEO metadata.
-// NOTE: SITE_URL is a placeholder — replace it with the real production
-// domain before going live. It feeds canonical URLs, Open Graph/Twitter
-// tags, and the generated sitemap.
-export const SITE_URL = "https://www.veldora.net";
+export const SITE_URL = "https://veldoramc.vercel.app";
 export const SITE_NAME = "VeldoraMC";
-
-export const DEFAULT_TITLE =
-  "VeldoraMC — Bangladesh's Friendly Minecraft Survival Server";
-export const DEFAULT_DESCRIPTION =
-  "Join VeldoraMC, a friendly Java & Bedrock cross-play Minecraft survival server built for the Bangladeshi community. Vote for rewards, grab ranks and crates, and climb the leaderboards.";
-export const DEFAULT_OG_IMAGE = `${SITE_URL}/og-image.png`;
+export const DEFAULT_TITLE = "VeldoraMC — Minecraft Lifesteal Realm";
+export const DEFAULT_DESCRIPTION = "Enter VeldoraMC, a Minecraft Lifesteal realm. Build your base, forge alliances, and fight for every heart. Join the community.";
+export const DEFAULT_OG_IMAGE = "https://veldoramc.vercel.app/og-image.png";
