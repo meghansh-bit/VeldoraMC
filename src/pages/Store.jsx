@@ -5,7 +5,6 @@ import { supabase } from "../lib/supabase";
 import { useCart } from "../context/useCart";
 import CurrencyTab from "../components/store/tabs/CurrencyTab";
 import { useSeo } from "../hooks/useSeo";
-import { Link } from "react-router-dom";
 import { UserRound, ShoppingCart } from "lucide-react";
 
 export default function Store() {
