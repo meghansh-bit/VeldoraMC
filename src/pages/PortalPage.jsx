@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { ArrowRight, CircleHelp, MessageCircle, Trophy, Users, Swords, Coins, Wallet, UsersRound, Medal, Plus, Ticket, Send, RefreshCw, Clock3, CheckCircle2, AlertCircle, X, ChevronLeft } from "lucide-react";
+import { ArrowRight, CircleHelp, MessageCircle, Trophy, Users, Swords, Coins, Wallet, UsersRound, Medal, Plus, Ticket, Send, RefreshCw, Clock3, CheckCircle2, AlertCircle, X, ChevronLeft, ShieldCheck } from "lucide-react";
 import { useSeo } from "../hooks/useSeo";
 import { supabase } from "../lib/supabase";
 
