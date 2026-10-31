@@ -5,9 +5,10 @@ import { ArrowDown, ArrowRight, Check, Copy, Crown, Heart, Shield, Users, Zap, G
 import { useSeo } from "../hooks/useSeo";
 import lifestealImage from "../assets/hero/rear.png";
 import VeldoraScene from "../components/scene/VeldoraScene";
+import NetworkStatus from "../components/NetworkStatus";
 import { motion } from "framer-motion";
 
-const SERVER_IP = "veldoramc.mc-dns.net";
+const SERVER_IP = "play.veldoramc.net";
 const DISCORD_URL = "https://discord.gg/NruxFSnrUe";
 
 function HeartMark({ className = "" }) {
@@ -78,7 +79,7 @@ export default function Home() {
 
     <section className="vld-gamemodes vld-section" id="gamemodes">
       <div className="vld-section-heading"><div><div className="vld-overline">CHOOSE YOUR ADVENTURE <span>— EXPLORE</span></div><h2>Explore our<br/><em>gamemodes.</em></h2></div><p>Find your next way to play on VeldoraMC. Start with our featured experience and discover what makes the network yours.</p></div>
-      <motion.div className="vld-gamemode-motion" whileHover={{ y: -5, rotateX: 1, rotateY: -1 }} transition={{ type: "spring", stiffness: 220, damping: 22 }}><Link to="/gamemodes" className="vld-gamemode-card"><div className="vld-gamemode-art"><img src={lifestealImage} alt="Minecraft Lifesteal world"/><span className="vld-gamemode-status"><i/> FEATURED GAMEMODE</span><span className="vld-gamemode-number">01</span></div><div className="vld-gamemode-copy"><span className="vld-overline">SURVIVAL • COMPETITIVE • COMMUNITY</span><h3>Lifesteal</h3><p>Build your base, team up with friends, explore the world, and grow your hearts through the featured VeldoraMC survival experience.</p><span className="vld-gamemode-link">Explore Lifesteal <ArrowRight size={16}/></span></div></Link></motion.div>
+      <motion.div className="vld-gamemode-motion" whileHover={{ y: -5, rotateX: 1, rotateY: -1 }} transition={{ type: "spring", stiffness: 220, damping: 22 }}><Link to="/gamemodes" className="vld-gamemode-card"><div className="vld-gamemode-art"><img src={lifestealImage} alt="Minecraft Lifesteal world"/><span className="vld-gamemode-status"><i/> FEATURED GAMEMODE</span><span className="vld-gamemode-number">01</span></div><div className="vld-gamemode-copy"><div className="vld-edition-badges"><span>JAVA</span><span>BEDROCK</span><span>SEASON 1</span><NetworkStatus compact /></div><span className="vld-overline">SURVIVAL • COMPETITIVE • COMMUNITY</span><h3>Lifesteal</h3><p>Build your base, team up with friends, explore the world, and grow your hearts through the featured VeldoraMC survival experience.</p><span className="vld-gamemode-link">Explore Lifesteal <ArrowRight size={16}/></span></div></Link></motion.div>
       <div className="vld-gamemode-note"><Sparkles size={15}/> More gamemodes and experiences will be revealed as the network grows.</div>
     </section>
 
