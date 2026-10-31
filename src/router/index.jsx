@@ -4,6 +4,7 @@ import Home from "../pages/Home";
 import News from "../pages/News";
 import Votes from "../pages/Votes";
 import Store from "../pages/Store";
+import StoreAccount from "../pages/StoreAccount";
 import Staff from "../pages/Staff";
 import NewsDetails from "../pages/NewsDetails";
 import Cart from "../pages/Cart";
@@ -20,7 +21,7 @@ export const router = createBrowserRouter([
  { path: "/", element: <RootLayout />, children: [
   { index: true, element: <Home /> },
   { path: "news", element: <News /> }, { path: "news/:slug", element: <NewsDetails /> },
-  { path: "votes", element: <Votes /> }, { path: "store", element: <Store /> }, { path: "bundles", element: <Bundles /> },
+  { path: "votes", element: <Votes /> }, { path: "store", element: <Store /> }, { path: "store/account", element: <StoreAccount /> }, { path: "bundles", element: <Bundles /> },
   { path: "staff", element: <Staff /> }, { path: "cart", element: <Cart /> },
   { path: "login", element: <Navigate to="/" replace /> },
   { path: "lifesteal", element: <Lifesteal /> },
