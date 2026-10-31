@@ -1,7 +1,9 @@
 export const navItems = [
   { to: "/", label: "Home", end: true },
-  { to: "/#realm", label: "The Realm" },
-  { to: "/#how-it-works", label: "How to Play" },
-  { to: "/#about", label: "About" },
-  { to: "/#join", label: "Join" },
+  { to: "/news", label: "Announcements" },
+  { to: "/lifesteal", label: "Lifesteal" },
+  { to: "/leaderboard", label: "Leaderboard" },
+  { to: "/staff", label: "Staff" },
+  { to: "/store", label: "Store" },
+  { to: "/support", label: "Support" },
 ];
