@@ -15,7 +15,7 @@ import AdminDashboard from "../pages/AdminDashboard";
 import AdminTickets from "../pages/AdminTickets";
 import AdminNews from "../pages/AdminNews";
 import AdminStore from "../pages/AdminStore";
-import Lifesteal from "../pages/Lifesteal";
+import Gamemodes from "../pages/Gamemodes";
 
 export const router = createBrowserRouter([
  { path: "/", element: <RootLayout />, children: [
@@ -24,10 +24,11 @@ export const router = createBrowserRouter([
   { path: "votes", element: <Votes /> }, { path: "store", element: <Store /> }, { path: "store/account", element: <StoreAccount /> }, { path: "bundles", element: <Bundles /> },
   { path: "staff", element: <Staff /> }, { path: "cart", element: <Cart /> },
   { path: "login", element: <Navigate to="/" replace /> },
-  { path: "lifesteal", element: <Lifesteal /> },
+  { path: "gamemodes", element: <Gamemodes /> },
+  { path: "lifesteal", element: <Navigate to="/gamemodes" replace /> },
   { path: "link-minecraft", element: <LinkMinecraft /> },
   { path: "profiles", element: <Navigate to="/" replace /> },
-  { path: "leaderboard", element: <PortalPage /> },
+  { path: "leaderboard", element: <Navigate to="/" replace /> },
   { path: "community", element: <PortalPage /> }, { path: "support", element: <PortalPage /> },
  ]},
  { path: "/admin", element: <AdminDashboard /> },
