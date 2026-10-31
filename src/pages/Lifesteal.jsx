@@ -3,21 +3,28 @@ import { ArrowLeft, ArrowRight, Heart, Swords, Shield, Gem, Users, Pickaxe, Cros
 import { Link } from "react-router-dom";
 import { useSeo } from "../hooks/useSeo";
 import lifestealImage from "../assets/hero/rear.png";
+import survivalCard from "../assets/modes/survival.png";
+import pvpCard from "../assets/modes/bedwars.png";
+import minigamesCard from "../assets/modes/minigames.png";
+import skyblockCard from "../assets/modes/skyblock.png";
+import teamCard from "../assets/reasons/community.png";
+import customCard from "../assets/reasons/custom-features.png";
+import launchCard from "../assets/reasons/events.png";
 import "./Lifesteal.css";
 
 const inpvpImages = {
-  base: "https://image.pollinations.ai/prompt/Minecraft%20voxel%20medieval%20survival%20base%20built%20into%20a%20mountain%2C%20fantasy%20block%20game%20art%2C%20cinematic%20lighting%2C%20no%20text?width=900&height=560&seed=5211&nologo=true",
-  hearts: "https://image.pollinations.ai/prompt/Minecraft%20voxel%20fantasy%20heart%20crystal%20floating%20above%20a%20dark%20blocky%20arena%2C%20epic%20game%20key%20art%2C%20no%20text?width=900&height=560&seed=5212&nologo=true",
-  crystal: "https://image.pollinations.ai/prompt/Minecraft%20voxel%20crystal%20PvP%20arena%20with%20glowing%20amethyst%20crystals%20and%20dramatic%20sky%2C%20cinematic%20block%20game%20art%2C%20no%20text?width=900&height=560&seed=5213&nologo=true",
+  base: survivalCard,
+  hearts: customCard,
+  crystal: pvpCard,
 };
 
 const features = [
   { icon: Gem, number: "01", title: "Crystal PvP", tag: "HIGH-SKILL COMBAT", body: "Master crystal placement, timing, and movement. Every fight rewards practice, awareness, and smart decisions.", className: "crystal", image: inpvpImages.crystal },
   { icon: Shield, number: "02", title: "Base Building & Raiding", tag: "PROTECT YOUR LOOT", body: "Build a hidden base, secure your resources, scout your rivals, and plan your next raid with your team.", className: "base", image: inpvpImages.base },
-  { icon: Crosshair, number: "03", title: "Warzone PvP", tag: "NO PLACE TO HIDE", body: "Enter dangerous battles, challenge rival squads, and fight for valuable loot in contested areas.", className: "warzone", image: inpvpImages.crystal },
+  { icon: Crosshair, number: "03", title: "Warzone PvP", tag: "NO PLACE TO HIDE", body: "Enter dangerous battles, challenge rival squads, and fight for valuable loot in contested areas.", className: "warzone", image: minigamesCard },
   { icon: Heart, number: "04", title: "Heart Stealing", tag: "EVERY HEART COUNTS", body: "Win fights to steal hearts and grow stronger. Lose a fight and your opponents may grow stronger instead.", className: "hearts", image: inpvpImages.hearts },
-  { icon: Users, number: "05", title: "Teams & Alliances", tag: "TRUST YOUR SQUAD", body: "Build a team, form temporary alliances, and decide who deserves your trust in a world of rivalries.", className: "teams", image: inpvpImages.base },
-  { icon: Pickaxe, number: "06", title: "Survival & Progression", tag: "BUILD YOUR LEGACY", body: "Gather resources, gear up, explore, and turn a small start into a base everyone knows about.", className: "survival", image: inpvpImages.base },
+  { icon: Users, number: "05", title: "Teams & Alliances", tag: "TRUST YOUR SQUAD", body: "Build a team, form temporary alliances, and decide who deserves your trust in a world of rivalries.", className: "teams", image: teamCard },
+  { icon: Pickaxe, number: "06", title: "Survival & Progression", tag: "BUILD YOUR LEGACY", body: "Gather resources, gear up, explore, and turn a small start into a base everyone knows about.", className: "survival", image: skyblockCard },
 ];
 
 export default function Lifesteal() {
@@ -43,7 +50,7 @@ export default function Lifesteal() {
       <div className="vl-hero-label"><span>01 / THE EXPERIENCE</span><span>YOUR STORY STARTS HERE</span></div>
     </section>
     <section className="vl-launch-announcement">
-      <div className="vl-launch-art"><img src="https://image.pollinations.ai/prompt/epic%20Minecraft-inspired%20fantasy%20red%20castle%20server%20launch%20poster%2C%20voxel%20landscape%2C%20cinematic%20sunset%2C%20no%20text?width=1000&height=520&seed=5214&nologo=true" alt="Fantasy Minecraft-style VeldoraMC launch artwork"/></div>
+      <div className="vl-launch-art"><img src={launchCard} alt="Fantasy Minecraft-style VeldoraMC launch artwork"/></div>
       <div className="vl-launch-copy"><span className="vl-kicker">OFFICIAL SERVER UPDATE</span><h2>THE LAUNCH IS<br/><em>ONLY DAYS AWAY.</em></h2><p>VeldoraMC is almost ready. Get your squad together and join our Discord for the official launch date, sneak peeks, and important updates.</p><a className="vl-primary" href="https://discord.gg/NruxFSnrUe" target="_blank" rel="noreferrer">JOIN DISCORD FOR INFO <ArrowRight size={16}/></a></div>
     </section>
     <section id="features" className="vl-features">
