@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { ArrowLeft, ArrowRight, CheckCircle2, LockKeyhole, Mail, ShieldCheck, UserRound } from "lucide-react";
 import { useAuth } from "../context/useAuth";
 import { useSeo } from "../hooks/useSeo";
