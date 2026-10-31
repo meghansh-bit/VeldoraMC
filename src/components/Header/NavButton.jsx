@@ -1,11 +1,10 @@
 import { NavLink } from "react-router-dom";
-import { Home, Newspaper, Trophy, ShieldCheck, ShoppingBag, Headset, Swords } from "lucide-react";
+import { Home, Newspaper, Gamepad2, ShieldCheck, ShoppingBag, Headset } from "lucide-react";
 
 const ICONS = {
   Home,
   Announcements: Newspaper,
-  Lifesteal: Swords,
-  Leaderboard: Trophy,
+  Gamemodes: Gamepad2,
   Staff: ShieldCheck,
   Store: ShoppingBag,
   Support: Headset,
