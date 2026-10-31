@@ -10,6 +10,7 @@ import { motion } from "framer-motion";
 
 const SERVER_IP = "play.veldoramc.net";
 const DISCORD_URL = "https://discord.gg/NruxFSnrUe";
+const LAUNCH_ANNOUNCEMENT = { slug: "server-launch-soon", title: "VeldoraMC launches in just a few days!", excerpt: "The wait is almost over. Get ready to explore Lifesteal, build your team, and make your mark. Join our Discord for the official launch date and all updates.", category: "SERVER LAUNCH", created_at: new Date().toISOString(), image: "https://image.pollinations.ai/prompt/epic%20Minecraft-inspired%20fantasy%20server%20launch%20key%20art%2C%20grand%20red%20medieval%20castle%20on%20floating%20island%2C%20blocky%20voxel%20landscape%2C%20dramatic%20cinematic%20lighting%2C%20no%20text%2C%20wide%20game%20poster?width=960&height=540&seed=4127&nologo=true" };
 
 function HeartMark({ className = "" }) {
   return <svg className={className} viewBox="0 0 16 15" role="img" aria-label="Veldora heart emblem" shapeRendering="crispEdges">
@@ -19,14 +20,18 @@ function HeartMark({ className = "" }) {
   </svg>;
 }
 
+function MinecraftMark() {
+  return <svg width="19" height="19" viewBox="0 0 24 24" aria-hidden="true"><path fill="#62b34b" d="M2 5.2 12 1l10 4.2-10 4.2z"/><path fill="#3d8d3d" d="M2 5.2v13.5L12 23V9.4z"/><path fill="#75c653" d="M22 5.2v13.5L12 23V9.4z"/><path fill="#9be36d" d="m5.2 6.5 6.8-2.8 6.8 2.8-6.8 2.8z"/></svg>;
+}
+
 function DiscordIcon() {
   return <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.73 5.14A18.4 18.4 0 0 0 15.2 3.75l-.56 1.14a16.9 16.9 0 0 0-5.27 0L8.8 3.75a18.4 18.4 0 0 0-4.53 1.39C1.4 9.38.62 13.52 1.01 17.6a18.5 18.5 0 0 0 5.55 2.8l1.2-1.95a12 12 0 0 1-1.89-.91l.46-.36c3.64 1.69 7.59 1.69 11.19 0l.47.36c-.61.36-1.24.66-1.9.91l1.2 1.95a18.4 18.4 0 0 0 5.55-2.8c.46-4.73-.79-8.83-3.11-12.46ZM8.74 14.9c-1.09 0-1.98-.99-1.98-2.2s.87-2.2 1.98-2.2c1.12 0 2 .99 1.98 2.2 0 1.21-.87 2.2-1.98 2.2Zm6.52 0c-1.09 0-1.98-.99-1.98-2.2s.87-2.2 1.98-2.2c1.12 0 2 .99 1.98 2.2 0 1.21-.86 2.2-1.98 2.2Z"/></svg>;
 }
 
 export default function Home() {
   const [copied, setCopied] = useState(false);
-  const [announcements, setAnnouncements] = useState([]);
-  useEffect(() => { let active = true; supabase.from("news_posts").select("slug,title,excerpt,category,created_at").eq("published", true).order("created_at", { ascending: false }).limit(3).then(({ data }) => { if (active && data) setAnnouncements(data); }); return () => { active = false; }; }, []);
+  const [announcements, setAnnouncements] = useState([LAUNCH_ANNOUNCEMENT]);
+  useEffect(() => { let active = true; supabase.from("news_posts").select("slug,title,excerpt,category,created_at,image").eq("published", true).order("created_at", { ascending: false }).limit(3).then(({ data }) => { if (active && data) setAnnouncements([LAUNCH_ANNOUNCEMENT, ...data].slice(0, 4)); }); return () => { active = false; }; }, []);
   useSeo({ title: "VeldoraMC — Explore the Gamemodes", description: "Explore VeldoraMC Minecraft gamemodes, meet the community, and find your next adventure.", path: "/", image: "https://veldoramc.vercel.app/og-image.svg" });
 
   useEffect(() => {
@@ -69,13 +74,13 @@ export default function Home() {
         <div className="vld-kicker"><i /> THE VELDORAMC NETWORK <b>·</b> MINECRAFT</div>
         <h1 id="vld-hero-title">YOUR NEXT<br/><span>ADVENTURE STARTS HERE.</span></h1>
         <p className="vld-hero-copy">Discover a world of custom experiences, find your people, and choose the gamemode that fits your style. Your next adventure starts here.</p>
-        <div className="vld-hero-actions"><a className="vld-button vld-button-primary" href="#join">Enter the realm <ArrowRight size={17}/></a><a className="vld-button vld-button-glass" href={DISCORD_URL} target="_blank" rel="noreferrer"><DiscordIcon/> Join Discord</a></div>
+        <div className="vld-hero-actions"><a className="vld-button vld-button-primary" href="#join"><MinecraftMark/> Continue to Minecraft <ArrowRight size={17}/></a><a className="vld-button vld-button-glass" href={DISCORD_URL} target="_blank" rel="noreferrer"><DiscordIcon/> Join Discord</a></div>
         <div className="vld-hero-meta"><span><Gamepad2 size={13}/> MINECRAFT GAMEMODES</span><i/><span><Gamepad2 size={14}/> MINECRAFT SERVER</span><i/><span>JAVA + BEDROCK</span></div>
       </div>
       <a className="vld-scroll-cue" href="#realm"><span>EXPLORE GAMEMODES</span><ArrowDown size={15}/></a><div className="vld-hero-index">01 <span>/</span> 04</div>
     </section>
 
-    <section className="vld-announcements vld-section" id="announcements"><div className="vld-announcement-heading"><div><div className="vld-overline">FROM THE REALM <span>— LATEST UPDATES</span></div><h2>Word travels<br/><em>through the realm.</em></h2></div><Link className="vld-text-link" to="/news">All announcements <ArrowRight size={16}/></Link></div>{announcements.length ? <div className="vld-announcement-grid">{announcements.map((post) => <article className="vld-announcement-card" key={post.slug}><div className="vld-announcement-image"><img src={lifestealImage} alt="Minecraft Lifesteal landscape" loading="lazy"/></div><div className="vld-announcement-meta"><span><Newspaper size={13}/>{post.category || "UPDATE"}</span><time><CalendarDays size={13}/>{new Date(post.created_at).toLocaleDateString("en-IN",{day:"numeric",month:"short",year:"numeric"})}</time></div><h3>{post.title}</h3><p>{post.excerpt}</p><Link to={"/news/"+post.slug}>Read update <ArrowRight size={14}/></Link></article>)}</div> : <div className="vld-announcements-empty"><span className="vld-announcement-pulse"/><div><b>Nothing new has been posted just yet.</b><p>Official VeldoraMC updates will appear here as soon as they are published.</p></div><Link to="/news">Visit announcements <ArrowRight size={14}/></Link></div>}</section>
+    <section className="vld-announcements vld-section" id="announcements"><div className="vld-announcement-heading"><div><div className="vld-overline">FROM THE REALM <span>— LATEST UPDATES</span></div><h2>Word travels<br/><em>through the realm.</em></h2></div><Link className="vld-text-link" to="/news">All announcements <ArrowRight size={16}/></Link></div>{announcements.length ? <div className="vld-announcement-grid">{announcements.map((post, index) => <article className="vld-announcement-card" key={post.slug}><div className="vld-announcement-image"><img src={post.image || (index % 2 ? "https://image.pollinations.ai/prompt/Minecraft-inspired%20voxel%20fantasy%20adventure%20landscape%20with%20glowing%20portal%20and%20mountains%2C%20cinematic%20game%20art%2C%20no%20text?width=960&height=540&seed=4128&nologo=true" : "https://image.pollinations.ai/prompt/Minecraft%20voxel%20castle%20at%20sunset%20with%20glowing%20crystal%20and%20floating%20islands%2C%20premium%20game%20key%20art%2C%20no%20text?width=960&height=540&seed=4129&nologo=true")} alt={post.title + " — VeldoraMC artwork"} loading="lazy"/></div><div className="vld-announcement-meta"><span><Newspaper size={13}/>{post.category || "UPDATE"}</span><time><CalendarDays size={13}/>{new Date(post.created_at).toLocaleDateString("en-IN",{day:"numeric",month:"short",year:"numeric"})}</time></div><h3>{post.title}</h3><p>{post.excerpt}</p>{post.slug === "server-launch-soon" ? <a href={DISCORD_URL} target="_blank" rel="noreferrer">Join Discord for info <ArrowRight size={14}/></a> : <Link to={"/news/"+post.slug}>Read update <ArrowRight size={14}/></Link>}</article>)}</div> : <div className="vld-announcements-empty"><span className="vld-announcement-pulse"/><div><b>Nothing new has been posted just yet.</b><p>Official VeldoraMC updates will appear here as soon as they are published.</p></div><Link to="/news">Visit announcements <ArrowRight size={14}/></Link></div>}</section>
 
     <section className="vld-gamemodes vld-section" id="gamemodes">
       <div className="vld-section-heading"><div><div className="vld-overline">CHOOSE YOUR ADVENTURE <span>— EXPLORE</span></div><h2>Explore our<br/><em>gamemodes.</em></h2></div><p>Find your next way to play on VeldoraMC. Start with our featured experience and discover what makes the network yours.</p></div>
