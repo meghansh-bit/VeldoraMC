@@ -11,16 +11,16 @@ export default function News() {
   useEffect(() => { let alive = true; supabase.from("news_posts").select("slug,image,category,excerpt,title,created_at").eq("published", true).order("created_at", { ascending: false }).then(({ data }) => { if (alive && data) setManagedPosts(data.map(p => ({ ...p, date: new Date(p.created_at).toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" }), tone: "var(--color-info)", managed: true }))); }); return () => { alive = false; }; }, []);
   const posts = managedPosts;
   useSeo({
-    title: "News",
+    title: "Announcements",
     description:
       "Season recaps, community events, and every announcement from the VeldoraMC Minecraft server.",
     path: "/news",
   });
   return (
     <section className="mx-auto max-w-7xl px-4 py-6 sm:px-6 s">
-      <h1 className="title gold-gradient-text">Latest News</h1>
+      <h1 className="title gold-gradient-text">Announcements</h1>
       <p className="p">
-        Events, season recaps, and everything happening around the server.
+        Official VeldoraMC updates, events, maintenance notes, and community news.
       </p>
 
       {posts.length === 0 ? <div className="mt-8 rounded-xl border border-white/10 p-8 text-center"><h2 className="text-xl font-semibold">No announcements yet</h2><p className="mt-2 text-sm text-(--color-text-muted)">Check back soon for official VeldoraMC updates.</p></div> : <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
