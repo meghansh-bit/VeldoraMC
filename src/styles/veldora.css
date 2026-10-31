@@ -918,3 +918,11 @@ html{scroll-behavior:smooth;scroll-padding-top:86px}
  .vld-home *, .vld-home *:before, .vld-home *:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}
  .vld-scene-image,.vld-scene-glow,.vld-scene-grid,.vld-hero-content{transform:none!important}
 }
+
+
+/* Crimson navigation finish for the new landing page */
+header.fixed{background:rgba(8,7,9,.86)!important;border-bottom:1px solid rgba(243,38,69,.2)!important;box-shadow:0 12px 42px #0008}
+header.fixed nav[aria-label="Primary"]>a[aria-current="page"]{background:rgba(243,38,69,.12)!important;border-color:rgba(243,38,69,.25)!important;color:#fff!important}
+header.fixed nav[aria-label="Primary"]>a:hover{color:#fff!important}
+.vnav-login-button{border-color:rgba(243,38,69,.45)!important;background:linear-gradient(135deg,rgba(243,38,69,.17),rgba(120,20,40,.12))!important}
+.vnav-login-arrow{color:#ff7186!important}
