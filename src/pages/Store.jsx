@@ -1,4 +1,4 @@
-import { Coins, ArrowRight, Sparkles, ShieldCheck, Heart, ShoppingBag, PackageCheck, Zap, UserRound, ShoppingCart, Gem, BadgeCheck } from "lucide-react";
+import { Coins, ArrowRight, Sparkles, ShieldCheck, Heart, ShoppingBag, PackageCheck, Zap, ShoppingCart, Gem, BadgeCheck } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { supabase } from "../lib/supabase";
@@ -26,7 +26,6 @@ export default function Store() {
         <p>Discover Velora packs and server exclusives. Every purchase helps support the world we build together.</p>
         <div className="vstore-hero-actions">
           <a href="#coin-packs" className="vstore-primary">Explore the store <ArrowRight size={17}/></a>
-          <Link to="/store/account" className="vstore-account-cta"><UserRound size={16}/> Store account</Link>
           <Link to="/cart" className="vstore-account-cta"><ShoppingCart size={16}/> Cart ({count})</Link>
         </div>
         <div className="vstore-trust"><span><ShieldCheck size={15}/> Official server store</span><span><Heart size={15}/> Supports VeldoraMC</span><span><BadgeCheck size={15}/> INR pricing</span></div>
