@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#09090d"/><stop offset=".55" stop-color="#1a0c12"/><stop offset="1" stop-color="#08080b"/></linearGradient>
+  <radialGradient id="glow"><stop stop-color="#f32645" stop-opacity=".28"/><stop offset="1" stop-color="#f32645" stop-opacity="0"/></radialGradient>
+  <pattern id="grid" width="56" height="56" patternUnits="userSpaceOnUse"><path d="M56 0H0V56" fill="none" stroke="#fff" stroke-opacity=".07"/></pattern>
+</defs>
+<rect width="1200" height="630" fill="url(#bg)"/><rect width="1200" height="630" fill="url(#grid)"/>
+<circle cx="930" cy="315" r="390" fill="url(#glow)"/>
+<g transform="translate(845 165)" shape-rendering="crispEdges"><path fill="#310813" d="M0 34h32V0h70v34h34V0h70v34h34v100h-17v34h-34v34h-34v34h-34v-17h-34v-34H53v-34H34v-34H0z"/><path fill="#f32645" d="M17 17h68v34h34V17h68v17h17v83h-17v34h-34v34h-34v17h-17v-17H85v-34H68v-34H51V85H34V51H17z"/><path fill="#ff8791" d="M17 17h51v17h17v34H51V51H17z"/></g>
+<text x="90" y="235" fill="#d5c3c7" font-family="Arial,sans-serif" font-size="20" font-weight="700" letter-spacing="8">THE LIFESTEAL REALM</text>
+<text x="82" y="350" fill="#fff" font-family="Arial,sans-serif" font-size="100" font-weight="900" letter-spacing="-5">VELDORA<tspan fill="#f32645">MC</tspan></text>
+<text x="92" y="420" fill="#f32645" font-family="Arial,sans-serif" font-size="38" font-weight="900" letter-spacing="3">EVERY HEART HAS A STORY.</text>
+<text x="94" y="490" fill="#c3b8bb" font-family="Arial,sans-serif" font-size="21">Build your sanctuary. Choose your allies. Defend what matters.</text>
+<path d="M92 535H450" stroke="#f32645" stroke-width="4"/>
+</svg>
