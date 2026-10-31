@@ -63,12 +63,12 @@ export default function Home() {
       <div className="vld-hero-content">
         <a className="vld-brand" href="#top" aria-label="VeldoraMC home"><span className="vld-brand-mark"><HeartMark /></span><span className="vld-brand-name">VELDORA<span>MC</span></span></a>
         <div className="vld-kicker"><i /> THE VELDORAMC NETWORK <b>·</b> MINECRAFT</div>
-        <h1 id="vld-hero-title">EVERY HEART<br/><span>HAS A PRICE.</span></h1>
+        <h1 id="vld-hero-title">YOUR NEXT<br/><span>ADVENTURE STARTS HERE.</span></h1>
         <p className="vld-hero-copy">Discover a world of custom experiences, find your people, and choose the gamemode that fits your style. Your next adventure starts here.</p>
         <div className="vld-hero-actions"><a className="vld-button vld-button-primary" href="#join">Enter the realm <ArrowRight size={17}/></a><a className="vld-button vld-button-glass" href={DISCORD_URL} target="_blank" rel="noreferrer"><DiscordIcon/> Join Discord</a></div>
         <div className="vld-hero-meta"><span><Gamepad2 size={13}/> MINECRAFT GAMEMODES</span><i/><span><Gamepad2 size={14}/> MINECRAFT SERVER</span><i/><span>JAVA EDITION</span></div>
       </div>
-      <a className="vld-scroll-cue" href="#realm"><span>DISCOVER THE REALM</span><ArrowDown size={15}/></a><div className="vld-hero-index">01 <span>/</span> 04</div>
+      <a className="vld-scroll-cue" href="#realm"><span>EXPLORE GAMEMODES</span><ArrowDown size={15}/></a><div className="vld-hero-index">01 <span>/</span> 04</div>
     </section>
 
     <section className="vld-announcements vld-section" id="announcements"><div className="vld-announcement-heading"><div><div className="vld-overline">FROM THE REALM <span>— LATEST UPDATES</span></div><h2>Word travels<br/><em>through the realm.</em></h2></div><Link className="vld-text-link" to="/news">All announcements <ArrowRight size={16}/></Link></div>{announcements.length ? <div className="vld-announcement-grid">{announcements.map((post) => <article className="vld-announcement-card" key={post.slug}><div className="vld-announcement-meta"><span><Newspaper size={13}/>{post.category || "UPDATE"}</span><time><CalendarDays size={13}/>{new Date(post.created_at).toLocaleDateString("en-IN",{day:"numeric",month:"short",year:"numeric"})}</time></div><h3>{post.title}</h3><p>{post.excerpt}</p><Link to={"/news/"+post.slug}>Read update <ArrowRight size={14}/></Link></article>)}</div> : <div className="vld-announcements-empty"><span className="vld-announcement-pulse"/><div><b>Nothing new has been posted just yet.</b><p>Official VeldoraMC updates will appear here as soon as they are published.</p></div><Link to="/news">Visit announcements <ArrowRight size={14}/></Link></div>}</section>
@@ -85,11 +85,11 @@ export default function Home() {
     </section>
 
     <section className="vld-world vld-section" id="how-it-works">
-      <div className="vld-section-heading"><div><div className="vld-overline">THE WORLD IS YOURS <span>— 002</span></div><h2>Make every<br/><em>move matter.</em></h2></div><p>Every gamemode brings a different way to play. Pick your path, bring your friends, and make the experience your own.</p></div>
+      <div className="vld-section-heading"><div><div className="vld-overline">YOUR NEXT ADVENTURE <span>— 002</span></div><h2>Make every<br/><em>move matter.</em></h2></div><p>Every gamemode brings a different way to play. Pick your path, bring your friends, and make the experience your own.</p></div>
       <div className="vld-feature-grid">
-        <article className="vld-feature vld-feature-large"><div className="vld-feature-top"><span>01 / SURVIVE</span><Heart size={21}/></div><div className="vld-feature-bottom"><h3>Protect your hearts.</h3><p>Every encounter matters. Stay prepared, stay alert, and never take your last heart for granted.</p></div><div className="vld-feature-watermark">♥</div></article>
-        <article className="vld-feature"><div className="vld-feature-top"><span>02 / BUILD</span><Shield size={21}/></div><div className="vld-feature-bottom"><h3>Build your stronghold.</h3><p>Create a base worth defending and a home worth returning to.</p></div><div className="vld-feature-watermark">⌂</div></article>
-        <article className="vld-feature"><div className="vld-feature-top"><span>03 / CONQUER</span><Zap size={21}/></div><div className="vld-feature-bottom"><h3>Build your legacy.</h3><p>Make alliances, meet rivals, and earn your place in the realm.</p></div><div className="vld-feature-watermark">⚔</div></article>
+        <article className="vld-feature vld-feature-large"><div className="vld-feature-top"><span>01 / SURVIVE</span><Heart size={21}/></div><div className="vld-feature-bottom"><h3>Find your next challenge.</h3><p>Discover a new way to play, take on fresh challenges, and enjoy the journey with your friends.</p></div><div className="vld-feature-watermark">♥</div></article>
+        <article className="vld-feature"><div className="vld-feature-top"><span>02 / BUILD</span><Shield size={21}/></div><div className="vld-feature-bottom"><h3>Create your world.</h3><p>Build, explore, and make a place that feels like yours.</p></div><div className="vld-feature-watermark">⌂</div></article>
+        <article className="vld-feature"><div className="vld-feature-top"><span>03 / CONQUER</span><Zap size={21}/></div><div className="vld-feature-bottom"><h3>Play together.</h3><p>Meet new players, team up with friends, and shape the community.</p></div><div className="vld-feature-watermark">⚔</div></article>
       </div>
     </section>
 
