@@ -1283,3 +1283,125 @@ img,button{image-rendering:auto}
 @keyframes vld-copy-burst{0%{opacity:1;transform:translate(-50%,-50%) scale(.35)}100%{opacity:0;transform:translate(-50%,-50%) scale(1.5)}}
 @keyframes vld-copy-ring{0%{opacity:.9;transform:scale(.86)}100%{opacity:0;transform:scale(1.18)}}
 @media(prefers-reduced-motion:reduce){.vld-copy-button.is-copied:before,.vld-copy-button.is-copied:after{animation:none;opacity:0}}
+
+
+/* VeldoraMC visual pass: animated world atmosphere, stronger color and card art */
+:root{
+  --color-bg:#080d18;
+  --color-bg-soft:#111b2d;
+  --color-header:rgba(8,13,24,.9);
+  --color-border:#26364d;
+  --color-text:#f5fbff;
+  --color-text-muted:#a9b9cb;
+  --color-text-dim:#71849b;
+  --color-primary:#22e6d1;
+  --color-info:#65bfff;
+  --color-pink:#ffbd72;
+  --vld-cyan:#22e6d1;
+  --vld-purple:#65bfff;
+  --vld-amber:#ffbd72;
+}
+html,body{background:#080d18!important}
+.vld-site-header{background:rgba(8,13,24,.88)!important;border-color:#9dd8ed24!important;box-shadow:0 16px 55px #020611a8!important}
+.vld-main-nav a:hover,.vld-main-nav a[aria-current=page],.vld-nav-link:hover,.vld-nav-link.is-active{background:#22e6d112!important;color:#f5ffff!important}
+.vld-main-nav a[aria-current=page],.vld-nav-link.is-active{box-shadow:inset 0 -2px #22e6d1!important}
+.vld-microsoft-cta{border-color:#22e6d17a!important;background:linear-gradient(110deg,#22e6d11f,#65bfff12)!important;color:#eaffff!important}
+.vld-microsoft-cta:hover{background:#22e6d12c!important;border-color:#22e6d1!important;box-shadow:0 8px 28px #22e6d11e}
+.vld-microsoft-mark i{background:#22e6d1!important}.vld-microsoft-mark i:nth-child(2),.vld-microsoft-mark i:nth-child(3){background:#65bfff!important}
+.vld-home,.vld-gamemodes-page{background:#080d18!important;color:#f5fbff!important}
+.vld-home .vld-hero{background:#080d18!important}
+.vld-home .vld-hero h1 span,.vld-home .vld-intro-copy h2 em,.vld-home .vld-section-heading h2 em,.vld-home .vld-announcement-heading h2 em{background:linear-gradient(100deg,#22e6d1 8%,#65bfff 58%,#ffbd72 100%);background-clip:text;-webkit-background-clip:text;color:transparent!important}
+.vld-home .vld-kicker,.vld-home .vld-overline,.vld-gamemodes-page .vld-overline{color:#6cefe0!important}
+.vld-home .vld-button-primary,.vld-gamemodes-page .vld-button-primary{background:linear-gradient(115deg,#22e6d1,#65bfff)!important;border-color:#9afff4!important;color:#06131c!important;box-shadow:0 10px 38px #22e6d12b!important}
+.vld-home .vld-button-primary:hover,.vld-gamemodes-page .vld-button-primary:hover{filter:brightness(1.12);transform:translateY(-3px)}
+.vld-home .vld-button-glass{border-color:#a7d5e82b!important;background:#0c1727a8!important}
+.vld-home .vld-scene{z-index:0!important;inset:-5% 0 0!important}
+.vld-home .vld-scene-image{
+  opacity:.78!important;filter:saturate(.9) contrast(1.08) brightness(.82)!important;
+  animation:vld-world-pan 34s ease-in-out infinite alternate;
+}
+.vld-home .vld-scene:before{
+  content:"";position:absolute;z-index:1;inset:-25%;
+  background:
+    radial-gradient(ellipse at 18% 30%,#22e6d13b 0%,transparent 34%),
+    radial-gradient(ellipse at 78% 24%,#367eea3b 0%,transparent 32%),
+    radial-gradient(ellipse at 65% 78%,#ffbd7220 0%,transparent 30%);
+  filter:blur(35px);animation:vld-aurora-drift 16s ease-in-out infinite alternate;pointer-events:none;
+}
+.vld-home .vld-scene:after{
+  content:"";position:absolute;z-index:2;inset:0;opacity:.28;pointer-events:none;
+  background-image:radial-gradient(2px 2px at 12% 23%,#d6ffff 50%,transparent 100%),radial-gradient(1.5px 1.5px at 73% 18%,#b7dfff 50%,transparent 100%),radial-gradient(2px 2px at 87% 63%,#fff0d4 50%,transparent 100%),radial-gradient(1.5px 1.5px at 41% 72%,#d6ffff 50%,transparent 100%),radial-gradient(2px 2px at 28% 88%,#a8eaff 50%,transparent 100%);
+  background-size:360px 280px;animation:vld-stars-drift 28s linear infinite;
+}
+.vld-home .vld-scene-shade{z-index:3!important;background:linear-gradient(90deg,rgba(5,10,20,.94) 0%,rgba(5,10,20,.78) 37%,rgba(5,10,20,.22) 100%),linear-gradient(0deg,#080d18 0%,transparent 48%)!important}
+.vld-scene-canvas{z-index:4!important;opacity:1!important}
+.vld-home .vld-hero-content,.vld-home .vld-scroll-cue,.vld-home .vld-hero-index{z-index:6!important}
+.vld-home .vld-announcements,.vld-home .vld-gamemodes,.vld-home .vld-world,.vld-home .vld-about{position:relative}
+.vld-announcement-card,.vld-home .vld-feature,.vld-gamemode-card,.vld-about-panel{
+  border:1px solid #5a819b45!important;border-radius:17px!important;
+  background:linear-gradient(145deg,#14243a,#0d1728 85%)!important;
+  box-shadow:0 18px 55px #0005!important;
+}
+.vld-announcement-card:hover,.vld-home .vld-feature:hover,.vld-gamemode-card:hover{
+  border-color:#22e6d1a0!important;box-shadow:0 24px 65px #0008,0 0 28px #22e6d111!important;
+}
+.vld-announcement-card{padding:0!important;overflow:hidden}
+.vld-announcement-image{height:145px;position:relative;overflow:hidden;background:#101d30}
+.vld-announcement-image:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,#111c2d 0%,transparent 80%)}
+.vld-announcement-image img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.88) contrast(1.05);transition:transform .7s cubic-bezier(.2,.7,.2,1)}
+.vld-announcement-card:hover .vld-announcement-image img{transform:scale(1.08)}
+.vld-announcement-card .vld-announcement-meta,.vld-announcement-card h3,.vld-announcement-card p,.vld-announcement-card>a{margin-left:22px;margin-right:22px}
+.vld-announcement-card .vld-announcement-meta{margin-top:3px}
+.vld-announcement-card h3{margin-top:17px!important}
+.vld-announcement-card>a{display:inline-flex;margin-bottom:22px}
+.vld-announcement-meta svg,.vld-announcement-card>a,.vld-gamemode-link{color:#22e6d1!important}
+.vld-announcement-card h3,.vld-home .vld-feature h3,.vld-gamemode-copy h3{color:#f5fbff!important}
+.vld-announcement-card p,.vld-home .vld-feature p,.vld-gamemode-copy p{color:#b1c0d0!important}
+.vld-home .vld-feature{isolation:isolate;min-height:330px;padding:24px!important}
+.vld-home .vld-feature-image{position:absolute;inset:0;z-index:-1;overflow:hidden;opacity:.4;pointer-events:none}
+.vld-home .vld-feature-image:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#0b17234d 0%,#0d1728bd 68%,#0d1728 100%)}
+.vld-home .vld-feature-image img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.9);transition:transform .8s ease}
+.vld-home .vld-feature:hover .vld-feature-image img{transform:scale(1.07)}
+.vld-home .vld-feature-top,.vld-home .vld-feature-bottom{position:relative;z-index:2}
+.vld-home .vld-feature-top,.vld-home .vld-feature-top svg{color:#22e6d1!important}
+.vld-home .vld-feature-watermark{z-index:1;color:#22e6d1!important;opacity:.12}
+.vld-gamemode-card{background:#111c2d!important}
+.vld-gamemode-art:after{background:linear-gradient(90deg,transparent 35%,#111c2d 100%),linear-gradient(0deg,#111c2d80,transparent 65%)!important}
+.vld-gamemode-copy{background:linear-gradient(145deg,#14243a,#101b2d)!important}
+.vld-edition-badges span:first-child{border-color:#22e6d16b!important;color:#73f7e8!important}
+.vld-edition-badges span:last-child{border-color:#ffbd726b!important;color:#ffcf91!important}
+.vld-home .vld-art-ring{border-color:#22e6d14a!important}
+.vld-home .vld-art-heart{filter:drop-shadow(0 12px 38px #22e6d14d)!important}
+.vld-home .vld-join{background:radial-gradient(ellipse at 50% 40%,#22e6d11b,transparent 58%)!important}
+.vld-home .vld-ip-card{border-color:#22e6d16b!important;background:#111d2c!important}
+.vld-home .vld-ip-card code{color:#f5ffff!important}
+.vld-home .vld-copy-button{background:linear-gradient(110deg,#22e6d1,#65bfff)!important;color:#06131c!important}
+.vld-gamemodes-page{background:#080d18!important}
+.vld-gamemodes-hero h1 em,.vld-gamemode-detail-copy h2 em{color:#22e6d1!important}
+.vld-gamemode-detail-art,.vld-gamemode-features .vld-feature{border-color:#38516c!important}
+.vld-gamemode-detail-art span{background:#0d1b2de8!important;color:#72f1e6!important}
+.vld-copy-server{border-color:#22e6d16b!important;background:#22e6d10e!important;color:#bffcf7!important}
+.vld-copy-server code{color:#fff!important}
+.vstore-redesign{background:#080d18!important;color:#f5fbff!important}
+.vstore-redesign .vstore-hero{background:radial-gradient(ellipse at 78% 50%,#22e6d122,transparent 42%),linear-gradient(120deg,#080d18,#14243a 60%,#080d18)!important}
+.vstore-redesign .vstore-kicker,.vstore-redesign .vstore-section-head h2 em{color:#22e6d1!important}
+.vstore-redesign .vstore-primary{background:linear-gradient(110deg,#22e6d1,#65bfff)!important;border-color:#9afff4!important;color:#06131c!important}
+.vstore-redesign .vstore-tab-panel,.vstore-redesign .store-product-card,.vstore-benefit-strip,.vstore-help{background:#111b2d!important;border-color:#30445e!important}
+.vstore-redesign .store-product-card:hover{border-color:#22e6d1!important}
+.vstore-managed-buy strong,.vstore-benefit-strip svg,.vstore-help-icon{color:#22e6d1!important}
+.portal-page,.portal-inner,.support-page{background:#080d18!important;color:#f5fbff!important}
+.portal-card,.support-sidebar,.support-main,.support-auth-card,.support-welcome{background:#111b2d!important;border-color:#30445e!important}
+.site-footer{background:#080d18!important;border-color:#26364d!important}
+@keyframes vld-world-pan{0%{transform:translate3d(-1.5%,0,0) scale(1.08)}100%{transform:translate3d(1.5%,-1.2%,0) scale(1.14)}}
+@keyframes vld-aurora-drift{0%{transform:translate3d(-4%,1%,0) rotate(-3deg) scale(.95)}100%{transform:translate3d(5%,-3%,0) rotate(4deg) scale(1.12)}}
+@keyframes vld-stars-drift{0%{background-position:0 0,40px 80px,120px 30px,200px 160px,80px 210px}100%{background-position:360px 280px,400px 360px,480px 310px,560px 440px,440px 490px}}
+@media(max-width:640px){
+  .vld-home .vld-hero{min-height:760px}
+  .vld-home .vld-scene-image{animation-duration:42s;opacity:.72!important}
+  .vld-home .vld-feature{min-height:290px}
+  .vld-announcement-image{height:165px}
+}
+@media(prefers-reduced-motion:reduce){
+  .vld-home .vld-scene-image,.vld-home .vld-scene:before,.vld-home .vld-scene:after{animation:none!important}
+  .vld-announcement-image img,.vld-home .vld-feature-image img{transition:none!important}
+}
