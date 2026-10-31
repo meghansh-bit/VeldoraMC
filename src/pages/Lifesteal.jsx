@@ -6,9 +6,9 @@ import lifestealImage from "../assets/hero/rear.png";
 import "./Lifesteal.css";
 
 const inpvpImages = {
-  base: "https://cdn.gatherings.franchise.minecraft-services.net/public/discovery/inpvp/msmp_base.png",
-  hearts: "https://cdn.gatherings.franchise.minecraft-services.net/public/discovery/inpvp/msmp_lifesteal.png",
-  crystal: "https://cdn.gatherings.franchise.minecraft-services.net/public/discovery/inpvp/msmp_crystal_pvp.png",
+  base: "https://image.pollinations.ai/prompt/Minecraft%20voxel%20medieval%20survival%20base%20built%20into%20a%20mountain%2C%20fantasy%20block%20game%20art%2C%20cinematic%20lighting%2C%20no%20text?width=900&height=560&seed=5211&nologo=true",
+  hearts: "https://image.pollinations.ai/prompt/Minecraft%20voxel%20fantasy%20heart%20crystal%20floating%20above%20a%20dark%20blocky%20arena%2C%20epic%20game%20key%20art%2C%20no%20text?width=900&height=560&seed=5212&nologo=true",
+  crystal: "https://image.pollinations.ai/prompt/Minecraft%20voxel%20crystal%20PvP%20arena%20with%20glowing%20amethyst%20crystals%20and%20dramatic%20sky%2C%20cinematic%20block%20game%20art%2C%20no%20text?width=900&height=560&seed=5213&nologo=true",
 };
 
 const features = [
@@ -41,6 +41,10 @@ export default function Lifesteal() {
         <a href="#features" className="vl-primary">EXPLORE THE GAMEMODE <ArrowRight size={17}/></a>
       </div>
       <div className="vl-hero-label"><span>01 / THE EXPERIENCE</span><span>YOUR STORY STARTS HERE</span></div>
+    </section>
+    <section className="vl-launch-announcement">
+      <div className="vl-launch-art"><img src="https://image.pollinations.ai/prompt/epic%20Minecraft-inspired%20fantasy%20red%20castle%20server%20launch%20poster%2C%20voxel%20landscape%2C%20cinematic%20sunset%2C%20no%20text?width=1000&height=520&seed=5214&nologo=true" alt="Fantasy Minecraft-style VeldoraMC launch artwork"/></div>
+      <div className="vl-launch-copy"><span className="vl-kicker">OFFICIAL SERVER UPDATE</span><h2>THE LAUNCH IS<br/><em>ONLY DAYS AWAY.</em></h2><p>VeldoraMC is almost ready. Get your squad together and join our Discord for the official launch date, sneak peeks, and important updates.</p><a className="vl-primary" href="https://discord.gg/NruxFSnrUe" target="_blank" rel="noreferrer">JOIN DISCORD FOR INFO <ArrowRight size={16}/></a></div>
     </section>
     <section id="features" className="vl-features">
       <div className="vl-section-heading"><span className="vl-kicker">MORE THAN SURVIVAL</span><h2>WHAT IS <em>LIFESTEAL?</em></h2><p>A survival world where hearts are power, alliances are fragile, and the next fight is never far away.</p></div>
