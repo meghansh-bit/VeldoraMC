@@ -1405,3 +1405,38 @@ html,body{background:#080d18!important}
   .vld-home .vld-scene-image,.vld-home .vld-scene:before,.vld-home .vld-scene:after{animation:none!important}
   .vld-announcement-image img,.vld-home .vld-feature-image img{transition:none!important}
 }
+
+
+/* One consistent Veldora gradient theme across every page and navigation state */
+:root{
+  --vld-theme-gradient:linear-gradient(105deg,#8b5cf6 0%,#3b82f6 100%);
+  --vld-theme-start:#8b5cf6;
+  --vld-theme-end:#3b82f6;
+  --color-primary:#8b5cf6;
+  --color-info:#3b82f6;
+  --color-pink:#8b5cf6;
+  --color-border:rgba(139,92,246,.24);
+}
+::selection{background:#7656df;color:#fff}
+header.fixed, .vld-site-header{border-image:none!important;border-bottom:1px solid rgba(139,92,246,.22)!important}
+header nav a[aria-current="page"],header nav button[aria-current="page"],
+.vld-main-nav a[aria-current="page"],.vld-main-nav button[aria-current="page"]{
+  background:var(--vld-theme-gradient)!important;color:#fff!important;border-color:transparent!important;
+}
+header .pixel-btn,.vld-microsoft-cta,.vld-header-cart,.vld-button-primary,.vld-copy-button,
+.vld-text-link:hover,.vld-gamemode-link,.vld-announcement-card>a{
+  background:var(--vld-theme-gradient)!important;color:#fff!important;border-color:transparent!important;
+}
+.vld-brand-mark,.vld-header-cart,.vld-microsoft-cta,.vld-button-primary,.vld-copy-button{
+  box-shadow:0 8px 30px rgba(91,86,220,.22);
+}
+.vld-brand-name span,.vld-overline span,.vld-section-heading em,.vld-announcement-heading em,
+.vld-intro-copy em,.vld-join em,.vld-hero-content h1 span,.vld-gamemode-link,
+.vld-feature-top svg,.vld-about-points svg{background:var(--vld-theme-gradient);background-clip:text;-webkit-background-clip:text;color:transparent}
+.vld-button-primary:hover,.vld-microsoft-cta:hover,.vld-header-cart:hover,.vld-copy-button:hover{filter:brightness(1.12);transform:translateY(-2px)}
+.vld-announcement-card,.vld-gamemode-card,.vld-feature,.vld-about-panel,.vld-ip-card{
+  border-color:rgba(139,92,246,.22)!important;
+}
+.vld-announcement-card:hover,.vld-gamemode-card:hover,.vld-feature:hover{border-color:rgba(59,130,246,.65)!important}
+.vld-site-header .vld-main-nav a:hover,.vld-site-header .vld-mobile-nav a:hover{color:#a5b4fc}
+.vld-announcement-card>a{display:inline-flex;align-items:center;gap:7px;padding:8px 12px;border-radius:8px;width:max-content}
