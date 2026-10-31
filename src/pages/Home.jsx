@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
-import { ArrowDown, ArrowRight, Check, Copy, Crown, Heart, Shield, Users, Zap, Gamepad2, MessageCircle, Sparkles } from "lucide-react";
+import { Link } from "react-router-dom";
+import { supabase } from "../lib/supabase";
+import { ArrowDown, ArrowRight, Check, Copy, Crown, Heart, Shield, Users, Zap, Gamepad2, MessageCircle, Sparkles, CalendarDays, Newspaper } from "lucide-react";
 import { useSeo } from "../hooks/useSeo";
 import lifestealImage from "../assets/hero/rear.png";
 
@@ -20,6 +22,8 @@ function DiscordIcon() {
 
 export default function Home() {
   const [copied, setCopied] = useState(false);
+  const [announcements, setAnnouncements] = useState([]);
+  useEffect(() => { let active = true; supabase.from("news_posts").select("slug,title,excerpt,category,created_at").eq("published", true).order("created_at", { ascending: false }).limit(3).then(({ data }) => { if (active && data) setAnnouncements(data); }); return () => { active = false; }; }, []);
   useSeo({ title: "VeldoraMC — Enter the Lifesteal Realm", description: "Enter VeldoraMC, a Minecraft Lifesteal realm. Build your base, forge alliances, and compete for every heart. Join the community.", path: "/", image: "https://veldoramc.vercel.app/og-image.svg" });
 
   useEffect(() => {
@@ -66,6 +70,8 @@ export default function Home() {
       </div>
       <a className="vld-scroll-cue" href="#realm"><span>DISCOVER THE REALM</span><ArrowDown size={15}/></a><div className="vld-hero-index">01 <span>/</span> 04</div>
     </section>
+
+    <section className="vld-announcements vld-section" id="announcements"><div className="vld-announcement-heading"><div><div className="vld-overline">FROM THE REALM <span>— LATEST UPDATES</span></div><h2>Word travels<br/><em>through the realm.</em></h2></div><Link className="vld-text-link" to="/news">All announcements <ArrowRight size={16}/></Link></div>{announcements.length ? <div className="vld-announcement-grid">{announcements.map((post) => <article className="vld-announcement-card" key={post.slug}><div className="vld-announcement-meta"><span><Newspaper size={13}/>{post.category || "UPDATE"}</span><time><CalendarDays size={13}/>{new Date(post.created_at).toLocaleDateString("en-IN",{day:"numeric",month:"short",year:"numeric"})}</time></div><h3>{post.title}</h3><p>{post.excerpt}</p><Link to={"/news/"+post.slug}>Read update <ArrowRight size={14}/></Link></article>)}</div> : <div className="vld-announcements-empty"><span className="vld-announcement-pulse"/><div><b>Nothing new has been posted just yet.</b><p>Official VeldoraMC updates will appear here as soon as they are published.</p></div><Link to="/news">Visit announcements <ArrowRight size={14}/></Link></div>}</section>
 
     <section className="vld-intro vld-section" id="realm">
       <div className="vld-intro-art" aria-hidden="true"><div className="vld-art-ring vld-ring-a"/><div className="vld-art-ring vld-ring-b"/><div className="vld-art-heart"><HeartMark/></div><span className="vld-art-caption">ONE HEART. ONE LIFE. ONE LEGACY.</span></div>
