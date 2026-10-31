@@ -1,8 +1,7 @@
 export const navItems = [
-  { to: "/", label: "Home", end: true },
-  { to: "/news", label: "Announcements" },
-  { to: "/gamemodes", label: "Gamemodes" },
-  { to: "/staff", label: "Staff" },
+  { to: "/gamemodes", label: "Servers" },
+  { to: "/news", label: "News" },
+  { to: "/rules", label: "Rules" },
   { to: "/store", label: "Store" },
-  { to: "/support", label: "Support" },
+  { to: "/community", label: "Community" },
 ];
