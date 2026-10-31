@@ -24,7 +24,7 @@ export default function Home() {
   const [copied, setCopied] = useState(false);
   const [announcements, setAnnouncements] = useState([]);
   useEffect(() => { let active = true; supabase.from("news_posts").select("slug,title,excerpt,category,created_at").eq("published", true).order("created_at", { ascending: false }).limit(3).then(({ data }) => { if (active && data) setAnnouncements(data); }); return () => { active = false; }; }, []);
-  useSeo({ title: "VeldoraMC — Enter the Lifesteal Realm", description: "Enter VeldoraMC, a Minecraft Lifesteal realm. Build your base, forge alliances, and compete for every heart. Join the community.", path: "/", image: "https://veldoramc.vercel.app/og-image.svg" });
+  useSeo({ title: "VeldoraMC — Explore the Gamemodes", description: "Explore VeldoraMC Minecraft gamemodes, meet the community, and find your next adventure.", path: "/", image: "https://veldoramc.vercel.app/og-image.svg" });
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return undefined;
@@ -62,24 +62,30 @@ export default function Home() {
       </div>
       <div className="vld-hero-content">
         <a className="vld-brand" href="#top" aria-label="VeldoraMC home"><span className="vld-brand-mark"><HeartMark /></span><span className="vld-brand-name">VELDORA<span>MC</span></span></a>
-        <div className="vld-kicker"><i /> THE LIFESTEAL REALM <b>·</b> MINECRAFT</div>
+        <div className="vld-kicker"><i /> THE VELDORAMC NETWORK <b>·</b> MINECRAFT</div>
         <h1 id="vld-hero-title">EVERY HEART<br/><span>HAS A PRICE.</span></h1>
-        <p className="vld-hero-copy">Build your sanctuary. Choose your allies. Defend what matters. In VeldoraMC, every heart tells a story — and yours is waiting to be written.</p>
+        <p className="vld-hero-copy">Discover a world of custom experiences, find your people, and choose the gamemode that fits your style. Your next adventure starts here.</p>
         <div className="vld-hero-actions"><a className="vld-button vld-button-primary" href="#join">Enter the realm <ArrowRight size={17}/></a><a className="vld-button vld-button-glass" href={DISCORD_URL} target="_blank" rel="noreferrer"><DiscordIcon/> Join Discord</a></div>
-        <div className="vld-hero-meta"><span><Heart size={13}/> LIFESTEAL SURVIVAL</span><i/><span><Gamepad2 size={14}/> MINECRAFT SERVER</span><i/><span>JAVA EDITION</span></div>
+        <div className="vld-hero-meta"><span><Gamepad2 size={13}/> MINECRAFT GAMEMODES</span><i/><span><Gamepad2 size={14}/> MINECRAFT SERVER</span><i/><span>JAVA EDITION</span></div>
       </div>
       <a className="vld-scroll-cue" href="#realm"><span>DISCOVER THE REALM</span><ArrowDown size={15}/></a><div className="vld-hero-index">01 <span>/</span> 04</div>
     </section>
 
     <section className="vld-announcements vld-section" id="announcements"><div className="vld-announcement-heading"><div><div className="vld-overline">FROM THE REALM <span>— LATEST UPDATES</span></div><h2>Word travels<br/><em>through the realm.</em></h2></div><Link className="vld-text-link" to="/news">All announcements <ArrowRight size={16}/></Link></div>{announcements.length ? <div className="vld-announcement-grid">{announcements.map((post) => <article className="vld-announcement-card" key={post.slug}><div className="vld-announcement-meta"><span><Newspaper size={13}/>{post.category || "UPDATE"}</span><time><CalendarDays size={13}/>{new Date(post.created_at).toLocaleDateString("en-IN",{day:"numeric",month:"short",year:"numeric"})}</time></div><h3>{post.title}</h3><p>{post.excerpt}</p><Link to={"/news/"+post.slug}>Read update <ArrowRight size={14}/></Link></article>)}</div> : <div className="vld-announcements-empty"><span className="vld-announcement-pulse"/><div><b>Nothing new has been posted just yet.</b><p>Official VeldoraMC updates will appear here as soon as they are published.</p></div><Link to="/news">Visit announcements <ArrowRight size={14}/></Link></div>}</section>
 
+    <section className="vld-gamemodes vld-section" id="gamemodes">
+      <div className="vld-section-heading"><div><div className="vld-overline">CHOOSE YOUR ADVENTURE <span>— EXPLORE</span></div><h2>Explore our<br/><em>gamemodes.</em></h2></div><p>Find your next way to play on VeldoraMC. Start with our featured experience and discover what makes the network yours.</p></div>
+      <Link to="/gamemodes" className="vld-gamemode-card"><div className="vld-gamemode-art"><img src={lifestealImage} alt="Minecraft Lifesteal world"/><span className="vld-gamemode-status"><i/> FEATURED GAMEMODE</span><span className="vld-gamemode-number">01</span></div><div className="vld-gamemode-copy"><span className="vld-overline">SURVIVAL • COMPETITIVE • COMMUNITY</span><h3>Lifesteal</h3><p>Build your base, team up with friends, explore the world, and grow your hearts through the featured VeldoraMC survival experience.</p><span className="vld-gamemode-link">Explore Lifesteal <ArrowRight size={16}/></span></div></Link>
+      <div className="vld-gamemode-note"><Sparkles size={15}/> More gamemodes and experiences will be revealed as the network grows.</div>
+    </section>
+
     <section className="vld-intro vld-section" id="realm">
       <div className="vld-intro-art" aria-hidden="true"><div className="vld-art-ring vld-ring-a"/><div className="vld-art-ring vld-ring-b"/><div className="vld-art-heart"><HeartMark/></div><span className="vld-art-caption">ONE HEART. ONE LIFE. ONE LEGACY.</span></div>
-      <div className="vld-intro-copy"><div className="vld-overline">WELCOME TO VELDORAMC <span>— 001</span></div><h2>A realm where<br/><em>every heart counts.</em></h2><p>VeldoraMC is a Lifesteal survival world built around strategic encounters, clever bases, shifting alliances, and the stories players create together.</p><p>Grow stronger, protect your hearts, and make your name mean something.</p><a className="vld-text-link" href="#how-it-works">Discover how it works <ArrowRight size={16}/></a></div>
+      <div className="vld-intro-copy"><div className="vld-overline">WELCOME TO VELDORAMC <span>— 001</span></div><h2>A network where<br/><em>every story begins.</em></h2><p>VeldoraMC brings players together through memorable Minecraft experiences, an active community, and a world that keeps growing.</p><p>Explore our gamemodes, meet your next teammates, and make your mark on the network.</p><a className="vld-text-link" href="#how-it-works">Discover how it works <ArrowRight size={16}/></a></div>
     </section>
 
     <section className="vld-world vld-section" id="how-it-works">
-      <div className="vld-section-heading"><div><div className="vld-overline">THE WORLD IS YOURS <span>— 002</span></div><h2>Make every<br/><em>move matter.</em></h2></div><p>Survival is only the beginning. Your decisions shape the alliances you make, the territory you claim, and the legacy you leave behind.</p></div>
+      <div className="vld-section-heading"><div><div className="vld-overline">THE WORLD IS YOURS <span>— 002</span></div><h2>Make every<br/><em>move matter.</em></h2></div><p>Every gamemode brings a different way to play. Pick your path, bring your friends, and make the experience your own.</p></div>
       <div className="vld-feature-grid">
         <article className="vld-feature vld-feature-large"><div className="vld-feature-top"><span>01 / SURVIVE</span><Heart size={21}/></div><div className="vld-feature-bottom"><h3>Protect your hearts.</h3><p>Every encounter matters. Stay prepared, stay alert, and never take your last heart for granted.</p></div><div className="vld-feature-watermark">♥</div></article>
         <article className="vld-feature"><div className="vld-feature-top"><span>02 / BUILD</span><Shield size={21}/></div><div className="vld-feature-bottom"><h3>Build your stronghold.</h3><p>Create a base worth defending and a home worth returning to.</p></div><div className="vld-feature-watermark">⌂</div></article>
@@ -87,7 +93,7 @@ export default function Home() {
       </div>
     </section>
 
-    <section className="vld-about vld-section" id="about"><div className="vld-about-panel"><div className="vld-about-image" style={{ backgroundImage: "url(" + lifestealImage + ")" }} aria-hidden="true"/><div className="vld-about-copy"><div className="vld-overline">MORE THAN A SERVER <span>— 003</span></div><h2>Find your people.<br/><em>Write your story.</em></h2><p>From unexpected friendships to unforgettable rivalries, the best parts of a multiplayer world happen together. Meet other players, find a team, and help shape the VeldoraMC community.</p><div className="vld-about-points"><span><Users size={17}/> Community-led</span><span><Zap size={17}/> Always evolving</span><span><Crown size={17}/> Your legacy</span></div></div></div></section>
+    <section className="vld-about vld-section" id="about"><div className="vld-about-panel"><div className="vld-about-image" style={{ backgroundImage: "url(" + lifestealImage + ")" }} aria-hidden="true"/><div className="vld-about-copy"><div className="vld-overline">MORE THAN A SERVER <span>— 003</span></div><h2>Find your people.<br/><em>Write your story.</em></h2><p>From first-time joins to long-running squads, the best parts of Minecraft happen together. Meet other players, find a team, and help shape VeldoraMC.</p><div className="vld-about-points"><span><Users size={17}/> Community-led</span><span><Zap size={17}/> Always evolving</span><span><Crown size={17}/> Your legacy</span></div></div></div></section>
 
     <section className="vld-join vld-section" id="join"><div className="vld-join-orbit" aria-hidden="true"><div/><div/><div/></div><div className="vld-overline">YOUR NEXT CHAPTER STARTS HERE <span>— 004</span></div><h2>Claim your<br/><em>place in the realm.</em></h2><p>Copy the server address, launch Minecraft Java Edition, and join the adventure.</p><div className="vld-ip-card"><div className="vld-ip-label"><span className="vld-live-dot"/> SERVER ADDRESS</div><code>{SERVER_IP}</code><button type="button" onClick={copyIp} className="vld-copy-button" aria-label="Copy server address">{copied ? <Check size={16}/> : <Copy size={16}/>} {copied ? "COPIED" : "COPY IP"}</button></div><div className="vld-join-actions"><a className="vld-button vld-button-primary" href={DISCORD_URL} target="_blank" rel="noreferrer"><DiscordIcon/> Join the community <ArrowRight size={16}/></a><a className="vld-button vld-button-glass" href="#top"><Sparkles size={16}/> Back to top</a></div><div className="vld-edition-note">MINECRAFT JAVA EDITION <span>·</span> SERVER ADDRESS ABOVE</div></section>
 
