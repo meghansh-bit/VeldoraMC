@@ -1440,3 +1440,22 @@ header .pixel-btn,.vld-microsoft-cta,.vld-header-cart,.vld-button-primary,.vld-c
 .vld-announcement-card:hover,.vld-gamemode-card:hover,.vld-feature:hover{border-color:rgba(59,130,246,.65)!important}
 .vld-site-header .vld-main-nav a:hover,.vld-site-header .vld-mobile-nav a:hover{color:#a5b4fc}
 .vld-announcement-card>a{display:inline-flex;align-items:center;gap:7px;padding:8px 12px;border-radius:8px;width:max-content}
+
+/* Higher-specificity overrides keep the same gradient on legacy and new route styles */
+.vld-nav-link.is-active,.vld-nav-link:hover,.vld-nav-link-mobile.is-active{
+  background:var(--vld-theme-gradient)!important;color:#fff!important;box-shadow:none!important;border-color:transparent!important;
+}
+.vld-main-nav .vld-nav-link{border-radius:9px}
+.vld-home .vld-hero h1 span,.vld-home .vld-intro-copy h2 em,
+.vld-home .vld-section-heading h2 em,.vld-home .vld-announcement-heading h2 em,
+.vld-home .vld-join h2 em,.vld-gamemodes-page h1 span,.vld-gamemodes-page h2 em{
+  background:var(--vld-theme-gradient)!important;background-clip:text!important;-webkit-background-clip:text!important;color:transparent!important;
+}
+.vld-home .vld-kicker,.vld-home .vld-overline,.vld-home .vld-gamemode-status,
+.vld-home .vld-announcement-meta,.vld-home .vld-gamemode-note{
+  color:#a78bfa;
+}
+.vld-site-header .vld-main-nav .vld-nav-link:hover{color:#fff!important}
+.vld-site-header .vld-microsoft-cta,.vld-site-header .vld-header-cart{
+  background:var(--vld-theme-gradient)!important;color:#fff!important;border:0!important;
+}
