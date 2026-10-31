@@ -1268,3 +1268,18 @@ img,button{image-rendering:auto}
 @media(max-width:850px){.vld-site-header{top:8px!important;width:calc(100% - 16px)!important}.vld-header-inner{height:60px!important;min-height:60px!important}.vld-main-nav{display:none}.vld-menu-toggle{display:grid;place-items:center}.vld-header-actions>.vld-microsoft-cta,.vld-header-actions>.vld-network-status{display:none}.vld-mobile-nav{display:flex;flex-direction:column;padding:8px 18px 18px}.vld-mobile-nav .vld-network-status{display:inline-flex}.vld-gamemode-card{grid-template-columns:1fr!important}.vld-gamemode-art{min-height:240px}}
 @media(max-width:640px){.vld-home .vld-hero{min-height:760px;padding-top:115px}.vld-scene-canvas{display:none}.vld-home .vld-hero h1{font-size:clamp(43px,12vw,68px)}.vld-home .vld-section{padding-left:18px;padding-right:18px}.vld-gamemode-copy{padding:25px!important}.vld-gamemode-art{min-height:210px}.vld-home .vld-hero-meta{flex-wrap:wrap;gap:8px}}
 @media(prefers-reduced-motion:reduce){.vld-scene-canvas{display:none!important}.vld-gamemode-motion{transform:none!important}html{scroll-behavior:auto!important}}
+
+/* Final stacking and copy-feedback polish */
+.vld-home .vld-scene-image{z-index:0}
+.vld-home .vld-scene-canvas{z-index:2}
+.vld-home .vld-scene-shade{z-index:3}
+.vld-home .vld-scene-grid,.vld-home .vld-scene-grain,.vld-home .vld-scene-glow{z-index:4;pointer-events:none}
+.vld-home .vld-hero-content{z-index:6}
+.vld-home .vld-scroll-cue,.vld-home .vld-hero-index{z-index:6}
+.vld-copy-button{position:relative;isolation:isolate;overflow:visible}
+.vld-copy-button.is-copied{background:linear-gradient(110deg,#00d9e8,#8c55db)!important;color:#071316!important}
+.vld-copy-button.is-copied:before{content:"";position:absolute;z-index:-1;left:50%;top:50%;width:5px;height:5px;border-radius:50%;background:#00d9e8;box-shadow:0 -25px 0 #00d9e8,18px -17px 0 #8c55db,25px 2px 0 #00d9e8,17px 20px 0 #8c55db,0 26px 0 #00d9e8,-19px 18px 0 #8c55db,-26px 0 0 #00d9e8,-17px -19px 0 #8c55db;animation:vld-copy-burst .65s ease-out both}
+.vld-copy-button.is-copied:after{content:"";position:absolute;inset:-8px;border:1px solid #00d9e85c;border-radius:10px;animation:vld-copy-ring .55s ease-out both;pointer-events:none}
+@keyframes vld-copy-burst{0%{opacity:1;transform:translate(-50%,-50%) scale(.35)}100%{opacity:0;transform:translate(-50%,-50%) scale(1.5)}}
+@keyframes vld-copy-ring{0%{opacity:.9;transform:scale(.86)}100%{opacity:0;transform:scale(1.18)}}
+@media(prefers-reduced-motion:reduce){.vld-copy-button.is-copied:before,.vld-copy-button.is-copied:after{animation:none;opacity:0}}
