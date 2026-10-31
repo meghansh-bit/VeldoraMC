@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Calendar, ArrowRight } from "lucide-react";
+import { Calendar, ArrowRight, MessageCircle } from "lucide-react";
 import PixelBox from "../components/ui/PixelBox";
 import PixelButton from "../components/ui/PixelButton";
 import { useSeo } from "../hooks/useSeo";
@@ -23,7 +23,7 @@ export default function News() {
         Official VeldoraMC updates, events, maintenance notes, and community news.
       </p>
 
-      {posts.length === 0 ? <div className="mt-8 rounded-xl border border-white/10 p-8 text-center"><h2 className="text-xl font-semibold">No announcements yet</h2><p className="mt-2 text-sm text-(--color-text-muted)">Check back soon for official VeldoraMC updates.</p></div> : <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      {<div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3"><PixelBox tone="info" padding="none" className="overflow-hidden"><div className="h-44 w-full overflow-hidden bg-(--color-bg-soft)"><img src="https://image.pollinations.ai/prompt/epic%20Minecraft-inspired%20fantasy%20red%20castle%20server%20launch%20poster%2C%20voxel%20landscape%2C%20cinematic%20sunset%2C%20no%20text?width=960&height=540&seed=4127&nologo=true" alt="VeldoraMC server launch artwork" className="h-full w-full object-cover"/></div><div className="flex flex-col gap-3 p-4"><span className="rounded-sm px-2 py-1 text-[9px] tracking-widest gradient-text">SERVER LAUNCH</span><h3 className="text-base font-semibold leading-snug">VeldoraMC launches in just a few days!</h3><p className="text-sm leading-relaxed text-(--color-text-muted)">The wait is almost over. Get your squad ready, explore Lifesteal, and join our Discord for the official launch date and more information.</p><a href="https://discord.gg/NruxFSnrUe" target="_blank" rel="noreferrer" className="mt-auto"><PixelButton tone="info" className="w-full py-5! gap-2!"><span className="flex items-center justify-center gap-2 gradient-text"><MessageCircle size={14}/> Join Discord for info <ArrowRight size={14}/></span></PixelButton></a></div></PixelBox>
         {posts.map(
           ({ slug, image, category, tone, date, title, excerpt }) => (
             <PixelBox
