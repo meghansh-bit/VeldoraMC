@@ -1358,7 +1358,7 @@ html,body{background:#080d18!important}
 .vld-announcement-card h3,.vld-home .vld-feature h3,.vld-gamemode-copy h3{color:#f5fbff!important}
 .vld-announcement-card p,.vld-home .vld-feature p,.vld-gamemode-copy p{color:#b1c0d0!important}
 .vld-home .vld-feature{isolation:isolate;min-height:330px;padding:24px!important}
-.vld-home .vld-feature-image{position:absolute;inset:0;z-index:-1;overflow:hidden;opacity:.4;pointer-events:none}
+.vld-home .vld-feature-image{position:absolute;inset:0;z-index:0;overflow:hidden;opacity:.4;pointer-events:none}
 .vld-home .vld-feature-image:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#0b17234d 0%,#0d1728bd 68%,#0d1728 100%)}
 .vld-home .vld-feature-image img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.9);transition:transform .8s ease}
 .vld-home .vld-feature:hover .vld-feature-image img{transform:scale(1.07)}
