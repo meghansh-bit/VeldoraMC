@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, ShoppingBag, UserRound, ChevronRight, LogIn } from "lucide-react";
+import { Menu, X, ShoppingBag, UserRound, LogIn } from "lucide-react";
 import Logo from "./Logo";
 import NavButton from "./NavButton";
 import NetworkStatus from "../NetworkStatus";
@@ -13,7 +13,7 @@ export default function Header() {
   const [authError, setAuthError] = useState("");
   const [authLoading, setAuthLoading] = useState(false);
   const { pathname } = useLocation();
-  const { user, signOut } = useAuth();
+  const { user } = useAuth();
   const inStore = pathname.startsWith("/store") || pathname === "/cart";
 
   async function signInWithMicrosoft() {
@@ -49,7 +49,6 @@ export default function Header() {
               {authLoading ? "Connecting…" : "Microsoft sign-in"}
             </button>
           )}
-          {inStore && (user ? <div className="vld-store-user"><span className="vld-store-avatar"><UserRound size={15}/></span><span>{user.email}</span><button type="button" onClick={signOut}>Sign out</button></div> : <Link className="vld-store-account" to="/store/account"><UserRound size={16}/> Store login <ChevronRight size={14}/></Link>)}
           {inStore && <Link className="vld-header-cart" to="/cart" aria-label="Open shopping cart"><ShoppingBag size={17}/><span>Cart</span></Link>}
           <button className="vld-menu-toggle" type="button" onClick={() => setOpen(v => !v)} aria-label={open ? "Close navigation" : "Open navigation"} aria-expanded={open}>{open ? <X size={22}/> : <Menu size={22}/>}</button>
         </div>
@@ -59,7 +58,6 @@ export default function Header() {
         {navItems.map(item => <NavButton key={item.to} {...item} mobile onNavigate={() => setOpen(false)}/>)}
         <NetworkStatus />
         {!user && <button className="vld-microsoft-cta" type="button" onClick={signInWithMicrosoft} disabled={authLoading}><LogIn size={16}/>{authLoading ? "Connecting…" : "Continue with Microsoft"}</button>}
-        {inStore && <Link className="vld-mobile-store-account" to="/store/account" onClick={() => setOpen(false)}><UserRound size={17}/> {user ? user.email : "Store login"}</Link>}
       </nav>}
     </header>
   );
