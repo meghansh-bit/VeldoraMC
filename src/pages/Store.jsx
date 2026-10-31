@@ -5,6 +5,8 @@ import { supabase } from "../lib/supabase";
 import { useCart } from "../context/useCart";
 import CurrencyTab from "../components/store/tabs/CurrencyTab";
 import { useSeo } from "../hooks/useSeo";
+import { Link } from "react-router-dom";
+import { UserRound, ShoppingCart } from "lucide-react";
 
 export default function Store() {
   const [managedItems, setManagedItems] = useState([]);
@@ -25,7 +27,7 @@ export default function Store() {
           <span className="vstore-kicker"><Sparkles size={14} /> OFFICIAL VELDORAMC STORE</span>
           <h1>Get more <span>Velora.</span></h1>
           <p>Choose a Velora pack to boost your in-game progress.</p>
-          <a href="#coin-packs" className="vstore-primary">Browse Velora packs <ArrowRight size={17} /></a>
+          <div className="vstore-hero-actions"><a href="#coin-packs" className="vstore-primary">Browse Velora packs <ArrowRight size={17} /></a><Link to="/store/account" className="vstore-account-cta"><UserRound size={16}/> Store account</Link><Link to="/cart" className="vstore-account-cta"><ShoppingCart size={16}/> Cart ({count})</Link></div>
           <div className="vstore-trust">
             <span><ShieldCheck size={15} /> Support the server</span>
             <span><Heart size={15} /> Velora currency</span>
