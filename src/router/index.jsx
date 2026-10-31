@@ -32,7 +32,7 @@ export const router = createBrowserRouter([
     { path: "gamemodes", element: <Gamemodes /> },
     { path: "servers", element: <Navigate to="/gamemodes" replace /> },
     { path: "lifesteal", element: <Navigate to="/gamemodes" replace /> },
-    { path: "rules", element: <PortalPage /> },
+    { path: "rules", element: <Navigate to="/" replace /> },
     { path: "link-minecraft", element: <LinkMinecraft /> },
     { path: "profiles", element: <Navigate to="/" replace /> },
     { path: "leaderboard", element: <Navigate to="/" replace /> },
