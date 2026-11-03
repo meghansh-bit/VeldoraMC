@@ -1,257 +1,36 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
-import {
-  ShoppingCart,
-  Minus,
-  Plus,
-  Trash2,
-  CheckCircle2,
-  PartyPopper,
-} from "lucide-react";
-import PixelBox from "../components/ui/PixelBox";
-import PixelButton from "../components/ui/PixelButton";
+import { ArrowLeft, Minus, Plus, ShoppingBag, Trash2, ShieldCheck, Zap } from "lucide-react";
 import { useCart } from "../context/useCart";
 import { parsePrice } from "../context/cart-utils";
 import { useSeo } from "../hooks/useSeo";
+import "./storefront.css";
 
-// Category -> accent color + label. Keeps every row's badge tied to the
-// same theme colors used across the Store tabs (rank=gold, crate=info,
-// currency=success) instead of re-deriving it per item.
-const CATEGORY_STYLE = {
-  rank: { label: "RANK", color: "var(--color-primary)" },
-  crate: { label: "CRATE KEY", color: "var(--color-info)" },
-  currency: { label: "CURRENCY", color: "var(--color-success)" },
-};
+const formatINR = (amount) => "₹" + Math.round(amount).toLocaleString("en-IN");
 
-function formatINR(amount) {
-  return "₹" + Math.round(amount).toLocaleString("en-IN");
-}
-
-function ItemIcon({ item }) {
-  if (item.image) {
-    return (
-      <img
-        src={item.image}
-        alt=""
-        className="h-10 w-10 object-contain [image-rendering:pixelated]"
-      />
-    );
-  }
-  const Icon = item.icon;
-  return (
-    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-sm bg-black/25">
-      {Icon && <Icon size={18} color="#fff" strokeWidth={2.25} />}
-    </span>
-  );
-}
-
-function CartRow({ item }) {
+function CartLine({ item }) {
   const { updateQty, removeFromCart } = useCart();
-  const style = CATEGORY_STYLE[item.category] ?? CATEGORY_STYLE.rank;
-  const lineTotal = parsePrice(item.price) * item.qty;
-
-  return (
-    <div className="flex flex-col gap-3 border-b border-white/5 py-4 last:border-0 sm:flex-row sm:items-center sm:gap-4">
-      <div className="flex flex-1 items-center gap-3">
-        <ItemIcon item={item} />
-
-        <div className="min-w-0 flex-1">
-          <span
-            className="inline-block rounded-sm px-1.5 py-0.5 text-[8.5px] tracking-widest"
-            style={{
-              backgroundColor: `color-mix(in srgb, ${style.color} 18%, transparent)`,
-              color: style.color,
-            }}
-          >
-            {style.label}
-          </span>
-          <p className="truncate text-[13px] gradient-text">{item.name}</p>
-        </div>
-      </div>
-
-      <div className="flex items-center justify-between gap-4 sm:justify-end">
-        <div className="flex items-center gap-1.5">
-          <PixelButton
-            tone="neutral"
-            size="sm"
-            className="px-2! py-2! gap-0!"
-            icon={Minus}
-            iconSize={12}
-            aria-label={`Decrease ${item.name} quantity`}
-            onClick={() => updateQty(item.id, item.qty - 1)}
-          />
-          <span className="w-6 text-center text-[12.5px] gold-gradient-text">
-            {item.qty}
-          </span>
-          <PixelButton
-            tone="neutral"
-            size="sm"
-            className="px-2! py-2! gap-0!"
-            icon={Plus}
-            iconSize={12}
-            aria-label={`Increase ${item.name} quantity`}
-            onClick={() => updateQty(item.id, item.qty + 1)}
-          />
-        </div>
-
-        <span className="w-16 shrink-0 text-right text-[13px] gold-gradient-text">
-          {formatINR(lineTotal)}
-        </span>
-
-        <PixelButton
-          tone="danger"
-          size="sm"
-          className="px-2.5! py-2.5! gap-0!"
-          icon={Trash2}
-          iconSize={13}
-          aria-label={`Remove ${item.name} from cart`}
-          onClick={() => removeFromCart(item.id)}
-        />
-      </div>
+  const category = item.category === "crate" ? "CRATE KEY" : item.category === "currency" ? "VELORA" : "RANK";
+  return <article className="sf-cart-line">
+    <div className="sf-cart-item-icon">{item.image ? <img src={item.image} alt="" /> : <ShoppingBag size={22}/>}</div>
+    <div className="sf-cart-item-info"><span>{category}</span><strong>{item.name}</strong><small>{formatINR(parsePrice(item.price))} each</small></div>
+    <div className="sf-cart-controls">
+      <button aria-label={`Decrease ${item.name} quantity`} onClick={() => updateQty(item.id,item.qty-1)}><Minus size={14}/></button>
+      <b>{item.qty}</b>
+      <button aria-label={`Increase ${item.name} quantity`} onClick={() => updateQty(item.id,item.qty+1)}><Plus size={14}/></button>
     </div>
-  );
-}
-
-function EmptyCart() {
-  return (
-    <PixelBox
-      tone="neutral"
-      className="mt-10"
-      contentClassName="flex flex-col items-center gap-3 py-14 text-center"
-    >
-      <ShoppingCart size={30} className="text-(--color-text-dim)" />
-      <h2 className="text-[15px] gold-gradient-text">Your cart is empty</h2>
-      <p className="max-w-xs text-[11.5px] leading-relaxed text-(--color-text-muted)">
-        Ranks, crates, keys, and currency you add from the Store will show up
-        here.
-      </p>
-      <Link to="/store" className="mt-2">
-        <PixelButton tone="primary" size="sm" className="px-5! py-4!">
-          <span className="gold-gradient-text">Browse Store</span>
-        </PixelButton>
-      </Link>
-    </PixelBox>
-  );
-}
-
-function OrderPlaced({ onContinue }) {
-  return (
-    <PixelBox
-      tone="success"
-      filled
-      className="mt-10"
-      contentClassName="flex flex-col items-center gap-3 py-14 text-center"
-    >
-      <PartyPopper size={30} color="#fff" />
-      <h2 className="text-[16px] green-gradient-text">Order placed!</h2>
-      <p className="max-w-sm text-[11.5px] leading-relaxed text-white/80">
-        Thanks for supporting VeldoraMC — your rewards will be waiting in-game
-        the next time you log in.
-      </p>
-      <Link to="/store" className="mt-2" onClick={onContinue}>
-        <PixelButton tone="neutral" size="sm" className="px-5! py-4!">
-          Continue Shopping
-        </PixelButton>
-      </Link>
-    </PixelBox>
-  );
+    <strong className="sf-cart-line-total">{formatINR(parsePrice(item.price)*item.qty)}</strong>
+    <button className="sf-cart-remove" aria-label={`Remove ${item.name}`} onClick={() => removeFromCart(item.id)}><Trash2 size={16}/></button>
+  </article>;
 }
 
 export default function Cart() {
-  useSeo({ title: "Your Cart", path: "/cart", noindex: true });
-  const { items, count, subtotal, clearCart } = useCart();
-  const [placed, setPlaced] = useState(false);
-  const [paymentOpen, setPaymentOpen] = useState(false);
-
-  // Temporary checkout placeholder until a real Paymenter endpoint and webhook are configured.
-  const handleCheckout = () => setPaymentOpen(true);
-
-  return (
-    <section className="mx-auto max-w-5xl px-4 py-6 sm:px-6">
-      <h1 className="title gold-gradient-text">Your Cart</h1>
-      <p className="p">
-        {count > 0
-          ? `${count} item${count > 1 ? "s" : ""} ready for checkout`
-          : "Nothing here yet"}
-      </p>
-
-      {placed && <OrderPlaced onContinue={() => setPlaced(false)} />}
-
-
-      {paymentOpen && !placed && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/75 p-4 backdrop-blur-md" role="dialog" aria-modal="true" aria-labelledby="paymenter-title">
-          <div className="w-full max-w-md rounded-2xl border border-red-400/30 bg-[#111014]/95 p-6 shadow-[0_20px_90px_#ff334d20]">
-            <div className="mb-4 flex items-center gap-3">
-              <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-red-500/10 text-red-300"><ShoppingCart size={22} /></span>
-              <div>
-                <h2 id="paymenter-title" className="text-lg font-extrabold text-white">Paymenter Checkout</h2>
-                <p className="text-xs text-white/50">Temporary payment preview</p>
-              </div>
-            </div>
-            <div className="mb-4 rounded-xl border border-white/10 bg-white/[0.03] p-4">
-              <div className="flex items-center justify-between text-sm text-white/65"><span>Items</span><span>{count}</span></div>
-              <div className="mt-2 flex items-center justify-between text-base font-bold text-white"><span>Total</span><span>{formatINR(subtotal)}</span></div>
-            </div>
-            <p className="text-sm leading-6 text-white/70">Paymenter isn’t connected yet. This temporary screen lets you review your order, but it will not charge you or deliver items.</p>
-            <div className="mt-5 flex gap-3">
-              <button type="button" onClick={() => setPaymentOpen(false)} className="flex-1 rounded-xl border border-white/15 px-4 py-3 text-sm font-bold text-white transition hover:bg-white/5">Back to cart</button>
-              <button type="button" onClick={() => setPaymentOpen(false)} className="flex-1 rounded-xl bg-[#ff334d] px-4 py-3 text-sm font-extrabold text-white transition hover:bg-[#e92540]">Got it</button>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {!placed && items.length === 0 && <EmptyCart />}
-
-      {!placed && items.length > 0 && (
-        <div className="mt-8 grid gap-6 lg:grid-cols-3">
-          <PixelBox
-            tone="neutral"
-            className="lg:col-span-2"
-            contentClassName="flex flex-col"
-            header={
-              <span className="gradient-text uppercase">
-                Cart Items ({count})
-              </span>
-            }
-          >
-            {items.map((item) => (
-              <CartRow key={item.id} item={item} />
-            ))}
-          </PixelBox>
-
-          <PixelBox
-            tone="primary"
-            className="h-fit lg:sticky lg:top-20"
-            contentClassName="flex flex-col gap-4"
-            header={<span className="gold-gradient-text uppercase">Order Summary</span>}
-          >
-            <div className="flex items-center justify-between text-[12.5px]">
-              <span className="text-(--color-text-muted)">Subtotal</span>
-              <span className="gradient-text">{formatINR(subtotal)}</span>
-            </div>
-
-            <div className="flex items-center justify-between border-t border-white/10 pt-3 text-[14px]">
-              <span className="gradient-text">Total</span>
-              <span className="gold-gradient-text">{formatINR(subtotal)}</span>
-            </div>
-
-            <PixelButton
-              tone="success"
-              filled
-              icon={CheckCircle2}
-              className="mt-1 w-full py-5!"
-              onClick={handleCheckout}
-            >
-              Checkout
-            </PixelButton>
-
-            <p className="text-center text-[10.5px] leading-relaxed text-(--color-text-dim)">
-              Temporary Paymenter preview. Payments and automatic delivery are not connected yet.
-            </p>
-          </PixelBox>
-        </div>
-      )}
-    </section>
-  );
+  useSeo({ title:"Your Cart", path:"/cart", noindex:true });
+  const { items, count, subtotal } = useCart();
+  return <main className="sf-cart-page">
+    <div className="sf-cart-top"><Link to="/"><ArrowLeft size={16}/> BACK TO STORE</Link><span>VELDORAMC / CART</span></div>
+    <header className="sf-cart-heading"><span className="sf-section-kicker">YOUR LOADOUT</span><h1>THE <em>CART.</em></h1><p>Review your selected upgrades before checkout.</p></header>
+    {items.length === 0 ? <section className="sf-cart-empty"><ShoppingBag size={38}/><h2>Your cart is empty.</h2><p>Find your next upgrade in the VeldoraMC store.</p><Link to="/" className="sf-btn sf-btn-main">Explore the store <Zap size={16}/></Link></section> :
+      <div className="sf-cart-layout"><section className="sf-cart-items"><div className="sf-cart-items-head"><strong>SELECTED ITEMS <span>({count})</span></strong><span>ITEM / QTY / PRICE</span></div>{items.map(item=><CartLine key={item.id} item={item}/>)}</section>
+      <aside className="sf-cart-summary"><span className="sf-section-kicker">ORDER SUMMARY</span><h2>Ready to <em>power up?</em></h2><div className="sf-cart-summary-row"><span>Items</span><b>{count}</b></div><div className="sf-cart-summary-row"><span>Subtotal</span><b>{formatINR(subtotal)}</b></div><div className="sf-cart-total"><span>TOTAL</span><strong>{formatINR(subtotal)}</strong></div><button type="button" className="sf-btn sf-btn-main sf-cart-checkout" disabled>CHECKOUT <Zap size={16}/></button><p className="sf-cart-unavailable"><ShieldCheck size={14}/> Secure checkout is being connected. No payment will be taken yet.</p></aside></div>}
+  </main>;
 }

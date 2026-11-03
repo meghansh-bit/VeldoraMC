@@ -75,10 +75,10 @@ export default function Store() {
         <div className="sf-eyebrow"><span className="sf-live-dot"/> THE OFFICIAL VELDORAMC STORE</div>
         <h1>GEAR UP.<br/><span>RISE ABOVE.</span></h1>
         <p>Everything you need to make your mark. Unlock exclusive ranks, open crate rewards and stock up on Velora.</p>
-        <div className="sf-hero-actions"><a href="#catalog" className="sf-btn sf-btn-main">Explore the store <ArrowRight size={16}/></a><button className="sf-btn sf-btn-quiet" onClick={() => setPlayerOpen(true)}><CircleUserRound size={16}/>{player ? player.username : "Enter username"}</button></div>
+        <div className="sf-hero-actions"><a href="#catalog" className="sf-btn sf-btn-main">Explore the store <ArrowRight size={16}/></a></div>
         <div className="sf-hero-meta"><span><Shield size={14}/> OFFICIAL STORE</span><i/> <span><LockKeyhole size={14}/> SECURE CHECKOUT COMING SOON</span><i/> <span>INR PRICING</span></div>
       </div>
-      <div className="sf-hero-visual"><div className="sf-hero-ring sf-ring-one"/><div className="sf-hero-ring sf-ring-two"/><div className="sf-hero-cube"><img src="/veldoramc-logo.svg" alt="VeldoraMC"/><span>VELDORA<span>MC</span></span></div><div className="sf-float-tag sf-tag-one"><Crown size={15}/> RANK UP</div><div className="sf-float-tag sf-tag-two"><KeyRound size={15}/> UNLOCK REWARDS</div></div>
+      <div className="sf-motion-swords" aria-hidden="true"><span><Sword size={92}/></span><span><Sword size={70}/></span><span><Sword size={54}/></span><span><Sword size={82}/></span></div><div className="sf-hero-visual"><div className="sf-hero-ring sf-ring-one"/><div className="sf-hero-ring sf-ring-two"/><div className="sf-hero-cube"><img src="/veldoramc-logo.svg" alt="VeldoraMC"/><span>VELDORA<span>MC</span></span></div><div className="sf-float-tag sf-tag-one"><Crown size={15}/> RANK UP</div><div className="sf-float-tag sf-tag-two"><KeyRound size={15}/> UNLOCK REWARDS</div></div>
     </section>
 
     <section className="sf-player-bar">
