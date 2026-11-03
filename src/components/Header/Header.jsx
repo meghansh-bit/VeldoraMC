@@ -10,12 +10,12 @@ export default function Header() {
   const [open, setOpen] = useState(false);
   const { pathname } = useLocation();
   const { user, signOut } = useAuth();
-  const inStore = pathname.startsWith("/store") || pathname === "/cart";
+  const inStore = pathname === "/" || pathname.startsWith("/store") || pathname === "/cart" || pathname === "/bundles";
   return (
     <header className="vld-site-header">
       <div className="vld-header-inner">
         <Logo />
-        <nav className="vld-main-nav" aria-label="Primary navigation">
+        <nav className="vld-main-nav" aria-label="Store navigation">
           {navItems.map((item) => <NavButton key={item.to} {...item} />)}
         </nav>
         <div className="vld-header-actions">
@@ -24,7 +24,7 @@ export default function Header() {
           <button className="vld-menu-toggle" type="button" onClick={() => setOpen(v => !v)} aria-label={open ? "Close navigation" : "Open navigation"} aria-expanded={open}>{open ? <X size={22}/> : <Menu size={22}/>}</button>
         </div>
       </div>
-      {open && <nav className="vld-mobile-nav" aria-label="Mobile navigation">{navItems.map(item => <NavButton key={item.to} {...item} mobile onNavigate={() => setOpen(false)}/>)}{inStore && <Link className="vld-mobile-store-account" to="/store/account" onClick={() => setOpen(false)}><UserRound size={17}/> {user ? user.email : "Store login"}</Link>}</nav>}
+      {open && <nav className="vld-mobile-nav" aria-label="Mobile store navigation">{navItems.map(item => <NavButton key={item.to} {...item} mobile onNavigate={() => setOpen(false)}/>)}{inStore && <Link className="vld-mobile-store-account" to="/store/account" onClick={() => setOpen(false)}><UserRound size={17}/> {user ? user.email : "Store login"}</Link>}</nav>}
     </header>
   );
 }
