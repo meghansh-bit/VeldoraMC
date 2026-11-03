@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { ArrowRight, BadgeCheck, Check, ChevronDown, CircleUserRound, Coins, Crown, Gem, KeyRound, LockKeyhole, Package, Plus, Shield, ShoppingBag, Sparkles, Sword, UserRound, X, Zap } from "lucide-react";
+import { ArrowRight, BadgeCheck, Check, ChevronDown, CircleUserRound, Coins, Copy, Crown, Gem, KeyRound, LockKeyhole, Package, Plus, Shield, ShoppingBag, Sparkles, Sword, UserRound, X, Zap } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useCart } from "../context/useCart";
 import { fetchRanks, fetchCrateKeys, fetchCurrencyPacks } from "../data/store";
@@ -38,6 +38,7 @@ export default function Store() {
   const [platform, setPlatform] = useState("java");
   const [username, setUsername] = useState("");
   const [player, setPlayer] = useState(null);
+  const [ipCopied, setIpCopied] = useState(false);
   const { addToCart, count } = useCart();
 
   useSeo({ title: "VeldoraMC Store — Ranks, Keys & Velora", description: "Shop official VeldoraMC ranks, crate keys, Velora currency and extras.", path: "/" });
@@ -76,6 +77,17 @@ export default function Store() {
         <h1>GEAR UP.<br/><span>RISE ABOVE.</span></h1>
         <p>Everything you need to make your mark. Unlock exclusive ranks, open crate rewards and stock up on Velora.</p>
         <div className="sf-hero-actions"><a href="#catalog" className="sf-btn sf-btn-main">Explore the store <ArrowRight size={16}/></a></div>
+        <div className="sf-hero-community">
+          <button type="button" className="sf-server-ip" onClick={() => { navigator.clipboard?.writeText("veldoramc.mc-dns.net").then(() => { setIpCopied(true); window.setTimeout(() => setIpCopied(false), 1600); }).catch(() => {}); }}>
+            <span className="sf-ip-label"><span className="sf-live-dot"/> SERVER IP</span>
+            <strong>veldoramc.mc-dns.net</strong>
+            <span className="sf-ip-copy">{ipCopied ? <Check size={14}/> : <Copy size={14}/>} {ipCopied ? "COPIED" : "COPY IP"}</span>
+          </button>
+          <a href="https://discord.gg/NruxFSnrUe" target="_blank" rel="noreferrer" className="sf-discord-hero" aria-label="Join VeldoraMC Discord">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M19.7 5.2a18.4 18.4 0 0 0-4.5-1.4l-.6 1.2a16.8 16.8 0 0 0-5.2 0l-.6-1.2a18.4 18.4 0 0 0-4.5 1.4C1.5 9.4.7 13.5 1.1 17.6a18.2 18.2 0 0 0 5.5 2.8l1.2-2a11.8 11.8 0 0 1-1.9-.9l.5-.4a13 13 0 0 0 11.2 0l.5.4a11.8 11.8 0 0 1-1.9.9l1.2 2a18.2 18.2 0 0 0 5.5-2.8c.5-4.8-.8-8.9-3.2-12.4ZM8.7 14.8c-1.1 0-2-1-2-2.2s.9-2.2 2-2.2 2 1 2 2.2-.9 2.2-2 2.2Zm6.6 0c-1.1 0-2-1-2-2.2s.9-2.2 2-2.2 2 1 2 2.2-.9 2.2-2 2.2Z"/></svg>
+            <span><b>JOIN DISCORD</b><small>Meet the community</small></span><ArrowRight size={16}/>
+          </a>
+        </div>
         <div className="sf-hero-meta"><span><Shield size={14}/> OFFICIAL STORE</span><i/> <span><LockKeyhole size={14}/> SECURE CHECKOUT COMING SOON</span><i/> <span>INR PRICING</span></div>
       </div>
       <div className="sf-motion-swords" aria-hidden="true"><span><Sword size={92}/></span><span><Sword size={70}/></span><span><Sword size={54}/></span><span><Sword size={82}/></span></div><div className="sf-hero-visual"><div className="sf-hero-ring sf-ring-one"/><div className="sf-hero-ring sf-ring-two"/><div className="sf-hero-cube"><img src="/veldoramc-logo.svg" alt="VeldoraMC"/><span>VELDORA<span>MC</span></span></div><div className="sf-float-tag sf-tag-one"><Crown size={15}/> RANK UP</div><div className="sf-float-tag sf-tag-two"><KeyRound size={15}/> UNLOCK REWARDS</div></div>
