@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { ArrowRight, BadgeCheck, Check, ChevronDown, CircleUserRound, Coins, Copy, Crown, Gem, KeyRound, LockKeyhole, Package, Plus, Shield, ShoppingBag, Sparkles, Sword, UserRound, X, Zap } from "lucide-react";
+import { ArrowRight, BadgeCheck, Check, ChevronDown, CircleUserRound, Coins, Copy, Crown, Gem, KeyRound, LockKeyhole, Package, Plus, Shield, ShoppingBag, Sparkles, Sword, X, Zap } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useCart } from "../context/useCart";
 import { fetchRanks, fetchCrateKeys, fetchCurrencyPacks } from "../data/store";
@@ -37,7 +37,6 @@ export default function Store() {
   const [playerOpen, setPlayerOpen] = useState(false);
   const [platform, setPlatform] = useState("java");
   const [username, setUsername] = useState("");
-  const [player, setPlayer] = useState(null);
   const [ipCopied, setIpCopied] = useState(false);
   const { addToCart, count } = useCart();
 
@@ -46,13 +45,15 @@ export default function Store() {
   useEffect(() => {
     try {
       const saved = JSON.parse(localStorage.getItem("veldora-store-player") || "null");
-      if (saved?.username && (saved.platform === "java" || saved.platform === "bedrock")) { setPlayer(saved); setUsername(saved.username); setPlatform(saved.platform); }
+      if (saved?.username && (saved.platform === "java" || saved.platform === "bedrock")) { setUsername(saved.username); setPlatform(saved.platform); }
     } catch {}
+    const openIdentification = () => setPlayerOpen(true);
+    window.addEventListener("veldora-open-player-identification", openIdentification);
     let live = true;
     Promise.all([fetchRanks(), fetchCrateKeys(), fetchCurrencyPacks()]).then(([ranks, keys, currency]) => {
       if (live) setProducts({ ranks: ranks || [], keys: keys || [], currency: currency || [] });
     }).finally(() => { if (live) setLoading(false); });
-    return () => { live = false; };
+    return () => { live = false; window.removeEventListener("veldora-open-player-identification", openIdentification); };
   }, []);
 
   const visible = useMemo(() => products[active] || [], [products, active]);
@@ -62,7 +63,8 @@ export default function Store() {
     if (!/^[A-Za-z0-9_]{3,16}$/.test(clean)) return;
     const next = { username: clean, platform };
     localStorage.setItem("veldora-store-player", JSON.stringify(next));
-    setPlayer(next); setPlayerOpen(false);
+    setPlayerOpen(false);
+    window.dispatchEvent(new CustomEvent("veldora-player-updated", { detail: next }));
   }
   function add(item, category) {
     const id = `${category}-${item.key}`;
@@ -91,11 +93,6 @@ export default function Store() {
         <div className="sf-hero-meta"><span><Shield size={14}/> OFFICIAL STORE</span><i/> <span><LockKeyhole size={14}/> SECURE CHECKOUT COMING SOON</span><i/> <span>INR PRICING</span></div>
       </div>
       <div className="sf-motion-swords" aria-hidden="true"><span><Sword size={92}/></span><span><Sword size={70}/></span><span><Sword size={54}/></span><span><Sword size={82}/></span></div><div className="sf-hero-visual"><div className="sf-hero-ring sf-ring-one"/><div className="sf-hero-ring sf-ring-two"/><div className="sf-hero-cube"><img src="/veldoramc-logo.svg" alt="VeldoraMC"/><span>VELDORA<span>MC</span></span></div><div className="sf-float-tag sf-tag-one"><Crown size={15}/> RANK UP</div><div className="sf-float-tag sf-tag-two"><KeyRound size={15}/> UNLOCK REWARDS</div></div>
-    </section>
-
-    <section className="sf-player-bar">
-      <div className="sf-player-left"><span className="sf-player-avatar"><UserRound size={19}/></span><div><small>SHOPPING FOR</small><strong>{player ? player.username : "Choose your Minecraft player"}</strong><em>{player ? (player.platform === "java" ? "JAVA EDITION" : "BEDROCK EDITION") : "Select Java or Bedrock and enter your username"}</em></div></div>
-      <button onClick={() => setPlayerOpen(true)}>{player ? "Change player" : "Set username"} <ArrowRight size={15}/></button>
     </section>
 
     <section className="sf-catalog" id="catalog">
