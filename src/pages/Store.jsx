@@ -103,7 +103,7 @@ export default function Store() {
     <section className="sf-catalog" id="catalog">
       <div className="sf-heading"><div><span className="sf-section-kicker">THE VELDORAMC COLLECTION</span><h2>Find your <em>upgrade.</em></h2><p>Choose a category and find the right addition to your adventure.</p></div><Link to="/cart" className="sf-cart-link"><ShoppingBag size={17}/> Cart <b>{count}</b></Link></div>
       <div className="sf-categories">{categories.map(({id,label,icon:Icon,hint})=><button key={id} className={active===id?"active":""} onClick={()=>setActive(id)}><Icon size={19}/><span><b>{label}</b><small>{hint}</small></span><ChevronDown size={14}/></button>)}</div>
-      loading ? <div className="sf-empty">Loading store catalogue…</div> :
+      {loading ? <div className="sf-empty">Loading store catalogue…</div> :
       <div className="sf-products">{visible.map((item,index)=><ProductCard key={item.key} item={item} category={active} featured={item.featured || (active==="ranks" && index===1)} added={added===`${active}-${item.key}`} onAdd={()=>add(item,active)}/>)}</div>}
       {active === "ranks" && <p className="sf-note">Rank perks and availability are subject to the server's final configuration. Only one rank can be added to a cart at a time.</p>}
     </section>
