@@ -1,59 +1,103 @@
-import { Coins, ArrowRight, Sparkles, ShieldCheck, Heart, ShoppingBag, PackageCheck, Zap, UserRound, ShoppingCart, Gem, BadgeCheck } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
+import { ArrowRight, BadgeCheck, Check, ChevronDown, CircleUserRound, Coins, Crown, Gem, KeyRound, LockKeyhole, Package, Plus, Shield, ShoppingBag, Sparkles, Sword, UserRound, X, Zap } from "lucide-react";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { supabase } from "../lib/supabase";
 import { useCart } from "../context/useCart";
-import CurrencyTab from "../components/store/tabs/CurrencyTab";
+import { fetchRanks, fetchCrateKeys, fetchCurrencyPacks } from "../data/store";
 import { useSeo } from "../hooks/useSeo";
+import "./storefront.css";
+
+const categories = [
+  { id: "ranks", label: "Ranks", icon: Crown, hint: "Permanent perks & status" },
+  { id: "keys", label: "Crate Keys", icon: KeyRound, hint: "Unlock in-game rewards" },
+  { id: "currency", label: "Velora", icon: Coins, hint: "Spendable server currency" },
+  { id: "extras", label: "Extras", icon: Sparkles, hint: "More ways to customize" },
+];
+const priceNumber = (value) => Number(String(value).replace(/[^0-9.]/g, "")) || 0;
+const money = (value) => "₹" + Math.round(priceNumber(value)).toLocaleString("en-IN");
+
+function ProductCard({ item, category, featured, onAdd, added }) {
+  const Icon = category === "ranks" ? Crown : category === "keys" ? KeyRound : category === "currency" ? Coins : Gem;
+  const description = item.perks?.slice(0, 3).join(" · ") || item.contents?.slice(0, 3).join(" · ") || item.amount || item.description || "A VeldoraMC store exclusive.";
+  return <article className={`sf-product ${featured ? "sf-featured" : ""}`}>
+    <div className="sf-product-top"><span className="sf-product-type">{category === "keys" ? "CRATE KEY" : category.toUpperCase()}</span>{featured && <span className="sf-popular"><Sparkles size={12}/> POPULAR</span>}</div>
+    <div className={`sf-product-art sf-art-${category}`}><span className="sf-art-glow"/><Icon size={48} strokeWidth={1.25}/>{category === "currency" && <small>VELORA</small>}</div>
+    <div className="sf-product-info"><h3>{item.name}</h3><p>{description}</p>
+      {item.amount && <div className="sf-product-amount">{item.amount}</div>}
+      {item.bonus && <span className="sf-bonus">{item.bonus}</span>}
+      <div className="sf-product-buy"><strong>{money(item.price)}</strong><button type="button" onClick={onAdd}><ShoppingBag size={15}/>{added ? "Added" : "Add to cart"}</button></div>
+    </div>
+  </article>;
+}
 
 export default function Store() {
-  const [managedItems, setManagedItems] = useState([]);
+  const [active, setActive] = useState("ranks");
+  const [products, setProducts] = useState({ ranks: [], keys: [], currency: [] });
+  const [loading, setLoading] = useState(true);
+  const [added, setAdded] = useState("");
+  const [playerOpen, setPlayerOpen] = useState(false);
+  const [platform, setPlatform] = useState("java");
+  const [username, setUsername] = useState("");
+  const [player, setPlayer] = useState(null);
   const { addToCart, count } = useCart();
+
+  useSeo({ title: "VeldoraMC Store — Ranks, Keys & Velora", description: "Shop official VeldoraMC ranks, crate keys, Velora currency and extras.", path: "/" });
+
   useEffect(() => {
-    let alive = true;
-    supabase.from("store_items").select("id,name,category,description,image_url,price").eq("active", true).order("created_at", { ascending: false })
-      .then(({ data }) => { if (alive && data) setManagedItems(data); });
-    return () => { alive = false; };
+    try {
+      const saved = JSON.parse(localStorage.getItem("veldora-store-player") || "null");
+      if (saved?.username && (saved.platform === "java" || saved.platform === "bedrock")) { setPlayer(saved); setUsername(saved.username); setPlatform(saved.platform); }
+    } catch {}
+    let live = true;
+    Promise.all([fetchRanks(), fetchCrateKeys(), fetchCurrencyPacks()]).then(([ranks, keys, currency]) => {
+      if (live) setProducts({ ranks: ranks || [], keys: keys || [], currency: currency || [] });
+    }).finally(() => { if (live) setLoading(false); });
+    return () => { live = false; };
   }, []);
-  useSeo({ title: "VeldoraMC Store — Velora & Ranks", description: "Explore official VeldoraMC store items and Velora currency packs.", path: "/store" });
 
-  return <main className="veldora-store vstore-redesign">
-    <section className="vstore-hero">
-      <div className="vstore-orb vstore-orb-one" /><div className="vstore-orb vstore-orb-two" />
-      <div className="vstore-hero-copy">
-        <span className="vstore-kicker"><Sparkles size={14}/> THE OFFICIAL VELDORAMC STORE</span>
-        <h1>Make your<br/><span>next move count.</span></h1>
-        <p>Discover Velora packs and server exclusives. Every purchase helps support the world we build together.</p>
-        <div className="vstore-hero-actions">
-          <a href="#coin-packs" className="vstore-primary">Explore the store <ArrowRight size={17}/></a>
-          <Link to="/store/account" className="vstore-account-cta"><UserRound size={16}/> Store account</Link>
-          <Link to="/cart" className="vstore-account-cta"><ShoppingCart size={16}/> Cart ({count})</Link>
-        </div>
-        <div className="vstore-trust"><span><ShieldCheck size={15}/> Official server store</span><span><Heart size={15}/> Supports VeldoraMC</span><span><BadgeCheck size={15}/> INR pricing</span></div>
+  const visible = useMemo(() => products[active] || [], [products, active]);
+  function choosePlayer(event) {
+    event.preventDefault();
+    const clean = username.trim();
+    if (!/^[A-Za-z0-9_]{3,16}$/.test(clean)) return;
+    const next = { username: clean, platform };
+    localStorage.setItem("veldora-store-player", JSON.stringify(next));
+    setPlayer(next); setPlayerOpen(false);
+  }
+  function add(item, category) {
+    const id = `${category}-${item.key}`;
+    const ok = addToCart({ id, category: category === "keys" ? "crate" : category === "ranks" ? "rank" : "currency", name: item.name, price: item.price, image: category === "currency" ? "/velora-icon.svg" : undefined });
+    if (ok) { setAdded(id); window.setTimeout(() => setAdded(""), 1300); }
+  }
+
+  return <main className="sf-store">
+    <section className="sf-hero">
+      <div className="sf-hero-noise"/><div className="sf-hero-inner">
+        <div className="sf-eyebrow"><span className="sf-live-dot"/> THE OFFICIAL VELDORAMC STORE</div>
+        <h1>GEAR UP.<br/><span>RISE ABOVE.</span></h1>
+        <p>Everything you need to make your mark. Unlock exclusive ranks, open crate rewards and stock up on Velora.</p>
+        <div className="sf-hero-actions"><a href="#catalog" className="sf-btn sf-btn-main">Explore the store <ArrowRight size={16}/></a><button className="sf-btn sf-btn-quiet" onClick={() => setPlayerOpen(true)}><CircleUserRound size={16}/>{player ? player.username : "Enter username"}</button></div>
+        <div className="sf-hero-meta"><span><Shield size={14}/> OFFICIAL STORE</span><i/> <span><LockKeyhole size={14}/> SECURE CHECKOUT COMING SOON</span><i/> <span>INR PRICING</span></div>
       </div>
-      <div className="vstore-hero-emblem" aria-hidden="true"><div className="vstore-emblem-frame"><img src="/veldoramc-logo.svg" alt=""/><span><Coins size={23}/> VELORA</span></div><i className="vstore-emblem-orbit orbit-a"/><i className="vstore-emblem-orbit orbit-b"/></div>
+      <div className="sf-hero-visual"><div className="sf-hero-ring sf-ring-one"/><div className="sf-hero-ring sf-ring-two"/><div className="sf-hero-cube"><img src="/veldoramc-logo.svg" alt="VeldoraMC"/><span>VELDORA<span>MC</span></span></div><div className="sf-float-tag sf-tag-one"><Crown size={15}/> RANK UP</div><div className="sf-float-tag sf-tag-two"><KeyRound size={15}/> UNLOCK REWARDS</div></div>
     </section>
 
-    <section className="vstore-benefit-strip">
-      <div><PackageCheck/><span><b>Instant cart access</b><small>Keep your selected items together</small></span></div>
-      <div><ShieldCheck/><span><b>Official VeldoraMC store</b><small>Items managed by the server team</small></span></div>
-      <div><Zap/><span><b>Built for your journey</b><small>Choose the extras that suit your play</small></span></div>
+    <section className="sf-player-bar">
+      <div className="sf-player-left"><span className="sf-player-avatar"><UserRound size={19}/></span><div><small>SHOPPING FOR</small><strong>{player ? player.username : "Choose your Minecraft player"}</strong><em>{player ? (player.platform === "java" ? "JAVA EDITION" : "BEDROCK EDITION") : "Select Java or Bedrock and enter your username"}</em></div></div>
+      <button onClick={() => setPlayerOpen(true)}>{player ? "Change player" : "Set username"} <ArrowRight size={15}/></button>
     </section>
 
-    <section id="coin-packs" className="vstore-catalog">
-      <div className="vstore-section-head"><div><span className="vstore-kicker">CURRENCY COLLECTION</span><h2>Choose your <em>Velora.</em></h2><p>Pick a pack to add it to your cart. Prices are shown in Indian rupees (INR).</p></div><span className="vstore-count-pill"><Gem size={14}/> VELORA PACKS</span></div>
-      <div className="vstore-tab-panel"><CurrencyTab/></div>
+    <section className="sf-catalog" id="catalog">
+      <div className="sf-heading"><div><span className="sf-section-kicker">THE VELDORAMC COLLECTION</span><h2>Find your <em>upgrade.</em></h2><p>Choose a category and find the right addition to your adventure.</p></div><Link to="/cart" className="sf-cart-link"><ShoppingBag size={17}/> Cart <b>{count}</b></Link></div>
+      <div className="sf-categories">{categories.map(({id,label,icon:Icon,hint})=><button key={id} className={active===id?"active":""} onClick={()=>setActive(id)}><Icon size={19}/><span><b>{label}</b><small>{hint}</small></span><ChevronDown size={14}/></button>)}</div>
+      {active === "extras" ? <div className="sf-empty"><Sparkles size={27}/><h3>More exclusives are on the way.</h3><p>Cosmetics, bundles and special offers will appear here as they are added to the store.</p></div> :
+      loading ? <div className="sf-empty">Loading store catalogue…</div> :
+      <div className="sf-products">{visible.map((item,index)=><ProductCard key={item.key} item={item} category={active} featured={item.featured || (active==="ranks" && index===1)} added={added===`${active}-${item.key}`} onAdd={()=>add(item,active)}/>)}</div>}
+      {active === "ranks" && <p className="sf-note">Rank perks and availability are subject to the server's final configuration. Only one rank can be added to a cart at a time.</p>}
     </section>
 
-    {managedItems.length > 0 && <section className="vstore-catalog vstore-managed">
-      <div className="vstore-section-head"><div><span className="vstore-kicker">SERVER EXCLUSIVES</span><h2>More from <em>Veldora.</em></h2><p>Official items and offers managed by the server team.</p></div></div>
-      <div className="vstore-managed-grid">{managedItems.map(item=><article key={item.id} className="store-product-card vstore-managed-card">
-        <div className="vstore-managed-image"><img src={item.image_url||"/veldoramc-logo.svg"} alt={item.name} onError={e=>{e.currentTarget.src="/veldoramc-logo.svg";}}/><span>{item.category || "EXCLUSIVE"}</span></div>
-        <div className="vstore-managed-copy"><h3>{item.name}</h3><p>{item.description}</p><div className="vstore-managed-buy"><strong>₹{Number(item.price).toLocaleString("en-IN")}</strong><button className="vstore-primary" onClick={()=>addToCart({id:"managed-"+item.id,category:String(item.category||"item").toLowerCase(),name:item.name,price:"₹"+Number(item.price).toLocaleString("en-IN"),image:item.image_url||"/veldoramc-logo.svg"})}><ShoppingBag size={15}/> Add to cart</button></div></div>
-      </article>)}</div>
-    </section>}
+    <section className="sf-bottom-banner"><div><span className="sf-section-kicker">NEED HELP WITH YOUR ORDER?</span><h2>We've got your <em>back.</em></h2><p>Talk to the VeldoraMC team on Discord if you need help choosing an item.</p></div><a href="https://discord.gg/NruxFSnrUe" target="_blank" rel="noreferrer" className="sf-btn sf-btn-main">Get support <ArrowRight size={16}/></a></section>
+    <footer className="sf-footer"><img src="/veldoramc-logo.svg" alt="VeldoraMC"/><span>VELDORAMC STORE · ALL PRICES IN INR</span><Link to="/cart">VIEW CART ({count})</Link></footer>
 
-    <section className="vstore-help"><div className="vstore-help-icon"><ShieldCheck size={24}/></div><div><span className="vstore-kicker">NEED A HAND?</span><h2>We’ve got your back.</h2><p>Questions about an order or an item? Reach out through the support page and the team can help.</p></div><Link to="/support" className="vstore-account-cta">Visit support <ArrowRight size={15}/></Link></section>
-    <footer className="vstore-footnote">VELDORAMC STORE <span>•</span> ALL PRICES IN INR <span>•</span> THANK YOU FOR SUPPORTING THE SERVER</footer>
+    {playerOpen && <div className="sf-modal-backdrop" role="presentation" onMouseDown={e=>{if(e.target===e.currentTarget)setPlayerOpen(false);}}><section className="sf-player-modal" role="dialog" aria-modal="true" aria-labelledby="sf-player-title"><button className="sf-modal-close" onClick={()=>setPlayerOpen(false)} aria-label="Close"><X size={18}/></button><span className="sf-section-kicker">PLAYER IDENTIFICATION</span><h2 id="sf-player-title">Who are we <em>shopping for?</em></h2><p>Choose your edition and enter your in-game username before adding items.</p><div className="sf-platforms"><button type="button" className={platform==="java"?"selected":""} onClick={()=>setPlatform("java")}><span>☕</span><b>Java Edition</b><small>PC / Mac</small></button><button type="button" className={platform==="bedrock"?"selected":""} onClick={()=>setPlatform("bedrock")}><span>◆</span><b>Bedrock Edition</b><small>Mobile / Console / Windows</small></button></div><form onSubmit={choosePlayer}><label htmlFor="sf-username">Minecraft username</label><input id="sf-username" value={username} onChange={e=>setUsername(e.target.value)} placeholder="Enter your username" minLength={3} maxLength={16} pattern="[A-Za-z0-9_]+" required autoComplete="off"/><small>3–16 letters, numbers or underscores. This identifies the recipient; it does not sign you into a Microsoft or Mojang account.</small><button className="sf-btn sf-btn-main" type="submit">Continue as {platform==="java"?"Java":"Bedrock"} player <ArrowRight size={16}/></button></form></section></div>}
   </main>;
 }
