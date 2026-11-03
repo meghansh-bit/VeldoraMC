@@ -97,7 +97,7 @@ export default function Store() {
         </div>
         <div className="sf-hero-meta"><span><Shield size={14}/> OFFICIAL STORE</span><i/> <span><LockKeyhole size={14}/> SECURE CHECKOUT COMING SOON</span><i/> <span>INR PRICING</span></div>
       </div>
-      <div className="sf-motion-swords" aria-hidden="true"><span><Sword size={92}/></span><span><Sword size={70}/></span><span><Sword size={54}/></span><span><Sword size={82}/></span></div><div className="sf-hero-visual"><div className="sf-hero-ring sf-ring-one"/><div className="sf-hero-ring sf-ring-two"/><div className="sf-hero-cube"><img src="/veldoramc-logo.svg" alt="VeldoraMC"/><span>VELDORA<span>MC</span></span></div><div className="sf-float-tag sf-tag-one"><Crown size={15}/> RANK UP</div><div className="sf-float-tag sf-tag-two"><KeyRound size={15}/> UNLOCK REWARDS</div></div>
+      <div className="sf-motion-swords" aria-hidden="true"><span><Sword size={92}/></span><span><Sword size={70}/></span><span><Sword size={54}/></span><span><Sword size={82}/></span></div><div className="sf-hero-visual"><div className="sf-hero-ring sf-ring-one"/><div className="sf-hero-ring sf-ring-two"/><div className="sf-hero-cube"><img src="/veldoramc-logo.svg" alt="VeldoraMC"/></div><div className="sf-float-tag sf-tag-one"><Crown size={15}/> RANK UP</div><div className="sf-float-tag sf-tag-two"><KeyRound size={15}/> UNLOCK REWARDS</div></div>
     </section>
 
     <section className="sf-catalog" id="catalog">
