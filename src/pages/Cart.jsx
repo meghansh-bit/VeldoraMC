@@ -4,6 +4,7 @@ import { useCart } from "../context/useCart";
 import { parsePrice } from "../context/cart-utils";
 import { useSeo } from "../hooks/useSeo";
 import "./storefront.css";
+import "./cart.css";
 
 const formatINR = (amount) => "₹" + Math.round(amount).toLocaleString("en-IN");
 
