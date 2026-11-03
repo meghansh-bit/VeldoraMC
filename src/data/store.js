@@ -128,21 +128,18 @@ export const CRATE_KEYS = [
   {
     key: "common",
     name: "Common Key",
-    price: "₹254",
     tone: "neutral",
     contents: ["Basic cosmetics", "Small currency boost", "Common tools"],
   },
   {
     key: "rare",
     name: "Rare Key",
-    price: "₹594",
     tone: "info",
     contents: ["Rare cosmetics", "Mid-tier currency", "Enchanted gear"],
   },
   {
     key: "epic",
     name: "Epic Key",
-    price: "₹1,104",
     tone: "primary",
     contents: ["Epic cosmetics", "Large currency boost", "Exclusive pets"],
     featured: true,
@@ -150,7 +147,6 @@ export const CRATE_KEYS = [
   {
     key: "legendary",
     name: "Legendary Key",
-    price: "₹2,124",
     tone: "pink",
     contents: ["Legendary cosmetics", "Max currency boost", "One-of-a-kind items"],
   },
