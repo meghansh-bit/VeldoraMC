@@ -30,7 +30,13 @@ function ProductCard({ item, category, featured, onAdd, added }) {
 
 export default function Store() {
   const [active, setActive] = useState("ranks");
-  const [products, setProducts] = useState({ ranks: [], keys: [], bundles: [\n    { key: "starter-bundle", name: "Starter Bundle", price: "", perks: ["Hero rank", "In-game money bonus", "Bonus crate keys"], description: "Everything you need to get started on VeldoraMC.", featured: true },\n    { key: "elite-bundle", name: "Elite Bundle", price: "", perks: ["Elite rank", "In-game money bonus", "Bonus crate keys"], description: "A step up for players building their Lifesteal journey." },\n    { key: "titan-bundle", name: "Titan Bundle", price: "", perks: ["Titan rank", "In-game money bonus", "Bonus crate keys"], description: "More perks and rewards for committed players." },\n    { key: "bolt-bundle", name: "Bolt Bundle", price: "", perks: ["Bolt rank", "In-game money bonus", "Bonus crate keys"], description: "A premium bundle for players ready to rise." },\n    { key: "primal-bundle", name: "Primal Bundle", price: "", perks: ["Primal rank", "In-game money bonus", "Bonus crate keys"], description: "The top-tier VeldoraMC bundle." },\n  ] });
+  const [products, setProducts] = useState({ ranks: [], keys: [], bundles: [
+    { key: "starter-bundle", name: "Starter Bundle", price: "", perks: ["Hero rank", "In-game money bonus", "Bonus crate keys"], description: "Everything you need to get started on VeldoraMC.", featured: true },
+    { key: "elite-bundle", name: "Elite Bundle", price: "", perks: ["Elite rank", "In-game money bonus", "Bonus crate keys"], description: "A step up for players building their Lifesteal journey." },
+    { key: "titan-bundle", name: "Titan Bundle", price: "", perks: ["Titan rank", "In-game money bonus", "Bonus crate keys"], description: "More perks and rewards for committed players." },
+    { key: "bolt-bundle", name: "Bolt Bundle", price: "", perks: ["Bolt rank", "In-game money bonus", "Bonus crate keys"], description: "A premium bundle for players ready to rise." },
+    { key: "primal-bundle", name: "Primal Bundle", price: "", perks: ["Primal rank", "In-game money bonus", "Bonus crate keys"], description: "The top-tier VeldoraMC bundle." },
+  ] });
   const [loading, setLoading] = useState(true);
   const [added, setAdded] = useState("");
   const [playerOpen, setPlayerOpen] = useState(false);
@@ -49,8 +55,8 @@ export default function Store() {
     const openIdentification = () => setPlayerOpen(true);
     window.addEventListener("veldora-open-player-identification", openIdentification);
     let live = true;
-    Promise.all([fetchRanks(), fetchCrateKeys(), fetchCurrencyPacks()]).then(([ranks, keys, currency]) => {
-      if (live) setProducts({ ranks: ranks || [], keys: keys || [], currency: currency || [] });
+    Promise.all([fetchRanks(), fetchCrateKeys()]).then(([ranks, keys]) => {
+      if (live) setProducts(current => ({ ...current, ranks: ranks || [], keys: keys || [] }));
     }).finally(() => { if (live) setLoading(false); });
     return () => { live = false; window.removeEventListener("veldora-open-player-identification", openIdentification); };
   }, []);
@@ -97,7 +103,6 @@ export default function Store() {
     <section className="sf-catalog" id="catalog">
       <div className="sf-heading"><div><span className="sf-section-kicker">THE VELDORAMC COLLECTION</span><h2>Find your <em>upgrade.</em></h2><p>Choose a category and find the right addition to your adventure.</p></div><Link to="/cart" className="sf-cart-link"><ShoppingBag size={17}/> Cart <b>{count}</b></Link></div>
       <div className="sf-categories">{categories.map(({id,label,icon:Icon,hint})=><button key={id} className={active===id?"active":""} onClick={()=>setActive(id)}><Icon size={19}/><span><b>{label}</b><small>{hint}</small></span><ChevronDown size={14}/></button>)}</div>
-      {active === "extras" ? <div className="sf-empty"><Sparkles size={27}/><h3>More exclusives are on the way.</h3><p>Cosmetics, bundles and special offers will appear here as they are added to the store.</p></div> :
       loading ? <div className="sf-empty">Loading store catalogue…</div> :
       <div className="sf-products">{visible.map((item,index)=><ProductCard key={item.key} item={item} category={active} featured={item.featured || (active==="ranks" && index===1)} added={added===`${active}-${item.key}`} onAdd={()=>add(item,active)}/>)}</div>}
       {active === "ranks" && <p className="sf-note">Rank perks and availability are subject to the server's final configuration. Only one rank can be added to a cart at a time.</p>}
