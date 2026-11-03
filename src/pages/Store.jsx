@@ -23,7 +23,7 @@ function ProductCard({ item, category, featured, onAdd, added }) {
     <div className={`sf-product-art sf-art-${category}`}><span className="sf-art-glow"/><Icon size={48} strokeWidth={1.25}/>{category === "currency" && <small>VELORA</small>}</div>
     <div className="sf-product-info"><h3>{item.name}</h3><p>{description}</p>
       {item.amount && <div className="sf-product-amount">{item.amount}</div>}
-      {item.bonus && <span className="sf-bonus">{item.bonus}</span>}
+      {item.bonus && <span className="sf-bonus">{item.bonus}</span>}{item.trialDays && <span className="sf-bonus sf-trial-badge">FREE {item.trialDays}-DAY TRIAL · ONCE PER ACCOUNT</span>}
       <div className="sf-product-buy"><strong>{money(item.price)}</strong><button type="button" onClick={onAdd}><ShoppingBag size={15}/>{added ? "Added" : "Add to cart"}</button></div>
     </div>
   </article>;
