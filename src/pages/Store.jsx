@@ -1,37 +1,36 @@
 import { useEffect, useMemo, useState } from "react";
-import { ArrowRight, BadgeCheck, Check, ChevronDown, CircleUserRound, Coins, Copy, Crown, Gem, KeyRound, LockKeyhole, Package, Plus, Shield, ShoppingBag, Sparkles, Sword, X, Zap } from "lucide-react";
+import { ArrowRight, BadgeCheck, Check, ChevronDown, CircleUserRound, Copy, Crown, Gem, KeyRound, LockKeyhole, Package, Plus, Shield, ShoppingBag, Sparkles, Sword, X, Zap } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useCart } from "../context/useCart";
-import { fetchRanks, fetchCrateKeys, fetchCurrencyPacks } from "../data/store";
+import { fetchRanks, fetchCrateKeys } from "../data/store";
 import { useSeo } from "../hooks/useSeo";
 import "./storefront.css";
 
 const categories = [
   { id: "ranks", label: "Ranks", icon: Crown, hint: "Permanent perks & status" },
   { id: "keys", label: "Crate Keys", icon: KeyRound, hint: "Unlock in-game rewards" },
-  { id: "currency", label: "Velora", icon: Coins, hint: "Spendable server currency" },
-  { id: "extras", label: "Extras", icon: Sparkles, hint: "More ways to customize" },
+  { id: "bundles", label: "Deal Bundles", icon: Package, hint: "Ranks, money & bonus rewards" },
 ];
 const priceNumber = (value) => Number(String(value).replace(/[^0-9.]/g, "")) || 0;
 const money = (value) => "₹" + Math.round(priceNumber(value)).toLocaleString("en-IN");
 
 function ProductCard({ item, category, featured, onAdd, added }) {
-  const Icon = category === "ranks" ? Crown : category === "keys" ? KeyRound : category === "currency" ? Coins : Gem;
+  const Icon = category === "ranks" ? Crown : category === "keys" ? KeyRound : Package;
   const description = item.perks?.slice(0, 3).join(" · ") || item.contents?.slice(0, 3).join(" · ") || item.amount || item.description || "A VeldoraMC store exclusive.";
   return <article className={`sf-product ${featured ? "sf-featured" : ""}`}>
-    <div className="sf-product-top"><span className="sf-product-type">{category === "keys" ? "CRATE KEY" : category.toUpperCase()}</span>{featured && <span className="sf-popular"><Sparkles size={12}/> POPULAR</span>}</div>
-    <div className={`sf-product-art sf-art-${category}`}><span className="sf-art-glow"/><Icon size={48} strokeWidth={1.25}/>{category === "currency" && <small>VELORA</small>}</div>
+    <div className="sf-product-top"><span className="sf-product-type">{category === "keys" ? "CRATE KEY" : category === "bundles" ? "DEAL BUNDLE" : category.toUpperCase()}</span>{featured && <span className="sf-popular"><Sparkles size={12}/> POPULAR</span>}</div>
+    <div className={`sf-product-art sf-art-${category}`}><span className="sf-art-glow"/><Icon size={48} strokeWidth={1.25}/></div>
     <div className="sf-product-info"><h3>{item.name}</h3><p>{description}</p>
       {item.amount && <div className="sf-product-amount">{item.amount}</div>}
       {item.bonus && <span className="sf-bonus">{item.bonus}</span>}{item.trialDays && <div className="sf-hero-trial"><strong>{item.trialDays}-DAY FREE HERO TRIAL</strong><p>Join VeldoraMC and type <code>/freerank</code> in chat to claim your Hero rank trial. Available once per Minecraft account.</p></div>}
-      <div className="sf-product-buy"><strong>{money(item.price)}</strong><button type="button" onClick={onAdd}><ShoppingBag size={15}/>{added ? "Added" : "Add to cart"}</button></div>
+      <div className="sf-product-buy"><strong>{item.price ? money(item.price) : "Price soon"}</strong><button type="button" onClick={onAdd} disabled={!item.price}><ShoppingBag size={15}/>{added ? "Added" : item.price ? "Add to cart" : "Coming soon"}</button></div>
     </div>
   </article>;
 }
 
 export default function Store() {
   const [active, setActive] = useState("ranks");
-  const [products, setProducts] = useState({ ranks: [], keys: [], currency: [] });
+  const [products, setProducts] = useState({ ranks: [], keys: [], bundles: [\n    { key: "starter-bundle", name: "Starter Bundle", price: "", perks: ["Hero rank", "In-game money bonus", "Bonus crate keys"], description: "Everything you need to get started on VeldoraMC.", featured: true },\n    { key: "elite-bundle", name: "Elite Bundle", price: "", perks: ["Elite rank", "In-game money bonus", "Bonus crate keys"], description: "A step up for players building their Lifesteal journey." },\n    { key: "titan-bundle", name: "Titan Bundle", price: "", perks: ["Titan rank", "In-game money bonus", "Bonus crate keys"], description: "More perks and rewards for committed players." },\n    { key: "bolt-bundle", name: "Bolt Bundle", price: "", perks: ["Bolt rank", "In-game money bonus", "Bonus crate keys"], description: "A premium bundle for players ready to rise." },\n    { key: "primal-bundle", name: "Primal Bundle", price: "", perks: ["Primal rank", "In-game money bonus", "Bonus crate keys"], description: "The top-tier VeldoraMC bundle." },\n  ] });
   const [loading, setLoading] = useState(true);
   const [added, setAdded] = useState("");
   const [playerOpen, setPlayerOpen] = useState(false);
@@ -40,7 +39,7 @@ export default function Store() {
   const [ipCopied, setIpCopied] = useState(false);
   const { addToCart, count } = useCart();
 
-  useSeo({ title: "VeldoraMC Store — Ranks, Keys & Velora", description: "Shop official VeldoraMC ranks, crate keys, Velora currency and extras.", path: "/" });
+  useSeo({ title: "VeldoraMC Store — Ranks, Keys & Bundles", description: "Shop official VeldoraMC ranks, crate keys and deal bundles.", path: "/" });
 
   useEffect(() => {
     try {
@@ -68,7 +67,7 @@ export default function Store() {
   }
   function add(item, category) {
     const id = `${category}-${item.key}`;
-    const ok = addToCart({ id, category: category === "keys" ? "crate" : category === "ranks" ? "rank" : "currency", name: item.name, price: item.price, image: category === "currency" ? "/velora-icon.svg" : undefined });
+    const ok = addToCart({ id, category: category === "keys" ? "crate" : category === "ranks" ? "rank" : "bundle", name: item.name, price: item.price });
     if (ok) { setAdded(id); window.setTimeout(() => setAdded(""), 1300); }
   }
 
@@ -77,7 +76,7 @@ export default function Store() {
       <div className="sf-hero-noise"/><div className="sf-hero-inner">
         <div className="sf-eyebrow"><span className="sf-live-dot"/> THE OFFICIAL VELDORAMC STORE</div>
         <h1>GEAR UP.<br/><span>RISE ABOVE.</span></h1>
-        <p>Everything you need to make your mark. Unlock exclusive ranks, open crate rewards and stock up on Velora.</p>
+        <p>Everything you need to make your mark. Unlock exclusive ranks, open crate rewards and grab a bundle packed with rewards.</p>
         <div className="sf-hero-actions"><a href="#catalog" className="sf-btn sf-btn-main">Explore the store <ArrowRight size={16}/></a></div>
         <div className="sf-hero-community">
           <button type="button" className="sf-server-ip" onClick={() => { navigator.clipboard?.writeText("veldoramc.mc-dns.net").then(() => { setIpCopied(true); window.setTimeout(() => setIpCopied(false), 1600); }).catch(() => {}); }}>
