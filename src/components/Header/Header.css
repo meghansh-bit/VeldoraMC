@@ -1,0 +1,27 @@
+.vld-store-header .vld-header-inner{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.vld-store-header .vld-header-actions{display:flex;align-items:center;gap:10px}
+.vld-store-login,.vld-header-cart{min-height:42px;display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:0 15px;border:1px solid rgba(255,255,255,.13);border-radius:12px;background:rgba(255,255,255,.055);color:inherit;font:inherit;font-weight:700;text-decoration:none;cursor:pointer}
+.vld-store-login img{width:23px;height:23px;image-rendering:pixelated;border-radius:5px}
+.vld-header-cart b{display:inline-grid;place-items:center;min-width:20px;height:20px;padding:0 5px;border-radius:20px;background:#f4c542;color:#111;font-size:11px}
+.vld-player-overlay{position:fixed;inset:0;z-index:1000;display:grid;place-items:center;padding:20px;background:rgba(0,0,0,.76);backdrop-filter:blur(9px)}
+.vld-player-dialog{position:relative;width:min(100%,420px);padding:30px;border:1px solid rgba(255,255,255,.14);border-radius:22px;background:#151515;color:#fff;box-shadow:0 24px 90px rgba(0,0,0,.55)}
+.vld-player-close{position:absolute;top:15px;right:15px;display:grid;place-items:center;width:34px;height:34px;border:0;border-radius:10px;background:rgba(255,255,255,.08);color:#fff;cursor:pointer}
+.vld-player-kicker{color:#e8bd39;font-size:10px;font-weight:900;letter-spacing:.16em}
+.vld-player-dialog h2{margin:10px 0 22px;font-size:29px;letter-spacing:-.04em}
+.vld-player-dialog h2 em{color:#efc43f;font-style:normal}
+.vld-player-dialog form label{display:block;margin-bottom:8px;font-size:13px;font-weight:700}
+.vld-player-dialog input{box-sizing:border-box;width:100%;height:48px;padding:0 14px;border:1px solid rgba(255,255,255,.16);border-radius:11px;outline:none;background:#222;color:#fff;font:inherit}
+.vld-player-dialog input:focus{border-color:#eac13d}
+.vld-player-help,.vld-player-disclaimer{color:#999;font-size:11px;line-height:1.55}
+.vld-player-primary,.vld-player-secondary{min-height:44px;display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:0 16px;border:0;border-radius:11px;font:inherit;font-size:13px;font-weight:800;cursor:pointer}
+.vld-player-primary{background:#efc43f;color:#151515}
+.vld-player-dialog form .vld-player-primary{width:100%;margin-top:12px}
+.vld-player-confirm{display:flex;flex-direction:column;align-items:center;gap:10px;padding:4px 0 8px}
+.vld-player-head{width:96px;height:96px;image-rendering:pixelated;filter:drop-shadow(0 8px 18px rgba(239,196,63,.2))}
+.vld-player-confirm strong{font-size:20px}
+.vld-player-confirm p{margin:0;color:#bbb;font-size:14px}
+.vld-player-choices{display:flex;flex-wrap:wrap;justify-content:center;gap:9px;margin-top:8px}
+.vld-player-secondary{border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.07);color:#fff}
+.vld-player-error{color:#ff7777!important;font-size:12px!important}
+.vld-player-disclaimer{margin:20px 0 0;padding-top:14px;border-top:1px solid rgba(255,255,255,.09)}
+@media(max-width:520px){.vld-store-login,.vld-header-cart{min-height:39px;padding:0 11px;font-size:12px}.vld-player-dialog{padding:25px 20px}.vld-player-choices{width:100%;flex-direction:column}.vld-player-choices button{width:100%}}
