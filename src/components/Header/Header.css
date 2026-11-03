@@ -33,3 +33,13 @@
 .vld-login-methods strong{font-size:13px}
 .vld-login-methods small{color:#999;font-size:11px}
 .vld-player-back{margin:0 0 16px;padding:0;border:0;background:none;color:#aaa;font:inherit;font-size:12px;cursor:pointer}
+
+.vld-account-menu-wrap{position:relative}
+.vld-account-menu-wrap .vld-store-login{max-width:min(240px,48vw)}
+.vld-account-menu-wrap .vld-store-login span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.vld-account-dropdown{position:absolute;top:calc(100% + 10px);right:0;z-index:1100;width:230px;padding:14px;border:1px solid rgba(239,196,63,.28);border-radius:13px;background:#171612;color:#fff;box-shadow:0 16px 45px rgba(0,0,0,.48)}
+.vld-account-dropdown-label{display:block;margin-bottom:6px;color:#d9b83e;font-size:9px;font-weight:900;letter-spacing:.14em}
+.vld-account-dropdown>strong{display:block;overflow:hidden;margin-bottom:13px;font-size:12px;text-overflow:ellipsis;white-space:nowrap}
+.vld-account-dropdown>button{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:38px;border:1px solid rgba(255,255,255,.13);border-radius:9px;background:rgba(255,255,255,.06);color:#fff;font:inherit;font-size:12px;font-weight:800;cursor:pointer}
+.vld-account-dropdown>button:hover{border-color:#efc43f;background:rgba(239,196,63,.1)}
+.vld-account-dropdown>button:disabled{opacity:.6;cursor:wait}
