@@ -23,7 +23,7 @@ function ProductCard({ item, category, featured, onAdd, added }) {
     <div className={`sf-product-art sf-art-${category}`}><span className="sf-art-glow"/><Icon size={48} strokeWidth={1.25}/>{category === "currency" && <small>VELORA</small>}</div>
     <div className="sf-product-info"><h3>{item.name}</h3><p>{description}</p>
       {item.amount && <div className="sf-product-amount">{item.amount}</div>}
-      {item.bonus && <span className="sf-bonus">{item.bonus}</span>}{item.trialDays && <div className="sf-hero-trial"><strong>{item.trialDays}-DAY FREE HERO TRIAL</strong><p>Join VeldoraMC and type <code>/free</code> in chat to claim your Hero rank trial. Available once per Minecraft account.</p></div>}
+      {item.bonus && <span className="sf-bonus">{item.bonus}</span>}{item.trialDays && <div className="sf-hero-trial"><strong>{item.trialDays}-DAY FREE HERO TRIAL</strong><p>Join VeldoraMC and type <code>/freerank</code> in chat to claim your Hero rank trial. Available once per Minecraft account.</p></div>}
       <div className="sf-product-buy"><strong>{money(item.price)}</strong><button type="button" onClick={onAdd}><ShoppingBag size={15}/>{added ? "Added" : "Add to cart"}</button></div>
     </div>
   </article>;
