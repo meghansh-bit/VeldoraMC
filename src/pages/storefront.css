@@ -47,3 +47,20 @@
 .sf-motion-swords svg{stroke-width:1.1}
 @keyframes sf-sword-drift{0%,100%{transform:translate3d(0,0,0) rotate(-28deg) scale(.9)}25%{transform:translate3d(22px,-24px,0) rotate(-8deg) scale(1.05)}50%{transform:translate3d(-13px,18px,0) rotate(15deg) scale(.96)}75%{transform:translate3d(17px,30px,0) rotate(-18deg) scale(1.02)}}
 @media(prefers-reduced-motion:reduce){.sf-motion-swords span{animation:none}.sf-product,.sf-btn{transition:none}}
+
+
+.sf-hero-community{display:flex;align-items:stretch;gap:12px;flex-wrap:wrap;margin-top:22px;position:relative;z-index:2}
+.sf-server-ip{display:flex;align-items:center;gap:13px;min-height:58px;padding:10px 14px;border:1px solid #ffd21f66;border-radius:10px;background:linear-gradient(120deg,#211b08ed,#11100bed);color:#fff;text-align:left;cursor:pointer;box-shadow:inset 0 0 22px #ffd21f0b;transition:border-color .2s,transform .2s}
+.sf-server-ip:hover{border-color:#ffe45b;transform:translateY(-2px)}
+.sf-ip-label{display:flex;align-items:center;gap:6px;color:#ffe15b;font-size:9px;font-weight:900;letter-spacing:1.1px;white-space:nowrap}
+.sf-ip-label .sf-live-dot{width:7px;height:7px;border-radius:50%;display:inline-block}
+.sf-server-ip strong{font-size:13px;letter-spacing:.25px;white-space:nowrap}
+.sf-ip-copy{display:flex;align-items:center;gap:5px;padding-left:12px;border-left:1px solid #ffffff24;color:#ffe15b;font-size:9px;font-weight:900;letter-spacing:.7px;white-space:nowrap}
+.sf-discord-hero{display:flex;align-items:center;gap:11px;min-height:58px;padding:10px 16px;border:1px solid #5865f288;border-radius:10px;background:linear-gradient(120deg,#5865f22b,#151622ed);color:#fff;text-decoration:none;transition:transform .2s,border-color .2s,background .2s}
+.sf-discord-hero:hover{transform:translateY(-2px);border-color:#8790ff;background:linear-gradient(120deg,#5865f244,#151622)}
+.sf-discord-hero>svg:first-child{width:25px;height:25px;color:#8790ff;flex:none}
+.sf-discord-hero>svg:last-child{color:#aab0ff}
+.sf-discord-hero span{display:flex;flex-direction:column;gap:3px}
+.sf-discord-hero b{font-size:10px;letter-spacing:1px}
+.sf-discord-hero small{font-size:10px;color:#aaaec4}
+@media(max-width:600px){.sf-hero-community{gap:9px}.sf-server-ip{width:100%;justify-content:space-between;gap:7px;padding:10px}.sf-server-ip strong{font-size:12px}.sf-discord-hero{width:100%;justify-content:center}}
