@@ -1,52 +1,82 @@
-import { useState, useMemo, useCallback, useRef } from "react";
+import { useState, useMemo, useCallback, useRef, useEffect } from "react";
 import { X } from "lucide-react";
 import { CartContext } from "./cart-context";
 import { parsePrice } from "./cart-utils";
 
+const STORAGE_KEY = "veldoramc-cart-v1";
+const SINGLE_PURCHASE_CATEGORIES = new Set(["rank", "bundle"]);
+
+function readSavedCart() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+    if (!Array.isArray(saved)) return [];
+    return saved.filter(item =>
+      item && typeof item.id === "string" &&
+      typeof item.name === "string" &&
+      Number.isFinite(Number(item.price)) &&
+      Number(item.price) > 0 &&
+      Number.isInteger(item.qty) && item.qty > 0 &&
+      ["rank", "bundle", "crate", "currency"].includes(item.category)
+    ).map(item => ({ ...item, price: Number(item.price), qty: SINGLE_PURCHASE_CATEGORIES.has(item.category) ? 1 : item.qty }));
+  } catch { return []; }
+}
+
 export function CartProvider({ children }) {
-  const [items, setItems] = useState([]);
-  const itemsRef = useRef([]);
+  const [items, setItems] = useState(readSavedCart);
+  const itemsRef = useRef(items);
   const [cartNotice, setCartNotice] = useState("");
-  const commit = useCallback((next) => { itemsRef.current = next; setItems(next); }, []);
+
+  const commit = useCallback((next) => {
+    itemsRef.current = next;
+    setItems(next);
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(next)); } catch {}
+  }, []);
 
   const addToCart = useCallback((item) => {
-    const current = itemsRef.current;
-    if (item.category === "rank" && current.some((i) => i.category === "rank")) {
-      setCartNotice("One rank per cart. Remove your current rank or bundle before adding another.");
+    if (!item || !item.id || !item.name || !Number.isFinite(parsePrice(item.price)) || parsePrice(item.price) <= 0) {
+      setCartNotice("This item is not available to purchase yet.");
       return false;
     }
-    const existing = current.find((i) => i.id === item.id);
+    const current = itemsRef.current;
+    const isSingle = SINGLE_PURCHASE_CATEGORIES.has(item.category);
+    if (isSingle && current.some(i => SINGLE_PURCHASE_CATEGORIES.has(i.category) && i.id !== item.id)) {
+      setCartNotice("Only one rank or bundle per cart. Remove your current rank or bundle before adding another.");
+      return false;
+    }
+    if (isSingle && current.some(i => i.id === item.id)) {
+      setCartNotice("You can only add one rank or bundle to your cart.");
+      return false;
+    }
+    const existing = current.find(i => i.id === item.id);
     if (existing) {
-      if (existing.category === "rank") {
-        setCartNotice("Rank quantity is limited to 1. You can only have one rank or bundle in your cart.");
-        return false;
-      }
-      commit(current.map((i) => i.id === item.id ? { ...i, qty: i.qty + 1 } : i));
+      commit(current.map(i => i.id === item.id ? { ...i, qty: i.qty + 1 } : i));
+      setCartNotice("");
       return true;
     }
-    commit([...current, { ...item, qty: 1 }]);
+    commit([...current, { ...item, price: parsePrice(item.price), qty: 1 }]);
     setCartNotice("");
     return true;
   }, [commit]);
 
   const removeFromCart = useCallback((id) => {
-    commit(itemsRef.current.filter((i) => i.id !== id));
+    commit(itemsRef.current.filter(i => i.id !== id));
     setCartNotice("");
   }, [commit]);
 
   const updateQty = useCallback((id, qty) => {
     const current = itemsRef.current;
-    const target = current.find((i) => i.id === id);
-    if (target?.category === "rank" && qty > 1) {
-      setCartNotice("Rank quantity is limited to 1. You can only have one rank or bundle in your cart.");
+    const target = current.find(i => i.id === id);
+    if (target && SINGLE_PURCHASE_CATEGORIES.has(target.category) && qty > 1) {
+      setCartNotice("You can only add one rank or bundle to your cart.");
       return false;
     }
     if (qty <= 0) {
-      commit(current.filter((i) => i.id !== id));
+      commit(current.filter(i => i.id !== id));
       setCartNotice("");
       return true;
     }
-    commit(current.map((i) => i.id === id ? { ...i, qty } : i));
+    commit(current.map(i => i.id === id ? { ...i, qty: Math.floor(qty) } : i));
+    setCartNotice("");
     return true;
   }, [commit]);
 
