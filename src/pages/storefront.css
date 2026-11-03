@@ -64,3 +64,10 @@
 .sf-discord-hero b{font-size:10px;letter-spacing:1px}
 .sf-discord-hero small{font-size:10px;color:#aaaec4}
 @media(max-width:600px){.sf-hero-community{gap:9px}.sf-server-ip{width:100%;justify-content:space-between;gap:7px;padding:10px}.sf-server-ip strong{font-size:12px}.sf-discord-hero{width:100%;justify-content:center}}
+
+
+/* Hero rank free-trial instructions */
+.sf-hero-trial{display:grid;gap:6px;margin:12px 0;padding:12px 13px;border:1px solid rgba(255,205,45,.42);border-radius:12px;background:rgba(255,193,7,.09)}
+.sf-hero-trial strong{color:#ffd34d;font-size:11px;letter-spacing:.08em}
+.sf-hero-trial p{margin:0;color:var(--sf-muted,#b9b9b9);font-size:12px;line-height:1.55}
+.sf-hero-trial code{padding:2px 6px;border-radius:5px;background:rgba(255,205,45,.14);color:#ffdb70;font-weight:700}
