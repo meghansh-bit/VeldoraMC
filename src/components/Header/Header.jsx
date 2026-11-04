@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { ShoppingBag, UserRound, X, ArrowRight, Mail, LogOut, ChevronDown } from "lucide-react";
+import { ShoppingBag, UserRound, X, ArrowRight, Mail, LogOut, ChevronDown, Crown } from "lucide-react";
 import Logo from "./Logo";
 import { useCart } from "../../context/useCart";
 import { useAuth } from "../../context/useAuth";
@@ -55,6 +55,9 @@ export default function Header() {
       <header className="vld-site-header vld-store-header">
         <div className="vld-header-inner">
           <Logo />
+          <nav className="vld-primary-nav" aria-label="Main navigation">
+            <Link to="/#catalog" className="vld-nav-ranks"><Crown size={16}/><span>Ranks</span></Link>
+          </nav>
           <div className="vld-header-actions">
             {displayName ? (
               <div className="vld-account-menu-wrap">
