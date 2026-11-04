@@ -215,3 +215,17 @@
 @media(prefers-reduced-motion:reduce){
  .sf-partner-card,.sf-partner-card:before,.sf-partner-art,.sf-partner-art:before,.sf-partner-art:after,.sf-aura-wordmark,.sf-partner-invite:after,.sf-partner-invite-icon{animation:none!important;transition:none!important}
 }
+
+
+/* Search-friendly server overview and FAQ */
+.sf-seo-section{max-width:1150px;margin:0 auto;padding:12px 24px 82px}
+.sf-seo-inner{padding:30px;border:1px solid #ffd21f30;border-radius:15px;background:radial-gradient(ellipse at 90% 0,#ffd21f12,transparent 48%),#11110d}
+.sf-seo-inner h2{margin:10px 0 12px;font-size:clamp(30px,4vw,44px);font-weight:950;letter-spacing:-.06em}
+.sf-seo-inner h2 em{font-style:normal;color:#ffd21f}
+.sf-seo-intro{max-width:850px;color:#aaa3a8;font-size:13px;line-height:1.9}
+.sf-seo-faq{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:22px}
+.sf-seo-faq details{padding:15px 16px;border:1px solid #ffffff14;border-radius:9px;background:#ffffff05}
+.sf-seo-faq summary{color:#f4e8bd;font-size:11px;font-weight:850;cursor:pointer;line-height:1.6}
+.sf-seo-faq details p{margin:10px 0 0;color:#a9a1a8;font-size:11px;line-height:1.8}
+.sf-seo-faq a{color:#ffd21f;text-decoration:underline;text-underline-offset:3px}
+@media(max-width:650px){.sf-seo-section{padding:0 15px 55px}.sf-seo-inner{padding:22px 18px}.sf-seo-faq{grid-template-columns:1fr}}
