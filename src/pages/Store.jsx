@@ -48,7 +48,7 @@ export default function Store() {
   const [ipCopied, setIpCopied] = useState(false);
   const { addToCart, count } = useCart();
 
-  useSeo({ title: "Best Lifesteal Server", description: "VeldoraMC is a Minecraft Lifesteal server. Explore ranks, join the community, and play at veldoramc.mc-dns.net.", path: "/" });
+  useSeo({ title: "Minecraft Ranks, Crate Keys & Bundles", description: "Shop the official VeldoraMC Minecraft store for ranks, crate keys and exclusive bundles. Explore Hero, Titan, Bolt and Primal upgrades.", path: "/" });
 
   useEffect(() => {
     try {
