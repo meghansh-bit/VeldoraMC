@@ -2,6 +2,8 @@ User-agent: *
 Allow: /
 Disallow: /cart
 Disallow: /login
+Disallow: /store/account
+Disallow: /link-minecraft
 Disallow: /admin
 
 Sitemap: https://veldoramc.vercel.app/sitemap.xml
