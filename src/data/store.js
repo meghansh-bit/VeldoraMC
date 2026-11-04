@@ -90,11 +90,11 @@ export const RANKS = [
     perks: ["Kit: Full Diamond Armor · Protection I", "7-day free trial available once per Minecraft account", "Permanent rank purchase: ₹199 for the whole season"],
   },
   {
-    key: "elite",
-    name: "Elite",
-    price: "₹399",
-    tone: "info",
-    perks: ["Kit: Full Diamond Armor · Protection III", "Permanent rank for the whole season"],
+    key: "bolt",
+    name: "Bolt",
+    price: "₹599",
+    tone: "success",
+    perks: ["Kit: Full Netherite Armor · Protection II", "Permanent rank for the whole season"],
   },
   {
     key: "titan",
@@ -102,13 +102,6 @@ export const RANKS = [
     price: "₹449",
     tone: "primary",
     perks: ["Kit: Full Netherite Armor · Protection III", "Permanent rank for the whole season"],
-  },
-  {
-    key: "bolt",
-    name: "Bolt",
-    price: "₹599",
-    tone: "success",
-    perks: ["Kit: Full Netherite Armor · Protection II", "Permanent rank for the whole season"],
   },
   {
     key: "primal",
