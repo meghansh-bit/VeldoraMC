@@ -2,3 +2,41 @@
 .sf-partner-art img{display:block;flex:0 0 auto;width:170px;height:170px;max-height:none;object-fit:contain;object-position:center;border-radius:0;box-shadow:none;position:relative;z-index:3;animation:sf-logo-float 4s ease-in-out infinite}
 @media(max-width:650px){.sf-partner-art{min-height:220px;height:220px;padding:18px}.sf-partner-art img{width:150px;height:150px;object-fit:contain;border-radius:0}}
 @media(prefers-reduced-motion:reduce){.sf-partner-art img{animation:none}}
+
+
+/* Compact partner carousel cards */
+.sf-partners-track{
+  display:flex;
+  align-items:stretch;
+  gap:16px;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  padding:8px 3px 18px;
+}
+.sf-partners-track>.sf-partner-card{
+  flex:0 0 clamp(300px,38vw,440px);
+  width:clamp(300px,38vw,440px);
+  max-width:440px;
+  min-height:270px;
+  height:270px;
+  border-radius:17px;
+}
+.sf-partner-aura{display:grid;grid-template-columns:38% 62%;min-height:270px}
+.sf-partner-art{min-height:270px;height:270px;padding:18px}
+.sf-partner-art img{width:116px;height:116px;max-width:100%;object-fit:contain}
+.sf-partner-content{padding:25px 24px;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;min-width:0}
+.sf-partner-content h3,.sf-partner-invite h3{font-size:clamp(24px,2.3vw,31px);margin:10px 0 8px;line-height:1.05}
+.sf-partner-content p,.sf-partner-invite p{font-size:11px;line-height:1.65}
+.sf-partner-meta{gap:7px;margin-top:12px}
+.sf-partner-cta{margin-top:14px;min-height:40px;padding:0 14px;font-size:9px}
+.sf-partner-invite{padding:24px;justify-content:center;min-height:270px}
+.sf-partner-invite-icon{width:48px;height:48px;margin-bottom:11px}
+.sf-partner-invite:after{font-size:100px;right:18px;top:16px}
+@media(max-width:650px){
+  .sf-partners-track>.sf-partner-card{flex:0 0 min(88vw,390px);width:min(88vw,390px);height:auto;min-height:0}
+  .sf-partner-aura{grid-template-columns:1fr}
+  .sf-partner-art{height:135px;min-height:135px}
+  .sf-partner-art img{width:94px;height:94px}
+  .sf-partner-content{padding:19px}
+  .sf-partner-invite{padding:22px;min-height:300px}
+}
