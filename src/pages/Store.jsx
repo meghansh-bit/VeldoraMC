@@ -111,6 +111,20 @@ export default function Store() {
       {active === "ranks" && <p className="sf-note">Starter kit: Full Iron Armor (no Protection enchantment). Rank kits progress from Hero Diamond Protection I to Titan Diamond Protection III, Bolt Netherite Protection IV and Primal Netherite Protection IV (MAX). Only one rank can be added to a cart at a time.</p>}
     </section>
 
+    <section className="sf-seo-section" aria-labelledby="sf-about-title">
+      <div className="sf-seo-inner">
+        <span className="sf-section-kicker">WELCOME TO THE REALM</span>
+        <h2 id="sf-about-title">Discover <em>VeldoraMC.</em></h2>
+        <p className="sf-seo-intro">VeldoraMC is a Minecraft Lifesteal multiplayer server built around survival, player-versus-player battles, base building, teams and heart progression. Join the community, make your mark, and explore the official VeldoraMC store for in-game ranks and rewards.</p>
+        <div className="sf-seo-faq">
+          <details><summary>What is the VeldoraMC Minecraft server?</summary><p>VeldoraMC is a Lifesteal Minecraft server where players gather resources, build bases, team up, compete in PvP and progress through the Lifesteal experience.</p></details>
+          <details><summary>What is the VeldoraMC server IP?</summary><p>Use <strong>veldoramc.mc-dns.net</strong> as the VeldoraMC server address. Check the <a href="https://discord.gg/NruxFSnrUe" target="_blank" rel="noreferrer">VeldoraMC Discord</a> for connection help and server updates.</p></details>
+          <details><summary>What can I get from the VeldoraMC store?</summary><p>The official store features rank upgrades, crate keys and deal bundles. Product availability and checkout status are shown on each store listing.</p></details>
+          <details><summary>Where can I find VeldoraMC news and support?</summary><p>Join the <a href="https://discord.gg/NruxFSnrUe" target="_blank" rel="noreferrer">VeldoraMC Discord community</a> for announcements, launch information and help from the team.</p></details>
+        </div>
+      </div>
+    </section>
+
     <section className="sf-partners" aria-labelledby="sf-partners-title">
       <div className="sf-partners-heading">
         <div><span className="sf-section-kicker">POWERED BY GOOD PEOPLE</span><h2 id="sf-partners-title">OUR <em>PARTNERS.</em></h2><p>Trusted names helping communities and servers grow together.</p></div>
