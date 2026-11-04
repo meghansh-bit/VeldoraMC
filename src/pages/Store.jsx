@@ -48,7 +48,7 @@ export default function Store() {
   const [ipCopied, setIpCopied] = useState(false);
   const { addToCart, count } = useCart();
 
-  useSeo({ title: "Official Minecraft Lifesteal Server & Store", description: "Visit VeldoraMC, explore the Minecraft Lifesteal server, shop official ranks, and join the community. Server IP: veldoramc.mc-dns.net.", path: "/" });
+  useSeo({ title: "Best Lifesteal Server", description: "VeldoraMC is a Minecraft Lifesteal server. Explore ranks, join the community, and play at veldoramc.mc-dns.net.", path: "/" });
 
   useEffect(() => {
     try {
