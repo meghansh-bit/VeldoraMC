@@ -1,5 +1,8 @@
 .vld-store-header .vld-header-inner{display:flex;align-items:center;justify-content:space-between;gap:16px}
 .vld-store-header .vld-header-actions{display:flex;align-items:center;gap:10px}
+.vld-primary-nav{display:flex;align-items:center;justify-content:center;flex:1}
+.vld-nav-ranks{min-height:42px;display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:0 16px;border:1px solid rgba(255,255,255,.13);border-radius:12px;background:rgba(255,255,255,.045);color:inherit;font:inherit;font-size:13px;font-weight:800;text-decoration:none;transition:border-color .2s,background .2s,color .2s}
+.vld-nav-ranks:hover{border-color:#efc43f;background:rgba(239,196,63,.09);color:#f4d56f}
 .vld-store-login,.vld-header-cart{min-height:42px;display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:0 15px;border:1px solid rgba(255,255,255,.13);border-radius:12px;background:rgba(255,255,255,.055);color:inherit;font:inherit;font-weight:700;text-decoration:none;cursor:pointer}
 .vld-store-login img{width:23px;height:23px;image-rendering:pixelated;border-radius:5px}
 .vld-header-cart b{display:inline-grid;place-items:center;min-width:20px;height:20px;padding:0 5px;border-radius:20px;background:#f4c542;color:#111;font-size:11px}
@@ -24,8 +27,7 @@
 .vld-player-secondary{border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.07);color:#fff}
 .vld-player-error{color:#ff7777!important;font-size:12px!important}
 .vld-player-disclaimer{margin:20px 0 0;padding-top:14px;border-top:1px solid rgba(255,255,255,.09)}
-@media(max-width:520px){.vld-store-login,.vld-header-cart{min-height:39px;padding:0 11px;font-size:12px}.vld-player-dialog{padding:25px 20px}.vld-player-choices{width:100%;flex-direction:column}.vld-player-choices button{width:100%}}
-
+@media(max-width:520px){.vld-store-login,.vld-header-cart{min-height:39px;padding:0 11px;font-size:12px}.vld-nav-ranks{min-height:39px;padding:0 10px;font-size:12px;gap:5px}.vld-primary-nav{flex:0 0 auto}.vld-player-dialog{padding:25px 20px}.vld-player-choices{width:100%;flex-direction:column}.vld-player-choices button{width:100%}}
 .vld-login-methods{display:grid;gap:11px;margin-top:20px}
 .vld-login-methods button,.vld-login-methods a{display:flex;align-items:center;gap:13px;width:100%;min-height:68px;padding:13px 15px;border:1px solid rgba(255,255,255,.13);border-radius:13px;background:rgba(255,255,255,.045);color:#fff;text-align:left;text-decoration:none;font:inherit;cursor:pointer}
 .vld-login-methods button:hover,.vld-login-methods a:hover{border-color:#efc43f;background:rgba(239,196,63,.08)}
@@ -33,7 +35,6 @@
 .vld-login-methods strong{font-size:13px}
 .vld-login-methods small{color:#999;font-size:11px}
 .vld-player-back{margin:0 0 16px;padding:0;border:0;background:none;color:#aaa;font:inherit;font-size:12px;cursor:pointer}
-
 .vld-account-menu-wrap{position:relative}
 .vld-account-menu-wrap .vld-store-login{max-width:min(240px,48vw)}
 .vld-account-menu-wrap .vld-store-login span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
