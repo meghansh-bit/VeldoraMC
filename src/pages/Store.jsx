@@ -35,7 +35,7 @@ export default function Store() {
   const slidePartners = (direction) => partnersTrack.current?.scrollBy({ left: direction * Math.min(420, partnersTrack.current.clientWidth * 0.82), behavior: "smooth" });
   const [products, setProducts] = useState({ ranks: [], keys: [], bundles: [
     { key: "starter-bundle", name: "Starter Bundle", price: "", perks: ["Hero rank", "In-game money bonus", "Bonus crate keys"], description: "Everything you need to get started on VeldoraMC.", featured: true },
-    { key: "elite-bundle", name: "Elite Bundle", price: "", perks: ["Elite rank", "In-game money bonus", "Bonus crate keys"], description: "A step up for players building their Lifesteal journey." },
+    { key: "hero-bundle", name: "Hero Bundle", price: "", perks: ["Hero rank", "In-game money bonus", "Bonus crate keys"], description: "A complete starter upgrade for your Lifesteal journey." },
     { key: "titan-bundle", name: "Titan Bundle", price: "", perks: ["Titan rank", "In-game money bonus", "Bonus crate keys"], description: "More perks and rewards for committed players." },
     { key: "bolt-bundle", name: "Bolt Bundle", price: "", perks: ["Bolt rank", "In-game money bonus", "Bonus crate keys"], description: "A premium bundle for players ready to rise." },
     { key: "primal-bundle", name: "Primal Bundle", price: "", perks: ["Primal rank", "In-game money bonus", "Bonus crate keys"], description: "The top-tier VeldoraMC bundle." },
@@ -108,7 +108,7 @@ export default function Store() {
       <div className="sf-categories">{categories.map(({id,label,icon:Icon,hint})=><button key={id} className={active===id?"active":""} onClick={()=>setActive(id)}><Icon size={19}/><span><b>{label}</b><small>{hint}</small></span><ChevronDown size={14}/></button>)}</div>
       {loading ? <div className="sf-empty">Loading store catalogue…</div> :
       <div className="sf-products">{visible.map((item,index)=><ProductCard key={item.key} item={item} category={active} featured={item.featured || (active==="ranks" && index===1)} added={added===`${active}-${item.key}`} onAdd={()=>add(item,active)}/>)}</div>}
-      {active === "ranks" && <p className="sf-note">Starter kit: Full Iron Armor (no Protection enchantment). Rank kits upgrade from Hero Diamond Protection I to Primal Netherite Protection IV (MAX). Only one rank can be added to a cart at a time.</p>}
+      {active === "ranks" && <p className="sf-note">Starter kit: Full Iron Armor (no Protection enchantment). Rank kits progress from Hero Diamond Protection I to Bolt Netherite Protection II, Titan Netherite Protection III and Primal Netherite Protection IV (MAX). Only one rank can be added to a cart at a time.</p>}
     </section>
 
     <section className="sf-partners" aria-labelledby="sf-partners-title">
