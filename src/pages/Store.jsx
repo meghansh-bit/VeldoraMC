@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { ArrowRight, BadgeCheck, Check, ChevronDown, CircleUserRound, Copy, Crown, Gem, KeyRound, LockKeyhole, Package, Plus, Shield, ShoppingBag, Sparkles, Sword, X, Zap } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useCart } from "../context/useCart";
@@ -30,6 +30,8 @@ function ProductCard({ item, category, featured, onAdd, added }) {
 
 export default function Store() {
   const [active, setActive] = useState("ranks");
+  const partnersTrack = useRef(null);
+  const slidePartners = (direction) => partnersTrack.current?.scrollBy({ left: direction * Math.min(420, partnersTrack.current.clientWidth * 0.82), behavior: "smooth" });
   const [products, setProducts] = useState({ ranks: [], keys: [], bundles: [
     { key: "starter-bundle", name: "Starter Bundle", price: "", perks: ["Hero rank", "In-game money bonus", "Bonus crate keys"], description: "Everything you need to get started on VeldoraMC.", featured: true },
     { key: "elite-bundle", name: "Elite Bundle", price: "", perks: ["Elite rank", "In-game money bonus", "Bonus crate keys"], description: "A step up for players building their Lifesteal journey." },
@@ -106,6 +108,23 @@ export default function Store() {
       {loading ? <div className="sf-empty">Loading store catalogue…</div> :
       <div className="sf-products">{visible.map((item,index)=><ProductCard key={item.key} item={item} category={active} featured={item.featured || (active==="ranks" && index===1)} added={added===`${active}-${item.key}`} onAdd={()=>add(item,active)}/>)}</div>}
       {active === "ranks" && <p className="sf-note">Rank perks and availability are subject to the server's final configuration. Only one rank can be added to a cart at a time.</p>}
+    </section>
+
+    <section className="sf-partners" aria-labelledby="sf-partners-title">
+      <div className="sf-partners-heading">
+        <div><span className="sf-section-kicker">POWERED BY GOOD PEOPLE</span><h2 id="sf-partners-title">OUR <em>PARTNERS.</em></h2><p>Trusted names helping communities and servers grow together.</p></div>
+        <div className="sf-partner-controls"><button type="button" aria-label="Previous partners" onClick={() => slidePartners(-1)}>‹</button><button type="button" aria-label="Next partners" onClick={() => slidePartners(1)}>›</button></div>
+      </div>
+      <div className="sf-partners-track" ref={partnersTrack}>
+        <article className="sf-partner-card sf-partner-aura">
+          <div className="sf-partner-art"><span className="sf-aura-wordmark">AURA <b>NODES</b></span><small>WE HOST YOUR DREAM</small></div>
+          <div className="sf-partner-content"><span className="sf-partner-tag">✦ OFFICIAL PARTNER</span><h3>AuraNodes</h3><p>Premium hosting for game servers, bots and web apps — backed by dedicated support.</p><div className="sf-partner-meta"><span>🚀 Game server hosting</span><span>⚡ Bot & web app hosting</span></div><a href="https://discord.gg/yMK8dpzqa5" target="_blank" rel="noreferrer" className="sf-partner-cta">JOIN AURANODES <ArrowRight size={15}/></a></div>
+        </article>
+        <article className="sf-partner-card sf-partner-invite">
+          <div className="sf-partner-invite-icon"><BadgeCheck size={32}/></div><span className="sf-partner-tag">GROW WITH US</span><h3>Become a<br/>VeldoraMC partner.</h3><p>Want your community or service featured here? Reach out to our team and let's build something together.</p><a href="https://discord.gg/NruxFSnrUe" target="_blank" rel="noreferrer" className="sf-partner-cta">CONTACT OUR TEAM <ArrowRight size={15}/></a>
+        </article>
+      </div>
+      <div className="sf-partners-hint"><span/> SWIPE TO EXPLORE <span/></div>
     </section>
 
     <section className="sf-bottom-banner"><div><span className="sf-section-kicker">NEED HELP WITH YOUR ORDER?</span><h2>We've got your <em>back.</em></h2><p>Talk to the VeldoraMC team on Discord if you need help choosing an item.</p></div><a href="https://discord.gg/NruxFSnrUe" target="_blank" rel="noreferrer" className="sf-btn sf-btn-main">Get support <ArrowRight size={16}/></a></section>
