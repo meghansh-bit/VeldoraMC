@@ -6,9 +6,9 @@ const LAST_MOD = new Date().toISOString().slice(0, 10);
 // Only include canonical, public pages that currently exist in the router.
 // Account, cart, admin, and redirect-only routes are intentionally excluded.
 const publicRoutes = [
+  // Keep the sitemap focused on the primary, fully public storefront.
+  // Account, support, cart, admin, and placeholder routes are excluded.
   { path: "/", priority: "1.0", changefreq: "weekly" },
-  { path: "/community", priority: "0.7", changefreq: "weekly" },
-  { path: "/support", priority: "0.6", changefreq: "monthly" },
 ];
 
 const urls = publicRoutes.map(({ path, priority, changefreq }) => `  <url>
