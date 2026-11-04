@@ -5,6 +5,7 @@ import { useCart } from "../context/useCart";
 import { fetchRanks, fetchCrateKeys } from "../data/store";
 import { useSeo } from "../hooks/useSeo";
 import "./storefront.css";
+import "./auranodes-partner.css";
 
 const categories = [
   { id: "ranks", label: "Ranks", icon: Crown, hint: "Permanent perks & status" },
@@ -117,7 +118,7 @@ export default function Store() {
       </div>
       <div className="sf-partners-track" ref={partnersTrack}>
         <article className="sf-partner-card sf-partner-aura">
-          <div className="sf-partner-art"><span className="sf-aura-wordmark">AURA <b>NODES</b></span><small>WE HOST YOUR DREAM</small></div>
+          <div className="sf-partner-art"><img src="/aura-nodes-logo.jpg" alt="AuraNodes logo" /></div>
           <div className="sf-partner-content"><span className="sf-partner-tag">✦ OFFICIAL PARTNER</span><h3>AuraNodes</h3><p>Premium hosting for game servers, bots and web apps — backed by dedicated support.</p><div className="sf-partner-meta"><span>🚀 Game server hosting</span><span>⚡ Bot & web app hosting</span></div><a href="https://discord.gg/yMK8dpzqa5" target="_blank" rel="noreferrer" className="sf-partner-cta">JOIN AURANODES <ArrowRight size={15}/></a></div>
         </article>
         <article className="sf-partner-card sf-partner-invite">
