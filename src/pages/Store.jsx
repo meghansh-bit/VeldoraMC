@@ -108,7 +108,7 @@ export default function Store() {
       <div className="sf-categories">{categories.map(({id,label,icon:Icon,hint})=><button key={id} className={active===id?"active":""} onClick={()=>setActive(id)}><Icon size={19}/><span><b>{label}</b><small>{hint}</small></span><ChevronDown size={14}/></button>)}</div>
       {loading ? <div className="sf-empty">Loading store catalogue…</div> :
       <div className="sf-products">{visible.map((item,index)=><ProductCard key={item.key} item={item} category={active} featured={item.featured || (active==="ranks" && index===1)} added={added===`${active}-${item.key}`} onAdd={()=>add(item,active)}/>)}</div>}
-      {active === "ranks" && <p className="sf-note">Starter kit: Full Iron Armor (no Protection enchantment). Rank kits progress from Hero Diamond Protection I to Bolt Netherite Protection II, Titan Netherite Protection III and Primal Netherite Protection IV (MAX). Only one rank can be added to a cart at a time.</p>}
+      {active === "ranks" && <p className="sf-note">Starter kit: Full Iron Armor (no Protection enchantment). Rank kits progress from Hero Diamond Protection I to Titan Diamond Protection III, Bolt Netherite Protection IV and Primal Netherite Protection IV (MAX). Only one rank can be added to a cart at a time.</p>}
     </section>
 
     <section className="sf-partners" aria-labelledby="sf-partners-title">
