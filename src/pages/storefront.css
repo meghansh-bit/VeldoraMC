@@ -229,3 +229,18 @@
 .sf-seo-faq details p{margin:10px 0 0;color:#a9a1a8;font-size:11px;line-height:1.8}
 .sf-seo-faq a{color:#ffd21f;text-decoration:underline;text-underline-offset:3px}
 @media(max-width:650px){.sf-seo-section{padding:0 15px 55px}.sf-seo-inner{padding:22px 18px}.sf-seo-faq{grid-template-columns:1fr}}
+
+
+/* Single partnership invitation after removing the former hosting partner. */
+.sf-partners-track-single{
+  display:flex;
+  justify-content:center;
+  overflow:visible;
+}
+.sf-partners-track-single>.sf-partner-invite{
+  width:min(100%,760px);
+  min-height:320px;
+}
+@media(max-width:650px){
+  .sf-partners-track-single>.sf-partner-invite{min-height:280px}
+}
