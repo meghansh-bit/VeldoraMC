@@ -130,7 +130,7 @@ export default function Store() {
         <article className="sf-partner-card sf-partner-invite sf-rybernt-card">
           <span className="sf-partner-tag">OFFICIAL HOSTING PARTNER</span>
           <a className="sf-rybernt-logo-link" href="https://discord.gg/rybernt" target="_blank" rel="noreferrer" aria-label="Join Rybernt Cloud Discord">
-            <span className="sf-rybernt-wordmark">RYBERNT<span>CLOUD</span></span>
+            <img src="/rybernt-cloud-logo.webp" alt="Rybernt Cloud" className="sf-rybernt-logo"/>
           </a>
           <h3>Rybernt Cloud</h3>
           <p>Powering VeldoraMC with hosting support. Connect with Rybernt Cloud to learn more about their hosting services.</p>
