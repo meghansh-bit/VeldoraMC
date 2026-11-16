@@ -15,6 +15,7 @@ export default function Footer() {
       <div className="site-footer__bottom">
         <span>© {new Date().getFullYear()} VeldoraMC. All rights reserved.</span>
         <span>Minecraft is a trademark of Mojang Studios. VeldoraMC is not affiliated with Mojang or Microsoft.</span>
+        <span className="site-footer__powered">Powered by <a href="https://discord.gg/rybernt" target="_blank" rel="noreferrer">Rybernt Cloud</a></span>
       </div>
     </footer>
   );
