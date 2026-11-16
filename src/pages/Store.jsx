@@ -124,23 +124,23 @@ export default function Store() {
 
     <section className="sf-partners" aria-labelledby="sf-partners-title">
       <div className="sf-partners-heading">
-        <div><span className="sf-section-kicker">GROW WITH VELDORAMC</span><h2 id="sf-partners-title">BECOME A <em>PARTNER.</em></h2><p>We're open to working with hosting providers, creators and communities.</p></div>
+        <div><span className="sf-section-kicker">POWERING VELDORAMC</span><h2 id="sf-partners-title">OUR <em>HOSTING PARTNER.</em></h2><p>Proud to be partnered with Rybernt Cloud.</p></div>
       </div>
       <div className="sf-partners-track sf-partners-track-single">
         <article className="sf-partner-card sf-partner-invite sf-rybernt-card">
           <span className="sf-partner-tag">OFFICIAL HOSTING PARTNER</span>
           <a className="sf-rybernt-logo-link" href="https://discord.gg/rybernt" target="_blank" rel="noreferrer" aria-label="Join Rybernt Cloud Discord">
-            <img src="/rybernt-cloud-logo.webp" alt="Rybernt Cloud" className="sf-rybernt-logo"/>
+            <span className="sf-rybernt-mark" aria-hidden="true">R</span>
           </a>
           <h3>Rybernt Cloud</h3>
-          <p>Powering VeldoraMC with hosting support. Connect with Rybernt Cloud to learn more about their hosting services.</p>
+          <p>Reliable hosting support for the VeldoraMC network. Visit Rybernt Cloud to explore their hosting services.</p>
           <a href="https://discord.gg/rybernt" target="_blank" rel="noreferrer" className="sf-partner-cta">JOIN RYBERNT CLOUD <ArrowRight size={15}/></a>
         </article>
       </div>
     </section>
 
     <section className="sf-bottom-banner"><div><span className="sf-section-kicker">NEED HELP WITH YOUR ORDER?</span><h2>We've got your <em>back.</em></h2><p>Talk to the VeldoraMC team on Discord if you need help choosing an item.</p></div><a href="https://discord.gg/NruxFSnrUe" target="_blank" rel="noreferrer" className="sf-btn sf-btn-main">Get support <ArrowRight size={16}/></a></section>
-    <footer className="sf-footer"><img src="/veldoramc-logo.svg" alt="VeldoraMC"/><span>VELDORAMC STORE · ALL PRICES IN INR</span><Link to="/cart">VIEW CART ({count})</Link></footer>
+    <footer className="sf-footer"><img src="/veldoramc-logo.svg" alt="VeldoraMC"/><span>VELDORAMC STORE · ALL PRICES IN INR<br/><small className="sf-powered-credit">Powered by <a href="https://discord.gg/rybernt" target="_blank" rel="noreferrer">Rybernt Cloud</a></small></span><Link to="/cart">VIEW CART ({count})</Link></footer>
 
     {playerOpen && <div className="sf-modal-backdrop" role="presentation" onMouseDown={e=>{if(e.target===e.currentTarget)setPlayerOpen(false);}}><section className="sf-player-modal" role="dialog" aria-modal="true" aria-labelledby="sf-player-title"><button className="sf-modal-close" onClick={()=>setPlayerOpen(false)} aria-label="Close"><X size={18}/></button><span className="sf-section-kicker">PLAYER IDENTIFICATION</span><h2 id="sf-player-title">Who are we <em>shopping for?</em></h2><p>Choose your edition and enter your in-game username before adding items.</p><div className="sf-platforms"><button type="button" className={platform==="java"?"selected":""} onClick={()=>setPlatform("java")}><span>☕</span><b>Java Edition</b><small>PC / Mac</small></button><button type="button" className={platform==="bedrock"?"selected":""} onClick={()=>setPlatform("bedrock")}><span>◆</span><b>Bedrock Edition</b><small>Mobile / Console / Windows</small></button></div><form onSubmit={choosePlayer}><label htmlFor="sf-username">Minecraft username</label><input id="sf-username" value={username} onChange={e=>setUsername(e.target.value)} placeholder="Enter your username" minLength={3} maxLength={16} pattern="[A-Za-z0-9_]+" required autoComplete="off"/><small>3–16 letters, numbers or underscores. This identifies the recipient; it does not sign you into a Microsoft or Mojang account.</small><button className="sf-btn sf-btn-main" type="submit">Continue as {platform==="java"?"Java":"Bedrock"} player <ArrowRight size={16}/></button></form></section></div>}
   </main>;
