@@ -244,3 +244,12 @@
 @media(max-width:650px){
   .sf-partners-track-single>.sf-partner-invite{min-height:280px}
 }
+
+
+/* Rybernt Cloud hosting partner card */
+.sf-rybernt-card{display:flex;flex-direction:column;align-items:center;text-align:center;justify-content:center;padding:28px 30px}
+.sf-rybernt-logo-link{display:grid;place-items:center;width:150px;height:132px;margin:12px auto 8px;border:1px solid #ffffff18;border-radius:18px;background:#09090d;overflow:hidden}
+.sf-rybernt-logo{display:block;width:100%;height:100%;object-fit:contain}
+.sf-rybernt-card h3{margin:8px 0;font-size:23px}
+.sf-rybernt-card>p{max-width:430px;min-height:0;margin:0 auto 18px;line-height:1.8}
+.sf-rybernt-card .sf-partner-cta{margin-top:2px}
