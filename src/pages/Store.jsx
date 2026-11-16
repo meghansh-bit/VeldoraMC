@@ -1,11 +1,10 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { ArrowRight, BadgeCheck, Check, ChevronDown, CircleUserRound, Copy, Crown, Gem, KeyRound, LockKeyhole, Package, Plus, Shield, ShoppingBag, Sparkles, Sword, X, Zap } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useCart } from "../context/useCart";
 import { fetchRanks, fetchCrateKeys } from "../data/store";
 import { useSeo } from "../hooks/useSeo";
 import "./storefront.css";
-import "./auranodes-partner.css";
 
 const categories = [
   { id: "ranks", label: "Ranks", icon: Crown, hint: "Permanent perks & status" },
@@ -31,8 +30,6 @@ function ProductCard({ item, category, featured, onAdd, added }) {
 
 export default function Store() {
   const [active, setActive] = useState("ranks");
-  const partnersTrack = useRef(null);
-  const slidePartners = (direction) => partnersTrack.current?.scrollBy({ left: direction * Math.min(420, partnersTrack.current.clientWidth * 0.82), behavior: "smooth" });
   const [products, setProducts] = useState({ ranks: [], keys: [], bundles: [
     { key: "starter-bundle", name: "Starter Bundle", price: "", perks: ["Hero rank", "In-game money bonus", "Bonus crate keys"], description: "Everything you need to get started on VeldoraMC.", featured: true },
     { key: "hero-bundle", name: "Hero Bundle", price: "", perks: ["Hero rank", "In-game money bonus", "Bonus crate keys"], description: "A complete starter upgrade for your Lifesteal journey." },
@@ -127,19 +124,13 @@ export default function Store() {
 
     <section className="sf-partners" aria-labelledby="sf-partners-title">
       <div className="sf-partners-heading">
-        <div><span className="sf-section-kicker">POWERED BY GOOD PEOPLE</span><h2 id="sf-partners-title">OUR <em>PARTNERS.</em></h2><p>Trusted names helping communities and servers grow together.</p></div>
-        <div className="sf-partner-controls"><button type="button" aria-label="Previous partners" onClick={() => slidePartners(-1)}>‹</button><button type="button" aria-label="Next partners" onClick={() => slidePartners(1)}>›</button></div>
+        <div><span className="sf-section-kicker">GROW WITH VELDORAMC</span><h2 id="sf-partners-title">BECOME A <em>PARTNER.</em></h2><p>We're open to working with hosting providers, creators and communities.</p></div>
       </div>
-      <div className="sf-partners-track" ref={partnersTrack}>
-        <article className="sf-partner-card sf-partner-aura">
-          <div className="sf-partner-art"><img src="/aura-nodes-logo.jpg" alt="AuraNodes logo" /></div>
-          <div className="sf-partner-content"><span className="sf-partner-tag">✦ OFFICIAL PARTNER</span><h3>AuraNodes</h3><p>Premium hosting for game servers, bots and web apps — backed by dedicated support.</p><div className="sf-partner-meta"><span>🚀 Game server hosting</span><span>⚡ Bot & web app hosting</span></div><a href="https://discord.gg/yMK8dpzqa5" target="_blank" rel="noreferrer" className="sf-partner-cta">JOIN AURANODES <ArrowRight size={15}/></a></div>
-        </article>
+      <div className="sf-partners-track sf-partners-track-single">
         <article className="sf-partner-card sf-partner-invite">
-          <div className="sf-partner-invite-icon"><BadgeCheck size={32}/></div><span className="sf-partner-tag">GROW WITH US</span><h3>Become a<br/>VeldoraMC partner.</h3><p>Want your community or service featured here? Reach out to our team and let's build something together.</p><a href="https://discord.gg/NruxFSnrUe" target="_blank" rel="noreferrer" className="sf-partner-cta">CONTACT OUR TEAM <ArrowRight size={15}/></a>
+          <div className="sf-partner-invite-icon"><BadgeCheck size={32}/></div><span className="sf-partner-tag">PARTNERSHIPS OPEN</span><h3>Let's build something together.</h3><p>Want your community or service featured on VeldoraMC? Reach out to our team and let's grow together.</p><a href="https://discord.gg/NruxFSnrUe" target="_blank" rel="noreferrer" className="sf-partner-cta">CONTACT OUR TEAM <ArrowRight size={15}/></a>
         </article>
       </div>
-      <div className="sf-partners-hint"><span/> SWIPE TO EXPLORE <span/></div>
     </section>
 
     <section className="sf-bottom-banner"><div><span className="sf-section-kicker">NEED HELP WITH YOUR ORDER?</span><h2>We've got your <em>back.</em></h2><p>Talk to the VeldoraMC team on Discord if you need help choosing an item.</p></div><a href="https://discord.gg/NruxFSnrUe" target="_blank" rel="noreferrer" className="sf-btn sf-btn-main">Get support <ArrowRight size={16}/></a></section>
