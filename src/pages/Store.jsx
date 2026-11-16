@@ -127,8 +127,14 @@ export default function Store() {
         <div><span className="sf-section-kicker">GROW WITH VELDORAMC</span><h2 id="sf-partners-title">BECOME A <em>PARTNER.</em></h2><p>We're open to working with hosting providers, creators and communities.</p></div>
       </div>
       <div className="sf-partners-track sf-partners-track-single">
-        <article className="sf-partner-card sf-partner-invite">
-          <div className="sf-partner-invite-icon"><BadgeCheck size={32}/></div><span className="sf-partner-tag">PARTNERSHIPS OPEN</span><h3>Let's build something together.</h3><p>Want your community or service featured on VeldoraMC? Reach out to our team and let's grow together.</p><a href="https://discord.gg/NruxFSnrUe" target="_blank" rel="noreferrer" className="sf-partner-cta">CONTACT OUR TEAM <ArrowRight size={15}/></a>
+        <article className="sf-partner-card sf-partner-invite sf-rybernt-card">
+          <span className="sf-partner-tag">OFFICIAL HOSTING PARTNER</span>
+          <a className="sf-rybernt-logo-link" href="https://discord.gg/rybernt" target="_blank" rel="noreferrer" aria-label="Join Rybernt Cloud Discord">
+            <img src="/rybernt-cloud-logo.webp" alt="Rybernt Cloud" className="sf-rybernt-logo"/>
+          </a>
+          <h3>Rybernt Cloud</h3>
+          <p>Powering VeldoraMC with hosting support. Connect with Rybernt Cloud to learn more about their hosting services.</p>
+          <a href="https://discord.gg/rybernt" target="_blank" rel="noreferrer" className="sf-partner-cta">JOIN RYBERNT CLOUD <ArrowRight size={15}/></a>
         </article>
       </div>
     </section>
