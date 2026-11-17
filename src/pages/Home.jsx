@@ -24,7 +24,7 @@ export default function Home() {
   const [copied, setCopied] = useState(false);
   const [announcements, setAnnouncements] = useState([]);
   useEffect(() => { let active = true; supabase.from("news_posts").select("slug,title,excerpt,category,created_at").eq("published", true).order("created_at", { ascending: false }).limit(3).then(({ data }) => { if (active && data) setAnnouncements(data); }); return () => { active = false; }; }, []);
-  useSeo({ title: "VeldoraMC — Explore the Gamemodes", description: "Explore VeldoraMC Minecraft gamemodes, meet the community, and find your next adventure.", path: "/", image: "https://veldoramc.vercel.app/og-image.svg" });
+  useSeo({ title: "VeldoraMC — Explore the Gamemodes", description: "Explore VeldoraMC Minecraft gamemodes, meet the community, and find your next adventure.", path: "/", image: "https://veldoramc.vercel.app/veldoramc-logo.png" });
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return undefined;
@@ -61,7 +61,7 @@ export default function Home() {
         <div className="vld-scene-shade" /><div className="vld-scene-glow vld-glow-one" /><div className="vld-scene-glow vld-glow-two" /><div className="vld-scene-grid" /><div className="vld-scene-grain" />
       </div>
       <div className="vld-hero-content">
-        <a className="vld-brand" href="#top" aria-label="VeldoraMC home"><span className="vld-brand-mark"><HeartMark /></span><span className="vld-brand-name">VELDORA<span>MC</span></span></a>
+        <a className="vld-brand" href="#top" aria-label="VeldoraMC home"><img className="vld-brand-logo" src="/veldoramc-logo.png" alt="VeldoraMC" style={{ width: 68, height: 68, objectFit: "contain", imageRendering: "pixelated" }} /></a>
         <div className="vld-kicker"><i /> THE VELDORAMC NETWORK <b>·</b> MINECRAFT</div>
         <h1 id="vld-hero-title">YOUR NEXT<br/><span>ADVENTURE STARTS HERE.</span></h1>
         <p className="vld-hero-copy">Discover a world of custom experiences, find your people, and choose the gamemode that fits your style. Your next adventure starts here.</p>
@@ -97,6 +97,6 @@ export default function Home() {
 
     <section className="vld-join vld-section" id="join"><div className="vld-join-orbit" aria-hidden="true"><div/><div/><div/></div><div className="vld-overline">YOUR NEXT CHAPTER STARTS HERE <span>— 004</span></div><h2>Claim your<br/><em>place in the realm.</em></h2><p>Copy the server address, launch Minecraft Java Edition, and join the adventure.</p><div className="vld-ip-card"><div className="vld-ip-label"><span className="vld-live-dot"/> SERVER ADDRESS</div><code>{SERVER_IP}</code><button type="button" onClick={copyIp} className="vld-copy-button" aria-label="Copy server address">{copied ? <Check size={16}/> : <Copy size={16}/>} {copied ? "COPIED" : "COPY IP"}</button></div><div className="vld-join-actions"><a className="vld-button vld-button-primary" href={DISCORD_URL} target="_blank" rel="noreferrer"><DiscordIcon/> Join the community <ArrowRight size={16}/></a><a className="vld-button vld-button-glass" href="#top"><Sparkles size={16}/> Back to top</a></div><div className="vld-edition-note">MINECRAFT JAVA EDITION <span>·</span> SERVER ADDRESS ABOVE</div></section>
 
-    <footer className="vld-footer"><a className="vld-brand" href="#top"><span className="vld-brand-mark"><HeartMark/></span><span className="vld-brand-name">VELDORA<span>MC</span></span></a><p>Built for the stories we make together.</p><div className="vld-footer-links"><a href={DISCORD_URL} target="_blank" rel="noreferrer"><MessageCircle size={15}/> Discord</a><a href="#join">Join the server <ArrowRight size={14}/></a></div><small>© {new Date().getFullYear()} VeldoraMC. Minecraft is a trademark of Mojang Studios. VeldoraMC is not affiliated with Mojang or Microsoft.</small></footer>
+    <footer className="vld-footer"><a className="vld-brand" href="#top" aria-label="VeldoraMC home"><img className="vld-brand-logo" src="/veldoramc-logo.png" alt="VeldoraMC" style={{ width: 76, height: 76, objectFit: "contain", imageRendering: "pixelated" }} /></a><p>Built for the stories we make together.</p><div className="vld-footer-links"><a href={DISCORD_URL} target="_blank" rel="noreferrer"><MessageCircle size={15}/> Discord</a><a href="#join">Join the server <ArrowRight size={14}/></a></div><small>© {new Date().getFullYear()} VeldoraMC. Minecraft is a trademark of Mojang Studios. VeldoraMC is not affiliated with Mojang or Microsoft.</small></footer>
   </main>;
 }
